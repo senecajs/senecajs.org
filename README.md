@@ -22,7 +22,7 @@ npm run docs
 
 ## Making changes
 
-Please make all content changes to the [/src/pages](https://github.com/rjrodger/seneca/tree/gh-pages/src/pages)
+Please make all content changes to the [/src/pages](https://github.com/senecajs/senecajs.github.io/tree/master/src/pages)
 folder.  After this, you can either submit a pull request or run `npm run build`
 before submitting a pull request.  Since the site uses metalsmith and not jekyll
 there is a two stage process where we must manually build before a change is live.  
