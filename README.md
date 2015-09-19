@@ -38,5 +38,5 @@ Copyright Seneca Contributors 2015, Licensed under [MIT][].
 [MIT]: ./LICENSE
 
 
-[Seneca]: http://seneca.org
+[Seneca]: http://senecajs.org
 [Metalsmith]: http://metalsmith.io
