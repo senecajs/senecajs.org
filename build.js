@@ -4,7 +4,6 @@ var minimist = require('minimist'),
     metalsmith = require('metalsmith')(__dirname),
     download = require('metalsmith-download'),
     metallic = require('metalsmith-metallic'),
-    less = require('metalsmith-less'),
     markdown = require('metalsmith-markdown'),
     layouts = require('metalsmith-layouts'),
     moveUp = require('metalsmith-move-up'),
@@ -27,15 +26,6 @@ download({
   metalsmith.source('./src')
   metalsmith.destination('./')
   metalsmith.clean(false)
-
-  metalsmith.use(less({
-    pattern: 'stylesheets/stylesheet.less',
-    render: {
-      paths: [
-        'src/stylesheets'
-      ]
-    }
-  }))
 
   metalsmith.use(metallic())
 
