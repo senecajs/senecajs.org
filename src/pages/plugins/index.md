@@ -280,5 +280,6 @@ the right solution a simple task.
 [simpledb-store-npm-url]: https://npmjs.org/package/seneca-simpledb-store
 
 ## Got a Plugin to share?
-Our docs are open source, simply fork the [seneca](https://github.com/rjrodger/seneca) repository, add your plugin to the appropriate section in the [gh-pages](https://github.com/rjrodger/seneca/tree/gh-pages) branch under `/src/pages/plugins.index.md`,
-and send us on a PR, that way other people can find your awesome plugin easily.
+Our docs are open source, simply fork the [seneca-docs]() repository, add your plugin to the appropriate section,
+and send us on a PR, that way other people can find your awesome plugin easily. See our [Plugin Guide]() for
+details on creating a plugin and adding it to our site.

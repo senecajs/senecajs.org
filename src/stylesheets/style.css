@@ -1,15 +1,19 @@
 
-/*
- * Custom Css Stylesheet Additions
- * Seneca Website
- *
- * Distributing author: BlueBottleDesign (www.bluebottledesign.com)
- */
+.install {
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-top: 20px;
+  text-align: center;
+}
 
-
-
+.install pre {
+  font-size: 30px;
+  margin-bottom: 40px;
+  line-height: 1.75;
+}
 
 /*~~~~~~~~~~~ Layout ~~~~~~~~~~~*/
+
 
 body {
 	font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -19,27 +23,65 @@ body {
 	background-color: #F2F2E8;
 }
 
+p {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.container a {
+  text-decoration: underline;
+}
+
+pre {
+  margin-bottom: 30px;
+  font-weight: normal;
+  line-height: 1.8;
+  background-color: #f0f0f0;
+}
 
 /*~~~~~~~~~~~ Navigation ~~~~~~~~~~~*/
 
 
 .navbar {
-	width: 100%;
-	margin-right: auto;
-	margin-left: auto;
-	background-color: #fff;
+  background-color: #fff;
 	-webkit-box-shadow: 0 1px 5px -1px #333;
 	-moz-box-shadow: 0 1px 5px -1px #333;
 	box-shadow: 0 1px 5px -1px #333;
 	font-family: "Bitter", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 900;
 	color: #E17762;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  font-weight: 100;
+  border-bottom: 0;
 
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-text, .navbar-default .navbar-nav > li > a  {
 	color: #E17762;
 }
+
+.navbar-default .navbar-brand {
+  font-family: 'Lobster', cursive;
+  font-size: 200%;
+}
+
+.navbar-right {
+  margin-right: 8px;
+}
+
+.dropdown-menu {
+  font-size: 18px;
+  font-weight: 400;
+  text-align: right;
+}
+
+.container {
+  margin-top: 60px;
+}
+
 /*~~~~~~~~~~~ Headings ~~~~~~~~~~~*/
 
 
@@ -55,30 +97,43 @@ h6,
 .h4,
 .h5,
 .h6 {
-	font-family: "Bitter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Bitter", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 900;
-	line-height: 1.1;
-	color: inherit;
+  line-height: 1.1;
+  color: inherit;
 }
 
 h1 {
-	line-height: 1.1875em;
-	width: 100%;
-	margin-bottom: 40px;
+  font-size: 250%;
+  width: 100%;
+  margin-bottom: 40px;
+  font-weight: 600;
 }
 
 h2 {
-	font-size: 160%;
-	line-height: 1.3em;
-	font-weight: 900;
-	margin-bottom: 20px;
+  font-size: 220%;
+  line-height: 1.3em;
+  margin-bottom: 20px;
 }
 
 h3 {
-	font-size: 130%;
-	line-height: 1.3em;
-	font-weight: 900;
-	margin-bottom: 20px;
+  font-size: 160%;
+  line-height: 1.3em;
+  margin-bottom: 20px;
+}
+
+h4 {
+  font-size: 140%;
+  line-height: 1.3em;
+  margin-bottom: 20px;
+}
+
+.hp .grey-box h3 {
+  font-size: 150%;
+}
+
+.center {
+  text-align: center;
 }
 
 .header-box h2 {
@@ -90,24 +145,6 @@ h3 {
 	width: 90%;
 	font-weight: 400;
 }
-
-/* ~~~~~~~~~ Links ~~~~~~~~~ */
-
-
-a {
-	color: #f07057;
-	font-weight: 700;
-}
-
-a:hover {
-	color: #333;
-}
-
-
-
-
-/* ~~~~~~~~~ Layout ~~~~~~~~~ */
-
 
 .fullwidthtop {
 	width: 100%;
@@ -128,23 +165,19 @@ a:hover {
 	text-align: center;
 }
 
-span.rule-r {		
-border-bottom: 1px solid #ddd;		
-height: 1px;		
-float: right;		
-width: 46%;		
-}		
-
-span.rule-l {		
-border-bottom: 1px solid #ddd;		
-height: 1px;		
-float: left;		
-width: 46%;		
+span.rule-r {
+border-bottom: 1px solid #ddd;
+height: 1px;
+float: right;
+width: 46%;
 }
 
-
-/* ~~~~~~~~~ Star Divider ~~~~~~~~~ */
-
+span.rule-l {
+border-bottom: 1px solid #ddd;
+height: 1px;
+float: left;
+width: 46%;
+}
 
 .sep {
 	width: 64.583333333333%;
@@ -159,30 +192,107 @@ span.star {
 	display: block;
 }
 
+/* ~~~~~~~~~ Links ~~~~~~~~~ */
+
+
+a {
+	color: #f07057;
+	font-weight: 700;
+}
+
+a:hover {
+	color: #333;
+}
+
+
+/* ~~~~~~~~~ Hover Boxes Grey ~~~~~~~~~ */
+
+.grey-box {
+  display: block;
+  font-size: 90%;
+  padding: 20px 20px;
+  text-align: center;
+  color: #333;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: background .35s ease-in-out;
+  -moz-transition: background .35s ease-in-out;
+  -ms-transition: background .35s ease-in-out;
+  -o-transition: background .35s ease-in-out;
+  transition: background .35s ease-in-out;
+}
+
+.container .col-md-4 .grey-box {
+  text-decoration: none;
+}
+
+.grey-box:hover {
+  background: #dedede;
+  text-decoration: none;
+}
 
 /* ~~~~~~~~~ Small Button ~~~~~~~~~ */
 
 
 .btn-primary {
-	font-weight: 600;
-	background: #f07057;
-	border:  #f07057;
-	-webkit-transition: background .35s ease-in-out;
-	-moz-transition: background .35s ease-in-out;
-	-ms-transition: background .35s ease-in-out;
-	-o-transition: background .35s ease-in-out;
-	transition: background .35s ease-in-out;
+  font-weight: 600;
+  background: #f07057;
+  border:  #f07057;
+  -webkit-transition: background .35s ease-in-out;
+  -moz-transition: background .35s ease-in-out;
+  -ms-transition: background .35s ease-in-out;
+  -o-transition: background .35s ease-in-out;
+  transition: background .35s ease-in-out;
 }
 
 .btn-primary:hover {
-	background: #6CBDC4;
-	text-decoration: none;
+  background: #6CBDC4;
+  text-decoration: none;
 }
 
 
 
+/* ~~~~~~~~~ Footer ~~~~~~~~~ */
 
-/* ~~~~~~~~~ Flex Slider ~~~~~~~~~ */
+
+.footer-one {
+  width: 100%;
+  padding: 30px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-size: 21px;
+  float: left;
+  text-align: center;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+  background-color: #f3f3f3;
+}
+
+
+.footer-two {
+  width: 100%;
+  padding: 30px;
+  float: left;
+  margin-top: -50px;
+  margin-bottom: -50px;
+  font-size: 15px;
+  font-weight: lighter;
+  color: #fff;
+  text-align: center;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+  background-color: #666;
+}
+
+.footer-two a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-one h1 {
+  font-family: 'Lobster' cursive;
+  font-weight: normal;
+}
 
 .social {
 	padding: 60px 0 30px 0;
@@ -203,40 +313,71 @@ span.star {
 }
 
 
-/* ~~~~~~~~~ Mobile Phone Specific CSS ~~~~~~~~~ */
+/* ~~~~~~~~~ Mobile Phone CSS ~~~~~~~~~ */
 
 @media screen and (max-width: 450px) {
 
-img {
-	width: 100%;
+
+
+.fullwidthtop {
+  background-size: 100% 50px;
+  padding: 30px;
+  margin-top: 30px;
 }
+
+
+i.box-icons {
+  font-size: 30px;
+  margin: 5px 0 0 0;
+}
+
+
+img {
+  width: 100%;
+}
+
+h1 {
+  font-size: 180%;
+  line-height: 1.3em;
+}
+
+h2 {
+	font-size: 110%;
+	line-height: 1.3em;
+}
+
 
 .btn-primary {
 	margin: 0 0 10px 0;
 }
 
-a.white-box {
+a.grey-box, a.white-box {
 	margin: 0 0 10px 0;
 }
 
-.jumbotron-hp h1 {
-	font-size: 70%;
+.install{
+	display:block;
 }
 
- .jumbotron-hp h2 {
-	margin-top: -30px;
-	font-size: 70%;
+.text-editor-wrap{
+	display:none !important;
 }
+
+
+
 }/* / mobile phone */
 
+@media screen and (min-width: 450px) {
+
+.install{
+	display:none;
+}
+
+}
 
 
 
-
-
-
-
-/* ~~~~~~~~~ iPad Mini Specific CSS ~~~~~~~~~ */
+/* ~~~~~~~~~ iPad Mini CSS ~~~~~~~~~ */
 
 @media only screen
 and (min-device-width : 768px)
@@ -244,19 +385,146 @@ and (max-device-width : 1024px)
 and (-webkit-min-device-pixel-ratio: 1)  {
 
 
-.navbar-default .navbar-brand, .navbar-default .navbar-text, .navbar-default .navbar-nav > li > a  {
-	font-size: 90%;
-}
-
-
-a.white-box {
-	margin: 0 0 10px 0;
+a.grey-box, a.white-box {
+  margin: 0 0 10px 0;
 }
 
 .btn-primary {
-	margin: 0 0 10px 0;
+  margin: 0 0 10px 0;
+}
+
+}
+
+.type-wrap{
+	margin:10px auto;
+	padding:20px;
+	background:#f0f0f0;
+	border-radius:5px;
+	border:#CCC 1px solid;
+}
+
+.typed-cursor{
+	opacity: 1;
+	font-weight: 100;
+	-webkit-animation: blink 0.7s infinite;
+	-moz-animation: blink 0.7s infinite;
+	-ms-animation: blink 0.7s infinite;
+	-o-animation: blink 0.7s infinite;
+	animation: blink 0.7s infinite;
+}
+@-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-moz-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-ms-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-o-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+
+.text-editor-wrap {
+	display: block;
+	margin: auto;
+	max-width: 480px;
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px;
+	clear: both;
+	overflow: hidden;
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-ms-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out; }
+
+.title-bar {
+	padding: 5px 0;
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-size: 0.75em;
+	text-align: center;
+	text-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px;
+	background-color: #f8f8f8;
+	background-image: -webkit-linear-gradient(top, #e8e8e8, #bcbbbc);
+	background-image: -moz-linear-gradient(top, #e8e8e8, #bcbbbc);
+	background-image: linear-gradient(top, #e8e8e8, #bcbbbc);
+	box-shadow: inset rgba(255, 255, 255, 0.7) 0px 1px 1px;
+	border-bottom: #6a6a6a 1px solid; }
+
+.text-body {
+	height: 130px;
+	background-color: rgba(0, 0, 0, 0.85);
+	padding: 10px;
+	color: #f0f0f0;
+	text-shadow: #000 0px 1px 0px;
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-size: 1.75em;
+	line-height: 1.40em;
+	font-weight: 500;
+	text-align: left;
+	overflow: hidden;
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-ms-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
 }
 
 
+@font-face {
+  font-family: 'Bitter';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bitter-Regular'), url(http://fonts.gstatic.com/s/bitter/v7/2PcBT6-VmYhQCus-O11S5-vvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+}
+@font-face {
+  font-family: 'Bitter';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Bitter-Bold'), url(http://fonts.gstatic.com/s/bitter/v7/evC1haE-MsorTl_A7_uSGbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+@font-face {
+  font-family: 'Bitter';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Bitter-Italic'), url(http://fonts.gstatic.com/s/bitter/v7/eMS0tViDqryBl0EG1pqFZXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+}
 
-}/* / ipad mini */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v10/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v10/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v10/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url(http://fonts.gstatic.com/s/opensans/v10/EInbV5DfGHOiMmvb1Xr-hqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
