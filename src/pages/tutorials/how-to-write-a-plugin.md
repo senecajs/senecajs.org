@@ -7,7 +7,7 @@ title: How to Write a Seneca Plugin
 
 
 When you use the Seneca framework. You write plugins all the
-time. They are an easy way to organize your action patterns.
+time. They   are an easy way to organize your action patterns.
 
 A Seneca plugin is just a function that gets passed an _options_
 object, and has a Seneca instance as its _this_ variable. You
