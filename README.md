@@ -1,42 +1,36 @@
 # senecajs.org
-This branch contains the static documentation website for [Seneca][]. It is built
-using [MetalSmith][] and can be built and served via npm scripts.
+> The documentation site for [Seneca.js][]
 
-Get the dependencies:
+This repo contains the documentation website for [Seneca.js][]. This documentation is available at
+[senecajs.org][Seneca.js] or can be ran locally by cloning this repo and following the steps below.
+
+## Run Locally
+After cloning, you will need to get dependencies via npm,
 
 ```
 npm install
 ```
 
-Build the site:
-
-```
-npm run build
-```
-
-Build and serve the site to port `4000`:
+Next simply build and serve to port `4000`,
 
 ```
 npm run docs
 ```
 
-## Making changes
+## Contributing
+Seneca and it's docs are __open projects__ and encourage participation. If you feel you can help in
+any way, be it with examples, extra testing, tutorials, or new features please be our guest.
 
-Seneca and it's Docs are __open projects__ and encourage participation. If you feel you can help in any
-way, be it with examples, extra testing, tutorials, or new features please be our guest.
-
-Please make all content changes to the [/src/pages](https://github.com/senecajs/senecajs.github.io/tree/master/src/pages)
-folder.  After this, you can either submit a pull request or run `npm run build`
-before submitting a pull request.  Since the site uses metalsmith and not jekyll
-there is a two stage process where we must manually build before a change is live.  
-
-
+Please make all content changes in the [/src/pages][] folder. All changes are built just before we
+redeploy the site so you only need to include changes in your PR. Upon your PR being accepted your
+changes will be deployed.
 
 ## License
 Copyright Seneca Contributors 2015, Licensed under [MIT][].
 
 [MIT]: ./LICENSE
-
+[/src/pages]: ./src/pages
+[Seneca.js]: https://www.npmjs.com/package/seneca
 
 [Seneca]: http://senecajs.org
 [Metalsmith]: http://metalsmith.io
