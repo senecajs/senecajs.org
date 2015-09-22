@@ -7,7 +7,8 @@
   "private": "true",
   "scripts": {
     "build": "node build.js",
-    "docs": "node build.js -s"
+    "docs": "node build.js -s",
+    "deploy": "surge --project ./dist/ --domain senecajs.surge.sh"
   },
   "dependencies": {
     "handlebars": "^3.0.3",
