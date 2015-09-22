@@ -27,10 +27,10 @@ var seneca = require('seneca')()
 seneca.use( function color() {
 
   var map_name_hex = {
-    black: '000000', 
-    red:   'FF0000', 
-    green: '00FF00', 
-    blue:  '0000FF', 
+    black: '000000',
+    red:   'FF0000',
+    green: '00FF00',
+    blue:  '0000FF',
     white: 'FFFFFF'
   }
 
@@ -65,7 +65,7 @@ But what if you have many new colors you want to add? Another way to extend the 
 
 ``` js
 var more_name_hex = {
-  cyan:    '00FFFF', 
+  cyan:    '00FFFF',
   fuchsia: 'FF00FF'
 }
 
@@ -251,14 +251,14 @@ $ node prior-debug.js --seneca.print.tree
 2015-09-04T17:00:55.445Z 5ftqv0kxp9zn/1441386055436/36136/- INFO    hello    Seneca/0.6.4/5ftqv0kxp9zn/1441386055436/36136/-    
 Seneca action patterns for instance: 5ftqv0kxp9zn/1441386055436/36136/-
 └─┬ a:1
-  ├── # root$, (e7roo), 
+  ├── # root$, (e7roo),
   └─┬ b:2
-    ├── # root$, (d77dx), 
-    │   # root$, (e7roo), 
+    ├── # root$, (d77dx),
+    │   # root$, (e7roo),
     └─┬ c:3
-      └── # root$, (nzgbq), 
-          # root$, (d77dx), 
-          # root$, (e7roo), 
+      └── # root$, (nzgbq),
+          # root$, (d77dx),
+          # root$, (e7roo),
 
 null { a: 1, b: 2, c: 3 }
 ```
@@ -278,13 +278,13 @@ $ node prior-debug.js --seneca.log.all --seneca.log.short
 ...
      159 3h/- DEBUG plugin root$  ADD (kjnse) a:1  
      159 3h/- DEBUG plugin root$  ADD (xtpzn) a:1,b:2  
-     160 3h/- DEBUG plugin root$  ADD (460jf) a:1,b:2,c:3 
+     160 3h/- DEBUG plugin root$  ADD (460jf) a:1,b:2,c:3
 ...
      160 3h/- DEBUG act root$ IN  0j/12 a:1,b:2,c:3 {a:1,b:2,c:3} ENTRY (460jf) - - -
-     164 3h/- DEBUG act root$ IN  7e/12 a:1,b:2     {a:1,b:2,c:3} PRIOR;(460jf) (xtpzn) - - - 
-     165 3h/- DEBUG act root$ IN  me/12 a:1         {a:1,b:2,c:3} PRIOR;(460jf),(xtpzn) (kjnse) - - - 
-     165 3h/- DEBUG act root$ OUT me/12 a:1         {a:1}         PRIOR;(460jf),(xtpzn) (kjnse) - - 0 - 
-     167 3h/- DEBUG act root$ OUT 7e/12 a:1,b:2     {a:1,b:2}     PRIOR;(460jf) (xtpzn) - - 3 - 
+     164 3h/- DEBUG act root$ IN  7e/12 a:1,b:2     {a:1,b:2,c:3} PRIOR;(460jf) (xtpzn) - - -
+     165 3h/- DEBUG act root$ IN  me/12 a:1         {a:1,b:2,c:3} PRIOR;(460jf),(xtpzn) (kjnse) - - -
+     165 3h/- DEBUG act root$ OUT me/12 a:1         {a:1}         PRIOR;(460jf),(xtpzn) (kjnse) - - 0 -
+     167 3h/- DEBUG act root$ OUT 7e/12 a:1,b:2     {a:1,b:2}     PRIOR;(460jf) (xtpzn) - - 3 -
      167 3h/- DEBUG act root$ OUT 0j/12 a:1,b:2,c:3 {a:1,b:2,c:3} EXIT (460jf) - - 7 -
 ```
 
@@ -311,4 +311,3 @@ If you have questions on priors, you can:
 <br /><br /><br />
 
 That's all folks! Corrections and comments: please tweet <a href="https://twitter.com/senecajs">@senecajs</a>.
-

@@ -12,7 +12,7 @@ also have partner tutorials.
 - [Logging with Seneca](/tutorials/logging-with-seneca.html)
 - [How to write a Plugin](/tutorials/how-to-write-a-plugin.html)
 - [Understanding Data Entities](/tutorials/understanding-data-entities.html)
-
+- [Understanding Prior Actions](/tutorials/understanding-prior-actions.html)
 
 # Sample Projects
 Sample projects are awesome and at Seneca we have a good chunk of them available to study and extend. This page
