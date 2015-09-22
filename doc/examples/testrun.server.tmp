@@ -1,7 +1,0 @@
-2015-09-04T17:35:36.476Z 541tuvfvkjsl/1441388136361/36486/- DEBUG	act	shop       	IN	afksrid00sq2/tx2nxkj32lnf	cmd:salestax,role:shop	{role:shop,cmd:salestax,net:100}	ENTRY	(qpfon)	-	-	-	
-2015-09-04T17:35:36.517Z 541tuvfvkjsl/1441388136361/36486/- DEBUG	plugin	shop       	ACT	afksrid00sq2/tx2nxkj32lnf	cmd:salestax,role:shop	apply-tax	100	123	0.23
-2015-09-04T17:35:36.517Z 541tuvfvkjsl/1441388136361/36486/- DEBUG	act	shop       	OUT	afksrid00sq2/tx2nxkj32lnf	cmd:salestax,role:shop	{total:123}	EXIT	(qpfon)	-	-	41	-	
-2015-09-04T17:35:36.518Z 541tuvfvkjsl/1441388136361/36486/- DEBUG	plugin	shop       	ACT	afksrid00sq2/tx2nxkj32lnf	cmd:salestax,role:shop	test	123
-2015-09-04T17:35:37.253Z 541tuvfvkjsl/1441388136361/36486/- DEBUG	act	shop       	IN	gz5fncar3d2z/izuegul1kc16	cmd:salestax,role:shop	{cmd:salestax,role:shop,net:100}	ENTRY	(qpfon)	-	-	-	
-2015-09-04T17:35:37.254Z 541tuvfvkjsl/1441388136361/36486/- DEBUG	plugin	shop       	ACT	gz5fncar3d2z/izuegul1kc16	cmd:salestax,role:shop	apply-tax	100	123	0.23
-2015-09-04T17:35:37.254Z 541tuvfvkjsl/1441388136361/36486/- DEBUG	act	shop       	OUT	gz5fncar3d2z/izuegul1kc16	cmd:salestax,role:shop	{total:123}	EXIT	(qpfon)	-	-	1	-	

@@ -10,36 +10,6 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lobster'>
     <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/typed.js" type="text/javascript"></script>
-    <script>
-    $(function(){
-
-        $("#typed").typed({
-            // strings: ["Typed.js is a <strong>jQuery</strong> plugin.", "It <em>types</em> out sentences.", "And then deletes them.", "Try it out!"],
-            stringsElement: $('#typed-strings'),
-            startDelay: 1000,
-            typeSpeed: 60,
-            backDelay: 500,
-            loop: false,
-            contentType: 'html', // or text
-            // defaults to false for infinite loop
-            loopCount: false,
-            callback: function(){ foo(); },
-            resetCallback: function() { newTyped(); }
-        });
-
-        $(".reset").click(function(){
-            $("#typed").typed('reset');
-        });
-
-    });
-
-    function newTyped(){ /* A new typed object */ }
-
-    function foo(){ console.log("Callback"); }
-
-    </script>
 
     <title>Seneca, a Micro-Services toolkit for Node.js</title>
   </head>
@@ -81,17 +51,6 @@
           <pre> $ npm install seneca --save </pre>
         </section>
       </div>
-
-        <div class="text-editor-wrap">
-      <div class="title-bar"><span class="title">terminal — bash — 80x<span class="terminal-height">10</span></span></div>
-      <div class="text-body">
-      $
-            <div id="typed-strings">
-                <p>npm install seneca --save </p>
-            </div>
-            <span id="typed" style="white-space:pre;"></span>
-        </div>
-        </div>
 
       <div class="sep">
         <span class="star"><img src="images/star.png" alt="star" height="auto" width="20"></span>

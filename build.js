@@ -24,7 +24,7 @@ download({
   if (err) console.error(err)
 
   metalsmith.source('./src')
-  metalsmith.destination('./')
+  metalsmith.destination('./dist')
   metalsmith.clean(false)
 
   metalsmith.use(metallic())
