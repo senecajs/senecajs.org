@@ -2,10 +2,9 @@
 layout: main.html
 ---
 
+# Understanding Prior Actions
 
-#Seneca Prior Actions
-
-##The Seneca software component model
+## The Seneca software component model
 Software components are supposed to make your life easier. They are supposed let you write production-ready code faster. They do this in four ways. Software components are:
 
 * _self-contained_, so they don't step on each other's toes;
@@ -16,7 +15,7 @@ Software components are supposed to make your life easier. They are supposed let
 Seneca <a href="http://senecajs.github.io/tutorials/how-to-write-a-plugin.html">plugins</a> are designed to deliver on these four features.
 
 
-##Pattern-based APIs make this easy
+## Pattern-based APIs make this easy
 Seneca plugins are fundamentally just a list of action patterns. This makes them self-contained because you must use messages (that match the patterns) to interact with the plugin. They are reusable, because you can load them into any Seneca microservice. They are extensible because you can override patterns with your own functionality. And they are composable because you can build up pattern behaviour with a function callback chain.
 
 The ease of extensibility and composability are the primary benefits of the pattern-based approach. Let's look at a simple example. Here's a plugin that converts color values between representations.
@@ -98,7 +97,7 @@ The new action function for _role:color,cmd:convert_ first passes on the input m
 Priors can be used in this way to customize the behavior of any action pattern.
 
 
-##Understanding priors
+## Understanding priors
 Priors can be stacked. Each time you override an action pattern, you get a prior. This prior may have its own prior from a previous definition of the action pattern. Thus you can compose layers of additional functionality.
 
 For example, you can add validation, auditing, throttling, custom logging, input and output data manipulation, or trigger other messages. The calling code has no visibility of these customizations, and no need to know about them, so the plugin remains self-contained.
@@ -135,7 +134,7 @@ You can make every prior strict by setting the top level option:
 
 
 
-##Add order is significant
+## Add order is significant
 In the same way that the order of plugin definition is significant, the order of pattern overrides is also significant. Seneca checks only at definition time for matching priors. This is deliberate, so that you have well-defined behaviour you can determine simply from reading the code.
 
 Using the example above, if you add patterns in the order:
@@ -148,8 +147,8 @@ Then there are _no_ priors.
 
 For this reason, take care when adding plugins whose purpose is mainly to extend existing patterns. They should be added after the main plugin that adds functionality.
 
-##Best practices for data entities
-The Seneca <a href="http://senecajs.github.io/tutorials/data-entities.html">data entity patterns</a> can be extended to handle special cases. You use calls to `this.prior` to perform the underlying data operations.
+## Best practices for data entities
+The Seneca <a href="/tutorials/understating-data-entities.html">data entity patterns</a> can be extended to handle special cases. You use calls to `this.prior` to perform the underlying data operations.
 
 For example, Let's say you want to add a _last_updated_ field to every data entity. Override the _role:entity,cmd:save_ pattern to do this:
 
@@ -214,7 +213,7 @@ Then `{role:entity,cmd:save,name:foo,base:bar}` will not trigger any custom prio
 
 The rule to follow is: if you are defining _base_ behaviors, only define _name,base_ behaviors for specific entities. if you are defining _zone_ behaviors, only define _base,zone_ and _name,base,zone behaviors_.
 
-##Debugging priors
+## Debugging priors
 You can trace the structure of action patterns priors using the `--seneca.print.tree` command line option. Run the following code:
 
 ``` js
@@ -300,7 +299,7 @@ In addition, the message and transaction identifiers, starting with 0j/12, allow
 
 For more details on Seneca logging, read the <a href="http://senecajs.github.io/tutorials/logging-example.html">logging tutorial</a>.
 
-##Help
+## Help
 If you have questions on priors, you can:
 
 * Tweet to <a href="https://twitter.com/senecajs">@senecajs</a>,
