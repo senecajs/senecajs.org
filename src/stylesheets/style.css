@@ -68,6 +68,10 @@ pre {
   font-size: 200%;
 }
 
+.fa {
+  font-size: 28px;
+}
+
 .navbar-right {
   margin-right: 8px;
 }
@@ -82,9 +86,6 @@ pre {
   margin-top: 60px;
 }
 
-.fa{
-  margin-top: 20px;
-}
 /*~~~~~~~~~~~ Headings ~~~~~~~~~~~*/
 
 

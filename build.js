@@ -43,8 +43,10 @@ metalsmith.use(layouts({
 }))
 
 metalsmith.use(moveUp({
-  pattern: 'pages/**'
-}))
+  pattern: [
+    'pages/**',
+    'images/favicon.ico'
+]}))
 
 if (argv.serve) {
   metalsmith.use(watch())
