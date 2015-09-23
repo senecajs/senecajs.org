@@ -57,8 +57,7 @@ if (argv.serve) {
   }))
 } else {
   metalsmith.use(ignore([
-    'template/**',
-    'api/.placeholder'
+    'template/**'
   ]))
 }
 
