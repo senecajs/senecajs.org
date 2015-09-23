@@ -2,10 +2,10 @@
 layout: main.html
 ---
 # Understanding Data Entities
-The Seneca framework provides a data entity API based loosely on the <a href="http://www.martinfowler.com/eaaCatalog/activeRecord.html">ActiveRecord style</a>. Here's how it works.
+The Seneca framework provides a data entity API based loosely on the [ActiveRecord style][]. Here's how it works.
 
 ## The Seneca Philosophy
-The Seneca framework is defined by a philosophy that <a href="http://richardrodger.com">actions are better than objects</a>.
+The Seneca framework is defined by a philosophy that [actions are better than objects][].
 
 The only first-class citizens in the Seneca framework are _actions_. You register actions in Seneca by defining a set of key-value pairs that the action matches.
 When a JSON document is submitted to Seneca, it triggers an action if a matching set of key-value pairs is found. The action returns another JSON document.
@@ -202,8 +202,8 @@ plugins won't interfere with your own entities.
 
 
 
-For example, the <a href="https://github.com/rjrodger/seneca-user">user</a>
-and <a href="https://github.com/rjrodger/seneca-auth">auth</a> plugins,
+For example, the [user][]
+and [auth][] plugins,
 which handle user accounts, and login/logout, use the _sys_ base,
 and work with the following entities:
 
@@ -319,8 +319,8 @@ that database. The plugins normally use a specific driver module to do the actua
 
 
 
-For example, the <a href="https://github.com/rjrodger/seneca-mongo-store">seneca-mongo-driver</a> plugin
-uses the <a href="http://mongodb.github.io/node-mongodb-native/">mongodb</a> module.
+For example, the [seneca-mongo-driver][] plugin
+uses the [mongoDB][] module.
 
 
 
@@ -385,11 +385,11 @@ The data store plugins use a naming convention of the form seneca-_database_-sto
 
 
 <ul>
-  </li><li>JSON files (on disk) - <a href="http://github.com/rjrodger/seneca-jsonfile-store">seneca-jsonfile-store</a>
-  </li><li>MongoDB - <a href="http://github.com/rjrodger/seneca-mongo-store">seneca-mongo-store</a>
-  </li><li>MySQL - <a href="https://github.com/mirceaalexandru/seneca-mysql-store">seneca-mysql-store</a>
-  </li><li>PostgreSQL - <a href="https://github.com/marianr/seneca-postgres-store">seneca-postgres-store</a>
-  </li><li>levelDB - <a href="https://github.com/rjrodger/seneca-level-store">seneca-level-store</a>
+  </li><li>JSON files (on disk) - [seneca-jsonfile-store][]
+  </li><li>MongoDB - [seneca-mongo-store][]
+  </li><li>MySQL - [seneca-mysql-store][]
+  </li><li>PostgreSQL - [seneca-postgres-store][]
+  </li><li>levelDB - [seneca-level-store][]
 </li></ul>
 
 
@@ -410,7 +410,7 @@ later point.
 
 
 If you'd like to add support for a database to Seneca,
-here's the <a href="/data-store-guide.html">guide to writing data store plugins</a>
+here's the [guide to writing data store plugins][]
 
 
 
@@ -463,10 +463,8 @@ seneca.use('level-store',{
 
 
 This mapping sends -/json/- entities to
-the <a href="https://github.com/rjrodger/seneca-jsonfile-store">jsonfile</a>
-data store, and -/level/- entities to
-the <a href="https://github.com/rjrodger/seneca-level-store">leveldb</a>
-data store.
+the [jsonfile][] data store, and -/level/- entities to
+the [leveldb][] data store.
 
 
 
@@ -490,7 +488,7 @@ seneca.ready(function(err,seneca){
 ```
 
 
-The full source code is available in the data-entities folder of the <a href="https://github.com/rjrodger/seneca-examples">seneca examples repository</a>.
+The full source code is available in the data-entities folder of the[seneca examples repository][].
 (The ; prefix is just a marker to avoid excessive indentation)
 
 
@@ -544,3 +542,19 @@ In this case, the data stores creates a log entry for each save operation that i
 Each plugin instance gets a three letter tag, such as `QSG`, or `JNG`. This helps you distinguish between multiple mappings that use the same data store.
 Each data store plugin instance can be ths be described by the name of the data store plugin, the tag, and the associated mapping. This is the last element of the log entry. For example:
 `level-store~JNG~-/level/-`
+
+[ActiveRecord style]: http://www.martinfowler.com/eaaCatalog/activeRecord.html 
+[actions are better than objects]: http://richardrodger.com
+[user]: https://github.com/rjrodger/seneca-user
+[auth]: https://github.com/rjrodger/seneca-auth 
+[seneca-mongo-driver]: https://github.com/rjrodger/seneca-mongo-store
+[mongoDB]: http://mongodb.github.io/node-mongodb-native/
+[seneca-jsonfile-store]: http://github.com/rjrodger/seneca-jsonfile-store
+[seneca-mongo-store]: http://github.com/rjrodger/seneca-mongo-store
+[seneca-mysql-store]: https://github.com/mirceaalexandru/seneca-mysql-store
+[seneca-postgres-store]: https://github.com/marianr/seneca-postgres-store
+[seneca-level-store]: https://github.com/rjrodger/seneca-level-store
+[guide to writing data store plugins]: /data-store-guide.html
+[jsonfile]: https://github.com/rjrodger/seneca-jsonfile-store
+[leveldb]: https://github.com/rjrodger/seneca-level-store
+[seneca examples repository]: https://github.com/rjrodger/seneca-examples

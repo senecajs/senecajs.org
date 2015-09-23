@@ -11,9 +11,8 @@ time. They   are an easy way to organize your action patterns.
 
 A Seneca plugin is just a function that gets passed an _options_
 object, and has a Seneca instance as its _this_ variable. You
-then <a href="http://senecajs.org/api.html#long-m-add">_add_</a> some action
-patterns in the body of the function, and you're done. There is no
-callback.
+then [_add_][] some action patterns in the body of the function, 
+and you're done. There is no callback.
 
 
 
@@ -25,17 +24,15 @@ discussed too.
 
 
 
-There are many Seneca plugins published on
-<a href="http://www.npmjs.org/search?q=seneca%20plugin">NPM</a>. Most of them
+There are many Seneca plugins published on [NPM][]. Most of them
 can be extended and modifed by overriding their actions. You'll also
 need to know how to do this.
 
 
 
 Finally, plugins provide you with a way to organize your own code, and
-to make use of the
-<a href="http://martinfowler.com/articles/microservices.html">micro-services</a>
-approach to software architecture, so that will be discussed too.
+to make use of the [micro-services][] approach to software 
+architecture, so that will be discussed too.
 
 ## Contents
 
@@ -107,12 +104,10 @@ name for you.
 
 
 
-You can use the plugin by calling
-the <a href="http://senecajs.org/api.html#long-m-use">use</a> method
+You can use the plugin by calling the [use][] method
 of the Seneca object. This loads the plugin into Seneca, after which
 the action patterns defined by the plugin are available. You can then
-call the <a href="http://senecajs.org/api.html#long-m-act">act</a>
-method to trigger them, like so:
+call the [act][] method to trigger them, like so:
 
 
 ``` js
@@ -128,7 +123,7 @@ seneca.act( {foo:'bar'}, console.log )
 
 
 This code is available in
-the <a href="https://github.com/rjrodger/seneca/tree/master/doc/examples/write-a-plugin">doc/examples/write-a-plugin</a>
+the [doc/examples/write-a-plugin][]
 example, in the _simple.js_ script. Running the script produces:
 
 ```bash
@@ -152,7 +147,7 @@ is, if you can _require_ it, you can _use_ it! Let's update the
 simple example to show this. First, create a file called _foo.js_
 containing the plugin code (all the files in this article are available on
 the Seneca github
-at <a href="https://github.com/rjrodger/seneca/tree/master/doc/examples/write-a-plugin">doc/examples/write-a-plugin</a>).
+at ([doc/examples/write-a-plugin][]).
 
 
 ``` js
@@ -191,10 +186,8 @@ null { color: 'pink' }
 
 
 As well as local files and local modules, you can use public plugin modules
-from <a href="https://www.npmjs.org/search?q=seneca">npmjs.org</a>. Let's use
-the <a href="https://www.npmjs.org/package/seneca-echo">seneca-echo
-plugin</a> as an example. This plugin echoes back arguments you send
-to the _role:echo_ pattern. First, _npm install_ it:
+from [npmjs.org][]. Let's use [seneca-echo plugin][] as an example. This plugin echoes back arguments you send to the _role:echo_ pattern. 
+First, _npm install_ it:
 
 
 ```bash
@@ -231,10 +224,7 @@ the output.
 
 
 
-The Seneca framework comes
-with <a href="http://senecajs.org/plugins.html">many plugins</a>
-written by the community. Feel free to write one yourself (after
-reading this article!). By convention, public and generically useful
+The Seneca framework comes with [many plugins][] written by the community. Feel free to write one yourself (after reading this article!). By convention, public and generically useful
 plugins are prefixed with _seneca-_ as part of their name. This
 lets you know the module is a Seneca plugin if you see it on
 NPM. However, its a bit tedious to type in "seneca-" all the time, so
@@ -289,7 +279,7 @@ null { color: 'pink' }
 
 This uses Seneca's log filtering feature to focus on the log lines
 that you care about. For more details on log filtering, read
-the <a href="http://senecajs.org/logging-example.html">logging tutorial</a>.
+the [logging tutorial][].
 
 
 
@@ -390,8 +380,7 @@ patterns.
 
 
 For example,
-the <a href="https://github.com/rjrodger/seneca-vcache">seneca-vcache
-plugin</a> overrides the standard entity patterns, of the
+the [seneca-vcache plugin][] overrides the standard entity patterns, of the
 form _role:entity, cmd:*_. It does this to transparently add
 caching to the database store operations.
 
@@ -424,7 +413,7 @@ plugin, by using tag strings. NOTE: the action patterns will still be
 overridden, unless the plugin handles this for you (like the example
 below). The data store plugins, in particular, use this mechanism to
 support multiple databases in the same system. For more details, read
-the <a href="http://senecajs.org/data-entities.html">data entities
+the [data entities tutorial.][] data entities
 tutorial.</a>
 
 
@@ -519,7 +508,7 @@ It's useful to provide default option values for users of your
 plugin. Seneca provides a utility function to support
 this: `seneca.util.deepextend`. The `deepextend`
 function works much the same
-as <a href="http://underscorejs.org/#extend">`_.extend`</a>,
+as [`_.extend`][],
 except that it can handle properties at any level. For example:
 
 
@@ -704,7 +693,7 @@ zed tag0       { red: 55, green: 100, blue: 150 }
 
 Sometimes you need to access to all the options provided to Seneca. For
 example, there is a global _timeout_ value that you might want to
-use for timeouts. The _transport_ family of plugins do this, see <a href="https://github.com/rjrodger/seneca-redis-transport/blob/master/redis-transport.js">redis-transport</a> for an example.
+use for timeouts. The _transport_ family of plugins do this, see [redis-transport][] for an example.
 
 
 
@@ -786,7 +775,7 @@ zed undefined { red: 10, green: 110, blue: 200 }
 ```
 
 
-Alternatively, you can use the environment variable `SENECA_OPTIONS` to specify options that will be merged into the base defaults (using `seneca.util.deepextend`). The format is <a href="https://github.com/rjrodger/jsonic">jsonic</a>, a lenient, abbreviated, fully compatible version of JSON for lazy developers.
+Alternatively, you can use the environment variable `SENECA_OPTIONS` to specify options that will be merged into the base defaults (using `seneca.util.deepextend`). The format is [jsonic][] jsonic</a>, a lenient, abbreviated, fully compatible version of JSON for lazy developers.
 
 
 ```bash
@@ -803,3 +792,20 @@ Command line options always override options from other sources. Here is the ord
 - Custom options file
 - Default options file
 - Internal defaults
+
+
+[_add_]: http://senecajs.org/api.html#long-m-add 
+[NPM]: http://www.npmjs.org/search?q=seneca%20plugin 
+[micro-services]: http://martinfowler.com/articles/microservices.html 
+[use]: http://senecajs.org/api.html#long-m-use
+[act]: http://senecajs.org/api.html#long-m-act 
+[doc/examples/write-a-plugin]: https://github.com/rjrodger/seneca/tree/master/doc/examples/write-a-plugin
+[npmjs.org]: https://www.npmjs.org/search?q=seneca
+[seneca-echo plugin]: https://www.npmjs.org/package/seneca-echo
+[many plugins]: http://senecajs.org/plugins.html 
+[logging tutorial]: http://senecajs.org/logging-example.html 
+[seneca-vcache plugin]: https://github.com/rjrodger/seneca-vcache 
+[data entities tutorial.]: http://senecajs.org/data-entities.html
+[`_.extend`]: http://underscorejs.org/#extend 
+[redis-transport]: https://github.com/rjrodger/seneca-redis-transport/blob/master/redis-transport.js
+[jsonic]: https://github.com/rjrodger/jsonic 
