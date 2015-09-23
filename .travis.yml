@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "4.0"
+branches:
+  only:
+    - master
+after_success:
+  - surge --project ./dist/ --domain senecajs.surge.sh

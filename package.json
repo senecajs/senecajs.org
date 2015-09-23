@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": "true",
   "scripts": {
+    "test": "echo \"INFO: No test specified.\"",
     "build": "node build.js",
     "docs": "node build.js -s",
     "deploy": "surge --project ./dist/ --domain senecajs.surge.sh"
@@ -24,5 +25,8 @@
     "metalsmith-serve": "0.0.3",
     "metalsmith-watch": "^0.2.0",
     "minimist": "^1.1.1"
+  },
+  "devDependencies": {
+    "surge": "^0.15.0"
   }
 }
