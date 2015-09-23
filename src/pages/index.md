@@ -2,7 +2,7 @@
 layout: splash.html
 ---
 
-__Example: a barebones microservice__
+__Example: a bare-bones microservice__
 ```javascript
 var seneca = require('seneca')()
 
