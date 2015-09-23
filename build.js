@@ -20,48 +20,51 @@ var argv = minimist(process.argv.splice(2), {
 metalsmith.source('./src')
 metalsmith.destination('./dist')
 
-metalsmith.use(download({
+download({
   url: 'https://raw.githubusercontent.com/geek/seneca/master/doc/api.md',
   file: __dirname + '/src/pages/api/index.md'
-}))
+})([], metalsmith, function (err) {
 
-metalsmith.use(metallic())
+  if (err) console.error(err)
 
-metalsmith.use(markdown({
-  smartypants: true,
-  gfm: true,
-  tables: true
-}))
+  metalsmith.use(metallic())
 
-metalsmith.use(partials({
-  directory: 'src/template/partials'
-}))
-
-metalsmith.use(layouts({
-  engine: 'handlebars',
-  directory: 'src/template/layouts'
-}))
-
-metalsmith.use(moveUp({
-  pattern: [
-    'pages/**',
-    'images/favicon.ico'
-]}))
-
-if (argv.serve) {
-  metalsmith.use(watch())
-  metalsmith.use(serve({
-    port: 4000,
-    verbose: true,
-    cache: 1
+  metalsmith.use(markdown({
+    smartypants: true,
+    gfm: true,
+    tables: true
   }))
-} else {
-  metalsmith.use(ignore([
-    'template/**'
-  ]))
-}
 
-metalsmith.build(function (err) {
-  if (err) console.log(err)
-  else console.log('Build complete...')
+  metalsmith.use(partials({
+    directory: 'src/template/partials'
+  }))
+
+  metalsmith.use(layouts({
+    engine: 'handlebars',
+    directory: 'src/template/layouts'
+  }))
+
+  metalsmith.use(moveUp({
+    pattern: [
+      'pages/**',
+      'images/favicon.ico'
+  ]}))
+
+  if (argv.serve) {
+    metalsmith.use(watch())
+    metalsmith.use(serve({
+      port: 4000,
+      verbose: true,
+      cache: 1
+    }))
+  } else {
+    metalsmith.use(ignore([
+      'template/**'
+    ]))
+  }
+
+  metalsmith.build(function (err) {
+    if (err) console.log(err)
+    else console.log('Build complete...')
+  })
 })
