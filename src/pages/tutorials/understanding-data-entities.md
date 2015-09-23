@@ -1,29 +1,19 @@
 ---
 layout: main.html
 ---
-
-
 # Understanding Data Entities
 The Seneca framework provides a data entity API based loosely on the <a href="http://www.martinfowler.com/eaaCatalog/activeRecord.html">ActiveRecord style</a>. Here's how it works.
-
 
 ## The Seneca Philosophy
 The Seneca framework is defined by a philosophy that <a href="http://richardrodger.com">actions are better than objects</a>.
 
-
-
 The only first-class citizens in the Seneca framework are _actions_. You register actions in Seneca by defining a set of key-value pairs that the action matches.
 When a JSON document is submitted to Seneca, it triggers an action if a matching set of key-value pairs is found. The action returns another JSON document.
-
-
 
 Actions can call other actions, and wrap existing actions. Groups of actions can work together to provide specific functionality, such as user management. Such groups are called _plugins_.
 To keep things organized, a few conventions are used. A _role_ property identifies a specific area of functionality. A _cmd_ property identifies a specific action.
 
-
-
 For example:
-
 
 ``` js
 seneca.act( {role:'entity', cmd:'save', ent:{...}},
@@ -39,7 +29,6 @@ In Seneca, data persistence is provided by a set of actions. These are:
 `save`, `load`, `list`, `remove`. This provides a consistent interface for all other actions that need to persist data.
 
 
-
 As convenience, these data entity actions are also available in the form of data entity objects, that expose the
 _cmd's_ as methods - just like the ActiveRecord pattern. However, you cannot add business logic to these objects.
 __Business logic belongs inside actions__.
@@ -47,8 +36,6 @@ __Business logic belongs inside actions__.
 
 
 ## The Data Entity API
-
-
 First you need a Seneca instance:
 
 
@@ -187,27 +174,21 @@ You can also use queries with the `load$` and `remove$` methods. The first match
 
 
 ## Zone, Base and Name: The Entity Namespace
+Your data can live in many different places. It can be persistent or transient. It may have
+business rules that apply to it.It may be owned by different people.
+
+Seneca lets you work with your data, without worrying about where it lives, or what rules should
+apply to it. This makes it easy to handle different types of data in different ways. To make this
+easier, Seneca provides a three layer namespace for data entities:
+
+- _name_: the primary name of the entity. For example: _product_
+- _base_: group name for entities that "belong together". For example: _shop_
+- _zone_: name for a data set belonging to a business entity, geography, or customer. For example: _tenant001_
 
 
-Your data can live in many different places. It can be persistent or transient. It may have business rules that apply to it.
-It may be owned by different people.
-
-
-
-Seneca lets you work with your data, without worrying about where it
-lives, or what rules should apply to it. This makes it easy to handle
-different types of data in different ways. To make this easier, Seneca provides a three layer namespace for data entities:
-
-
-<ul>
-<li>_name_: the primary name of the entity. For example: _product_</li>
-<li>_base_: group name for entities that "belong together". For example: _shop_</li>
-<li>_zone_: name for a data set belonging to a business entity, geography, or customer. For example: _tenant001_</li>
-</ul>
-
-
-The zone and base are optional. You can just use the name element in the same way you use ordinary database tables, and you'll be just fine.
-Here's an example of creating a _foo_ entity (as seen above):
+The zone and base are optional. You can just use the name element in the same way you use ordinary
+database tables, and you'll be just fine. Here's an example of creating a _foo_ entity (as seen
+above):
 
 
 ``` js
@@ -395,7 +376,7 @@ seneca.close(function(err){
 To use a data store plugin, you'll normally need to install the module via npm:
 
 
-{% highlight bash %}
+```
 npm install seneca-mongo-store
 ```
 
@@ -524,7 +505,7 @@ You can track and debug the activity of data entities by reviewing the action lo
 For example, run the example above, that uses both the jsonfile store and the leveldb store, using the `--seneca.log=type:act` log filter, and you get the output:
 
 
-{% highlight bash %}
+```
 $ node main.js --seneca.log=type:act
 ...
 2013-04-18T10:05:45.818Z	DEBUG	act	jsonfile-store	BCL	wa8xc5	In	{cmd=save,role=entity,ent=$-/json/foo:{id=;propA=val1;propB=val2},name=foo,base=json}	gx38qi
@@ -552,7 +533,7 @@ Once the action completes, the `OUT` log entries show the returned data. In part
 The data stores themselves also generate logging output. Try `--seneca.log=type:plugin` to see this:
 
 
-{% highlight bash %}
+```
 $ node main.js --seneca.log=type:plugin
 2013-04-18T10:39:54.961Z	DEBUG	plugin	jsonfile-store	QSG	cop6lx	save/insert	$-/json/foo:{id=nt7usm;propA=val1;propB=val2}	jsonfile-store~QSG~-/json/-
 2013-04-18T10:40:19.802Z	DEBUG	plugin	level-store	JNG	save/insert	$-/level/bar:{id=7166037e-112d-448c-9afa-84e69d84aa25;propA=val3;propB=val4}	level-store~JNG~-/level/-
@@ -563,22 +544,3 @@ In this case, the data stores creates a log entry for each save operation that i
 Each plugin instance gets a three letter tag, such as `QSG`, or `JNG`. This helps you distinguish between multiple mappings that use the same data store.
 Each data store plugin instance can be ths be described by the name of the data store plugin, the tag, and the associated mapping. This is the last element of the log entry. For example:
 `level-store~JNG~-/level/-`
-
-
-
-
-<!--
-
-
-- caching
-- api coverage
-  - standard data interface / common entity feature set
-- underlying actions
-- native
-- extending
-
--->
-
-<br /><br /><br />
-
-That's all folks! Corrections and comments: please tweet <a href="https://twitter.com/senecajs">@senecajs</a>.
