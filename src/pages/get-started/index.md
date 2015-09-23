@@ -1,7 +1,7 @@
 ---
 layout: main.html
 ---
-## Getting Started
+# Getting Started
 
 Seneca lets you build a <a href="http://martinfowler.com/articles/microservices.html">microservice system</a> without worrying about how things will fit together in production. You don't need to know where the other services are located, how many of them there are, or what they do. Everything external to your business logic, such as databases, caches, or third party integrations can likewise be hidden behind microservices.
 
