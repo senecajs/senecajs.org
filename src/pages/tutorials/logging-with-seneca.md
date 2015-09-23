@@ -5,15 +5,14 @@ title: Ya
 
 # Logging with Seneca
 This tutorial shows you how to control Seneca's logging
-output.Clone the <a href="http://github.com/rjrodger/seneca">main
-Seneca repository</a> from github, and open the _doc/examples_
+output.Clone the [main Seneca repository][] from github, and open the _doc/examples_
 folder.
 
 
 
 You'll use the Sales Tax example code. This code shows you how to
 handle sales tax rules using Seneca. Take a look at
-the <a href="https://github.com/rjrodger/seneca">main README</a> for
+the [main README][] for
 details. For this tutorial, you'll focus on the logging output.
 
 
@@ -424,8 +423,8 @@ Node.js _http_ module. Any plugins that return a HTTP middleware
 function (by setting the _service_ property when returning the
 plugin meta data), are wrapped up by Seneca into a single middleware
 function, returned by _seneca.service()_. You can use this as
-<a href="http://www.senchalabs.org/connect/">connect</a>
-or <a href="http://expressjs.com">express</a> middleware, or directly
+[connect][] 
+or [express][] middleware, or directly
 with the standard HTTP API:
 
 
@@ -447,7 +446,7 @@ seneca.use('admin',{server:server,local:true})
 ```
 
 
-Run this app, and open <a href="localhost:3000/admin">localhost:3000/admin</a>. You can
+Run this app, and open [localhost:3000/admin][]. You can
 still use command line logging - you can have multiple separate logging channels.
 
 
@@ -573,7 +572,7 @@ log entry as first argument. The log entry is an array of values.
 
 
 
-Here's an example using the <a href="http://logentries.com">LogEntries.com</a> service. This is cloud logging service that
+Here's an example using the [LogEntries.com][] service. This is cloud logging service that
 stores your logs and makes them searchable. I wrote their Node.js API module :) - `$ npm install node-logentries`.
 This example is in the file _sales-tax-logentries.js_:
 
@@ -635,4 +634,12 @@ dynamically modify the filters at runtime.
 
 
 
-That's all folks! Corrections and comments: please tweet <a href="https://twitter.com/senecajs">@senecajs</a>.
+That's all folks! Corrections and comments: please tweet [@senecajs][].
+
+[main Seneca repository]: http://github.com/rjrodger/seneca
+[main README]: https://github.com/rjrodger/seneca
+[connect]: http://www.senchalabs.org/connect/
+[express]: http://expressjs.com
+[localhost:3000/admin]: localhost:3000/admin
+[LogEntries.com]: http://logentries.com
+[@senecajs]: https://twitter.com/senecajs
