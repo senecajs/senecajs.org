@@ -296,7 +296,11 @@ a:hover {
     margin-bottom: 0;
   }
   .navbar-header {
+    margin-top: 1rem;
     text-align: center;
+  }
+  .navbar-brand {
+    float: none;
   }
   .navbar-nav {
     text-align: center;
