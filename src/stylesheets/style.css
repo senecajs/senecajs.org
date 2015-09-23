@@ -1,8 +1,39 @@
+html {
+  font-size: 10px;
+}
 
+/*---- base ----*/
+
+body {
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-size: 1.6rem;
+	line-height: 1.5;
+	color: #333333;
+}
+
+.navbar {
+	box-shadow: 0 1px 5px -1px #333;
+	font-family: "Cinzel";
+  background-color: white;
+  border-bottom: 0;
+
+}
+
+.navbar-default .navbar-nav > li > a  {
+  color: #333333;
+  font-size: 1.4rem;
+}
+
+.navbar-default .navbar-brand {
+  font-family: 'Cinzel';
+  font-size: 3rem;
+  color: #333333;
+}
+
+/*---- .prompt ----*/
 .install {
-  margin-left: 12%;
-  margin-right: 12%;
-  margin-top: 20px;
+  margin-left: 1rem;
+  margin-right: 1rem;
   text-align: center;
 }
 
@@ -10,17 +41,6 @@
   font-size: 30px;
   margin-bottom: 40px;
   line-height: 1.75;
-}
-
-/*~~~~~~~~~~~ Layout ~~~~~~~~~~~*/
-
-
-body {
-	font-family: "Open Sans", Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	line-height: 1.5;
-	color: #333333;
-	background-color: #FFFFFC;
 }
 
 p {
@@ -42,31 +62,6 @@ pre {
 
 /*~~~~~~~~~~~ Navigation ~~~~~~~~~~~*/
 
-
-.navbar {
-  background-color: #fff;
-	-webkit-box-shadow: 0 1px 5px -1px #333;
-	-moz-box-shadow: 0 1px 5px -1px #333;
-	box-shadow: 0 1px 5px -1px #333;
-	font-family: "Bitter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 900;
-	color: #E17762;
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  font-weight: 100;
-  border-bottom: 0;
-
-}
-
-.navbar-default .navbar-brand, .navbar-default .navbar-text, .navbar-default .navbar-nav > li > a  {
-	color: #E17762;
-}
-
-.navbar-default .navbar-brand {
-  font-family: 'Lobster', cursive;
-  font-size: 200%;
-}
 
 .fa {
   font-size: 28px;
@@ -101,33 +96,26 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Bitter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 900;
-  line-height: 1.1;
+  font-family: "Cinzel";
   color: inherit;
 }
 
 h1 {
-  font-size: 250%;
   width: 100%;
   margin-bottom: 40px;
-  font-weight: 600;
 }
 
 h2 {
-  font-size: 220%;
   line-height: 1.3em;
   margin-bottom: 20px;
 }
 
 h3 {
-  font-size: 160%;
   line-height: 1.3em;
   margin-bottom: 20px;
 }
 
 h4 {
-  font-size: 140%;
   line-height: 1.3em;
   margin-bottom: 20px;
 }
@@ -156,8 +144,6 @@ h4 {
 	margin-top: 51px;
 	margin-bottom: 30px;
 	background-color: #379199;
-	-webkit-box-shadow: 0 1px 5px -1px #333;
-	-moz-box-shadow: 0 1px 5px -1px #333;
 	box-shadow: 0 1px 5px -1px #333;
 }
 
@@ -201,7 +187,6 @@ span.star {
 
 a {
 	color: #f07057;
-	font-weight: 700;
 }
 
 a:hover {
@@ -235,26 +220,6 @@ a:hover {
   text-decoration: none;
 }
 
-/* ~~~~~~~~~ Small Button ~~~~~~~~~ */
-
-
-.btn-primary {
-  font-weight: 600;
-  background: #f07057;
-  border:  #f07057;
-  -webkit-transition: background .35s ease-in-out;
-  -moz-transition: background .35s ease-in-out;
-  -ms-transition: background .35s ease-in-out;
-  -o-transition: background .35s ease-in-out;
-  transition: background .35s ease-in-out;
-}
-
-.btn-primary:hover {
-  background: #6CBDC4;
-  text-decoration: none;
-}
-
-
 
 /* ~~~~~~~~~ Footer ~~~~~~~~~ */
 
@@ -263,13 +228,13 @@ a:hover {
   width: 100%;
   padding: 30px;
   margin-top: 50px;
+  color: #ffffff;
   margin-bottom: 30px;
   font-size: 21px;
   float: left;
   text-align: center;
-  border-top: 1px solid #dedede;
-  border-bottom: 1px solid #dedede;
-  background-color: #f3f3f3;
+  background-color: #379199;
+  box-shadow: 0 -1px 5px 0 #333;
 }
 
 
@@ -283,8 +248,7 @@ a:hover {
   font-weight: lighter;
   color: #fff;
   text-align: center;
-  border-top: 1px solid #dedede;
-  border-bottom: 1px solid #dedede;
+  box-shadow: 0 -1px 5px 0 #333;
   background-color: #666;
 }
 
@@ -293,8 +257,14 @@ a:hover {
   text-decoration: underline;
 }
 
+.footer-one a {
+  color: #fff;
+  text-decoration: none;
+}
+
 .footer-one h1 {
-  font-family: 'Lobster' cursive;
+  font-family: 'Cinzel';
+  font-size: 3em;
   font-weight: normal;
 }
 
@@ -305,6 +275,7 @@ a:hover {
 	font-size: 1.2em;
 	text-transform: uppercase;
 	letter-spacing: 4px;
+  font-family: 'Cinzel';
 }
 
 .social p a i {
@@ -317,119 +288,80 @@ a:hover {
 }
 
 
-/* ~~~~~~~~~ Mobile Phone CSS ~~~~~~~~~ */
 
-@media screen and (max-width: 450px) {
-
-
-
-.fullwidthtop {
-  background-size: 100% 50px;
-  padding: 30px;
-  margin-top: 30px;
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width:320px) {
+  .navbar {
+    position: relative;
+    margin-bottom: 0;
+  }
+  .navbar-header {
+    text-align: center;
+  }
+  .navbar-nav {
+    text-align: center;
+  }
+  .fullwidthtop {
+    margin-top: 0;
+  }
+  .header-box h1 {
+    font-size: 3rem;
+  }
+  .header-box h2 {
+    font-size: 1.6rem;
+  }
+  .header-box img {
+    width: 100%;
+  }
+  .install {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  .install pre {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+  .container {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .container h2 {
+    font-size: 2rem;
+  }
 }
 
-
-i.box-icons {
-  font-size: 30px;
-  margin: 5px 0 0 0;
-}
-
-
-img {
-  width: 100%;
-}
-
-h1 {
-  font-size: 180%;
-  line-height: 1.3em;
-}
-
-h2 {
-	font-size: 110%;
-	line-height: 1.3em;
-}
-
-
-.btn-primary {
-	margin: 0 0 10px 0;
-}
-
-a.grey-box, a.white-box {
-	margin: 0 0 10px 0;
-}
-
-.install{
-	display:block;
-}
-
-
-}/* / mobile phone */
-
-@media screen and (min-width: 450px) {
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (min-width:481px) {
 
 }
 
-
-
-/* ~~~~~~~~~ iPad Mini CSS ~~~~~~~~~ */
-
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (-webkit-min-device-pixel-ratio: 1)  {
-
-
-a.grey-box, a.white-box {
-  margin: 0 0 10px 0;
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width:641px) {
+  .header-box img {
+    width: auto;
+  }
+  .install pre {
+    font-size: 3rem;
+  }
 }
 
-.btn-primary {
-  margin: 0 0 10px 0;
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width:961px) {
+  .install {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+  .install pre {
+    font-size: 4rem;
+  }
 }
+
+/* big landscape tablets, laptops, and desktops */
+@media (min-width:1025px) {
 
 }
 
-@font-face {
-  font-family: 'Bitter';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Bitter-Regular'), url(http://fonts.gstatic.com/s/bitter/v7/2PcBT6-VmYhQCus-O11S5-vvDin1pK8aKteLpeZ5c0A.woff) format('woff');
-}
-@font-face {
-  font-family: 'Bitter';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Bitter-Bold'), url(http://fonts.gstatic.com/s/bitter/v7/evC1haE-MsorTl_A7_uSGbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
-}
-@font-face {
-  font-family: 'Bitter';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Bitter-Italic'), url(http://fonts.gstatic.com/s/bitter/v7/eMS0tViDqryBl0EG1pqFZXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
-}
+/* hi-res laptops and desktops */
+@media (min-width:1281px) {
 
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v10/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v10/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v10/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 800;
-  src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url(http://fonts.gstatic.com/s/opensans/v10/EInbV5DfGHOiMmvb1Xr-hqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
 }
