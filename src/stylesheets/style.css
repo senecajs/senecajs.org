@@ -343,6 +343,10 @@ a:hover {
   .install pre {
     font-size: 3rem;
   }
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */
