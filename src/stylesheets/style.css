@@ -296,11 +296,13 @@ a:hover {
     margin-bottom: 0;
   }
   .navbar-header {
-    margin-top: 1rem;
     text-align: center;
+    margin-top: 1rem;
   }
-  .navbar-brand {
+  .navbar-brand  {
     float: none;
+    margin-left: 0;
+    padding-left: 0;
   }
   .navbar-nav {
     text-align: center;
@@ -330,7 +332,7 @@ a:hover {
     margin-right: 10px;
   }
   .container h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -341,21 +343,15 @@ a:hover {
 
 /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
 @media (min-width:641px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .header-box img {
     width: auto;
   }
   .install pre {
     font-size: 3rem;
-  }
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .container h1 {
-    font-size: 3rem;
-  }
-  .container h2 {
-    font-size: 2.4rem;
   }
 }
 
