@@ -1,6 +1,4 @@
-# senecajs.org
-> The documentation site for [Seneca.js][]
-
+![logo](./src/images/logo-banner.png)
 This repo contains the documentation website for [Seneca.js][]. This documentation is available at
 [senecajs.org][Seneca.js] or can be ran locally by cloning this repo and following the steps below.
 
