@@ -472,7 +472,10 @@ a:hover {
     margin-right: 20rem;
   }
   .install pre {
-    font-size: 4rem;
+    font-size: 3rem;
+  }
+  .container {
+    width: 970px;
   }
   .container h1 {
     font-size: 5.5rem;
@@ -497,5 +500,11 @@ a:hover {
   .footer-one img {
     height: 30%;
     width: 30%;
+  }
+}
+
+@media (min-width: 1200px)
+.container {
+    width: 1170px;
   }
 }
