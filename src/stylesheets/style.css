@@ -12,7 +12,7 @@ body {
 }
 
 .navbar {
-	box-shadow: 0 1px 5px -1px #333;
+	box-shadow: 0 1px 5px 0px #333;
 	font-family: "Cinzel";
   background-color: white;
   border-bottom: 0;
@@ -41,6 +41,12 @@ body {
   font-size: 30px;
   margin-bottom: 40px;
   line-height: 1.75;
+}
+
+pre code {
+  white-space: pre;
+  word-break: normal;
+  word-wrap: normal;
 }
 
 p {
@@ -355,7 +361,7 @@ a:hover {
   }
 }
 
-/* tablet, landscape iPad, lo-res laptops ands desktops */
+/* tablet, landscape iPad, laptops and desktops */
 @media (min-width:961px) {
   .install {
     margin-left: 5rem;
@@ -364,14 +370,4 @@ a:hover {
   .install pre {
     font-size: 4rem;
   }
-}
-
-/* big landscape tablets, laptops, and desktops */
-@media (min-width:1025px) {
-
-}
-
-/* hi-res laptops and desktops */
-@media (min-width:1281px) {
-
 }
