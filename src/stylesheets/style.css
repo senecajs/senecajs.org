@@ -19,6 +19,12 @@ body {
 
 }
 
+.callout p {
+  margin-top: 3rem;
+  font-size: 1.8rem;
+  font-style: italic;
+}
+
 .navbar img {
   height: 4.5rem;
   width: 4.5rem;
