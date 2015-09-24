@@ -226,6 +226,62 @@ a:hover {
   text-decoration: none;
 }
 
+/* Comapnies Using Seneca */
+
+.companies-logo{
+  height:90px;
+  line-height:90px;
+}
+.companies-logo img{
+  vertical-align:middle;
+}
+.companies-logo{
+  cursor:pointer;opacity:.8;
+}
+.companies-logo:hover,.companies-company-logo:hover,.speaker:hover{
+  opacity:1;
+}
+
+@media (min-width:769px){
+  .companies .button-primary{
+    margin-top:30px;
+  }
+  .companies-logo,.speaker{
+    margin:5px 20px;
+  }
+  .company .companies-company-logo{
+    width:150px;
+    float:left;
+  }
+  .company blockquote{
+    padding-left:200px;
+  }
+  .company blockquote.full-width{
+    padding:0;
+  }
+}
+
+@media (max-width:768px){
+  .companies-company-logo{
+    display:block;
+    margin:0 auto 20px;
+  }
+}
+
+@media (min-width:481px) and (max-width:768px){
+  .companies-logo{
+    margin:20px;
+  }
+}
+
+@media (max-width:480px){
+  .companies-logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+}
 
 /* ~~~~~~~~~ Footer ~~~~~~~~~ */
 
