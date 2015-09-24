@@ -19,14 +19,23 @@ body {
 
 }
 
+.navbar img {
+  height: 4.5rem;
+  width: 4.5rem;
+  margin-top: -0.9rem;
+  margin-left: 1rem;
+  float: left;
+}
+
 .navbar-default .navbar-nav > li > a  {
   color: #333333;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
+  line-height: 2;
 }
 
 .navbar-default .navbar-brand {
   font-family: 'Cinzel';
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: #333333;
 }
 
@@ -325,15 +334,9 @@ a:hover {
   font-size: 2rem;
 }
 
-.footer-one h1 {
-  font-family: 'Cinzel';
-  font-size: 6rem;
-  font-weight: normal;
-}
-
-.footer-one i {
-  font-size: 6rem;
-  font-weight: normal;
+.footer-one img {
+  height: 40%;
+  width: 40%;
 }
 
 .social {
@@ -376,6 +379,11 @@ a:hover {
   }
   .navbar-nav {
     text-align: center;
+  }
+  .navbar img {
+    float: none;
+    margin-top: 0;
+    display: inline-block;
   }
   .fullwidthtop {
     margin-top: 0;
@@ -421,6 +429,10 @@ a:hover {
     margin-top: 0;
     margin-bottom: 1rem;
   }
+  .footer-one img {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
@@ -446,6 +458,10 @@ a:hover {
   }
   .install pre {
     font-size: 3rem;
+  }
+  .footer-one img {
+    height: 40%;
+    width: 40%;
   }
 }
 
@@ -478,5 +494,8 @@ a:hover {
     margin-top: 0;
     margin-bottom: 1rem;
   }
-
+  .footer-one img {
+    height: 30%;
+    width: 30%;
+  }
 }
