@@ -293,7 +293,9 @@ a:hover {
   letter-spacing: 4px;
 }
 
-
+.container ul {
+  margin-bottom: 2rem;
+}
 
 /* smartphones, iPhone, portrait 480x320 phones */
 @media (min-width:320px) {
@@ -320,7 +322,7 @@ a:hover {
     font-size: 3rem;
   }
   .header-box h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
   .header-box img {
     width: 100%;
@@ -337,8 +339,25 @@ a:hover {
     margin-left: 10px;
     margin-right: 10px;
   }
+  .container h1 {
+    font-size: 4rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
   .container h2 {
-    font-size: 1.8rem;
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+  .container h3 {
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  .container h4 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 }
 
@@ -370,4 +389,25 @@ a:hover {
   .install pre {
     font-size: 4rem;
   }
+  .container h1 {
+    font-size: 5.5rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+  .container h2 {
+    font-size: 3.5rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+  .container h3 {
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  .container h3 {
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
 }

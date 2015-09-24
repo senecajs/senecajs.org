@@ -7,19 +7,19 @@ Focusing on a single topic, tutorials offer a deep dive into a particular concep
 that cover Seneca features, as well as ones around applying Seneca in different contexts. Some [Sample Projects][]
 also have partner tutorials.
 
-### The Basics
+## The Basics
 
 - [Logging with Seneca][]
 - [How to write a Plugin][]
 - [Understanding Data Entities][]
 - [Understanding Prior Actions][]
 
-# Sample Projects
+## Sample Projects
 Sample projects are awesome and at Seneca we have a good chunk of them available to study and extend. This page
 is broken down into Samples, which offer simple tutorial style projects and Full Apps, which are more complex
 examples of working services
 
-## Samples
+### Samples
 We have a number of samples in a single repository for convenience. In this repository we cover single concepts
 as well as popular plugins. This repository is open sourced, PR's are welcome.
 
