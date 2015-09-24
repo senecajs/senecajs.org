@@ -25,7 +25,7 @@ if you have any questions, or want to help out, please stop by our issues boards
 ## License
 
 Both [Seneca][] and [it's docs][senecajs.org] are licensed under MIT and
-is the copyright of Richard Rodgers and [other][] [contributors][].
+are the copyright of Richard Rodgers and [other][] [contributors][].
 
 - Copyright (c) 2014 Richard Rodgers.
 - Copyright (c) 2015 Richard Rodgers and Seneca Contributors.
