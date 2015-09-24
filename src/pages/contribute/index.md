@@ -22,8 +22,35 @@ if you have any questions, or want to help out, please stop by our issues boards
 - For documentation issues or questions it's [Senecajs.org][org_issues]
 - For Seneca issues or questions it's [Seneca][code_issues]
 
+## License
+
+Both [Seneca][] and [it's docs][senecajs.org] are licensed under MIT and
+is the copyright of Richard Rodgers and [other][] [contributors][].
+
+- Copyright (c) 2014 Richard Rodgers.
+- Copyright (c) 2015 Richard Rodgers and Seneca Contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 [Seneca]: https://github.com/rjrodger/seneca
 [Senecajs.org]: https://github.com/senecajs/senecajs.org
 [code_issues]: https://github.com/rjrodger/seneca/issues
 [org_issues]: https://github.com/senecajs/senecajs.org/issues
+[other]: https://github.com/senecajs/senecajs.org/contributors
+[contributors]: https://github.com/rjrodger/seneca/contributors
