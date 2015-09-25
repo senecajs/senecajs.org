@@ -292,8 +292,7 @@ a:hover {
 @media (max-width:480px){
   .companies-logo{
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: center;
     max-width: 100%;
   }
 }
