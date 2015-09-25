@@ -26,11 +26,14 @@ Please make all content changes in the [/src/pages][] folder. All changes are bu
 redeploy the site so you only need to include changes in your PR. Upon your PR being accepted your
 changes will be deployed.
 
+Please see our [/contribute][] page for more information.
+
 ## License
 Copyright Richard Rodger and other contributors, Licensed under [MIT][].
 
 [MIT]: ./LICENSE
 [/src/pages]: ./src/pages
+[/contribute]: ./src/pages/contribute/index.md
 [Seneca.js]: https://www.npmjs.com/package/seneca
 
 [Seneca]: http://senecajs.org
