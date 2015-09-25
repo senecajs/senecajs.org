@@ -27,7 +27,7 @@ redeploy the site so you only need to include changes in your PR. Upon your PR b
 changes will be deployed.
 
 ## License
-Copyright Seneca Contributors 2015, Licensed under [MIT][].
+Copyright Richard Rodger and other contributors, Licensed under [MIT][].
 
 [MIT]: ./LICENSE
 [/src/pages]: ./src/pages
