@@ -23,12 +23,10 @@ if you have any questions, or want to help out, please stop by our issues boards
 - For Seneca issues or questions it's [Seneca][code_issues]
 
 ## License
+[Seneca][] and [it's docs][senecajs.org] are licensed under MIT and
+are the copyright of [Richard Rodger][] and [other][] [contributors][].
 
-Both [Seneca][] and [it's docs][senecajs.org] are licensed under MIT and
-are the copyright of Richard Rodgers and [other][] [contributors][].
-
-- Copyright (c) 2014 Richard Rodgers.
-- Copyright (c) 2015 Richard Rodgers and Seneca Contributors.
+Copyright (c) 2010 - 2015 Richard Rodger and other contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,3 +52,4 @@ THE SOFTWARE.
 [org_issues]: https://github.com/senecajs/senecajs.org/issues
 [other]: https://github.com/senecajs/senecajs.org/contributors
 [contributors]: https://github.com/rjrodger/seneca/contributors
+[Richard Rodger]: https://github.com/rjrodger
