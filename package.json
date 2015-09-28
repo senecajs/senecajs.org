@@ -9,7 +9,7 @@
     "test": "echo \"INFO: No test specified.\"",
     "build": "node build.js",
     "docs": "node build.js -s",
-    "deploy": "surge --project ./dist/ --domain senecajs.surge.sh"
+    "deploy": "surge --project ./dist/ --domain senecajs.org"
   },
   "dependencies": {
     "handlebars": "^3.0.3",
