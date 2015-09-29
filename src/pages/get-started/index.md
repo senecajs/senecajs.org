@@ -4,7 +4,7 @@ layout: main.html
 # Getting started
 Welcome to the Seneca _Getting started_ guide! This guide assumes you already have [Node.js][] installed.
 
-Seneca lets you build a [microservices system][] without worrying about production. You don't need to know where the other services are located, how many of them there
+Seneca lets you build a microservices system without worrying about production. You don't need to know where the other services are located, how many of them there
 are, or what they do. Everything external to your business logic - such as databases, caches, or
 third party integrations - is likewise hidden behind microservices.
 
