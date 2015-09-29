@@ -1,34 +1,30 @@
 ---
 layout: main.html
 ---
-# Getting Started
-Seneca lets you build a [microservice system][] without worrying about how things will fit together
-in production. You don't need to know where the other services are located, how many of them there
-are, or what they do. Everything external to your business logic, such as databases, caches, or
-third party integrations can likewise be hidden behind microservices.
+# Getting started
+Welcome to the Seneca _Getting started_ guide! This guide assumes you already have [Node.js][] installed.
 
-This decoupling makes your system easy to build and change on a continuous basis. It works because
-Seneca has two core features.
+Seneca lets you build a [microservices system][] without worrying about production. You don't need to know where the other services are located, how many of them there
+are, or what they do. Everything external to your business logic - such as databases, caches, or
+third party integrations - is likewise hidden behind microservices.
 
-**Transport Independence:** </br>
-You can send messages between services in many ways, all hidden from your business logic.
+This decoupling makes your system easy to continuously build and change. It works because
+Seneca has the following two core features:
 
-**Pattern Matching:** </br>
-Instead of fragile service discovery, you just let the world know what sort of messages you care about.
+* **Transport independence**. You can send messages between services in many ways, all hidden from your business logic.
 
-Messages are JSON documents, with any internal structure you like. Messages can be sent via HTTP/S,
+* **Pattern matching**. Instead of fragile service discovery, you just let the world know what sort of messages you care about.
+
+Messages are JSON documents. They can have any internal structure you like. Messages can be sent via HTTP/S,
 TCP connections, message queues, publish/subscribe services or any mechanism that moves bits
 around. From your perspective as the writer of a service, you just send messages out into the
-world. You don't want to know which services get them — that creates fragile coupling.
+world. You don't want to know which services receive them.
 
 Then there are the messages you'd like to receive. You specify the property patterns that you care
-about, and Seneca (with a little configuration help) makes sure that you get any messages matching
-those patterns, sent by other services. The patterns are very simple, just a list of key-value
-pairs that the top level properties of the JSON message document must match.
+about, and Seneca (with a little configuration help) makes sure that you get any messages sent by other services that match those patterns. The patterns are very simple, just a list of key-value
+pairs that must match the top-level properties of the JSON message document.
 
-This _Getting Started_ guide will cover Seneca in a broad way, but won't go into too much depth.
-
-## A Simple Microservice
+## A simple microservice
 Let's start with some code. Here's a service that sums two numbers:
 
 ``` js
@@ -49,8 +45,7 @@ seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, function (err, result)
 })
 ```
 
-For the moment this is all happening in the same process, and there's no network traffic. In
-process function calls are a type of message transport too!
+For the moment, this is all happening in the same process, without network traffic. In-process function calls are a type of message transport too!
 
 The example code to try this out is in [sum.js][]. To run the code, follow these steps:
 
@@ -60,8 +55,6 @@ The example code to try this out is in [sum.js][]. To run the code, follow these
 4. Run `npm install` to install the required modules, including Seneca.
 5. Run `node sum.js`.
 
-This guide assumes you already have [Node.js][] installed.
-
 When you run `sum.js`, you get the following output:
 
 ``` js
@@ -69,8 +62,8 @@ When you run `sum.js`, you get the following output:
 {answer: 3}
 ```
 
-The first line is logging information that Seneca prints to let you know that it has started. The
-second line is the result produced after the message has been matched and processed.
+The first line logs information that Seneca prints to let you know that it has started. The
+second line is the result you get after the message has been matched and processed.
 
 The `seneca.add` method adds a new action pattern to the Seneca instance. This pattern is matched
 against any JSON messages that the Seneca instance receives. The action is a function that is
@@ -78,12 +71,12 @@ executed when a pattern matches a message.
 
 The `seneca.add` method has two parameters:
 
-* `pattern`: the property pattern to match in messages,
+* `pattern`: the property pattern to match in messages.
 * `action`: the function to execute if a message matches.
 
 The action function has two parameters:
 
-* `msg`: the matching inbound message (provided as a plain object),
+* `msg`: the matching inbound message (provided as a plain object).
 * `respond`: a callback function that you use to provide a respond to the message.
 
 The respond function is a callback with the standard `error, result` signature. Let's put this all
@@ -117,7 +110,7 @@ are using for pattern matching.
 
 The `seneca.act` method submits a message to act on. It takes two parameters:
 
-* `msg`: the message object,
+* `msg`: the message object.
 * `response_callback`: a function that receives the message response, if any.
 
 The response callback is a function you provide with the standard `error, result` signature. If
@@ -133,12 +126,13 @@ seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, function (err, result)
 ```
 
 The example code in the [sum.js][] file shows you how to define and call an action pattern inside
-the same Node.js process. Soon you'll see how to split this code over multiple processes.
+the same Node.js process. You'll soon see how to split this code over multiple processes.
 
-## How Patterns Work
+## How patterns work
 Using patterns instead of network addresses or topics makes it much easier to extend and enhance
-your system over time by adding new microservices incrementally. Let's extend our system with the
-ability to multiply two numbers.
+your system over time by adding new microservices incrementally. 
+
+Let's add to our system the ability to multiply two numbers.
 
 We want messages that look like this:
 
