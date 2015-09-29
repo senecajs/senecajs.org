@@ -5,7 +5,7 @@ layout: main.html
 # Understanding Prior Actions
 
 ## The Seneca software component model
-Software components are supposed to make your life easier. They are supposed let you write production-ready code faster. They do this in four ways. Software components are:
+Software components are supposed to make your life easier. They are supposed to let you write production-ready code faster. They do this in four ways. Software components are:
 
 * _self-contained_, so they don't step on each other's toes;
 * _reusable_, so you don't have to write so much code;
