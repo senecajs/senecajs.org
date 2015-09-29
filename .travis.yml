@@ -6,4 +6,4 @@ branches:
     - master
 after_success:
   - npm run build
-  - surge --project ./dist/ --domain seneca.org
+  - surge --project ./dist/ --domain senecajs.org
