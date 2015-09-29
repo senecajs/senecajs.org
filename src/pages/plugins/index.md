@@ -3,8 +3,8 @@ layout: main.html
 ---
 
 # Plugins
-___Seneca___ is nothing without plugins. Seneca plugins enable you to build awesome microservices, incredibly
-fast. Some plugins are maintained in-house, while others are provided by the community. We provide an npm link and
+Seneca plugins enable you to build awesome microservices, incredibly
+fast. Some plugins are maintained in-house, while others are provided by the community. On this page, we provide an npm link and
 total downloads per month for any plugins we find or publish ourselves, so you only need to look in one place.
 
 ## Core plugins
@@ -182,101 +182,100 @@ toggles, colors and ranges.
 
 ## Storage plugins
 Storage plugins work with our built-in [Entity API](). Storage plugins can be used on a per-entity
-basis so feel free to mix and match. Each plugin is named after the storage it supports, making it simple to find
+basis, so feel free to mix and match. Each plugin is named after the storage it supports, making it simple to find
 the right solution.
 
-### [Mongo Store](https://npmjs.org/package/seneca-mongo-store)
+### [Mongo store](https://npmjs.org/package/seneca-mongo-store)
 [![version][mongo-store-npm-version]][mongo-store-npm-url]
 [![downloads][mongo-store-npm-downloads]][mongo-store-npm-url]
 [mongo-store-npm-version]: https://img.shields.io/npm/v/seneca-mongo-store.svg?style=flat-square
 [mongo-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-mongo-store.svg?style=flat-square
 [mongo-store-npm-url]: https://npmjs.org/package/seneca-mongo-store
 
-### [Postgres Store](https://npmjs.org/package/seneca-postgres-store)
+### [Postgres store](https://npmjs.org/package/seneca-postgres-store)
 [![version][postgres-store-npm-version]][postgres-store-npm-url]
 [![downloads][postgres-store-npm-downloads]][postgres-store-npm-url]
 [postgres-store-npm-version]: https://img.shields.io/npm/v/seneca-postgres-store.svg?style=flat-square
 [postgres-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-postgres-store.svg?style=flat-square
 [postgres-store-npm-url]: https://npmjs.org/package/seneca-postgres-store
 
-### [MySQL Store](https://npmjs.org/package/seneca-mysql-store)
+### [MySQL store](https://npmjs.org/package/seneca-mysql-store)
 [![version][mysql-store-npm-version]][mysql-store-npm-url]
 [![downloads][mysql-store-npm-downloads]][mysql-store-npm-url]
 [mysql-store-npm-version]: https://img.shields.io/npm/v/seneca-mysql-store.svg?style=flat-square
 [mysql-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-mysql-store.svg?style=flat-square
 [mysql-store-npm-url]: https://npmjs.org/package/seneca-mysql-store
 
-### [Level Store](https://npmjs.org/package/seneca-level-store)
+### [Level store](https://npmjs.org/package/seneca-level-store)
 [![version][level-store-npm-version]][level-store-npm-url]
 [![downloads][level-store-npm-downloads]][level-store-npm-url]
 [level-store-npm-version]: https://img.shields.io/npm/v/seneca-level-store.svg?style=flat-square
 [level-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-level-store.svg?style=flat-square
 [level-store-npm-url]: https://npmjs.org/package/seneca-level-store
 
-### [JSON File Store](https://npmjs.org/package/seneca-jsonfile-store)
+### [JSON file store](https://npmjs.org/package/seneca-jsonfile-store)
 [![version][jsonfile-store-npm-version]][jsonfile-store-npm-url]
 [![downloads][jsonfile-store-npm-downloads]][jsonfile-store-npm-url]
 [jsonfile-store-npm-version]: https://img.shields.io/npm/v/seneca-jsonfile-store.svg?style=flat-square
 [jsonfile-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-jsonfile-store.svg?style=flat-square
 [jsonfile-store-npm-url]: https://npmjs.org/package/seneca-jsonfile-store
 
-### [Redis Store](https://npmjs.org/package/seneca-redis-store)
+### [Redis store](https://npmjs.org/package/seneca-redis-store)
 [![version][redis-store-npm-version]][redis-store-npm-url]
 [![downloads][redis-store-npm-downloads]][redis-store-npm-url]
 [redis-store-npm-version]: https://img.shields.io/npm/v/seneca-redis-store.svg?style=flat-square
 [redis-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-redis-store.svg?style=flat-square
 [redis-store-npm-url]: https://npmjs.org/package/seneca-redis-store
 
-### [Dynamo Store](https://npmjs.org/package/seneca-dynamo-store)
+### [Dynamo store](https://npmjs.org/package/seneca-dynamo-store)
 [![version][dynamo-store-npm-version]][dynamo-store-npm-url]
 [![downloads][dynamo-store-npm-downloads]][dynamo-store-npm-url]
 [dynamo-store-npm-version]: https://img.shields.io/npm/v/seneca-dynamo-store.svg?style=flat-square
 [dynamo-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-dynamo-store.svg?style=flat-square
 [dynamo-store-npm-url]: https://npmjs.org/package/seneca-dynamo-store
 
-### [HANA Store](https://npmjs.org/package/seneca-hana-store)
+### [HANA store](https://npmjs.org/package/seneca-hana-store)
 [![version][hana-store-npm-version]][hana-store-npm-url]
 [![downloads][hana-store-npm-downloads]][hana-store-npm-url]
 [hana-store-npm-version]: https://img.shields.io/npm/v/seneca-hana-store.svg?style=flat-square
 [hana-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-hana-store.svg?style=flat-square
 [hana-store-npm-url]: https://npmjs.org/package/seneca-hana-store
 
-### [SQLite Store](https://npmjs.org/package/seneca-sqlite-store)
+### [SQLite store](https://npmjs.org/package/seneca-sqlite-store)
 [![version][sqlite-store-npm-version]][sqlite-store-npm-url]
 [![downloads][sqlite-store-npm-downloads]][sqlite-store-npm-url]
 [sqlite-store-npm-version]: https://img.shields.io/npm/v/seneca-sqlite-store.svg?style=flat-square
 [sqlite-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-sqlite-store.svg?style=flat-square
 [sqlite-store-npm-url]: https://npmjs.org/package/seneca-sqlite-store
 
-### [Riak Store](https://npmjs.org/package/seneca-riak-store)
+### [Riak store](https://npmjs.org/package/seneca-riak-store)
 [![version][riak-store-npm-version]][riak-store-npm-url]
 [![downloads][riak-store-npm-downloads]][riak-store-npm-url]
 [riak-store-npm-version]: https://img.shields.io/npm/v/seneca-riak-store.svg?style=flat-square
 [riak-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-riak-store.svg?style=flat-square
 [riak-store-npm-url]: https://npmjs.org/package/seneca-riak-store
 
-### [Cassandra Store](https://npmjs.org/package/seneca-cassandra-store)
+### [Cassandra store](https://npmjs.org/package/seneca-cassandra-store)
 [![version][cassandra-store-npm-version]][cassandra-store-npm-url]
 [![downloads][cassandra-store-npm-downloads]][cassandra-store-npm-url]
 [cassandra-store-npm-version]: https://img.shields.io/npm/v/seneca-cassandra-store.svg?style=flat-square
 [cassandra-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-cassandra-store.svg?style=flat-square
 [cassandra-store-npm-url]: https://npmjs.org/package/seneca-cassandra-store
 
-### [CouchDB Store](https://npmjs.org/package/seneca-couchdb-store)
+### [CouchDB store](https://npmjs.org/package/seneca-couchdb-store)
 [![version][couchdb-store-npm-version]][couchdb-store-npm-url]
 [![downloads][couchdb-store-npm-downloads]][couchdb-store-npm-url]
 [couchdb-store-npm-version]: https://img.shields.io/npm/v/seneca-couchdb-store.svg?style=flat-square
 [couchdb-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-couchdb-store.svg?style=flat-square
 [couchdb-store-npm-url]: https://npmjs.org/package/seneca-couchdb-store
 
-### [SimpleDB Store](https://npmjs.org/package/seneca-simpledb-store)
+### [SimpleDB store](https://npmjs.org/package/seneca-simpledb-store)
 [![version][simpledb-store-npm-version]][simpledb-store-npm-url]
 [![downloads][simpledb-store-npm-downloads]][simpledb-store-npm-url]
 [simpledb-store-npm-version]: https://img.shields.io/npm/v/seneca-simpledb-store.svg?style=flat-square
 [simpledb-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-simpledb-store.svg?style=flat-square
 [simpledb-store-npm-url]: https://npmjs.org/package/seneca-simpledb-store
 
-## Got a Plugin to share?
-Our docs are open source, simply fork the [seneca-docs]() repository, add your plugin to the appropriate section,
-and send us on a PR, that way other people can find your awesome plugin easily. See our [Plugin Guide]() for
-details on creating a plugin and adding it to our site.
+## Got a plugin to share?
+Our docs are open source. Simply fork the [seneca-docs]() repository, add your plugin to the appropriate section,
+and send us on a pull request - that way, other people can find your awesome plugin easily.
