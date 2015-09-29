@@ -93,13 +93,13 @@ In the example code, the action computes the sum of two numbers, provided via th
 `right` properties of the message object. Not all messages generate a result, but as this is the
 most common case, Seneca allows you to provide the result via a callback function.
 
-In summary, the action pattern `role:math,cmd:sum` acts on the message
+In summary, the action pattern `role:math,cmd:sum` acts on this message
 
 ``` js
 {role: 'math', cmd: 'sum', left: 1, right: 2}
 ```
 
-to produce the result:
+to produce this result:
 
 ``` js
 {answer: 3}
@@ -129,8 +129,7 @@ The example code in the [sum.js][] file shows you how to define and call an acti
 the same Node.js process. You'll soon see how to split this code over multiple processes.
 
 ## How patterns work
-Using patterns instead of network addresses or topics makes it much easier to extend and enhance
-your system over time by adding new microservices incrementally. 
+Patterns - instead of network addresses or topics - make it much easier to extend and enhance your system by incrementally adding new microservices. 
 
 Let's add to our system the ability to multiply two numbers.
 
@@ -162,7 +161,7 @@ And you can call it in exactly the same way:
 seneca.act({role: 'math', cmd: 'product', left: 3, right: 4}, console.log)
 ```
 
-Here, you use `console.log` as a shortcut to print out both the error (if any), and the result.
+Here, you use `console.log` as a shortcut to print out both the error (if any) and the result.
 Running this code produces:
 
 ``` js
@@ -189,14 +188,13 @@ seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, console.log)
       .act({role: 'math', cmd: 'product', left: 3, right: 4}, console.log)
 ```
 
-In this example the `seneca.act` calls are chained together. Seneca provides a chaining API as a
-convenience. Chained calls are executed in order, but _not_ in series, so their results could come
+In this example, the `seneca.act` calls are chained together. Seneca provides a chaining API as a
+convenience. Chained calls are executed in order, but not in series, so their results could come
 back in any order.
 
-## Extending Functionality with Patterns
+## Extending functionality with patterns
 Patterns make it easy to extend your functionality. Instead of adding if statements and complex
-logic, you add more patterns. Lets extend the addition action with the ability to force integer
-only arithmetic. To do this, you can add a new property, _integer:true_ to the message object. Then
+logic, you add more patterns. Let's extend the addition action with the ability to force integer-only arithmetic. To do this, you add a new property, _integer:true_, to the message object. Then
 you provide a new action for messages that have this property:
 
 ``` js
@@ -206,23 +204,22 @@ seneca.add({role: 'math', cmd: 'sum', integer: true}, function (msg, respond) {
 })
 ```
 
-Now, the message:
+Now, the message
 
 ``` js
 {role: 'math', cmd: 'sum', left: 1.5, right: 2.5, integer: true}
 ```
 
-will produce the result:
+produces the result:
 
 ``` js
 {answer: 3}  // == 1 + 2, as decimals removed
 ```
 
 What happens if you add both patterns to the same system? How does Seneca choose which one to use?
-The more specific pattern always wins. That is, the pattern with the most matching attributes is
-the one that has precedence.
+The more specific pattern always wins. That is, the pattern with the most matching attributes has precedence.
 
-Here's some code to show this:
+Here's some code to illustrate this:
 
 ``` js
 var seneca = require( 'seneca' )()
