@@ -526,7 +526,7 @@ With Seneca, you build up your system by defining a set of patterns that corresp
 
 Plugins often need to do some initialization work — such as connecting to a database. You don't do this work in the body of the plugin definition function. The definition function is synchronous by design, because all it does is _define_ the plugin. In fact, you should not call `seneca.act` at all in the plugin definition, just `seneca.add`.
 
-To initailize a plugin, you add a special action pattern: `init:`<plugin-name>. This action pattern is called in sequence for each plugin serially. The init function _must_ call its `respond` callback without errors. If plugin initialization fails, then Seneca will exit the Node.js process. You want your microservics to fail-fast (and scream loudly) when there's a problem. All plugins must complete initialization before any actions are executed.
+To initailize a plugin, you add a special action pattern: `init:`<plugin-name>. This action pattern is called in sequence for each plugin serially. The init function _must_ call its `respond` callback without errors. If plugin initialization fails, then Seneca will exit the Node.js process. You want your microservices to fail-fast (and scream loudly) when there's a problem. All plugins must complete initialization before any actions are executed.
 
 To demonstrate initialization, let's add simplistic custom logging to the _math_ plugin. When the plugin starts, it opens a log file, and writes a log of all operations to the file. The file needs to open successfully and be writable. If this fails, the microservice should fail.
 
