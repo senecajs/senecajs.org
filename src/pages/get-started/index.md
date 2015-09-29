@@ -194,7 +194,9 @@ back in any order.
 
 ## Extending functionality with patterns
 Patterns make it easy to extend your functionality. Instead of adding if statements and complex
-logic, you add more patterns. Let's extend the addition action with the ability to force integer-only arithmetic. To do this, you add a new property, _integer:true_, to the message object. Then
+logic, you add more patterns. 
+
+Let's extend the addition action with the ability to force integer-only arithmetic. To do this, you add a new property, _integer:true_, to the message object. Then
 you provide a new action for messages that have this property:
 
 ``` js
@@ -258,16 +260,15 @@ null { answer: 4 }
 null { answer: 3 }
 ```
 
-The first two `.act` calls both match the `role: math, cmd: sum` action pattern. Then the integer
-only action pattern `role: math, cmd: sum, integer: true` is defined. After that, the third call to
+The first two `.act` calls both match the `role: math, cmd: sum` action pattern. Next, the integer-only action pattern `role: math, cmd: sum, integer: true` is defined. After that, the third call to
 `.act` gos with the `role: math, cmd: sum` action, but the fourth goes with `role: math, cmd: sum,
 integer: true`. This code also demonstrates that you can chain `.add` and `.act` calls together.
 This code is available in the [sum-integer.js][] file.
 
-The ability to easily extend the behaviour of your actions by matching more specific kinds of
-messages is an easy way to handle new and changing requirements while your project is in
+The ability to easily extend the behavior of your actions by matching more specific kinds of
+messages is an easy way to handle new and changing requirements. This applies both while your project is in
 development and when it is live and needs to adapt. It also has the advantage that you do not need
-to modify existing code, which is always dangerous. It's much safer to add new code to handle
+to modify existing code. It's much safer to add new code to handle
 special cases. In a production system you won't even need to do a re-deploy. Your existing services
 can stay running as they are. All you need to do is start up your new service.
 
