@@ -44,6 +44,6 @@ This is the nodezoo.com project, a search engine for Node.js modules. The NodeZo
 [How to write a Plugin]: /tutorials/how-to-write-a-plugin.html
 [Understanding Data Entities]: /tutorials/understanding-data-entities.html
 [Understanding Prior Actions]: /tutorials/understanding-prior-actions.html
-[Seneca Examples]: https://github.com/rjrodger/seneca-examples]
+[Seneca Examples]: https://github.com/rjrodger/seneca-examples
 [Well!]: https://github.com/nearform/well
 [Nodezoo]: https://github.com/rjrodger/nodezoo

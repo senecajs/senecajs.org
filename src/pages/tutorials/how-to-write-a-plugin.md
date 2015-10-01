@@ -11,7 +11,7 @@ time. They   are an easy way to organize your action patterns.
 
 A Seneca plugin is just a function that gets passed an _options_
 object, and has a Seneca instance as its _this_ variable. You
-then [_add_][] some action patterns in the body of the function, 
+then [_add_][] some action patterns in the body of the function,
 and you're done. There is no callback.
 
 
@@ -31,7 +31,7 @@ need to know how to do this.
 
 
 Finally, plugins provide you with a way to organize your own code, and
-to make use of the [micro-services][] approach to software 
+to make use of the [micro-services][] approach to software
 architecture, so that will be discussed too.
 
 ## Contents
@@ -186,7 +186,7 @@ null { color: 'pink' }
 
 
 As well as local files and local modules, you can use public plugin modules
-from [npmjs.org][]. Let's use [seneca-echo plugin][] as an example. This plugin echoes back arguments you send to the _role:echo_ pattern. 
+from [npmjs.org][]. Let's use [seneca-echo plugin][] as an example. This plugin echoes back arguments you send to the _role:echo_ pattern.
 First, _npm install_ it:
 
 
@@ -794,18 +794,18 @@ Command line options always override options from other sources. Here is the ord
 - Internal defaults
 
 
-[_add_]: http://senecajs.org/api.html#long-m-add 
-[NPM]: http://www.npmjs.org/search?q=seneca%20plugin 
-[micro-services]: http://martinfowler.com/articles/microservices.html 
-[use]: http://senecajs.org/api.html#long-m-use
-[act]: http://senecajs.org/api.html#long-m-act 
+[_add_]: http://senecajs.org/api/#add-pattern-paramspec-action-
+[NPM]: http://www.npmjs.org/search?q=seneca%20plugin
+[micro-services]: http://martinfowler.com/articles/microservices.html
+[use]: http://senecajs.org/api/#use-name-options-
+[act]: http://senecajs.org/api/#act-input-callback-
 [doc/examples/write-a-plugin]: https://github.com/rjrodger/seneca/tree/master/doc/examples/write-a-plugin
 [npmjs.org]: https://www.npmjs.org/search?q=seneca
 [seneca-echo plugin]: https://www.npmjs.org/package/seneca-echo
-[many plugins]: http://senecajs.org/plugins.html 
-[logging tutorial]: http://senecajs.org/logging-example.html 
-[seneca-vcache plugin]: https://github.com/rjrodger/seneca-vcache 
-[data entities tutorial.]: http://senecajs.org/data-entities.html
-[`_.extend`]: http://underscorejs.org/#extend 
+[many plugins]: http://senecajs.org/plugins
+[logging tutorial]: http://senecajs.org/tutorials/logging-with-seneca.html
+[seneca-vcache plugin]: https://github.com/rjrodger/seneca-vcache
+[data entities tutorial.]: http://senecajs.org/tutorials/understanding-data-entities.html
+[`_.extend`]: http://underscorejs.org/#extend
 [redis-transport]: https://github.com/rjrodger/seneca-redis-transport/blob/master/redis-transport.js
-[jsonic]: https://github.com/rjrodger/jsonic 
+[jsonic]: https://github.com/rjrodger/jsonic
