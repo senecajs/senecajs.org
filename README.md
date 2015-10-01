@@ -1,4 +1,4 @@
-![logo](./src/files/assets/seneca-banner.png)
+![logo](./src/files/assets/seneca-logo.png)
 > A Node.js toolkit for Micro-Service Architectures
 
 #senecajs.org
