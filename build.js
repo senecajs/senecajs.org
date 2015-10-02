@@ -55,7 +55,10 @@ download({
     metalsmith.use(serve({
       port: 4000,
       verbose: true,
-      cache: 1
+      cache: 1,
+      http_error_files: {
+        404: "/404.html"
+      }
     }))
   } else {
     metalsmith.use(ignore([
