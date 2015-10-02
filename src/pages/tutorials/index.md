@@ -3,9 +3,7 @@ layout: main.html
 ---
 
 # Tutorials
-Tutorials offer a deep dive into a particular concept or feature. We have tutorials
-that cover Seneca features, as well as ones around applying Seneca in different contexts. Some [sample projects][]
-also have partner tutorials.
+Seneca tutorials offer a deep dive into a particular concept or feature. There are also partner tutorials that go with some of the [sample projects][].
 
 ## The basics
 
@@ -20,30 +18,24 @@ is broken down into samples and full apps. Samples offer simple tutorial-style p
 examples of working services.
 
 ### Samples
-We have a number of samples in a single repository for convenience. In this repository, we cover single concepts
-as well as popular plugins. This repository is open sourced; pull requests are welcome.
-
-- Go to the repo: [Seneca Examples][]
+For convenience, we have a number of samples in a single repository. This repository covers single concepts
+as well as popular plugins. This repository is open sourced; pull requests are welcome. See the repo at [Seneca samples][].
 
 ## Full Apps
-Full Apps are much more complex than Samples but represent production quality microservices. Where possible we
-try to include as many plugins as possible to provide demonstration of their use.
+Full apps are much more complex than samples. They are production quality microservices. We
+try to include as many plugins as possible in order to demonstrate their use.
 
 ### Well!
-This is a simple meetup networking game implemented as a mobile web app. It's purpose is to show you an example of a "real" app, built with Node.js, Sencha Touch, and Seneca. That means it has non-trivial functionality, and there are some warts and hacks. This lets you decide for yourself if this set of tools is right for you.
+This is a simple networking game implemented as a mobile web app. Its purpose is to serve as an example of a real app, built with Node.js, Sencha Touch, and Seneca. As such, it has non-trivial functionality, and there are some warts and hacks. Decide for yourself if this set of tools is right for you. See the repo at [Well!][].
 
-- Go to the repo: [Well!][]
+### nodezoo
+This is the nodezoo.com project, a search engine for Node.js modules. The nodezoo search engine is an example of a real-world service built using Node.js microservices. Each microservice is published in its own GitHub repository. The code base is intended to be used as a larger-scale example and as a starting point for your own projects. See the repo at [nodezoo][].
 
-### Nodezoo
-This is the nodezoo.com project, a search engine for Node.js modules. The NodeZoo search engine is an example of a real-world service built using Node.js micro-services. Each micro-service is published in its own github repository. The codebase is intended to be used as a larger-scale example, and as a starting point for your own projects.
-
-- Go to the repo: [Nodezoo][]
-
-[Sample Projects]: /tutorials/#samples
+[Sample projects]: /tutorials/#samples
 [Logging with Seneca]: /tutorials/logging-with-seneca.html
-[How to write a Plugin]: /tutorials/how-to-write-a-plugin.html
-[Understanding Data Entities]: /tutorials/understanding-data-entities.html
-[Understanding Prior Actions]: /tutorials/understanding-prior-actions.html
-[Seneca Examples]: https://github.com/rjrodger/seneca-examples
+[How to write a plugin]: /tutorials/how-to-write-a-plugin.html
+[Understanding data entities]: /tutorials/understanding-data-entities.html
+[Understanding prior actions]: /tutorials/understanding-prior-actions.html
+[Seneca samples]: https://github.com/rjrodger/seneca-examples
 [Well!]: https://github.com/nearform/well
-[Nodezoo]: https://github.com/rjrodger/nodezoo
+[nodezoo]: https://github.com/rjrodger/nodezoo
