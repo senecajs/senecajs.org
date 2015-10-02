@@ -29,7 +29,7 @@ try to include as many plugins as possible in order to demonstrate their use.
 This is a simple networking game implemented as a mobile web app. Its purpose is to serve as an example of a real app, built with Node.js, Sencha Touch, and Seneca. As such, it has non-trivial functionality, and there are some warts and hacks. Decide for yourself if this set of tools is right for you. See the repo at [Well!][].
 
 ### nodezoo
-This is the nodezoo.com project, a search engine for Node.js modules. The nodezoo search engine is an example of a real-world service built using Node.js microservices. Each microservice is published in its own GitHub repository. The code base is intended to be used as a larger-scale example and as a starting point for your own projects. See the repo at [nodezoo][].
+nodezoo is a search engine for Node.js modules. The nodezoo search engine is an example of a real-world service built using Node.js microservices. Each microservice is published in its own GitHub repository. The code base is intended to be used as a larger-scale example and as a starting point for your own projects. See the repo at [nodezoo][].
 
 [Sample projects]: /tutorials/#samples
 [Logging with Seneca]: /tutorials/logging-with-seneca.html
