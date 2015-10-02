@@ -21,7 +21,7 @@ examples of working services.
 For convenience, we have a number of samples in a single repository. This repository covers single concepts
 as well as popular plugins. This repository is open sourced; pull requests are welcome. See the repo at [Seneca samples][].
 
-## Full Apps
+## Full apps
 Full apps are much more complex than samples. They are production quality microservices. We
 try to include as many plugins as possible in order to demonstrate their use.
 
