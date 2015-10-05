@@ -47,7 +47,10 @@ if (argv.serve) {
   metalsmith.use(serve({
     port: 4000,
     verbose: true,
-      cache: 1
+    cache: 1,
+    http_error_files: {
+      404: "/404.html"
+    }
   }))
 } else {
   metalsmith.use(ignore([
@@ -58,5 +61,4 @@ if (argv.serve) {
 metalsmith.build(function (err) {
   if (err) console.log(err)
   else console.log('Build complete...')
->>>>>>> re add the api file, seneca repo is too volitile
 })
