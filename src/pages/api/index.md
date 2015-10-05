@@ -45,6 +45,7 @@ seneca.ready(function (err) {
   // handle err / start inserting data.
 })
 ```
+
 ___Example: waiting for the database connection before inserting data___
 
 You can call ready more than once. If you need to register additional plugins dynamically (this is perfectly
@@ -54,6 +55,7 @@ which you can use instead of this function:
 ``` js
 seneca.on('ready', function (err) {...})
 ```
+
 ___Example: adding callback for the ready event, emitted by Seneca___
 
 They both achieve the same result. It's a matter of preference which you use.
@@ -80,6 +82,7 @@ seneca.act({foo:'bar', zoo:'qaz'}, function (err, out) {
   console.log( out.zoo )
 })
 ```
+
 ___Example: defining an action___
 
 You can define actions any time, anywhere. They don't need to be associated with a plugin. Actions defined
@@ -142,6 +145,7 @@ seneca.ready(function (err) {
   seneca.listen()
 })
 ```
+
 ___Example: calling listen on port 10101 over http___
 
 The options object for this method allows you to set the `type`, `host` and `port` settings for the default transport. The exact options that you need vary by transport plugin. If you are using a custom transport, consult its documentation for information on the available options.
@@ -157,6 +161,7 @@ seneca.ready(function (err) {
   })
 })
 ```
+
 ___Example: calling listen on a custom host and port over tcp___
 
 Seneca allows multiple transport types to be run simultaneously over different ports. This gives clients maximum flexibility with minimal setup.
