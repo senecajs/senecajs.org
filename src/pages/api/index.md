@@ -22,6 +22,7 @@ seneca.use('mem-store', {
   }
 })
 ```
+
 ___Example: registering the built-in mem-store plugin with custom options___
 
 The second argument to the use method is an options object containing configuration properties specific to the plugin. Refer to the documentation for each plugin to find out how to use them. If you're using the options
