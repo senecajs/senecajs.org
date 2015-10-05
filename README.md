@@ -1,5 +1,5 @@
 ![logo](./src/files/assets/seneca-logo.png)
-> A Node.js toolkit for Micro-Service Architectures
+> A Node.js toolkit for micro service architectures
 
 #senecajs.org
 This repo contains the documentation website for [Seneca.js][]. This documentation is available at
