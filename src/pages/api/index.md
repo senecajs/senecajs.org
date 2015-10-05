@@ -50,28 +50,26 @@ You can call ready more than once. If you need to register additional plugins dy
 fine), you can call ready again to wait for the new plugins to initialize. Seneca also emits a 'ready' event,
 which you can use instead of this function:
 
-___Example: adding callback for the ready event, emitted by Seneca___
 ``` js
 seneca.on('ready', function (err) {...})
 ```
+___Example: adding callback for the ready event, emitted by Seneca___
 
 They both achieve the same result. It's a matter of preference which you use.
 
 ## add (pattern [, paramspec], action)
-- __pattern__ - `object` or `string`: matching the the pattern specification
-- __paramspec__ - `object`: matching the parameter specification
-- __action__: `function(...)`: matching the action signature
+- __pattern__ - `object` or `string`: matches the pattern specification.
+- __paramspec__ - `object`: matches the parameter specification.
+- __action__ - `function(...)`: matches the action signature.
 
-Add an action to the Seneca instance. You provide a key/value pair pattern that Seneca will match against objects
-that are submitted using the add method. When an object is submitted, Seneca will check the object's top-level
+This method adds an action to the Seneca instance. You provide a key/value pair pattern that Seneca matches against objects that are submitted using the add method. When an object is submitted, Seneca checks the object's top-level
 properties in alphabetical order to see if there is a matching action.
 
-The action is a function that accepts two arguments. The first is the object that was submitted, and the second
-is a callback that you should call once your action has completed it's work. The callback has the standard
+The action is a function that accepts two arguments. The first is the object that was submitted. The second
+is a callback that you should call once your action has completed its work. The callback has the standard
 signature function( err, result ). The callback must always be called, especially to report errors. The action
-result is optional, and you do not have to supply one if it does not make sense for your action.
+result is optional; you do not have to supply one if it does not make sense for your action.
 
-___Example: defining an action___
 ``` js
 seneca.add({foo:'bar'}, function (args, done) {
   done( null,{zoo:args.zoo})
@@ -81,23 +79,22 @@ seneca.act({foo:'bar', zoo:'qaz'}, function (err, out) {
   console.log( out.zoo )
 })
 ```
+___Example: defining an action___
 
-You can define actions at any time, any where. They don't need to be associated with a plugin. Actions defined
-inside a plugin do get some logging meta-data however, so they're easier to manage in the long run.
+You can define actions any time, anywhere. They don't need to be associated with a plugin. Actions defined
+inside a plugin do get some logging metadata, however, so they're easier to manage in the long run.
 
 ## act (input [, callback])
-- __input:__ object, properties to be matched against previously added action patterns
-- __callback:__ function, optional (<a href="desc-result-signature">result signature</a>)
-
-notes
+- __input:__ object. Matches properties against previously added action patterns.
+- __callback:__ function. Optional (<a href="desc-result-signature">result signature</a>).
 
 ## make (entity-canon [, properties])
-- __entity-canon__ - `string`: see [Entity Cannon](/entity-canon-format) for info.
+- __entity-canon__ - `string`: see [Entity canon](/entity-canon-format) for information.
 - __properties__ - `object`: optional, default data for the new entity.
 
-This method creates new entities using the built in [Data Entity]() functionality. The `entity-canon` string
-is documented in [Entity Cannon Format]() but is essentially a namespaced way to refer to the same type or
-shape of object for the purposes of storage.
+This method creates new entities using the built-in [Data entity]() functionality. The `entity-canon` string
+is documented in [Entity canon format](). It is essentially a namespaced way to refer to the same type or
+shape of object for storage purposes:
 
 ```js
 var stockItem = seneca.make('stock-item')
@@ -105,7 +102,7 @@ stockItem.price = 1.22
 stockItem.quantity = 22
 ```
 
-A set of default or preset options can be passed to the above method to create a pre-populated object.
+A set of default or pre-set options can be passed to the above method to create a pre-populated object:
 
 ```js
 var stockItem = seneca.make('stock-item', {
@@ -116,38 +113,27 @@ var stockItem = seneca.make('stock-item', {
 ```
 
 ## export (name)
-- __name:__ string, reference to plugin provided object
-
-notes...
+- __name:__ string, reference to an object provided by a plugin. 
 
 ## pin (pin-pattern)
-- __pin-pattern:__ object or string (<a href="desc-pin-pattern-format">pin pattern format</a>)
-
-notes...
+- __pin-pattern:__ object or string (<a href="desc-pin-pattern-format">pin pattern format</a>).
 
 ## log._level_([entry, ..])
-- __entry:__ JavaScript value, converted to string
-
-notes...
+- __entry:__ JavaScript value, converted to string.
 
 ## close ([done])
-- __done:__ function, optional, callback with signature function(err), called after all close actions complete.
-
-notes...
+- __done:__ function, optional, callback with signature function(err), called after all close actions are complete.
 
 ## client (options)
-- __options:__ object, transport options
-
-notes...
+- __options:__ object, transport options.
 
 ## listen (options)
-- __options__  - `object`: transport options
+- __options__  - `object`: transport options.
 
-The listen method tells the underlying transport to start listening for traffic. This method is usually called last
-after you have finished any setup and have loaded all plugins. The built in transport supports HTTP and TCP. The
-default port is set to `10101`, the default transit type is HTTP.
+The listen method tells the underlying transport to start listening for traffic. This method is usually called last,
+after you have finished any setup and have loaded all plugins. The built-in transport supports HTTP and TCP. The
+default port is set to `10101`, while the default transit type is HTTP.
 
-___Example: calling listen on port 10101 over http___
 ```js
 seneca.ready(function (err) {
   if (err) return
@@ -155,12 +141,10 @@ seneca.ready(function (err) {
   seneca.listen()
 })
 ```
+___Example: calling listen on port 10101 over http___
 
-The options object for this method allows the `type`, `host` and `port` settings for the default transport to be
-set. The exact options needed will vary by transport plugin, if you are using a custom transport, consult it's
-documentation the the options available.
+The options object for this method allows you to set the `type`, `host` and `port` settings for the default transport. The exact options that you need vary by transport plugin. If you are using a custom transport, consult its documentation for information on the available options.
 
-___Example: calling listen on a custom host and port over tcp___
 ```js
 seneca.ready(function (err) {
   if (err) return
@@ -172,6 +156,7 @@ seneca.ready(function (err) {
   })
 })
 ```
+___Example: calling listen on a custom host and port over tcp___
 
 Seneca allows multiple transport types to be ran simultaneously over different ports. This allows the greatest
 flexibility to clients with minimal setup.
