@@ -247,7 +247,7 @@ And you'll see the output:
 
 ``` js
 $ node prior-debug.js --seneca.print.tree
-2015-09-04T17:00:55.445Z 5ftqv0kxp9zn/1441386055436/36136/- INFO    hello    Seneca/0.6.4/5ftqv0kxp9zn/1441386055436/36136/-    
+2015-09-04T17:00:55.445Z 5ftqv0kxp9zn/1441386055436/36136/- INFO    hello    Seneca/0.6.4/5ftqv0kxp9zn/1441386055436/36136/-
 Seneca action patterns for instance: 5ftqv0kxp9zn/1441386055436/36136/-
 └─┬ a:1
   ├── # root$, (e7roo),
@@ -275,8 +275,8 @@ Running the above program using `--seneca.log.all` also shows you the log output
 ``` js
 $ node prior-debug.js --seneca.log.all --seneca.log.short
 ...
-     159 3h/- DEBUG plugin root$  ADD (kjnse) a:1  
-     159 3h/- DEBUG plugin root$  ADD (xtpzn) a:1,b:2  
+     159 3h/- DEBUG plugin root$  ADD (kjnse) a:1
+     159 3h/- DEBUG plugin root$  ADD (xtpzn) a:1,b:2
      160 3h/- DEBUG plugin root$  ADD (460jf) a:1,b:2,c:3
 ...
      160 3h/- DEBUG act root$ IN  0j/12 a:1,b:2,c:3 {a:1,b:2,c:3} ENTRY (460jf) - - -
@@ -311,9 +311,9 @@ If you have questions on priors, you can:
 
 That's all folks! Corrections and comments: please tweet [@senecajs][].
 
-[plugins]: http://senecajs.github.io/tutorials/how-to-write-a-plugin.html 
-[data entity patterns]: /tutorials/understating-data-entities.html
-[logging tutorial]: http://senecajs.github.io/tutorials/logging-example.html
+[plugins]: http://senecajs.org/tutorials/how-to-write-a-plugin.html
+[data entity patterns]: http://senecajs.org/tutorials/understanding-data-entities.html
+[logging tutorial]: http://senecajs.org/tutorials/logging-with-seneca.html
 [@senecajs]: https://twitter.com/senecajs
 [github issue]: https://github.com/rjrodger/seneca/issues
 [conversation]: https://gitter.im/rjrodger/seneca
