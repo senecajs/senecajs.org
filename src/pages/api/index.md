@@ -2,20 +2,19 @@
 layout: main.html
 ---
 
-# API Reference
-Seneca's API is pretty tiny, we try hard to keep any non essential functionality out of core, instead pushing it
-out to plugins. The core API documented in full below. If you have any further questions [get in touch](), we
+# API reference
+The Seneca API is pretty tiny. We try hard to keep any non-essential functionality out of core. Instead, we push it
+out to plugins. The core API is documented below. If you have any further questions, [get in touch](). We
 love to talk!
 
 ## use (name [, options])
-- __name:__ - `string`: name of the plugin, used to build argument to require function.
-- __options:__ - `object`: optional, options for the plugin, contents depend on plugin.
+- __name:__ - `string`: name of the plugin. Used to build the argument to the require function.
+- __options:__ - `object`: options for the plugin. Contents depend on plugin.
 
-The use method loads and registers plugins. You can refer to built-in plugins by name directly, for example:
-echo, options, mem-store, etc. External plugins need to be installed with npm install first, and then you can
-refer to them using their npm module name. As a convenience, you can omit the seneca- prefix on standard plugins.
+The use method loads and registers plugins. You can refer directly to built-in plugins by name; for example,
+echo, options, mem-store. External plugins need to be installed with npm install first. You can then 
+refer to them by their npm module name. For convenience, you can omit the seneca- prefix on standard plugins.
 
-___Example: registering the built-in mem-store plugin with custom options___
 ``` js
 seneca.use('mem-store', {
   web:{
@@ -23,22 +22,21 @@ seneca.use('mem-store', {
   }
 })
 ```
+___Example: registering the built-in mem-store plugin with custom options___
 
 The second argument to the use method is an options object containing configuration properties specific to the plugin. Refer to the documentation for each plugin to find out how to use them. If you're using the options
-plugin, properties in the options argument will override options loaded externally.
+plugin, properties in the options argument override externally loaded options.
 
 ## ready (ready)
 - __ready__ - `function(err)`: callback to execute after all plugins initialize.
 
-Each plugin can optionally define an action with the pattern init:name. If this action is defined, it will be
-called in series, in order, for any plugins that define it. You can ensure that database connections and other
+Each plugin has the option to define an action with the pattern init:name. If this action is defined, it is
+called in series and in order for any plugins that define it. You can ensure that database connections and other
 external dependencies are in place before using them. Just a reminder: the order of plugin registration is
-significant!
+significant.
 
-This method takes a callback function as an argument. Inside this callback is where you would normally complete
-the initialization of other parts of your app, such as setting up express.
+This method takes a callback function as an argument. You would normally complete the initialization of other parts of your app, such as setting up express, inside this callback.
 
-___Example: waiting for the database connection before inserting data___
 ``` js
 seneca.use('mongo-store', {...})
 
@@ -46,9 +44,10 @@ seneca.ready(function (err) {
   // handle err / start inserting data.
 })
 ```
+___Example: waiting for the database connection before inserting data___
 
 You can call ready more than once. If you need to register additional plugins dynamically (this is perfectly
-fine!), you can call ready again to wait for the new plugins to initialize. Seneca also emits a 'ready' event,
+fine), you can call ready again to wait for the new plugins to initialize. Seneca also emits a 'ready' event,
 which you can use instead of this function:
 
 ___Example: adding callback for the ready event, emitted by Seneca___
@@ -56,7 +55,7 @@ ___Example: adding callback for the ready event, emitted by Seneca___
 seneca.on('ready', function (err) {...})
 ```
 
-They both achieve the same result, it's simply a matter of preference which you choose to use.
+They both achieve the same result. It's a matter of preference which you use.
 
 ## add (pattern [, paramspec], action)
 - __pattern__ - `object` or `string`: matching the the pattern specification
