@@ -158,5 +158,4 @@ seneca.ready(function (err) {
 ```
 ___Example: calling listen on a custom host and port over tcp___
 
-Seneca allows multiple transport types to be ran simultaneously over different ports. This allows the greatest
-flexibility to clients with minimal setup.
+Seneca allows multiple transport types to be run simultaneously over different ports. This gives clients maximum flexibility with minimal setup.
