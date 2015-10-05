@@ -44,7 +44,7 @@ architecture, so that will be discussed too.
 
 
 
-<small style="float:right"><a href="#wp-contents">[top]</a></small>
+<small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small>
 ## A Simple Plugin
 
 
@@ -138,7 +138,7 @@ output is a JavaScript object with single property _color_, the
 value of which is set from the original options given to the plugin.
 
 
-<small style="float:right"><a href="#wp-contents">[top]</a></small></a>
+<small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small></a>
 ## A Plugin is a Module
 
 
@@ -238,7 +238,7 @@ seneca.use( 'echo' )
 ```
 
 
-<small style="float:right"><a href="#wp-contents">[top]</a></small>
+<small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small>
 ## Give Your Plugin a Name
 
 
@@ -500,7 +500,7 @@ null { color: 'green', tag: 'BBB' }
 ```
 
 
-<small style="float:right"><a href="#wp-contents">[top]</a></small>
+<small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small>
 ## Dealing with Options
 
 
