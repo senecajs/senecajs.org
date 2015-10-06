@@ -2,14 +2,12 @@
 layout: main.html
 ---
 # Getting started
-Welcome to the Seneca _Getting started_ guide! This guide assumes you already have [Node.js][] installed.
+Welcome to the Seneca _Getting started_ guide! This guide assumes that you already have [Node.js][] installed.
 
 Seneca lets you build a microservices system without worrying about production. You don't need to know where the other services are located, how many of them there
-are, or what they do. Everything external to your business logic - such as databases, caches, or
-third party integrations - is likewise hidden behind microservices.
+are, or what they do. Everything external to your business logic - such as databases, caches and third-party integrations - is likewise hidden behind microservices.
 
-This decoupling makes your system easy to continuously build and change. It works because
-Seneca has the following two core features:
+This decoupling makes your system easy to continuously build and change. It works because Seneca has the following two core features:
 
 * **Transport independence**. You can send messages between services in many ways, all hidden from your business logic.
 
@@ -18,10 +16,10 @@ Seneca has the following two core features:
 Messages are JSON documents. They can have any internal structure you like. Messages can be sent via HTTP/S,
 TCP connections, message queues, publish/subscribe services or any mechanism that moves bits
 around. From your perspective as the writer of a service, you just send messages out into the
-world. You don't want to know which services receive them.
+world. You don't need to know which services receive them.
 
 Then there are the messages you'd like to receive. You specify the property patterns that you care
-about, and Seneca (with a little configuration help) makes sure that you get any messages sent by other services that match those patterns. The patterns are very simple, just a list of key-value
+about, and Seneca (with a little configuration help) makes sure that you get any messages sent by other services that match those patterns. The patterns are very simple: just a list of key-value
 pairs that must match the top-level properties of the JSON message document.
 
 ## A simple microservice
@@ -49,7 +47,7 @@ For the moment, this is all happening in the same process, without network traff
 
 The example code to try this out is in [sum.js][]. To run the code, follow these steps:
 
-1. Open a terminal, and cd to your projects folder.
+1. Open a terminal and cd to your projects folder.
 2. Run `git clone https://github.com/senecajs/getting-started`.
 3. cd into the _getting-started_ folder.
 4. Run `npm install` to install the required modules, including Seneca.
@@ -65,22 +63,19 @@ When you run `sum.js`, you get the following output:
 The first line logs information that Seneca prints to let you know that it has started. The
 second line is the result you get after the message has been matched and processed.
 
-The `seneca.add` method adds a new action pattern to the Seneca instance. This pattern is matched
-against any JSON messages that the Seneca instance receives. The action is a function that is
-executed when a pattern matches a message.
+The `seneca.add` method adds a new action pattern to the Seneca instance. It has two parameters:
 
-The `seneca.add` method has two parameters:
-
-* `pattern`: the property pattern to match in messages.
-* `action`: the function to execute if a message matches.
+* `pattern`: the property pattern to match in any JSON messages that the Seneca instance receives.
+* `action`: the function to execute when a pattern matches a message.
 
 The action function has two parameters:
 
 * `msg`: the matching inbound message (provided as a plain object).
 * `respond`: a callback function that you use to provide a respond to the message.
 
-The respond function is a callback with the standard `error, result` signature. Let's put this all
-together again:
+The respond function is a callback with the standard `error, result` signature. 
+
+Let's put this all together again:
 
 ``` js
 seneca.add({role: 'math', cmd: 'sum'}, function (msg, respond) {
@@ -89,11 +84,11 @@ seneca.add({role: 'math', cmd: 'sum'}, function (msg, respond) {
 })
 ```
 
-In the example code, the action computes the sum of two numbers, provided via the `left` and
+In the sample code, the action computes the sum of two numbers, provided via the `left` and
 `right` properties of the message object. Not all messages generate a result, but as this is the
 most common case, Seneca allows you to provide the result via a callback function.
 
-In summary, the action pattern `role:math,cmd:sum` acts on this message
+In summary, the action pattern `role:math,cmd:sum` acts on this message:
 
 ``` js
 {role: 'math', cmd: 'sum', left: 1, right: 2}
@@ -108,15 +103,15 @@ to produce this result:
 There is nothing special about the properties `role` and `cmd`. They just happen to be the ones you
 are using for pattern matching.
 
-The `seneca.act` method submits a message to act on. It takes two parameters:
+The `seneca.act` method submits a message to act on. It has two parameters:
 
 * `msg`: the message object.
 * `response_callback`: a function that receives the message response, if any.
 
 The response callback is a function you provide with the standard `error, result` signature. If
-there was a problem (say, the message matched no patterns), then the first argument will be an
-[Error][] object. If everything went to plan, the second argument will be the result object. In the
-example code, these arguments are simply printed to the console:
+there is a problem (say, the message matches no patterns), then the first argument is an
+[Error][] object. If everything goes according to plan, the second argument is the result object. In the
+sample code, these arguments are simply printed to the console:
 
 ``` js
 seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, function (err, result) {
@@ -125,7 +120,7 @@ seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, function (err, result)
 })
 ```
 
-The example code in the [sum.js][] file shows you how to define and call an action pattern inside
+The sample code in the [sum.js][] file shows you how to define and call an action pattern inside
 the same Node.js process. You'll soon see how to split this code over multiple processes.
 
 ## How patterns work
