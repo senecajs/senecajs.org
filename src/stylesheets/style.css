@@ -119,6 +119,7 @@ h6,
 .h5,
 .h6 {
   font-family: "Cinzel";
+  letter-spacing: .2rem;
   color: inherit;
 }
 
