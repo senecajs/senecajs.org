@@ -187,8 +187,8 @@ In the above code sample, the `seneca.act` calls are chained together. Seneca pr
 convenience. Chained calls are executed in order, but not in series, so their results could come
 back in any order.
 
-## Extending functionality with patterns
-Patterns make it easy to extend your functionality. Instead of adding if statements and complex
+## Extending functionality by adding patterns
+Patterns make it easy for you to extend your functionality. Instead of adding if statements and complex
 logic, you simply add more patterns. 
 
 Let's extend the addition action by adding the ability to force integer-only arithmetic. To do this, you add a new property, _integer:true_, to the message object. Then, you provide a new action for messages that have this property:
@@ -225,7 +225,7 @@ seneca.add({role: 'math', cmd: 'sum'}, function (msg, respond) {
   respond(null, {answer: sum})
 })
 
-// both these messages will match role: math, cmd: sum
+// both these messages match role: math, cmd: sum
 
 
 seneca.act({role: 'math', cmd: 'sum', left: 1.5, right: 2.5}, console.log)
@@ -254,21 +254,19 @@ null { answer: 4 }
 null { answer: 3 }
 ```
 
-The first two `.act` calls both match the `role: math, cmd: sum` action pattern. Next, the integer-only action pattern `role: math, cmd: sum, integer: true` is defined. After that, the third call to
-`.act` gos with the `role: math, cmd: sum` action, but the fourth goes with `role: math, cmd: sum,
+The first two `.act` calls both match the `role: math, cmd: sum` action pattern. Next, the code defines the integer-only action pattern `role: math, cmd: sum, integer: true`. After that, the third call to
+`.act` goes with the `role: math, cmd: sum` action, but the fourth goes with `role: math, cmd: sum,
 integer: true`. This code also demonstrates that you can chain `.add` and `.act` calls together.
 This code is available in the [sum-integer.js][] file.
 
 The ability to easily extend the behavior of your actions by matching more specific kinds of
 messages is an easy way to handle new and changing requirements. This applies both while your project is in
 development and when it is live and needs to adapt. It also has the advantage that you do not need
-to modify existing code. It's much safer to add new code to handle
-special cases. In a production system you won't even need to do a re-deploy. Your existing services
-can stay running as they are. All you need to do is start up your new service.
+to modify existing code. It's much safer to add new code to handle special cases. In a production system, you won't even need to do a re-deploy. Your existing services can stay running as they are. All you need to do is start up your new service.
 
-## Code Re-use with Patterns
-Action patterns can call other action patterns to get their work done. Let's modify our example
-code to use this approach.
+## Using patterns for code re-use
+Action patterns can call other action patterns to get their work done. Let's modify our sample
+code to use this approach:
 
 ``` js
 var seneca = require( 'seneca' )()
@@ -295,16 +293,16 @@ seneca.act('role: math, cmd: sum, left: 1.5, right: 2.5',console.log)
 seneca.act('role: math, cmd: sum, left: 1.5, right: 2.5, integer: true', console.log)
 ```
 
-In this version, the definition of the `role: math, cmd: sum, integer: true` action pattern uses
-the previously defined `role: math, cmd: sum` action pattern, but first modifies the message to
+In this version of the code, the definition of the `role: math, cmd: sum, integer: true` action pattern uses
+the previously defined `role: math, cmd: sum` action pattern. However, it first modifies the message to
 convert the `left` and `right` properties into integers.
 
-Inside the action function, the context variable, `this`, is a reference to the current Seneca
-instance. This is the proper way to reference Seneca inside actions, as you will get the full
-context of the current action call. Among other things, this makes your logs more informative.
+Inside the action function, the context variable `this` is a reference to the current Seneca
+instance. This is the proper way to reference Seneca inside actions, as you get the full
+context of the current action call. This makes your logs more informative, among other things.
 
 This code uses an abbreviated form of JSON to specify the patterns and messages. For example, the
-object literal form.
+object literal form
 
 ``` js
 {role: 'math', cmd: 'sum', left: 1.5, right: 2.5}
@@ -316,19 +314,19 @@ becomes:
 'role: math, cmd: sum, left: 1.5, right: 2.5'
 ```
 
-This format, [jsonic][], which you provide as a string literal, is a convenience format to make
+This format, [jsonic][], which you provide as a string literal, is a convenient format for making
 patterns and messages more concise in your code.
 
-The code for the above example is available in the [sum-reuse.js][] file.
+The code for the sample above is available in the [sum-reuse.js][] file.
 
 ## Patterns are Unique, with Overrides
 The action patterns that you define are unique. They can only trigger one function. The patterns
-resolve using the rules:
+resolve using the following rules:
 
-* more properties win, and
-* if the patterns have the same number of properties, they are matched in alphabetical order.
+* More properties win.
+* If the patterns have the same number of properties, they are matched in alphabetical order.
 
-The reason that these rules are so simple is so that you can run them "in your head". It's very
+These rules are designed to be simple so that you can run them "in your head". It's very
 easy to understand which pattern will trigger which action function.
 
 Here are some examples:
@@ -346,9 +344,9 @@ fully. For example, you might want to perform custom validation of the message p
 capture message statistics, or add additional information to action results, or throttle message
 flow rates.
 
-In the example code, the addition action expects that the left and right properties are finite
+In the sample code, the addition action expects the left and right properties to be finite
 numbers. Also, it's useful to include the original input arguments in the output for debugging
-purposes. You can add a validation check, and debugging information, using the following code:
+purposes. You can add a validation check and debugging information using the following code:
 
 ``` js
 var seneca = require( 'seneca' )()
