@@ -13,7 +13,8 @@ body {
 
 .navbar {
 	box-shadow: 0 1px 5px 0px #333;
-	font-family: "Cinzel";
+	font-family: "Merriweather";
+  letter-spacing: .06rem;
   background-color: white;
   border-bottom: 0;
 
@@ -41,7 +42,7 @@ body {
 
 .navbar-default .navbar-brand {
   font-family: 'Cinzel';
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   color: #333333;
 }
 
@@ -142,7 +143,10 @@ h4 {
 }
 
 .hp .grey-box h3 {
-  font-size: 150%;
+  font-size: 140%;
+  margin-top: 2rem;
+  letter-spacing: .06rem;
+  font-family: 'Merriweather';
 }
 
 .center {
@@ -151,11 +155,13 @@ h4 {
 
 .header-box h2 {
 	font-size: 120%;
+  font-family: 'Merriweather';
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: -20px;
 	line-height: 1.3em;
 	width: 90%;
+  letter-spacing: .06rem;
 	font-weight: 400;
 }
 
@@ -339,11 +345,6 @@ a:hover {
   font-size: 2rem;
 }
 
-.footer-one img {
-  height: 40%;
-  width: 40%;
-}
-
 .social {
 	padding: 60px 0 30px 0;
 	font-style: normal;
@@ -430,13 +431,15 @@ a:hover {
     margin-bottom: 1rem;
   }
   .container h4 {
-    font-size: 2rem;
+    font-family: 'Merriweather';
+    letter-spacing: .06rem;
+    font-size: 1.8rem;
     margin-top: 0;
     margin-bottom: 1rem;
   }
   .footer-one img {
-    height: 100%;
-    width: 100%;
+    height: 60%;
+    width: 60%;
   }
 }
 
@@ -503,8 +506,8 @@ a:hover {
     margin-bottom: 1rem;
   }
   .footer-one img {
-    height: 30%;
-    width: 30%;
+    height: 20%;
+    width: 20%;
   }
 }
 
