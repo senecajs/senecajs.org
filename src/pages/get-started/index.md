@@ -124,7 +124,7 @@ The sample code in the [sum.js][] file shows you how to define and call an actio
 the same Node.js process. You'll soon see how to split this code over multiple processes.
 
 ## How patterns work
-Patterns - instead of network addresses or topics - make it much easier to extend and enhance your system by incrementally adding new microservices. 
+Patterns - as opposed to network addresses or topics - make it much easier to extend and enhance your system. They do this by letting you incrementally add new microservices. 
 
 Let's add to our system the ability to multiply two numbers.
 
@@ -183,16 +183,15 @@ seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, console.log)
       .act({role: 'math', cmd: 'product', left: 3, right: 4}, console.log)
 ```
 
-In this example, the `seneca.act` calls are chained together. Seneca provides a chaining API as a
+In the above code sample, the `seneca.act` calls are chained together. Seneca provides a chaining API as a
 convenience. Chained calls are executed in order, but not in series, so their results could come
 back in any order.
 
 ## Extending functionality with patterns
 Patterns make it easy to extend your functionality. Instead of adding if statements and complex
-logic, you add more patterns. 
+logic, you simply add more patterns. 
 
-Let's extend the addition action with the ability to force integer-only arithmetic. To do this, you add a new property, _integer:true_, to the message object. Then
-you provide a new action for messages that have this property:
+Let's extend the addition action by adding the ability to force integer-only arithmetic. To do this, you add a new property, _integer:true_, to the message object. Then, you provide a new action for messages that have this property:
 
 ``` js
 seneca.add({role: 'math', cmd: 'sum', integer: true}, function (msg, respond) {
@@ -201,20 +200,20 @@ seneca.add({role: 'math', cmd: 'sum', integer: true}, function (msg, respond) {
 })
 ```
 
-Now, the message
+Now, this message
 
 ``` js
 {role: 'math', cmd: 'sum', left: 1.5, right: 2.5, integer: true}
 ```
 
-produces the result:
+produces this result:
 
 ``` js
 {answer: 3}  // == 1 + 2, as decimals removed
 ```
 
 What happens if you add both patterns to the same system? How does Seneca choose which one to use?
-The more specific pattern always wins. That is, the pattern with the most matching attributes has precedence.
+The more specific pattern always wins. In other words, the pattern with the highest number of matching attributes has precedence.
 
 Here's some code to illustrate this:
 
