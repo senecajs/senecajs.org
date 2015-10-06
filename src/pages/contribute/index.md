@@ -22,6 +22,10 @@ If you have any questions, or want to help out, please stop by our issues boards
 - For issues or questions on documentation, go to [Senecajs.org][org_issues].
 - For issues or questions on Seneca itself, go to [Seneca][code_issues].
 
+## Contributing guides
+
+- [Adding a tutorial][]
+
 ## License
 [Seneca][] and [its docs][senecajs.org] are licensed under MIT and
 are the copyright of [Richard Rodger][] and [other][] [contributors][].
@@ -46,6 +50,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+[Adding a tutorial]: ./adding-a-tutorial.html
 [Seneca]: https://github.com/rjrodger/seneca
 [Senecajs.org]: https://github.com/senecajs/senecajs.org
 [code_issues]: https://github.com/rjrodger/seneca/issues
