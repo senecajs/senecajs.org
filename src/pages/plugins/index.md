@@ -277,8 +277,8 @@ the right solution.
 [simpledb-store-npm-url]: https://npmjs.org/package/seneca-simpledb-store
 
 ## Transport plugins
-
-### [Transport ](https://npmjs.com/package/seneca-transport)
+Seneca supports many different transports. Use the one that fits best with your project right now; swap it out if you scale. Each plugin is named after the transport it supports, making it easy to find the right solution.
+### [Transport](https://npmjs.com/package/seneca-transport)
 [![version][seneca-transport-npm-version]][seneca-transport-npm-url]
 [![downloads][seneca-transport-npm-downloads]][seneca-transport-npm-url]
 [seneca-transport-npm-version]: https://img.shields.io/npm/v/seneca-transport.svg?style=flat-square
@@ -328,49 +328,49 @@ the right solution.
 [seneca-queue-npm-downloads]: https://img.shields.io/npm/dm/seneca-queue.svg?style=flat-square
 [seneca-queue-npm-url]: https://npmjs.org/package/seneca-queue
 
-### [ActiveMQ ](https://npmjs.com/package/seneca-activemq-transport)
+### [ActiveMQ](https://npmjs.com/package/seneca-activemq-transport)
 [![version][seneca-activemq-transport-npm-version]][seneca-activemq-transport-npm-url]
 [![downloads][seneca-activemq-transport-npm-downloads]][seneca-activemq-transport-npm-url]
 [seneca-activemq-transport-npm-version]: https://img.shields.io/npm/v/seneca-activemq-transport.svg?style=flat-square
 [seneca-activemq-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-activemq-transport.svg?style=flat-square
 [seneca-activemq-transport-npm-url]: https://npmjs.org/package/seneca-activemq-transport
 
-### [AMQP ](https://npmjs.com/package/seneca-amqp-transport)
+### [AMQP](https://npmjs.com/package/seneca-amqp-transport)
 [![version][seneca-amqp-transport-npm-version]][seneca-amqp-transport-npm-url]
 [![downloads][seneca-amqp-transport-npm-downloads]][seneca-amqp-transport-npm-url]
 [seneca-amqp-transport-npm-version]: https://img.shields.io/npm/v/seneca-amqp-transport.svg?style=flat-square
 [seneca-amqp-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-amqp-transport.svg?style=flat-square
 [seneca-amqp-transport-npm-url]: https://npmjs.org/package/seneca-amqp-transport
 
-### [Redis Queue ](https://npmjs.com/package/seneca-redis-queue-transport)
+### [Redis Queue](https://npmjs.com/package/seneca-redis-queue-transport)
 [![version][seneca-redis-queue-transport-npm-version]][seneca-redis-queue-transport-npm-url]
 [![downloads][seneca-redis-queue-transport-npm-downloads]][seneca-redis-queue-transport-npm-url]
 [seneca-redis-queue-transport-npm-version]: https://img.shields.io/npm/v/seneca-redis-queue-transport.svg?style=flat-square
 [seneca-redis-queue-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-redis-queue-transport.svg?style=flat-square
 [seneca-redis-queue-transport-npm-url]: https://npmjs.org/package/seneca-redis-queue-transport
 
-### [NATS ](https://npmjs.com/package/seneca-nats-transport)
+### [NATS](https://npmjs.com/package/seneca-nats-transport)
 [![version][seneca-nats-transport-npm-version]][seneca-nats-transport-npm-url]
 [![downloads][seneca-nats-transport-npm-downloads]][seneca-nats-transport-npm-url]
 [seneca-nats-transport-npm-version]: https://img.shields.io/npm/v/seneca-nats-transport.svg?style=flat-square
 [seneca-nats-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-nats-transport.svg?style=flat-square
 [seneca-nats-transport-npm-url]: https://npmjs.org/package/seneca-nats-transport
 
-### [NSQ ](https://npmjs.com/package/seneca-nsq-transport)
+### [NSQ](https://npmjs.com/package/seneca-nsq-transport)
 [![version][seneca-nsq-transport-npm-version]][seneca-nsq-transport-npm-url]
 [![downloads][seneca-nsq-transport-npm-downloads]][seneca-nsq-transport-npm-url]
 [seneca-nsq-transport-npm-version]: https://img.shields.io/npm/v/seneca-nsq-transport.svg?style=flat-square
 [seneca-nsq-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-nsq-transport.svg?style=flat-square
 [seneca-nsq-transport-npm-url]: https://npmjs.org/package/seneca-nsq-transport
 
-### [Stomp ](https://npmjs.com/package/seneca-stomp-transport)
+### [Stomp](https://npmjs.com/package/seneca-stomp-transport)
 [![version][seneca-stomp-transport-npm-version]][seneca-stomp-transport-npm-url]
 [![downloads][seneca-stomp-transport-npm-downloads]][seneca-stomp-transport-npm-url]
 [seneca-stomp-transport-npm-version]: https://img.shields.io/npm/v/seneca-stomp-transport.svg?style=flat-square
 [seneca-stomp-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-stomp-transport.svg?style=flat-square
 [seneca-stomp-transport-npm-url]: https://npmjs.org/package/seneca-stomp-transport
 
-### [Redis Sync ](https://npmjs.com/package/seneca-redis-sync-transport)
+### [Redis Sync](https://npmjs.com/package/seneca-redis-sync-transport)
 [![version][seneca-redis-sync-transport-npm-version]][seneca-redis-sync-transport-npm-url]
 [![downloads][seneca-redis-sync-transport-npm-downloads]][seneca-redis-sync-transport-npm-url]
 [seneca-redis-sync-transport-npm-version]: https://img.shields.io/npm/v/seneca-redis-sync-transport.svg?style=flat-square
