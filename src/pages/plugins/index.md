@@ -292,6 +292,14 @@ the right solution.
 [seneca-rabbitmq-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-rabbitmq-transport.svg?style=flat-square
 [seneca-rabbitmq-transport-npm-url]: https://npmjs.org/package/seneca-rabbitmq-transport
 
+### [Kafka](https://npmjs.com/package/seneca-kafka-transport)
+[![version][seneca-kafka-transport-npm-version]][seneca-kafka-transport-npm-url]
+[![downloads][seneca-kafka-transport-npm-downloads]][seneca-kafka-transport-npm-url]
+[seneca-kafka-transport-npm-version]: https://img.shields.io/npm/v/seneca-kafka-transport.svg?style=flat-square
+[seneca-kafka-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-kafka-transport.svg?style=flat-square
+[seneca-kafka-transport-npm-url]: https://npmjs.org/package/seneca-kafka-transport
+
+
 ### [Redis Transport](https://npmjs.com/package/seneca-redis-transport)
 [![version][seneca-redis-transport-npm-version]][seneca-redis-transport-npm-url]
 [![downloads][seneca-redis-transport-npm-downloads]][seneca-redis-transport-npm-url]
@@ -313,14 +321,12 @@ the right solution.
 [seneca-beanstalk-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-beanstalk-transport.svg?style=flat-square
 [seneca-beanstalk-transport-npm-url]: https://npmjs.org/package/seneca-beanstalk-transport
 
-<!---
-### [Queue?]](https://npmjs.com/package/seneca-queue)
+### [Queue]](https://npmjs.com/package/seneca-queue)
 [![version][seneca-queue-npm-version]][seneca-queue-npm-url]
 [![downloads][seneca-queue-npm-downloads]][seneca-queue-npm-url]
 [seneca-queue-npm-version]: https://img.shields.io/npm/v/seneca-queue.svg?style=flat-square
 [seneca-queue-npm-downloads]: https://img.shields.io/npm/dm/seneca-queue.svg?style=flat-square
 [seneca-queue-npm-url]: https://npmjs.org/package/seneca-queue
--->
 
 ### [ActiveMQ ](https://npmjs.com/package/seneca-activemq-transport)
 [![version][seneca-activemq-transport-npm-version]][seneca-activemq-transport-npm-url]
@@ -370,6 +376,13 @@ the right solution.
 [seneca-redis-sync-transport-npm-version]: https://img.shields.io/npm/v/seneca-redis-sync-transport.svg?style=flat-square
 [seneca-redis-sync-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-redis-sync-transport.svg?style=flat-square
 [seneca-redis-sync-transport-npm-url]: https://npmjs.org/package/seneca-redis-sync-transport
+
+### [MQ Light](https://npmjs.com/package/seneca-mqlight-transport)
+[![version][seneca-mqlight-transport-npm-version]][seneca-mqlight-transport-npm-url]
+[![downloads][seneca-mqlight-transport-npm-downloads]][seneca-mqlight-transport-npm-url]
+[seneca-mqlight-transport-npm-version]: https://img.shields.io/npm/v/seneca-mqlight-transport.svg?style=flat-square
+[seneca-mqlight-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-mqlight-transport.svg?style=flat-square
+[seneca-mqlight-transport-npm-url]: https://npmjs.org/package/seneca-mqlight-transport
 
 
 ## Got a plugin to share?
