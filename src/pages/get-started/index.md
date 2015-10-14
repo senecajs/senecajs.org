@@ -319,7 +319,7 @@ patterns and messages more concise in your code.
 
 The code for the sample above is available in the [sum-reuse.js][] file.
 
-## Patterns are unique, with overrides
+## Patterns are unique
 The action patterns that you define are unique. They can trigger only one function. The patterns
 resolve using the following rules:
 
@@ -340,8 +340,8 @@ Here are some examples:
 To see this in action, run the file [pattern-wins.js][]. For more details, see the [patrun module][].
 
 It is sometimes useful to have a way of enhancing the behavior of an action without rewriting it
-fully. For example, you might want to perform custom validation of the message properties, or
-capture message statistics, or add additional information to action results, or throttle message
+fully. For example, you might want to perform custom validation of the message properties,
+capture message statistics, add additional information to action results, or throttle message
 flow rates.
 
 In the sample code, the addition action expects the left and right properties to be finite
@@ -409,11 +409,11 @@ The code for this example is in the [sum-valid.js][] file.
 
 ## Organising patterns into plugins
 
-A Seneca instance is ultimately just a set of action patterns. You can organize them by using namespacing conventions in your patterns, such as `role:math`. To help with logging and debugging, Seneca supports a minimalist notion of a plugin to help organize patterns.
+A Seneca instance is just a set of action patterns. You can organize action patterns using namespacing conventions, such as `role:math`. To help with logging and debugging, Seneca supports a minimalist notion of a plugin.
 
-A Seneca plugin is just a set of action patterns. The plugin can have a name, which is used to annotate logging entries. Plugins can be given a set of options to control their behaviour. Plugins also provide a mechanism for executing initialisation functions in the correct order. For example, you want your database connection to be established before you try to read data from the database.
+Likewise, a Seneca plugin is just a set of action patterns. A plugin can have a name, which is used to annotate logging entries. Plugins can be given a set of options to control their behavior. Plugins also provide a mechanism for executing initialization functions in the correct order. For example, you want your database connection to be established before you try to read data from the database.
 
-A Seneca plugin is a function that has a single parameter `options`. You pass this plugin definition function to the `seneca.use method`. Here is the minimal Seneca plugin (it does nothing!).
+A Seneca plugin is a function that has a single parameter `options`. You pass this plugin definition function to the `seneca.use method`. Here is the minimal Seneca plugin (it does nothing!):
 
 ``` js
 function minimal_plugin( options ) {
@@ -426,10 +426,10 @@ require( 'seneca' )()
 
 The `seneca.use` method takes two parameters:
 
-* `plugin`: plugin definition function, or plugin name,
+* `plugin`: plugin definition function or plugin name.
 * `options`: options object for the plugin.
 
-If you run the example code (in file minimal-plugin.js), you'll get the following output:
+The sample code (in file minimal-plugin.js) produces the following output:
 
 ``` js
 $ node minimal-plugin.js
@@ -437,14 +437,14 @@ $ node minimal-plugin.js
 { foo: 'bar' }
 ```
 
-Seneca provides detailed logging information when it starts, and also when running. Normally, the log level is set to `INFO` which means you don't see very much. To see all the logs, try:
+Seneca provides detailed logging information when it starts and also when running. Normally, the log level is set to `INFO` which means you don't see very much. To see all the logs, try this:
 
 ``` js
 $ node minimal-plugin.js --seneca.log.all
 ... lots of log lines ...
 ```
 
-You can narrow this down by [grepping][] the log output for log lines relevant to plugin definition.
+You can narrow this down by [grepping][] the log output for log lines relevant to plugin definition:
 
 ``` js
 $ node minimal-plugin.js --seneca.log.all | grep plugin | grep DEFINE
@@ -455,7 +455,7 @@ $ node minimal-plugin.js --seneca.log.all | grep plugin | grep DEFINE
 2015...    3qf7...    DEBUG    plugin    minimal_plugin  DEFINE    {foo=bar}
 ```
 
-You can see that by default Seneca loads four built-in plugins: [basic][], [transport][],[web][], and [mem-store][]. These provide core functionalities for basic microservices. You can also see that your _minimal_plugin_ is in the list as well, and also shown are the options you provided: `{foo=bar}`. The name _minimal_plugin_ is obtained from the plugin definition function name, so you should always give your plugin definition function a name.
+You can see that Seneca loads four built-in plugins by default: [basic][], [transport][],[web][] and [mem-store][]. These provide core functionalities for basic microservices. You can also see that your _minimal_plugin_ is in the list as well, and also shown are the options you provided: `{foo=bar}`. The name _minimal_plugin_ is obtained from the plugin definition function name, so you should always give your plugin definition function a name.
 
 Let's give the plugin some action patterns. The `this` context variable of the plugin definition function is an instance of Seneca that you can use to do this. Here's a `math` plugin:
 
@@ -477,7 +477,7 @@ require( 'seneca' )()
   .act( 'role:math,cmd:sum,left:1,right:2', console.log )
 ```
 
-Running this file [math-plugin.js][] generates the output:
+Running this file [math-plugin.js][] generates the following output:
 
 ``` js
 $ node math-plugin.js
@@ -502,7 +502,7 @@ $ node math-plugin.js --seneca.log.all | grep math
 2015...    alqs...    DEBUG    act       math     -    OUT    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {answer=3}    EXIT    A;qlh13h47d0nu    5
 ```
 
-There's detailed logging information on the plugin definition and initialization, which you can mostly ignore for now. The most interesting lines the ones showing the addition of action patterns within the _math_ plugin, and then the execution of the `role:math,cmd:sum,left:1,right:2` action, showing the inbound and outbound messages.
+There is detailed logging information on the plugin definition and initialization, but you can mostly ignore this for now. The most interesting lines are the ones showing the addition of action patterns within the _math_ plugin, and then the execution of the `role:math,cmd:sum,left:1,right:2` action, showing the inbound and outbound messages:
 
 ``` js
 ...
@@ -516,11 +516,11 @@ There's detailed logging information on the plugin definition and initialization
 
 With Seneca, you build up your system by defining a set of patterns that correspond to messages. You organize these patterns into plugins to make logging and debugging easier. You then combine one or more plugins into microservices. You'll create a `math` microservice in the next section.
 
-Plugins often need to do some initialization work — such as connecting to a database. You don't do this work in the body of the plugin definition function. The definition function is synchronous by design, because all it does is _define_ the plugin. In fact, you should not call `seneca.act` at all in the plugin definition, just `seneca.add`.
+Plugins often need to do some initialization work, such as connecting to a database. You don't do this work in the body of the plugin definition function. The definition function is synchronous by design, because all it does is _define_ the plugin. In fact, you should not call `seneca.act` at all in the plugin definition - call `seneca.add` only.
 
-To initailize a plugin, you add a special action pattern: `init:`<plugin-name>. This action pattern is called in sequence for each plugin serially. The init function _must_ call its `respond` callback without errors. If plugin initialization fails, then Seneca will exit the Node.js process. You want your microservices to fail-fast (and scream loudly) when there's a problem. All plugins must complete initialization before any actions are executed.
+To initialize a plugin, you add a special action pattern: `init:`<plugin-name>. This action pattern is called in sequence for each plugin. The init function _must_ call its `respond` callback without errors. If plugin initialization fails, then Seneca exits the Node.js process. You want your microservices to fail fast (and scream loudly) when there's a problem. All plugins must complete initialization before any actions are executed.
 
-To demonstrate initialization, let's add simplistic custom logging to the _math_ plugin. When the plugin starts, it opens a log file, and writes a log of all operations to the file. The file needs to open successfully and be writable. If this fails, the microservice should fail.
+To demonstrate initialization, let's add simplistic custom logging to the _math_ plugin. When the plugin starts, it opens a log file and writes a log of all operations to the file. The file needs to open successfully and be writable. If this fails, the microservice should fail:
 
 ``` js
 var fs = require('fs')
@@ -584,13 +584,13 @@ require( 'seneca' )()
   .act( 'role:math,cmd:sum,left:1,right:2', console.log )
 ```
 
-In this plugin code, the patterns are organized at the top of the plugin so that they are easy to see. The action functions are defined below these. You can also see how the options are used to provide the location for the custom log file (it should go without saying that this is not a way to do production logging!).
+In this plugin code, the patterns are organized at the top of the plugin so that they are easy to see. The action functions are defined below these patterns. You can also see how the options are used to provide the location for the custom log file (it should go without saying that this is not a way to do production logging!).
 
-The initialization function `init` does some asynchronous file system work, and so must complete before any actions can be performed. If it fails, the whole service will fail to initialize. To see this in action, try changing the log file location to something invalid, like say `'/math.log'`.
+The initialization function `init` does some asynchronous file system work and so must complete before any actions can be performed. If it fails, the whole service fails to initialize. To see this in action, try changing the log file location to something invalid, such as `'/math.log'`.
 
 This code is available in the [math-plugin-init.js][] file.
 
-## Writing Microservices
+## Writing microservices
 
 Let's turn the _math_ plugin into a real microservice. First, you need to get organized. The business logic of the _math_ plugin, the functionality that it provides, is separate from whatever way it communicates with the outside world. Sometimes you might expose a web service. Other times you might listen on a message bus.
 
