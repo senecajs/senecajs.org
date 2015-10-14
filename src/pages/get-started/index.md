@@ -2,7 +2,7 @@
 layout: main.html
 ---
 # Getting started
-Welcome to the Seneca _Getting started_ guide! This guide assumes that you already have [Node.js][] installed.
+Welcome to the Seneca _Getting started_ guide! This guide assumes that you have already installed [Node.js][].
 
 Seneca lets you build a microservices system without worrying about production. You don't need to know where the other services are located, how many of them there
 are, or what they do. Everything external to your business logic - such as databases, caches and third-party integrations - is likewise hidden behind microservices.
@@ -592,9 +592,9 @@ This code is available in the [math-plugin-init.js][] file.
 
 ## Writing microservices
 
-Let's turn the _math_ plugin into a real microservice. First, you need to get organized. The business logic of the _math_ plugin, the functionality that it provides, is separate from whatever way it communicates with the outside world. Sometimes you might expose a web service. Other times you might listen on a message bus.
+Let's turn the _math_ plugin into a real microservice. First, you need to get organized. The business logic of the _math_ plugin - that is, the functionality that it provides - is separate from whatever way it communicates with the outside world. Sometimes you might expose a web service; other times you might listen on a message bus.
 
-It makes sense to put the business logic, the plugin definition, in its own file. Node.js modules are perfect for this:
+It makes sense to put the business logic - that is, the plugin definition - in its own file. Node.js modules are perfect for this:
 
 ``` js
 module.exports = function math( options ) {
@@ -616,7 +616,7 @@ module.exports = function math( options ) {
 }
 ```
 
-This plugin is defined in the [math.js][] file. You export the plugin definition function, and then call seneca.use with the name of the file. You can either [require][] it in, or if you like to be terse, let Seneca make the `require` call:
+This plugin is defined in the [math.js][] file. You export the plugin definition function and then call seneca.use with the name of the file. You can either [require][] it in or if you like to be terse, let Seneca make the `require` call:
 
 ``` js
 // these are equivalent
@@ -629,14 +629,14 @@ require( 'seneca' )()
   .act( 'role:math,cmd:sum,left:1,right:2', console.log )
 ```
 
-The `seneca.wrap` method matches a set of patterns and overrides all of them with the same action extension function. This is the same as calling `seneca.add` manually for each one. It takes two parameters:
+The `seneca.wrap` method matches a set of patterns and overrides all of them with the same action extension function. This is the same as calling `seneca.add` manually for each one. It takes the following two parameters:
 
-* `pin`: a pin is a pattern-matching pattern
-* `action`: action extension function
+* `pin`: a pin is a pattern-matching pattern.
+* `action`: action extension function.
 *
-A `pin` is a pattern that matches other patterns (it "pins" them). The pin `role:math` will match the patterns `role:math,cmd:sum` and `role:math,cmd:product` that are registered with Seneca.
+A `pin` is a pattern that matches other patterns (it "pins" them). The pin `role:math` matches the patterns `role:math,cmd:sum` and `role:math,cmd:product` that are registered with Seneca.
 
-In this case, you use `seneca.wrap` to make sure that the `left` and `right` properties are parsed as numberic values, even if they are provided as strings.
+In this case, you use `seneca.wrap` to make sure that the `left` and `right` properties are parsed as numeric values, even if they are provided as strings.
 
 Sometimes it can be useful to see a visual tree of the patterns and any overrides in a Seneca instance. You can do this using the `--seneca.print.tree` command line option. The file [math-tree.js][] loads the _math_ plugin, but then does nothing:
 
@@ -661,7 +661,7 @@ Seneca action patterns for instance: 9vjqzroin2k4/1436455291148/78025/-
         # math, (b8gcw), product
 ```
 
-Here you can see the name/value pairs of the action patterns arranged in a tree structure, and also any overrides. Action functions are indicated by the format: # `plugin`, `(action-id)`, `function-name`.
+Here, you can see the name/value pairs of the action patterns arranged in a tree structure as well as any overrides. Action functions are indicated by the format: # `plugin`, `(action-id)`, `function-name`.
 
 Everything is still in the same process. Let's change that. First you need a microservice:
 
@@ -673,13 +673,13 @@ require( 'seneca' )()
 
 Running this code ([math-service.js][]) starts a microservice process that listens on port 10101 for HTTP requests. This is _not_ a web server. In this case, HTTP is being used as the transport mechanism for messages.
 
-You can try it out by sending a request to the microservice. Open the URL: `http://localhost:10101/act?role=math&cmd=sum&left=1&right=2` in a web browser, or use curl on the command line:
+You can try it out by sending a request to the microservice. Open the URL: `http://localhost:10101/act?role=math&cmd=sum&left=1&right=2` in a web browser or use curl on the command line:
 
 ``` js
 $ curl -d '{"role":"math","cmd":"sum","left":1,"right":2}' http://localhost:10101/act
 ```
 
-And what you get back is:
+What you get back is:
 
 ``` js
 {"answer":3}
@@ -693,7 +693,7 @@ require( 'seneca' )()
   .act('role:math,cmd:sum,left:1,right:2',console.log)
 ```
 
-Running this code ([math-client.js][]) starts a microservice client that sends the JSON message:
+Running this code ([math-client.js][]) starts a microservice client that sends this JSON message:
 
 ``` js
 { "role":"math", "cmd":"sum", "left":1, "right":2 }
@@ -705,27 +705,27 @@ to the math-service microservice above, which then responds with:
 { "answer":2 }
 ```
 
-With Seneca, you create microservices by calling `seneca.listen`, and you talk to the services using `seneca.client`. In the example, you are using the default settings for the client and server, which is to communicate via HTTP over port 10101. Both `seneca.client` and `seneca.listen` accept the following parameters:
+With Seneca, you create microservices by calling `seneca.listen` and you talk to the services using `seneca.client`. In the example, you are using the default settings for the client and server (communicate via HTTP over port 10101). Both `seneca.client` and `seneca.listen` accept the following parameters:
 
-* `port`: optional integer; port number,
-* `host`: optional string; host IP address,
+* `port`: optional integer; port number.
+* `host`: optional string; host IP address.
 * `spec`: optional object; full specification object.
 
-So long as the client and listen parameters are the same, the two services can communicate. Some examples:
+As long as the client and listen parameters are the same, the two services can communicate. Here are some examples:
 
 * `seneca.client( 8080 ) → seneca.listen( 8080 )`
 * `seneca.client( 8080, '192.168.0.2' ) → seneca.listen( 8080, '192.168.0.2' )`
 * `seneca.client( { port:8080, host:'192.168.0.2' } ) → seneca.listen( { port:8080, host:'192.168.0.2' } )`
 
-Seneca provides you with **transport independence** because your business logic does not need to know how messages are transported, or which service will get them. This is specified in the service setup code or configuration. In this case, the code in the _math.js_ plugin _never_ changes.
+Seneca provides you with **transport independence** because your business logic does not need to know how messages are transported or which service will get them. This is specified in the service setup code or configuration. In this case, the code in the _math.js_ plugin _never_ changes.
 
-The HTTP transport provides an easy way to integrate with Seneca microservices. But it does have all the overhead of HTTP. Another transport you can use is direct TCP connections. Seneca provides both HTTP and TCP options via the built-in [transport][]. Let's move to TCP:
+The HTTP transport provides an easy way to integrate with Seneca microservices, but it does have all the overhead of HTTP. Another transport that you can use is direct TCP connections. Seneca provides both HTTP and TCP options via the built-in [transport][]. Let's move to TCP:
 
 * `seneca.client( { type:'tcp' } ) → seneca.listen( { type:'tcp' } )`
 
-The default _client/listen_ configuration sends all messages that the client does not recognize over the listening server. Locally defined patterns are executed locally. It's usually preferable to specific exactly which patterns should be sent to which service, and you can do this using a _pin_.
+The default _client/listen_ configuration sends all messages that the client does not recognize over the listening server. Locally defined patterns are executed locally. It's usually preferable to specify exactly which patterns should be sent to which service. You can do this using a _pin_.
 
-Let's put all this together into an example that sends `role:math` messages out over TCP on port 30303 (just an arbitrary port), and executes all other messages locally:
+Let's put all this together into an example that sends `role:math` messages out over TCP on port 30303 (just an arbitrary port) and executes all other messages locally.
 
 First, the listening service ([math-plugin.js][]):
 
@@ -758,19 +758,19 @@ require( 'seneca' )()
   .act('say:hello',console.log)
 ```
 
-You can use filtered logging to trace the flow of messages. You can use the command line option `--seneca...` to control how Seneca runs, including the log output generated. Seneca logs have the following attributes, the most important of which, in order, are:
+You can use filtered logging to trace the flow of messages. You can use the command line option `--seneca...` to control how Seneca runs, including the log output generated. Seneca logs have the following attributes (in order of importance):
 
-* `date-time`: when the log entry occurred
-* `seneca-id`: identifier for the Seneca process
-* `level`: one of DEBUG, INFO, WARN, ERROR, FATAL
-* `type`: entry code, such as act, plugin, etc
-* `plugi`n: plugin name (actions without a plugin have root$)
+* `date-time`: when the log entry occurred.
+* `seneca-id`: identifier for the Seneca process.
+* `level`: one of DEBUG, INFO, WARN, ERROR, FATAL.
+* `type`: entry code, such as act, plugin, etc.
+* `plugi`n: plugin name (actions without a plugin have root$).
 * `case`: entry case, such as IN, OUT, ADD, etc.
-* `action-id/transaction-id`: tracing identifier, **stays the same over the network**
-* `pin`: the action pattern for this message
-* `message`: the inbound or outbound message (truncated if too long)
+* `action-id/transaction-id`: tracing identifier, **stays the same over the network**.
+* `pin`: the action pattern for this message.
+* `message`: the inbound or outbound message (truncated if too long).
 
-If you run the above processes with `--seneca.log.all` then you'll get all the logs. If you look at the entries, you can see Seneca booting up all the internal plugins.
+If you run the above processes with `--seneca.log.all` then you get all the logs. If you look at the entries, you can see Seneca booting up all the internal plugins:
 
 ``` js
 $ node math-pin-service.js --seneca.log.all
@@ -780,7 +780,7 @@ $ node math-pin-client.js --seneca.log.all
 ... lots of logs ...
 ```
 
-It's hard to see the log entries that you care about, the ones relevant to the _math_ plugin. To narrow the output, try this:
+It's hard to see the log entries that you care about; that is, the ones relevant to the _math_ plugin. To narrow down the output, try this:
 
 ``` js
 $ node math-pin-service.js --seneca.log=plugin:math
@@ -802,11 +802,11 @@ nu
 null { answer: 3 }
 ```
 
-On the listening server, the setting `--seneca.log=plugin:math` narrows the log to those entries where the `plugin` attribute is _math_. You can see the registration of the _math_ plugin, and the addition of its action patterns. If you remember, you used `seneca.wrap` to override the basic actions with a string to integer conversion. That means that the `role:math` actions have two _ADD_ lines in the logs. You'll also notice that each action gets an indentifer, of the form (abcde). You can use this to find out the exact action function that gets executed when a message comes in.
+On the listening server, the setting `--seneca.log=plugin:math` narrows down the log to those entries where the `plugin` attribute is _math_. You can see the registration of the _math_ plugin and the addition of its action patterns. If you remember, you used `seneca.wrap` to override the basic actions with a string-to-integer conversion. That means that the `role:math` actions have two _ADD_ lines in the logs. You'll also notice that each action gets an indentifer of the form (abcde). You can use this to find out the exact action function that is executed when a message comes in.
 
-When a message comes in, an `IN` log entry is created. When the action function provides a result, an 'OUT' log entry is created. In the listening server logs above you can see this happening when the {role:math,cmd:sum,left:1,right:2} comes in over the network from the client.
+When a message comes in, an `IN` log entry is created. When the action function provides a result, an 'OUT' log entry is created. In the listening server logs above, you can see this happening when the {role:math,cmd:sum,left:1,right:2} comes in over the network from the client.
 
-Look carefully at the generated unique action identifers: `2682lsrziy1i/rst61586f7wl` and `1k46jra7rhpd/rst61586f7wl`. These can be used to trace the flow of messages. The `IN` and `OUT` lines will have the same action identifier. Further, the second page, after the /, is a transaction identifer. All sub actions triggered by an initial action have the same transaction identifier, in this case `rst61586f7wl`.
+Look carefully at the generated unique action identifers `2682lsrziy1i/rst61586f7wl` and `1k46jra7rhpd/rst61586f7wl`. These can be used to trace the flow of messages. The `IN` and `OUT` lines have the same action identifier. Furthermore, the second page, after the /, is a transaction identifer. All sub-actions triggered by an initial action have the same transaction identifier, in this case `rst61586f7wl`.
 
 The action identifier persists over the network so that you can trace message flows when you have many microservices. Let's look at the client side. The setting `--seneca.log=pin:role:math` is another filter. This time it filters all log entries where the action pattern contains the specific pin, in this case `role:math`.
 
