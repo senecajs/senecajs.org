@@ -265,7 +265,7 @@ development and when it is live and needs to adapt. It also has the advantage th
 to modify existing code. It's much safer to add new code to handle special cases. In a production system, you won't even need to do a re-deploy. Your existing services can stay running as they are. All you need to do is start up your new service.
 
 ## Using patterns for code re-use
-Action patterns can call other action patterns to get their work done. Let's modify our sample
+Action patterns can call other action patterns to do their work. Let's modify our sample
 code to use this approach:
 
 ``` js
@@ -295,7 +295,7 @@ seneca.act('role: math, cmd: sum, left: 1.5, right: 2.5, integer: true', console
 
 In this version of the code, the definition of the `role: math, cmd: sum, integer: true` action pattern uses
 the previously defined `role: math, cmd: sum` action pattern. However, it first modifies the message to
-convert the `left` and `right` properties into integers.
+convert the `left` and `right` properties to integers.
 
 Inside the action function, the context variable `this` is a reference to the current Seneca
 instance. This is the proper way to reference Seneca inside actions, as you get the full
@@ -319,27 +319,27 @@ patterns and messages more concise in your code.
 
 The code for the sample above is available in the [sum-reuse.js][] file.
 
-## Patterns are Unique, with Overrides
-The action patterns that you define are unique. They can only trigger one function. The patterns
+## Patterns are unique, with overrides
+The action patterns that you define are unique. They can trigger only one function. The patterns
 resolve using the following rules:
 
 * More properties win.
 * If the patterns have the same number of properties, they are matched in alphabetical order.
 
-These rules are designed to be simple so that you can run them "in your head". It's very
+These rules are designed to be simple so that you can run them in your head. It's very
 easy to understand which pattern will trigger which action function.
 
 Here are some examples:
 
 * a:1, b:2 wins over a:1 as it has more properties.
-* a:1, b:2 wins over a:1, c:3 as b is before c alphabetically.
-* a:1, b:2, d:4 wins over a:1, c:3, d:4 as b is before c alphabetically.
+* a:1, b:2 wins over a:1, c:3 as b comes before c alphabetically.
+* a:1, b:2, d:4 wins over a:1, c:3, d:4 as b comes before c alphabetically.
 * a:1, b:2, c:3 wins over a:1, b:2 as it has more properties.
 * a:1, b:2, c:3 wins over a:1, c:3 as it has more properties.
 
 To see this in action, run the file [pattern-wins.js][]. For more details, see the [patrun module][].
 
-It is sometimes useful to have a way of enhancing the behaviour of an action without rewriting it
+It is sometimes useful to have a way of enhancing the behavior of an action without rewriting it
 fully. For example, you might want to perform custom validation of the message properties, or
 capture message statistics, or add additional information to action results, or throttle message
 flow rates.
@@ -396,18 +396,18 @@ The Seneca instance provided to an action function via the the `this` context va
 
 The prior function has parameters:
 
-* msg: the msg object, which you may have modified
-* response_callback: a callback function, where you may modify the result
+* msg: the msg object, which you may have modified.
+* response_callback: a callback function where you can modify the result.
 
-The example code shows you how to modify both the inbound message, and the outbound result. Modification of either is optional — you may leave the data unchanged and use this mechanism for enhanced logging or auditing.
+The example code shows you how to modify both the inbound message and the outbound result. Modification of either is optional. You may leave the data unchanged and use this mechanism for enhanced logging or auditing.
 
-The example code also shows good practices for error handling. It uses early returns to exit from the action function as soon as possible. This avoids spurious indentation from `if-else` statements. The error is provided using an `Error` object. This ensures stack trace capture and proper handling.
+The example code also shows good practice for error handling. It uses early returns to exit from the action function as soon as possible. This avoids spurious indentation from `if-else` statements. The error is provided using an `Error` object. This ensures stack trace capture and proper handling.
 
-Errors should only be used for invalid input or internal failures. For example, if you are executing a database query that returns no data, that is _not_ an error, just a fact about the database. If the database connection fails, that is an error.
+Errors should only be used for invalid input or internal failures. For example, if you are executing a database query that returns no data, that is _not_ an error; it is just a fact about the database. If the database connection fails, that is an error.
 
 The code for this example is in the [sum-valid.js][] file.
 
-## Organising Patterns into Plugins
+## Organising patterns into plugins
 
 A Seneca instance is ultimately just a set of action patterns. You can organize them by using namespacing conventions in your patterns, such as `role:math`. To help with logging and debugging, Seneca supports a minimalist notion of a plugin to help organize patterns.
 
