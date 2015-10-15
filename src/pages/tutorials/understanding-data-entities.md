@@ -406,7 +406,7 @@ seneca.close(function(err){
 ```
 
 
-<h5>Data Store Plugins</h5>
+### Data Store Plugins
 
 
 To use a data store plugin, you'll normally need to install the module via npm:
@@ -450,7 +450,7 @@ here's the [guide to writing data store plugins][]
 
 
 
-<h5>Mapping Entities to Data Stores</h5>
+### Mapping Entities to Data Stores
 
 
 One of the most useful features of the Seneca data entity model is the
@@ -524,7 +524,7 @@ seneca.ready(function(err,seneca){
 ```
 
 
-The full source code is available in the data-entities folder of the[seneca examples repository][].
+The full source code is available in the data-entities folder of the [seneca examples repository][].
 (The ; prefix is just a marker to avoid excessive indentation)
 
 
