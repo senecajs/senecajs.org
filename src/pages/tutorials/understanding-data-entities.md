@@ -309,6 +309,8 @@ The syntax _zone/base/name_ is also used a shorthand for an
 entity type pattern. For example, _-/bar/-_ means any entities
 that have base _bar_.
 
+#### `entity.canon$([options])`
+
 Each entity has a `canon$` method to extract or test equality of the _zone/base/name_ properties.
 
 ```js
@@ -323,6 +325,24 @@ apple.canon$({array: true}); // -> [undefined, 'market', 'fruit']
 apple.canon$({isa: '-/market/fruit'}); // -> true
 apple.canon$({isa: {base: 'market', name: 'fruit'}}); // -> true
 apple.canon$({isa: '-/market/vegetable'}); // -> false
+```
+
+#### `entity.data$([options])`
+
+Each entity also has a `data$` method to read and write to the entity.
+
+```js
+var apple = seneca.make('market','fruit');
+apple.name = 'MacIntosh';
+
+// Includes all $-properties
+apple.data$(); // -> {'entity$': {zone: undefined, base: 'market', name: 'fruit'}, name: 'MacIntosh'}
+
+// Exclude all $-properties
+apple.data$(false); // -> {name: 'MacIntosh'}
+
+// Update and add data
+apple.data$({name: 'Golden Delicious', color: 'Yellow'});
 ```
 
 
@@ -559,10 +579,10 @@ Each plugin instance gets a three letter tag, such as `QSG`, or `JNG`. This help
 Each data store plugin instance can be ths be described by the name of the data store plugin, the tag, and the associated mapping. This is the last element of the log entry. For example:
 `level-store~JNG~-/level/-`
 
-[ActiveRecord style]: http://www.martinfowler.com/eaaCatalog/activeRecord.html 
+[ActiveRecord style]: http://www.martinfowler.com/eaaCatalog/activeRecord.html
 [actions are better than objects]: http://richardrodger.com
 [user]: https://github.com/rjrodger/seneca-user
-[auth]: https://github.com/rjrodger/seneca-auth 
+[auth]: https://github.com/rjrodger/seneca-auth
 [seneca-mongo-driver]: https://github.com/rjrodger/seneca-mongo-store
 [mongoDB]: http://mongodb.github.io/node-mongodb-native/
 [seneca-jsonfile-store]: http://github.com/rjrodger/seneca-jsonfile-store
