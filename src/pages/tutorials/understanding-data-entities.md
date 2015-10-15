@@ -244,7 +244,7 @@ automatic for you (see the entity type mapping examples below).
 You can also use the zone for custom business rules. The zone, base and name appear as action arguments - just pattern match the underlying actions! (and there are examples below).
 
 
-<h5>Creating an Entity with a Specific Zone, Base and Name</h5>
+### Creating an Entity with a Specific Zone, Base and Name
 
 
 The _make_ method is available on both the main Seneca object, and on each entity object (where it always has a $ suffix):
@@ -292,7 +292,7 @@ console.log('price is '+foo.price+' and color is '+foo.color)
 If you call the `toString` method on an entity, it will indicate the zone, base and name using the syntax _zone/base/name_ as a prefix to the entity data:
 
 
-{% highlight text %}
+```
 $zone/base/name:{id=...;prop=val,...}
 ```
 
@@ -300,7 +300,7 @@ $zone/base/name:{id=...;prop=val,...}
 If any of the namespace elements are not defined, a minus `'-'` is used as placeholder:
 
 
-{% highlight text %}
+```
 $-/-/name:{id=...;prop=val,...}
 ```
 
@@ -308,6 +308,42 @@ $-/-/name:{id=...;prop=val,...}
 The syntax _zone/base/name_ is also used a shorthand for an
 entity type pattern. For example, _-/bar/-_ means any entities
 that have base _bar_.
+
+#### `entity.canon$([options])`
+
+Each entity has a `canon$` method to extract or test equality of the _zone/base/name_ properties.
+
+```js
+var apple = seneca.make('market','fruit');
+
+// Get the properties
+apple.canon$(); // -> '-/market/fruit'
+apple.canon$({object: true}); // -> {zone: undefined, base: 'market', name: 'fruit'}
+apple.canon$({array: true}); // -> [undefined, 'market', 'fruit']
+
+// Test the properties by 'is a'
+apple.canon$({isa: '-/market/fruit'}); // -> true
+apple.canon$({isa: {base: 'market', name: 'fruit'}}); // -> true
+apple.canon$({isa: '-/market/vegetable'}); // -> false
+```
+
+#### `entity.data$([options])`
+
+Each entity also has a `data$` method to read and write to the entity.
+
+```js
+var apple = seneca.make('market','fruit');
+apple.name = 'MacIntosh';
+
+// Includes all $-properties
+apple.data$(); // -> {'entity$': {zone: undefined, base: 'market', name: 'fruit'}, name: 'MacIntosh'}
+
+// Exclude all $-properties
+apple.data$(false); // -> {name: 'MacIntosh'}
+
+// Update and add data
+apple.data$({name: 'Golden Delicious', color: 'Yellow'});
+```
 
 
 ## Using Databases to Store Entity Data
@@ -370,7 +406,7 @@ seneca.close(function(err){
 ```
 
 
-<h5>Data Store Plugins</h5>
+### Data Store Plugins
 
 
 To use a data store plugin, you'll normally need to install the module via npm:
@@ -414,7 +450,7 @@ here's the [guide to writing data store plugins][]
 
 
 
-<h5>Mapping Entities to Data Stores</h5>
+### Mapping Entities to Data Stores
 
 
 One of the most useful features of the Seneca data entity model is the
@@ -488,7 +524,7 @@ seneca.ready(function(err,seneca){
 ```
 
 
-The full source code is available in the data-entities folder of the[seneca examples repository][].
+The full source code is available in the data-entities folder of the [seneca examples repository][].
 (The ; prefix is just a marker to avoid excessive indentation)
 
 
@@ -543,10 +579,10 @@ Each plugin instance gets a three letter tag, such as `QSG`, or `JNG`. This help
 Each data store plugin instance can be ths be described by the name of the data store plugin, the tag, and the associated mapping. This is the last element of the log entry. For example:
 `level-store~JNG~-/level/-`
 
-[ActiveRecord style]: http://www.martinfowler.com/eaaCatalog/activeRecord.html 
+[ActiveRecord style]: http://www.martinfowler.com/eaaCatalog/activeRecord.html
 [actions are better than objects]: http://richardrodger.com
 [user]: https://github.com/rjrodger/seneca-user
-[auth]: https://github.com/rjrodger/seneca-auth 
+[auth]: https://github.com/rjrodger/seneca-auth
 [seneca-mongo-driver]: https://github.com/rjrodger/seneca-mongo-store
 [mongoDB]: http://mongodb.github.io/node-mongodb-native/
 [seneca-jsonfile-store]: http://github.com/rjrodger/seneca-jsonfile-store
