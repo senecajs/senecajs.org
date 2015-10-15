@@ -244,7 +244,7 @@ automatic for you (see the entity type mapping examples below).
 You can also use the zone for custom business rules. The zone, base and name appear as action arguments - just pattern match the underlying actions! (and there are examples below).
 
 
-<h5>Creating an Entity with a Specific Zone, Base and Name</h5>
+### Creating an Entity with a Specific Zone, Base and Name
 
 
 The _make_ method is available on both the main Seneca object, and on each entity object (where it always has a $ suffix):
@@ -292,7 +292,7 @@ console.log('price is '+foo.price+' and color is '+foo.color)
 If you call the `toString` method on an entity, it will indicate the zone, base and name using the syntax _zone/base/name_ as a prefix to the entity data:
 
 
-{% highlight text %}
+```
 $zone/base/name:{id=...;prop=val,...}
 ```
 
@@ -300,7 +300,7 @@ $zone/base/name:{id=...;prop=val,...}
 If any of the namespace elements are not defined, a minus `'-'` is used as placeholder:
 
 
-{% highlight text %}
+```
 $-/-/name:{id=...;prop=val,...}
 ```
 
@@ -308,6 +308,22 @@ $-/-/name:{id=...;prop=val,...}
 The syntax _zone/base/name_ is also used a shorthand for an
 entity type pattern. For example, _-/bar/-_ means any entities
 that have base _bar_.
+
+Each entity has a `canon$` method to extract or test equality of the _zone/base/name_ properties.
+
+```js
+var apple = seneca.make('market','fruit');
+
+// Get the properties
+apple.canon$(); // -> '-/market/fruit'
+apple.canon$({object: true}); // -> {zone: undefined, base: 'market', name: 'fruit'}
+apple.canon$({array: true}); // -> [undefined, 'market', 'fruit']
+
+// Test the properties by 'is a'
+apple.canon$({isa: '-/market/fruit'}); // -> true
+apple.canon$({isa: {base: 'market', name: 'fruit'}}); // -> true
+apple.canon$({isa: '-/market/vegetable'}); // -> false
+```
 
 
 ## Using Databases to Store Entity Data
