@@ -20,6 +20,7 @@ var argv = minimist(process.argv.splice(2), {
 
 metalsmith.source('./src')
 metalsmith.destination('./dist')
+
 metalsmith.use(metallic())
 
 metalsmith.use(markdown({
@@ -35,11 +36,6 @@ metalsmith.use(partials({
 metalsmith.use(layouts({
   engine: 'handlebars',
   directory: 'src/template/layouts'
-}))
-
-metalsmith.use(annotate({
-  workingdir: __dirname,
-  directory: 'src/'
 }))
 
 metalsmith.use(moveUp({
