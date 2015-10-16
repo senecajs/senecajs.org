@@ -10,7 +10,8 @@ var minimist = require('minimist'),
     moveUp = require('metalsmith-move-up'),
     ignore = require('metalsmith-ignore'),
     serve = require('metalsmith-serve'),
-    watch = require('metalsmith-watch')
+    watch = require('metalsmith-watch'),
+    annotate = require('metalsmith-annotate')
 
 var argv = minimist(process.argv.splice(2), {
   boolean: ['serve'],
@@ -34,6 +35,11 @@ metalsmith.use(partials({
 metalsmith.use(layouts({
   engine: 'handlebars',
   directory: 'src/template/layouts'
+}))
+
+metalsmith.use(annotate({
+  workingdir: __dirname,
+  directory: 'src/'
 }))
 
 metalsmith.use(moveUp({
