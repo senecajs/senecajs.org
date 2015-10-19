@@ -37,7 +37,7 @@ architecture, so that will be discussed too.
 ## Contents
 
 - [A Simple Plugin]()
-- <a href="#wp-ismodule">A Plugin is a Module</a>
+- <a href="#wp-module">A Plugin is a Module</a>
 - <a href="#wp-name">Give Your Plugin a Name</a>
 - <a href="#wp-options">Dealing with Options</a>
 
@@ -126,7 +126,7 @@ This code is available in
 the [doc/examples/write-a-plugin][]
 example, in the _simple.js_ script. Running the script produces:
 
-```bash
+``` bash
 $ node simple.js
 null { color: 'pink' }
 ```
@@ -139,6 +139,7 @@ value of which is set from the original options given to the plugin.
 
 
 <small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small></a>
+<a name="wp-module"></a>
 ## A Plugin is a Module
 
 
@@ -239,6 +240,7 @@ seneca.use( 'echo' )
 
 
 <small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small>
+<a name="wp-name"></a>
 ## Give Your Plugin a Name
 
 
@@ -501,6 +503,7 @@ null { color: 'green', tag: 'BBB' }
 
 
 <small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small>
+<a name="wp-options"></a>
 ## Dealing with Options
 
 
