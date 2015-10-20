@@ -56,7 +56,8 @@ if (argv.serve) {
   }))
 } else {
   metalsmith.use(ignore([
-    'template/**'
+    'template/**',
+    'drafts/**'
   ]))
 }
 
