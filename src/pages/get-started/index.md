@@ -73,7 +73,7 @@ The action function has two parameters:
 * `msg`: the matching inbound message (provided as a plain object).
 * `respond`: a callback function that you use to provide a respond to the message.
 
-The respond function is a callback with the standard `error, result` signature. 
+The respond function is a callback with the standard `error, result` signature.
 
 Let's put this all together again:
 
@@ -124,7 +124,7 @@ The sample code in the [sum.js][] file shows you how to define and call an actio
 the same Node.js process. You'll soon see how to split this code over multiple processes.
 
 ## How patterns work
-Patterns - as opposed to network addresses or topics - make it much easier to extend and enhance your system. They do this by letting you incrementally add new microservices. 
+Patterns - as opposed to network addresses or topics - make it much easier to extend and enhance your system. They do this by letting you incrementally add new microservices.
 
 Let's add to our system the ability to multiply two numbers.
 
@@ -189,7 +189,7 @@ back in any order.
 
 ## Extending functionality by adding patterns
 Patterns make it easy for you to extend your functionality. Instead of adding if statements and complex
-logic, you simply add more patterns. 
+logic, you simply add more patterns.
 
 Let's extend the addition action by adding the ability to force integer-only arithmetic. To do this, you add a new property, _integer:true_, to the message object. Then, you provide a new action for messages that have this property:
 
@@ -702,7 +702,7 @@ Running this code ([math-client.js][]) starts a microservice client that sends t
 to the math-service microservice above, which then responds with:
 
 ``` js
-{ "answer":2 }
+{ "answer":3 }
 ```
 
 With Seneca, you create microservices by calling `seneca.listen` and you talk to the services using `seneca.client`. In the example, you are using the default settings for the client and server (communicate via HTTP over port 10101). Both `seneca.client` and `seneca.listen` accept the following parameters:
@@ -729,7 +729,7 @@ The default _client/listen_ configuration sends all messages that the client doe
 
 Let's put all this together into an example that sends `role:math` messages out over TCP on port 30303 (just an arbitrary port) and executes all other messages locally.
 
-First, the listening service ([math-plugin.js][]):
+First, the listening service ([math-pin-client.js][]):
 
 ``` js
 require( 'seneca' )()
