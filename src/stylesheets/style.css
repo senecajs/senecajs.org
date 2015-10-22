@@ -5,7 +5,7 @@ html {
 /*---- base ----*/
 
 body {
-	font-family: "Merriweather";
+	font-family: "Muli";
 	font-size: 1.6rem;
 	line-height: 1.5;
 	color: #333333;
@@ -13,7 +13,7 @@ body {
 
 .navbar {
 	box-shadow: 0 1px 5px 0px #333;
-	font-family: "Merriweather";
+	font-family: "Muli";
   letter-spacing: .06rem;
   background-color: white;
   border-bottom: 0;
@@ -93,6 +93,10 @@ pre {
   margin-right: 8px;
 }
 
+.navbar-font{
+  font-family: 'Ovo';
+}
+
 .dropdown-menu {
   font-size: 18px;
   font-weight: 400;
@@ -118,7 +122,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Cinzel";
+  font-family: "Ovo";
   letter-spacing: .2rem;
   color: inherit;
 }
@@ -147,7 +151,7 @@ h4 {
   font-size: 140%;
   margin-top: 2rem;
   letter-spacing: .06rem;
-  font-family: 'Merriweather';
+  font-family: 'Muli';
 }
 
 .center {
@@ -156,7 +160,7 @@ h4 {
 
 .header-box h2 {
 	font-size: 120%;
-  font-family: 'Merriweather';
+  font-family: 'Muli';
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: -20px;
@@ -353,7 +357,7 @@ a:hover {
 	font-size: 2rem;
 	text-transform: uppercase;
 	letter-spacing: 4px;
-  font-family: 'Cinzel';
+  font-family: 'Ovo';
 }
 
 .social p a i {
@@ -432,7 +436,7 @@ a:hover {
     margin-bottom: 1rem;
   }
   .container h4 {
-    font-family: 'Merriweather';
+    font-family: 'Muli';
     letter-spacing: .06rem;
     font-size: 1.8rem;
     margin-top: 0;
@@ -515,5 +519,116 @@ a:hover {
 @media (min-width: 1200px)
 .container {
     width: 1170px;
+  }
+}
+
+.annotation ul, .annotation ol {
+  margin: 25px 0;
+}
+
+.annotation ul li, .annotation ol li {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 10px 0;
+}
+
+
+
+
+blockquote {
+  border-left: 5px solid #ccc;
+  margin: 0;
+  padding: 1px 0 1px 1em;
+}
+
+.sections blockquote p {
+  font-family: Menlo, Consolas, Monaco, monospace;
+  font-size: 12px; line-height: 16px;
+  color: #999;
+  margin: 10px 0 0;
+  white-space: pre-wrap;
+}
+
+ul.sections {
+  list-style: none;
+  margin:0;
+}
+
+ul.sections > li > div {
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*---------------------- Low resolutions (> 320px) ---------------------*/
+@media only screen and (min-width: 320px) {
+  .pilwrap { display: none; }
+
+  ul.sections > li > div {
+    display: block;
+    padding:5px 10px 0 10px;
+  }
+}
+
+/*----------------------  (> 481px) ---------------------*/
+@media only screen and (min-width: 481px) {
+  pre, tt, code {
+    line-height: 18px;
+  }
+  p, ul, ol {
+    margin: 0 0 15px;
+  }
+
+
+  #jump_to {
+    padding: 5px 10px;
+  }
+  #jump_wrapper {
+    padding: 0;
+  }
+  #jump_to, #jump_page {
+    font: 10px Arial;
+    text-transform: uppercase;
+  }
+  #jump_page .source {
+    padding: 5px 10px;
+  }
+  #jump_to a.large {
+    display: inline-block;
+  }
+  #jump_to a.small {
+    display: none;
+  }
+
+  ul.sections > li > div.annotation ul, ul.sections > li > div.annotation ol {
+    padding-left: 40px;
+  }
+
+  ul.sections > li {
+    white-space: nowrap;
+  }
+
+  ul.sections > li > div {
+    display: inline-block;
+    width: 60%;
+  }
+
+  ul.sections > li > div.annotation {
+    min-height: 5px;
+    padding: 13px;
+    max-width: 40%;
+    overflow-x: hidden;
+    white-space: normal;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  ul.sections > li > div.content {
+    vertical-align: top;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
   }
 }

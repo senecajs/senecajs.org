@@ -10,7 +10,8 @@ var minimist = require('minimist'),
     moveUp = require('metalsmith-move-up'),
     ignore = require('metalsmith-ignore'),
     serve = require('metalsmith-serve'),
-    watch = require('metalsmith-watch')
+    watch = require('metalsmith-watch'),
+    annotate = require('metalsmith-annotate')
 
 var argv = minimist(process.argv.splice(2), {
   boolean: ['serve'],
@@ -19,6 +20,7 @@ var argv = minimist(process.argv.splice(2), {
 
 metalsmith.source('./src')
 metalsmith.destination('./dist')
+
 metalsmith.use(metallic())
 
 metalsmith.use(markdown({
@@ -54,7 +56,8 @@ if (argv.serve) {
   }))
 } else {
   metalsmith.use(ignore([
-    'template/**'
+    'template/**',
+    'drafts/**'
   ]))
 }
 

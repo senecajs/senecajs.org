@@ -711,6 +711,8 @@ With Seneca, you create microservices by calling `seneca.listen` and you talk to
 * `host`: optional string; host IP address.
 * `spec`: optional object; full specification object.
 
+**Note:** On windows machines, if no host is specified, the client will try to connect to `host` at `0.0.0.0`, which won't work. To get around this, set the `host` to be `localhost`.
+
 As long as the client and listen parameters are the same, the two services can communicate. Here are some examples:
 
 * `seneca.client( 8080 ) → seneca.listen( 8080 )`
