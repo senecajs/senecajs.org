@@ -386,5 +386,7 @@ Seneca supports many different transports. Use the one that fits best with your 
 
 
 ## Got a plugin to share?
-Our docs are open source. Simply fork the [seneca-docs]() repository, add your plugin to the appropriate section,
+Our docs are open source. Simply fork the [senecajs.org]() repository, add your plugin to the appropriate section,
 and send us on a pull request - that way, other people can find your awesome plugin easily.
+
+[senecajs.org]: https://github.com/senecajs/senecajs.org
