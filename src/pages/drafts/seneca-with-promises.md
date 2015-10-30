@@ -12,35 +12,46 @@ Even though Seneca does not come with promises built in, it is pretty trivial to
 var Promise = require('bluebird');
 var seneca = require('seneca')();
 
-// Promisify the .act() method
+// Promisify the .act() method; to learn more about this technique see:
+// http://bluebirdjs.com/docs/features.html#promisification-on-steroids
 var act = Promise.promisify(seneca.act, seneca);
 
 // Return no error and a success message to illustrate a resolved promise
-seneca.add({cmd: 'resolved'}, function (args, done) {
-	done(null, {message: 'resolved'});
+seneca.add({cmd: 'resolve'}, function (args, done) {
+    done(null, {message: "Yay, I've been resolved!"});
 });
 
 // Return an error to force a rejected promise
-seneca.add({cmd: 'rejected'}, function (args, done) {
-	done(new Error('rejected'));
+seneca.add({cmd: 'reject'}, function (args, done) {
+    done(new Error("D'oh! I've been rejected."));
 });
 
 // Use the new promisified act() with no callback
-act({cmd: 'resolved'})
+act({cmd: 'resolve'})
   .then(function (result) {
-    // result will be {message: 'success'} since its guaranteed to resolve
+    // result will be {message: "Yay, I've been resolved!"} since 
+    // its guaranteed to resolve
   })
   .catch(function (err) {
     // Catch any error as usual if it was rejected
   });
 
-act({cmd: 'rejected'})
+act({cmd: 'reject'})
   .then(function (result) {
     // Never reaches here since we throw an error on purpose
   })
   .catch(function (err) {
-    // err will be set with message 'rejected'
+    // err will be set with message "D'oh! I've been rejected."
   });
+```
+
+Note that Bluebird v3 has some [promisification API changes](http://bluebirdjs.com/docs/new-in-bluebird-3.html). Instead of
+```js
+var act = Promise.promisify(seneca.act, seneca);
+```
+we have to use
+```js
+var act = Promise.promisify(seneca.act, {context: seneca});
 ```
 
 ### Handling Gate Executor Timeouts
@@ -48,11 +59,16 @@ act({cmd: 'rejected'})
 Luckily the timeouts thrown by the gate executer are errors so the promise ends up being rejected and we can `.catch()` them as any other error.
 
 ```js
-// Add a command that takes a longer time that the seneca timeout period
+var Promise = require('bluebird');
+var seneca = require('seneca')({ timeout: 500 });
+
+var act = Promise.promisify(seneca.act, seneca);
+
+// Add a command that takes a longer time that the seneca's timeout period
 seneca.add({cmd: 'timeout'}, function (args, done) {
-	setTimeout(function () {
-		done(null, {message: 'resolved'});
-	}, 20000);
+    setTimeout(function () {
+        done(null, {message: 'resolve'});
+    }, 1000);
 });
 
 act({cmd: 'timeout'})
