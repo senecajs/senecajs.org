@@ -5,12 +5,13 @@ layout: main.html
 # Tutorials
 Seneca tutorials offer a deep dive into a particular concept or feature. There are also partner tutorials that go with some of the [sample projects][].
 
-## The basics
+## Guides
 
 - [Logging with Seneca][]
 - [How to write a plugin][]
 - [Understanding data entities][]
 - [Understanding prior actions][]
+- [Seneca with promises][]
 
 ## Sample projects
 Sample projects are awesome. At Seneca, we have a good chunk of them available to study and extend. This page
@@ -33,6 +34,7 @@ nodezoo is a search engine for Node.js modules. The nodezoo search engine is an 
 
 [Sample projects]: /tutorials/#samples
 [Logging with Seneca]: /tutorials/logging-with-seneca.html
+[Seneca with promises]: /tutorials/seneca-with-promises.html
 [How to write a plugin]: /tutorials/how-to-write-a-plugin.html
 [Understanding data entities]: /tutorials/understanding-data-entities.html
 [Understanding prior actions]: /tutorials/understanding-prior-actions.html
