@@ -51,10 +51,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 [Adding a tutorial]: ./adding-a-tutorial.html
-[Seneca]: https://github.com/rjrodger/seneca
+[Seneca]: https://github.com/senecajs/seneca
 [Senecajs.org]: https://github.com/senecajs/senecajs.org
-[code_issues]: https://github.com/rjrodger/seneca/issues
+[code_issues]: https://github.com/senecajs/seneca/issues
 [org_issues]: https://github.com/senecajs/senecajs.org/issues
 [other]: https://github.com/senecajs/senecajs.org/contributors
-[contributors]: https://github.com/rjrodger/seneca/contributors
+[contributors]: https://github.com/senecajs/seneca/contributors
 [Richard Rodger]: https://github.com/rjrodger
