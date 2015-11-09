@@ -11,5 +11,5 @@ There are many different ways to get in touch with Seneca contributors or the co
 No matter how minor your issue is or how basic your question appears to be we want to hear it. We
 want you to get up and running as quickly as possible so please, ask away.
 
-[issue]: https://github.com/rjrodger/seneca/issues/new
-[Gitter]: https://gitter.im/rjrodger/seneca
+[issue]: https://github.com/senecajs/seneca/issues/new
+[Gitter]: https://gitter.im/senecajs/seneca

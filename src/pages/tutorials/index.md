@@ -34,6 +34,6 @@ nodezoo is a search engine for Node.js modules. The nodezoo search engine is an 
 [How to write a plugin]: /tutorials/how-to-write-a-plugin.html
 [Understanding data entities]: /tutorials/understanding-data-entities.html
 [Understanding prior actions]: /tutorials/understanding-prior-actions.html
-[Seneca samples]: https://github.com/rjrodger/seneca-examples
+[Seneca samples]: https://github.com/senecajs/seneca-examples
 [Well!]: https://github.com/nearform/well
 [nodezoo]: https://github.com/rjrodger/nodezoo

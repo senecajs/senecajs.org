@@ -315,5 +315,5 @@ That's all folks! Corrections and comments: please tweet [@senecajs][].
 [data entity patterns]: http://senecajs.org/tutorials/understanding-data-entities.html
 [logging tutorial]: http://senecajs.org/tutorials/logging-with-seneca.html
 [@senecajs]: https://twitter.com/senecajs
-[github issue]: https://github.com/rjrodger/seneca/issues
-[conversation]: https://gitter.im/rjrodger/seneca
+[github issue]: https://github.com/senecajs/seneca/issues
+[conversation]: https://gitter.im/senecajs/seneca
