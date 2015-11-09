@@ -802,13 +802,13 @@ Command line options always override options from other sources. Here is the ord
 [micro-services]: http://martinfowler.com/articles/microservices.html
 [use]: http://senecajs.org/api/#use-name-options-
 [act]: http://senecajs.org/api/#act-input-callback-
-[doc/examples/write-a-plugin]: https://github.com/rjrodger/seneca/tree/master/doc/examples/write-a-plugin
+[doc/examples/write-a-plugin]: https://github.com/senecajs/seneca/tree/master/doc/examples/write-a-plugin
 [npmjs.org]: https://www.npmjs.org/search?q=seneca
 [seneca-echo plugin]: https://www.npmjs.org/package/seneca-echo
 [many plugins]: http://senecajs.org/plugins
 [logging tutorial]: http://senecajs.org/tutorials/logging-with-seneca.html
-[seneca-vcache plugin]: https://github.com/rjrodger/seneca-vcache
+[seneca-vcache plugin]: https://github.com/senecajs/seneca-vcache
 [data entities tutorial.]: http://senecajs.org/tutorials/understanding-data-entities.html
 [`_.extend`]: http://underscorejs.org/#extend
-[redis-transport]: https://github.com/rjrodger/seneca-redis-transport/blob/master/redis-transport.js
+[redis-transport]: https://github.com/senecajs/seneca-redis-transport/blob/master/redis-transport.js
 [jsonic]: https://github.com/rjrodger/jsonic

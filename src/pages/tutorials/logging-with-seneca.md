@@ -423,7 +423,7 @@ Node.js _http_ module. Any plugins that return a HTTP middleware
 function (by setting the _service_ property when returning the
 plugin meta data), are wrapped up by Seneca into a single middleware
 function, returned by _seneca.service()_. You can use this as
-[connect][] 
+[connect][]
 or [express][] middleware, or directly
 with the standard HTTP API:
 
@@ -636,8 +636,8 @@ dynamically modify the filters at runtime.
 
 That's all folks! Corrections and comments: please tweet [@senecajs][].
 
-[main Seneca repository]: http://github.com/rjrodger/seneca
-[main README]: https://github.com/rjrodger/seneca
+[main Seneca repository]: http://github.com/senecajs/seneca
+[main README]: https://github.com/senecajs/seneca
 [connect]: http://www.senchalabs.org/connect/
 [express]: http://expressjs.com
 [localhost:3000/admin]: localhost:3000/admin
