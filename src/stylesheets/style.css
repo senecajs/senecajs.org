@@ -308,6 +308,16 @@ a:hover {
   }
 }
 
+/* ~~~~~~~~~ Error ~~~~~~~~~ */
+
+.error .container {
+  text-align: center;
+}
+
+.error h1 {
+  color: #d00;
+}
+
 /* ~~~~~~~~~ Footer ~~~~~~~~~ */
 
 
