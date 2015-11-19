@@ -766,7 +766,7 @@ You can use filtered logging to trace the flow of messages. You can use the comm
 * `seneca-id`: identifier for the Seneca process.
 * `level`: one of DEBUG, INFO, WARN, ERROR, FATAL.
 * `type`: entry code, such as act, plugin, etc.
-* `plugi`n: plugin name (actions without a plugin have root$).
+* `plugin`: plugin name (actions without a plugin have root$).
 * `case`: entry case, such as IN, OUT, ADD, etc.
 * `action-id/transaction-id`: tracing identifier, **stays the same over the network**.
 * `pin`: the action pattern for this message.
