@@ -225,6 +225,10 @@ a:hover {
 	color: #333;
 }
 
+a:visited {
+	color: #379199;
+}
+
 
 /* ~~~~~~~~~ Hover Boxes Grey ~~~~~~~~~ */
 
