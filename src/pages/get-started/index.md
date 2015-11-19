@@ -283,7 +283,7 @@ seneca.add('role: math, cmd: sum, integer: true', function (msg, respond) {
     cmd: 'sum',
     left: Math.floor(msg.left),
     right: Math.floor(msg.right)
-  }), respond)
+  }, respond)
 })
 
 // this matches role:math,cmd:sum
