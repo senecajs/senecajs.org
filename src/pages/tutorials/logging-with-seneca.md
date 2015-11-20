@@ -5,7 +5,7 @@ title: Ya
 
 # Logging with Seneca
 This tutorial shows you how to control Seneca's logging
-output.Clone the [main Seneca repository][] from github, and open the _doc/examples_
+output. Clone the [main Seneca repository][] from github, and open the _doc/examples_
 folder.
 
 
@@ -27,8 +27,9 @@ haven't actually told Seneca how to do that yet.
 ```js
 var seneca = require('seneca')()
 
-seneca.act( {cmd:'salestax', net:100}, function(err,result){
-console.log( result.total )
+seneca.act({cmd: 'salestax', net: 100}, function (err, result) {
+  if (err) return console.error(err)
+  console.log(result.total)
 })
 ```
 
@@ -72,11 +73,11 @@ The _ERROR_ entry tells you what went wrong: no action pattern matched the input
 You can fix this by defining an action:
 
 
-``` js
+```js
 seneca.add( {cmd:'salestax'}, function(args,callback){
-var rate= 0.23
-var total = args.net * (1+rate)
-callback(null,{total:total})
+  var rate= 0.23
+  var total = args.net * (1+rate)
+  callback(null,{total:total})
 })
 ```
 
@@ -169,12 +170,17 @@ Here's the client code, in the file _sales-tax-log.js_:
 
 ``` js
 var seneca = require('seneca')()
-seneca.use( 'sales-tax-plugin', {country:'IE',rate:0.23} )
-seneca.use( 'sales-tax-plugin', {country:'UK',rate:0.20} )
 
-seneca.act( {cmd:'salestax', country:'IE', net:100})
-seneca.act( {cmd:'salestax', country:'UK', net:200})
-seneca.act( {cmd:'salestax', country:'UK', net:300})
+seneca.use('sales-tax-plugin', {country: 'IE', rate: 0.23})
+seneca.use('sales-tax-plugin', {country: 'UK', rate: 0.20})
+
+seneca.ready(function (err) {
+  if (err) return process.exit(!console.error(err))
+
+  seneca.act({role: 'shop', cmd: 'salestax', country: 'IE', net: 100})
+  seneca.act({role: 'shop', cmd: 'salestax', country: 'UK', net: 200})
+  seneca.act({role: 'shop', cmd: 'salestax', country: 'UK', net: 300})
+})
 ```
 
 
@@ -187,84 +193,74 @@ Now you need a plugin - that's in the _sales-tax-plugin.js_ file:
 
 
 ``` js
-module.exports = function( seneca, options, callback ) {
+module.exports = function (options) {
+  var seneca = this
+  var plugin = 'shop'
+  var country = options.country || 'IE'
+  var rate = options.rate || 0.23
 
-var salestax = {
-hits:0,
-rate:options.rate,
-country:options.country
-}
-salestax.calc = function(net){
-return net * (1+salestax.rate)
-}
+  var calc = function (net) {
+    return net * (1 + rate)
+  }
 
-seneca.add(
-{cmd:'salestax',country:salestax.country},
-function(args,callback){
-var total = salestax.calc(args.net)
-salestax.hits++
-seneca.log.debug(args.actid$,
- 'net:',args.net,
- 'total:',total,
- 'tax:',salestax)
-callback(null,{total:total})
-})
+  seneca.add({ role: plugin, cmd: 'salestax', country: country }, function (args, callback) {
+    var total = calc(parseFloat(args.net, 10))
+    seneca.log.debug('apply-tax', args.net, total, rate, country)
+    callback(null, { total: total })
+  })
 
-callback(null,{name:'sales-tax',tag:salestax.country})
+  seneca.add({ role: plugin, cmd: 'salestax' }, function (args, callback) {
+    var total = calc(parseFloat(args.net, 10))
+    seneca.log.debug('apply-tax', args.net, total, rate, country)
+    callback(null, { total: total })
+  })
+
+  seneca.act({ role: 'web', use: {
+    prefix: 'shop/',
+    pin: { role: 'shop', cmd: '*' },
+    map: {
+      salestax: { GET: true }
+    }
+  }})
+
+  return {
+    name: plugin
+  }
 }
 ```
 
 
 The plugin creates a separate instance of the _salestax_ object
-for each country. This object stores the country rate, country code,
+for each country and one instance that matches a call with no country. This object stores the country rate, country code,
 and the number of times that sales tax for that country is calculated
 (hit count).
 
 
 
 This plugin follows the standard format for Seneca plugins. You provide a function that takes
-a Seneca instance, a set of options, and a callback. Using the Seneca instance, you add some actions, and
-finally call the callback, optionally providing some meta data:
+a set of options and it's called in the Seneca context (eg the `this` object). Using the Seneca instance, you add some actions, and
+return a plugin object:
 
 
 ``` js
-module.exports = function( seneca, options, callback ) {
+module.exports = function (options) {
+  var seneca = this
 
-seneca.add( { ... }, function(args,callback) {
-...
-})
+  seneca.add( { ... }, function (args, callback) {
+  ...
+  })
 
-callback(null,{name:'plugin-name'})
+  return {
+    name: 'plugin-name'
+  }
 }
 ```
-
-
-This initialization function is called each time you load a plugin
-with _seneca.use_. You can track separate plugin instances by
-optionally providing a tag string in the meta data:
-
-
-
-``` js
-...
-callback(null,{name:'plugin-name',tag:'tag-string'})
-...
-```
-
-
-The sales tax plugin uses the country code as a tag:
-
-
-``` js
-callback(null,{name:'sales-tax',tag:salestax.country})
-```
-
 
 Run this code, and filter the log to show only debug output from the sales-tax plugin:
 
 
 ```bash
-$ node sales-tax-log.js --seneca.log=plugin:sales-tax
+$ node sales-tax-log.js --seneca.log=plugin:shop
 
 [-isodate-]	DEBUG	plugin	sales-tax	IE	annv4h
 net:	100	total:	123	tax:	{hits=1,rate=0.23,country=IE}
@@ -277,21 +273,14 @@ net:	300	total:	360	tax:	{hits=2,rate=0.2,country=UK}
 ```
 
 
-
 These logs appear because the plugin calls _seneca.log.debug_ and provides the information about the sales tax calculation:
 
 
 ``` js
-seneca.add( {cmd:'salestax',country:salestax.country}, function(args,callback){
-var total = salestax.calc(args.net)
-salestax.hits++
-
-seneca.log.debug(args.actid$,
- 'net:',args.net,
- 'total:',total,
- 'tax:',salestax)
-
-callback(null,{total:total})
+seneca.add({ role: plugin, cmd: 'salestax', country: country }, function (args, callback) {
+  var total = calc(parseFloat(args.net, 10))
+  seneca.log.debug('apply-tax', args.net, total, rate, country)
+  callback(null, { total: total })
 })
 ```
 
@@ -387,62 +376,58 @@ Console logs are fun, but live logs in your web browser are awesome! Seneca can 
 
 
 You'll need to create an app that provides a sales-tax calculation HTTP JSON API. Using the
-_transport_ plugin this is easy. This plugin accepts JSON documents from remote clients
+_web_ plugin this is easy. This plugin accepts JSON documents from remote clients
 over HTTP and submits them to the local Seneca instance.
 
 
 Here the code, in _sales-tax-app.js_, that sets up the app:
 
-``` js
-var http = require('http')
+```js
+var connect = require('connect')
+var connect_query = require('connect-query')
+var body_parser = require('body-parser')
 
 var seneca = require('seneca')()
-seneca.use( 'sales-tax-plugin', {country:'IE',rate:0.23} )
-seneca.use( 'sales-tax-plugin', {country:'UK',rate:0.20} )
 
-seneca.use('transport')
+seneca.use('sales-tax-plugin', {country: 'IE', rate: 0.23})
+seneca.use('sales-tax-plugin', {country: 'UK', rate: 0.20})
+seneca.use('sales-tax-plugin', {country: '*', rate: 0.25})
 
-var server = http.createServer(seneca.service())
-server.listen(3000)
+var app = connect()
 
-seneca.use('admin',{server:server,local:true})
+app.use(connect_query())
+app.use(body_parser.json())
+app.use(seneca.export('web'))
+
+app.listen(3000)
+
+seneca.use('data-editor')
+seneca.use('admin', {server: app, local: true})
 ```
 
-
-The _transport_ plugin works locally without any configuration,
-so all you have to do is load it in:
-
-
-``` js
-seneca.use('transport')
-```
-
-
-The next step is to set up a simple HTTP server, using the standard
-Node.js _http_ module. Any plugins that return a HTTP middleware
-function (by setting the _service_ property when returning the
-plugin meta data), are wrapped up by Seneca into a single middleware
-function, returned by _seneca.service()_. You can use this as
-[connect][]
+The script sets up a simple HTTP server, using the
+Node.js _connect_ module. The _web_ plugin is preloaded by Seneca and works locally without any configuration,
+so all you have to do is hook it as a [connect][]
 or [express][] middleware, or directly
 with the standard HTTP API:
 
 
 ``` js
-var server = http.createServer(seneca.service())
-server.listen(3000)
+var app = connect()
+app.use(seneca.export('web'))
+app.listen(3000)
 ```
 
-
-The _admin_ plugin provides a web administration interface for
+The _admin_ and _data-editor_ plugins together provide a web administration interface for
 Seneca. It uses web sockets, so you need to provide a reference to the
-http server object in the plugin options.To expose the
-admininstration web interface locally without requiring a password,
+http server object in the plugin options. To expose the
+administration web interface locally without requiring a password,
 use the _local:true_ option:
 
 
 ``` js
-seneca.use('admin',{server:server,local:true})
+seneca.use('data-editor')
+seneca.use('admin', {server: app, local: true})
 ```
 
 
@@ -451,7 +436,7 @@ still use command line logging - you can have multiple separate logging channels
 
 
 ```bash
-$ node sales-tax-app.js --seneca.log=plugin:sales-tax
+$ node sales-tax-app.js --seneca.log=plugin:shop
 ```
 
 
@@ -463,36 +448,29 @@ There's nothing to log yet, so let's generate some sales tax calculations!
 
 
 The file _sales-tax-app-client.js_ contains the client
-code. The _transport_ plugin is used again on the client-side to
-direct sales tax operations to the app:
+code. We're using the standard Node HTTP client here:
 
 
 ``` js
-var seneca = require('server')()
+var http = require('http')
 
-seneca.use('transport',{
-remoteurl:'http://localhost:3000/transport',
-pins:[ {cmd:'salestax'} ]
+http.get({
+  hostname: 'localhost',
+  port: 3000,
+  path: '/shop/salestax?net=100&country=UK'
+}, function (res) {
+  res.on('data', function (chunk) {
+    console.log(JSON.parse(chunk.toString()))
+  })
 })
-
-seneca.act( {cmd:'salestax', country:'IE', net:100})
-seneca.act( {cmd:'salestax', country:'UK', net:200})
-seneca.act( {cmd:'salestax', country:'UK', net:300})
 ```
 
+But you can also test it with cUrl:
 
-
-
-You need to provide the _transport_ plugin with some settings to
-get the sales tax operations sent over to the remote app.First,
-provide a _remoteurl_, which is the HTTP end point of the
-transport API provided by the app. Second the _pins_ setting is
-an array of action patterns.If any of these match a submitted
-action, the action is sent over the wire to the remote app. In this
-case, anything where the _cmd_ property is equal to the string
-"salestax".
-
-
+```bash
+$ curl -S 'http://localhost:3000/shop/salestax?net=100&country=UK'
+$ {"total":120}
+```
 
 The sales tax operations code is as before. This is the key idea
 behind Seneca - your business logic code stays the same, but you can
@@ -501,22 +479,7 @@ refactoring your code.
 
 
 
-With the app up and running, run the client:
-
-
-```bash
-$ node sales-tax-log.js --seneca.log=plugin:sales-tax
-[-isodate-]	DEBUG	plugin	sales-tax	IE	dy6c6k
-net:	100	total:	123	tax:	{hits=1,rate=0.23,country=IE}
-[-isodate-]	DEBUG	plugin	sales-tax	UK	qbfzrw
-net:	200	total:	240	tax:	{hits=1,rate=0.2,country=UK}
-[-isodate-]	DEBUG	plugin	sales-tax	UK	wy5uah
- net:	300	total:	360	tax:	{hits=2,rate=0.2,country=UK}
-```
-
-
-You'll see corresponding log entries in the web interface, along with
-entries for the transport plugin.
+With the app up and running, run the client: you'll see log entries in the web interface.
 
 
 
@@ -532,25 +495,28 @@ var seneca = require('seneca')
 
 // need this to get a reference to seneca.loghandler
 seneca = seneca({
-log:{
-map:[
-{plugin:'sales-tax',handler:'print'},
-{level:'all',handler:seneca.loghandler.file('salestax.log')}
-]
-}
+  log: {
+    map: [
+      {plugin: 'shop', handler: 'print'},
+      {level: 'all', handler: seneca.loghandler.file('shop.log')}
+    ]
+  }
 })
 
-seneca.use( 'sales-tax-plugin', {country:'IE',rate:0.23} )
-seneca.use( 'sales-tax-plugin', {country:'UK',rate:0.20} )
+seneca.use('sales-tax-plugin', {rate: 0.23})
 
-seneca.act( {cmd:'salestax', country:'IE', net:100})
-seneca.act( {cmd:'salestax', country:'UK', net:200})
-seneca.act( {cmd:'salestax', country:'UK', net:300})
+seneca.ready(function (err) {
+  if (err) return process.exit(!console.error(err))
+
+  seneca.act({role: 'shop', cmd: 'salestax', net: 100})
+  seneca.act({role: 'shop', cmd: 'salestax', net: 200})
+  seneca.act({role: 'shop', cmd: 'salestax', net: 300})
+})
 ```
 
 
-Running this script will output log entries both to the console (only where plugin is "sales-tax" ), and
-to a log file _salestax.log_, which gets everything. In production you mostly just want to output to the console and use
+Running this script will output log entries both to the console (only where plugin is "shop" ), and
+to a log file _shop.log_, which gets everything. In production you mostly just want to output to the console and use
 the operating system tools for file redirection. The file handler is mostly for creating special log files.
 
 
@@ -581,28 +547,31 @@ This example is in the file _sales-tax-logentries.js_:
 var logentries = require('node-logentries')
 
 var log = logentries.logger({
-token:'YOUR_TOKEN',
+  token: 'YOUR_TOKEN',
 
-// redefine log levels to match the ones seneca uses
-levels:{debug:0,info:1,warn:2,error:3,fatal:4}
+  // redefine log levels to match the ones seneca uses
+  levels: {debug: 0, info: 1, warn: 2, error: 3, fatal: 4}
 })
 
-var seneca = require('../..')({
-log:{
-map:[
-{level:'all',handler:function(){
-log.log(arguments[1],Array.prototype.join.call(arguments,'\t'))
-}}
-]
-}
+var seneca = require('seneca')({
+  log: {
+    map: [
+      {level: 'all', handler: function () {
+        log.log(arguments[1], Array.prototype.join.call(arguments, '\t'))
+      }}
+    ]
+  }
 })
 
-seneca.use( 'sales-tax-plugin', {country:'IE',rate:0.23} )
-seneca.use( 'sales-tax-plugin', {country:'UK',rate:0.20} )
+seneca.use('sales-tax-plugin', {rate: 0.23})
 
-seneca.act( {cmd:'salestax', country:'IE', net:100})
-seneca.act( {cmd:'salestax', country:'UK', net:200})
-seneca.act( {cmd:'salestax', country:'UK', net:300})
+seneca.ready(function (err) {
+  if (err) return process.exit(!console.error(err))
+
+  seneca.act({role: 'shop', cmd: 'salestax', net: 100})
+  seneca.act({role: 'shop', cmd: 'salestax', net: 200})
+  seneca.act({role: 'shop', cmd: 'salestax', net: 300})
+})
 ```
 
 
