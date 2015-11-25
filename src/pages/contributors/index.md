@@ -4,6 +4,7 @@ layout: main.html
 
 # Contributors
 
+- Richard Rodger (https://github.com/rjrodger)
 - Dean McDonnell (https://github.com/mcdonnelldean)
 - Wyatt Preul (https://github.com/geek)
 - Orla Shanaghy (https://github.com/orlacoding)
