@@ -581,16 +581,16 @@ Each data store plugin instance can be ths be described by the name of the data 
 
 [ActiveRecord style]: http://www.martinfowler.com/eaaCatalog/activeRecord.html
 [actions are better than objects]: http://richardrodger.com
-[user]: https://github.com/senecajs/seneca-user
-[auth]: https://github.com/senecajs/seneca-auth
+[user]: https://github.com/rjrodger/seneca-user
+[auth]: https://github.com/rjrodger/seneca-auth
 [seneca-mongo-driver]: https://github.com/senecajs/seneca-mongo-store
 [mongoDB]: http://mongodb.github.io/node-mongodb-native/
-[seneca-jsonfile-store]: http://github.com/senecajs/seneca-jsonfile-store
+[seneca-jsonfile-store]: http://github.com/rjrodger/seneca-jsonfile-store
 [seneca-mongo-store]: http://github.com/senecajs/seneca-mongo-store
 [seneca-mysql-store]: https://github.com/mirceaalexandru/seneca-mysql-store
 [seneca-postgres-store]: https://github.com/marianr/seneca-postgres-store
 [seneca-level-store]: https://github.com/senecajs/seneca-level-store
 [guide to writing data store plugins]: /data-store-guide.html
-[jsonfile]: https://github.com/senecajs/seneca-jsonfile-store
+[jsonfile]: https://github.com/rjrodger/seneca-jsonfile-store
 [leveldb]: https://github.com/senecajs/seneca-level-store
 [seneca examples repository]: https://github.com/senecajs/seneca-examples
