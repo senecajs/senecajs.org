@@ -581,8 +581,8 @@ Each data store plugin instance can be ths be described by the name of the data 
 
 [ActiveRecord style]: http://www.martinfowler.com/eaaCatalog/activeRecord.html
 [actions are better than objects]: http://richardrodger.com
-[user]: https://github.com/senecajs/seneca-user
-[auth]: https://github.com/senecajs/seneca-auth
+[user]: https://github.com/rjrodger/seneca-user
+[auth]: https://github.com/rjrodger/seneca-auth
 [seneca-mongo-driver]: https://github.com/senecajs/seneca-mongo-store
 [mongoDB]: http://mongodb.github.io/node-mongodb-native/
 [seneca-jsonfile-store]: http://github.com/rjrodger/seneca-jsonfile-store
