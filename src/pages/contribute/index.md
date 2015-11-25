@@ -26,9 +26,12 @@ If you have any questions, or want to help out, please stop by our issues boards
 
 - [Adding a tutorial][]
 
+## Contributors
+To see a list of all contributors, go [here][contributors].
+
 ## License
 [Seneca][] and [its docs][senecajs.org] are licensed under MIT and
-are the copyright of [Richard Rodger][] and [other][] [contributors][].
+are the copyright of [Richard Rodger][] and [other][contributors] [contributors][].
 
 Copyright (c) 2010 - 2015 Richard Rodger and other contributors.
 
@@ -56,5 +59,5 @@ THE SOFTWARE.
 [code_issues]: https://github.com/senecajs/seneca/issues
 [org_issues]: https://github.com/senecajs/senecajs.org/issues
 [other]: https://github.com/senecajs/senecajs.org/contributors
-[contributors]: https://github.com/senecajs/seneca/contributors
+[contributors]: /contributors/
 [Richard Rodger]: https://github.com/rjrodger
