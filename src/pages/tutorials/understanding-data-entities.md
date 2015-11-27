@@ -446,7 +446,7 @@ later point.
 
 
 If you'd like to add support for a database to Seneca,
-here's the [guide to writing data store plugins][]
+we are working on a _guide to writing data store plugins_, stay tuned!
 
 
 
