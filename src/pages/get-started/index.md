@@ -729,7 +729,7 @@ The default _client/listen_ configuration sends all messages that the client doe
 
 Let's put all this together into an example that sends `role:math` messages out over TCP on port 30303 (just an arbitrary port) and executes all other messages locally.
 
-First, the listening service ([math-pin-client.js][]):
+First, the listening service ([math-pin-service.js][]):
 
 ``` js
 require( 'seneca' )()
@@ -741,7 +741,7 @@ require( 'seneca' )()
   .listen( { type:'tcp', pin:'role:math' } )
 ```
 
-Then, the client ([math-pin-service.js][]):
+Then, the client ([math-pin-client.js][]):
 
 ``` js
 require( 'seneca' )()
@@ -1286,6 +1286,7 @@ Changes to one service do not affect the others. This is how microservices give 
 [Docker]: https://www.docker.com
 [shop-service.js]: https://github.com/senecajs/getting-started/blob/master/shop-service.js
 [math-pin-service.js]: https://github.com/senecajs/getting-started/blob/master/math-pin-service.js
+[math-pin-client.js]: https://github.com/senecajs/getting-started/blob/master/math-pin-client.js
 [app-all.js]: https://github.com/senecajs/getting-started/blob/master/app-all.js
 [message bus]: https://www.npmjs.com/package/seneca-rabbitmq-transport
 [multiple clients]: https://www.npmjs.com/package/seneca-redis-transport
