@@ -818,7 +818,7 @@ Also seen in the output of the client is the console.log printing of the results
 
 There are many ways to configure your microservice communciation architecture. Take a look at the reference links at the end of this guide for more information.
 
-## Web Server Integraton
+## Web Server Integration
 
 Seneca is not a web framework. But you still need to connect it up to your web service API. Here's the easiest way to do that.
 
