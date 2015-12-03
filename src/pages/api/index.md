@@ -93,7 +93,8 @@ inside a plugin do get some logging metadata, however, so they're easier to mana
 - __callback:__ function. Optional (<a href="desc-result-signature">result signature</a>).
 
 ## make (entity-canon [, properties])
-- __entity-canon__ - `string`: see [Entity canon](/entity-canon-format) for information.
+- __entity-canon__ - `string`
+   <!-- see [Entity canon](/entity-canon-format) for information. -->
 - __properties__ - `object`: optional, default data for the new entity.
 
 This method creates new entities using the built-in [Data entity]() functionality. The `entity-canon` string
@@ -120,7 +121,8 @@ var stockItem = seneca.make('stock-item', {
 - __name:__ string, reference to an object provided by a plugin. 
 
 ## pin (pin-pattern)
-- __pin-pattern:__ object or string (<a href="desc-pin-pattern-format">pin pattern format</a>).
+- __pin-pattern:__ object or string.
+  <!--[pin pattern format](/desc-pin-pattern-format)-->
 
 ## log._level_([entry, ..])
 - __entry:__ JavaScript value, converted to string.
