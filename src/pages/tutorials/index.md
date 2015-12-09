@@ -29,6 +29,20 @@ Well! is a simple networking game implemented as a mobile web app. Its purpose i
 ### nodezoo
 nodezoo is a search engine for Node.js modules. The nodezoo search engine is an example of a real-world service built using Node.js microservices. Each microservice is published in its own GitHub repository. The code base is intended to be used as a larger-scale example and as a starting point for your own projects. See the repo at [nodezoo][].
 
+## Seneca Talks
+
+Here are some talks about Seneca and Microservices:
+
+- [How to build big apps - Richard Rodger(Node Dublin 2012)][]
+- [Introducing the Seneca MVP framework for Node.js - Richard Rodger(Node.js Dublin 2012)][]
+- [Microservices - Richard Rodger(NodeConf EU 2014)][]
+- [Measuring Microservices - Richard Rodger(Microservices Dublin 2015)][]
+- [Measuring Microservices - Richard Rodger(Codemotion Rome 2015)][]
+- [How Microservcies fail and what to do about it - Richard Rodger(Microservices Dublin 2015)][]
+- [Pattern matching is awesome! - Dean McDonnell(Node.js Dublin 2015)][]
+- [We are not Object-Oriented anymore - Matteo Collina(FullStack London 2015)][]
+
+
 [Logging with Seneca]: /tutorials/logging-with-seneca.html
 [Seneca with promises]: /tutorials/seneca-with-promises.html
 [How to write a plugin]: /tutorials/how-to-write-a-plugin.html
@@ -37,3 +51,14 @@ nodezoo is a search engine for Node.js modules. The nodezoo search engine is an 
 [Seneca samples]: https://github.com/senecajs/seneca-examples
 [Well!]: https://github.com/nearform/well
 [nodezoo]: https://github.com/rjrodger/nodezoo
+
+
+[How to build big apps - Richard Rodger(Node Dublin 2012)]: https://www.youtube.com/watch?v=Qv0VQf7iJGQ
+[Microservices - Richard Rodger(NodeConf EU 2014)]: https://www.youtube.com/watch?v=fVfWuked2qE
+[Measuring Microservices - Richard Rodger(Microservices Dublin 2015)]: https://www.youtube.com/watch?v=ZRBKfyykEw8
+[Measuring Microservices - Richard Rodger(Codemotion Rome 2015)]: https://www.youtube.com/watch?v=SQYCzAWlrHU
+[How Microservcies fail and what to do about it - Richard Rodger(Microservices Dublin 2015)]: https://www.youtube.com/watch?v=f40EybJwgBo
+[Pattern matching is awesome! - Dean McDonnell(Node.js Dublin 2015)]: http://pattern-matching-is-awesome.mcdonnelldean.me/
+[Introducing the Seneca MVP framework for Node.js - Richard Rodger(Node.js Dublin 2012)]: http://www.slideshare.net/rjrodger/introducing-the-seneca-mvp-framework-for-nodejs
+[We are not Object-Oriented anymore - Matteo Collina(FullStack London 2015)]: http://thenewstack.io/microservices-node-js/ 
+
