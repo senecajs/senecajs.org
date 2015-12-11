@@ -33,14 +33,15 @@ nodezoo is a search engine for Node.js modules. The nodezoo search engine is an 
 
 Here are some talks about Seneca and Microservices:
 
-- [How to build big apps - Richard Rodger(Node Dublin 2012)][]
-- [Introducing the Seneca MVP framework for Node.js - Richard Rodger(Node.js Dublin 2012)][]
-- [Microservices - Richard Rodger(NodeConf EU 2014)][]
-- [Measuring Microservices - Richard Rodger(Microservices Dublin 2015)][]
-- [Measuring Microservices - Richard Rodger(Codemotion Rome 2015)][]
-- [How Microservcies fail and what to do about it - Richard Rodger(Microservices Dublin 2015)][]
-- [Pattern matching is awesome! - Dean McDonnell(Node.js Dublin 2015)][]
-- [We are not Object-Oriented anymore - Matteo Collina(FullStack London 2015)][]
+- [How to build big apps - Richard Rodger (Node Dublin 2012)][]
+- [Introducing the Seneca MVP framework for Node.js - Richard Rodger (Node.js Dublin 2012)][]
+- [Microservices - Richard Rodger (NodeConf EU 2014)][]
+- [Measuring Microservices - Richard Rodger (Microservices Dublin 2015)][]
+- [Measuring Microservices - Richard Rodger (Codemotion Rome 2015)][]
+- [How Microservcies fail and what to do about it - Richard Rodger (Microservices Dublin 2015)][]
+- [Pattern matching is awesome! - Dean McDonnell (Node.js Dublin 2015)][]
+- [We are not Object-Oriented anymore - Matteo Collina (FullStack London 2015)][]
+- [The proof is in the pudding - seneca+hapi - Wyatt Preul (Nodevember 2015)][]
 
 
 [Logging with Seneca]: /tutorials/logging-with-seneca.html
@@ -53,12 +54,12 @@ Here are some talks about Seneca and Microservices:
 [nodezoo]: https://github.com/rjrodger/nodezoo
 
 
-[How to build big apps - Richard Rodger(Node Dublin 2012)]: https://www.youtube.com/watch?v=Qv0VQf7iJGQ
-[Microservices - Richard Rodger(NodeConf EU 2014)]: https://www.youtube.com/watch?v=fVfWuked2qE
-[Measuring Microservices - Richard Rodger(Microservices Dublin 2015)]: https://www.youtube.com/watch?v=ZRBKfyykEw8
-[Measuring Microservices - Richard Rodger(Codemotion Rome 2015)]: https://www.youtube.com/watch?v=SQYCzAWlrHU
-[How Microservcies fail and what to do about it - Richard Rodger(Microservices Dublin 2015)]: https://www.youtube.com/watch?v=f40EybJwgBo
-[Pattern matching is awesome! - Dean McDonnell(Node.js Dublin 2015)]: http://pattern-matching-is-awesome.mcdonnelldean.me/
-[Introducing the Seneca MVP framework for Node.js - Richard Rodger(Node.js Dublin 2012)]: http://www.slideshare.net/rjrodger/introducing-the-seneca-mvp-framework-for-nodejs
-[We are not Object-Oriented anymore - Matteo Collina(FullStack London 2015)]: http://thenewstack.io/microservices-node-js/ 
-
+[How to build big apps - Richard Rodger (Node Dublin 2012)]: https://www.youtube.com/watch?v=Qv0VQf7iJGQ
+[Microservices - Richard Rodger (NodeConf EU 2014)]: https://www.youtube.com/watch?v=fVfWuked2qE
+[Measuring Microservices - Richard Rodger (Microservices Dublin 2015)]: https://www.youtube.com/watch?v=ZRBKfyykEw8
+[Measuring Microservices - Richard Rodger (Codemotion Rome 2015)]: https://www.youtube.com/watch?v=SQYCzAWlrHU
+[How Microservcies fail and what to do about it - Richard Rodger (Microservices Dublin 2015)]: https://www.youtube.com/watch?v=f40EybJwgBo
+[Pattern matching is awesome! - Dean McDonnell (Node.js Dublin 2015)]: http://pattern-matching-is-awesome.mcdonnelldean.me/
+[Introducing the Seneca MVP framework for Node.js - Richard Rodger (Node.js Dublin 2012)]: http://www.slideshare.net/rjrodger/introducing-the-seneca-mvp-framework-for-nodejs
+[We are not Object-Oriented anymore - Matteo Collina (FullStack London 2015)]: http://thenewstack.io/microservices-node-js/ 
+[The proof is in the pudding - seneca+hapi - Wyatt Preul (Nodevember 2015)]: https://www.youtube.com/watch?v=l7zFZcgAFzg
