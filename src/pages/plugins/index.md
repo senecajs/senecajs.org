@@ -3,12 +3,14 @@ layout: main.html
 ---
 
 # Plugins
-Seneca plugins enable you to build awesome microservices, incredibly
-fast. Some plugins are maintained in-house, while others are provided by the community. On this page, we provide an npm link and
-total downloads per month for any plugins we find or publish ourselves, so you only need to look in one place.
+*Seneca* plugins enable you to build awesome microservices, incredibly fast.
+Some plugins are maintained in-house, while others are provided by the community.
+
+On this page, we provide an `npm` link and total downloads per month for any plugins
+we find or publish ourselves, so you only need to look in one place.
 
 ## Core plugins
-Seneca includes a number of core plugins by default. It does this in order to ensure that you can create a working microservice out of the box.
+Seneca includes a number of **core plugins** by default. It does this in order to ensure that you can create a **working microservice out of the box**.
 
 ### [Web](https://npmjs.org/package/seneca-web)
 [![version][web-npm-version]][web-npm-url]
@@ -17,7 +19,7 @@ Seneca includes a number of core plugins by default. It does this in order to en
 [web-npm-downloads]: https://img.shields.io/npm/dm/seneca-web.svg?style=flat-square
 [web-npm-url]: https://npmjs.org/package/seneca-web
 
-Provides a web service API routing layer for Seneca action patterns. It translates HTTP requests with specific
+Provides a **web service API routing layer** for Seneca action patterns. It translates HTTP requests with specific
 URL routes into action pattern calls. It's a built-in dependency of the Seneca module, so you don't need to
 include it manually.
 
@@ -28,7 +30,7 @@ include it manually.
 [transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-transport.svg?style=flat-square
 [transport-npm-url]: https://npmjs.org/package/seneca-transport
 
-Provides the HTTP and TCP transport channels for microservice messages. It's a built-in dependency of the Seneca
+Provides the **HTTP and TCP transport channels** for microservice messages. It's a *built-in dependency of the Seneca
 module, so you don't need to include it manually.
 
 ## Feature plugins
@@ -43,8 +45,8 @@ by overriding their actions.
 [user-npm-downloads]: https://img.shields.io/npm/dm/seneca-user.svg?style=flat-square
 [user-npm-url]: https://npmjs.org/package/seneca-user
 
-Provides business logic for complete user management, such as login, logout, registration and password
-handling, using Seneca's expressive action-based API. This module complements Auth (below).
+Provides business logic for **complete user management**, such as login, logout, registration and password
+handling, using Seneca's expressive action-based API. This module complements `Auth` (below).
 
 ### [Auth](https://npmjs.org/package/seneca-auth)
 [![version][auth-npm-version]][auth-npm-url]
@@ -53,7 +55,7 @@ handling, using Seneca's expressive action-based API. This module complements Au
 [auth-npm-downloads]: https://img.shields.io/npm/dm/seneca-auth.svg?style=flat-square
 [auth-npm-url]: https://npmjs.org/package/seneca-auth
 
-Provides the business logic for authentication via HTTP. Adds the ability to set up simple win/fail-style conditions. The User plugin complements this one nicely.
+Provides the business logic for **authentication via HTTP**. Adds the ability to set up simple win/fail-style conditions. The User plugin complements this one nicely.
 
 ### [JSON REST API](https://npmjs.org/package/seneca-jsonrest-api)
 [![version][jsonrest-npm-version]][jsonrest-npm-url]
@@ -62,7 +64,7 @@ Provides the business logic for authentication via HTTP. Adds the ability to set
 [jsonrest-npm-downloads]: https://img.shields.io/npm/dm/seneca-jsonrest-api.svg?style=flat-square
 [jsonrest-npm-url]: https://npmjs.org/package/seneca-jsonrest-api
 
-Provides the ability to expose your data entities as a REST API. Works via pattern matching actions to HTTP
+Provides the ability to **expose your data entities as a REST API**. Works via pattern matching actions to HTTP
 verbs. Removes the need for additional plumbing to expose entities as resources.
 
 ### [Data editor](https://npmjs.org/package/seneca-data-editor)
@@ -72,7 +74,7 @@ verbs. Removes the need for additional plumbing to expose entities as resources.
 [data-editor-npm-downloads]: https://img.shields.io/npm/dm/seneca-data-editor.svg?style=flat-square
 [data-editor-npm-url]: https://npmjs.org/package/seneca-data-editor
 
-Provides an administrative interface for editing all the data in your system. This plugin can be used alone, but also pairs well with seneca-admin. Inspired by the Django admin interface.
+Provides an **administrative interface** for editing all the data in your system. This plugin can be used alone, but also pairs well with `seneca-admin`. Inspired by the Django admin interface.
 
 ### [Admin](https://npmjs.org/package/seneca-admin)
 [![version][admin-npm-version]][admin-npm-url]
@@ -81,7 +83,7 @@ Provides an administrative interface for editing all the data in your system. Th
 [admin-npm-downloads]: https://img.shields.io/npm/dm/seneca-admin.svg?style=flat-square
 [admin-npm-url]: https://npmjs.org/package/seneca-admin
 
-Provides an administration console that returns interesting data about your microservice, including
+Provides an **administration console** that returns interesting data about your microservice, including
 streaming log, status summaries and action patterns. Can be locked to admin for safety purposes.
 
 ### [Email](https://npmjs.org/package/seneca-mail)
@@ -91,7 +93,7 @@ streaming log, status summaries and action patterns. Can be locked to admin for 
 [mail-npm-downloads]: https://img.shields.io/npm/dm/seneca-mail.svg?style=flat-square
 [mail-npm-url]: https://npmjs.org/package/seneca-mail
 
-Provides email delivery business logic, including the ability to have templates. Works with many
+Provides **email delivery business logic**, including the ability to have templates. Works with many
 different providers. Works well with the User plugin for handling things like welcome mails and
 password reminders.
 
@@ -102,8 +104,8 @@ password reminders.
 [account-npm-downloads]: https://img.shields.io/npm/dm/seneca-account.svg?style=flat-square
 [account-npm-url]: https://npmjs.org/package/seneca-account
 
-Provides a user account system for managing multiple users in an account. Handles account creation
-and management, and user management within a given account. The User plugin compliments this one nicely.
+Provides a **user account system** for managing multiple users in an account. Handles account creation
+and management, and user management within a given account. The `User` plugin compliments this one nicely.
 
 ### [Project](https://npmjs.org/package/seneca-project)
 [![version][project-npm-version]][project-npm-url]
@@ -112,9 +114,9 @@ and management, and user management within a given account. The User plugin comp
 [project-npm-downloads]: https://img.shields.io/npm/dm/seneca-project.svg?style=flat-square
 [project-npm-url]: https://npmjs.org/package/seneca-project
 
-Provides all the actions needed to manage a project. Use this plugin to build out microservices
+Provides all the actions needed to **manage a project**. Use this plugin to build out microservices
 that have the concepts of ownership, grouping, and starting, stopping and loading of some type of work. Works
-well with the Accounts plugin.
+well with the `Accounts` plugin.
 
 ### [Perm](https://npmjs.org/package/seneca-perm)
 [![version][perm-npm-version]][perm-npm-url]
@@ -123,7 +125,7 @@ well with the Accounts plugin.
 [perm-npm-downloads]: https://img.shields.io/npm/dm/seneca-perm.svg?style=flat-square
 [perm-npm-url]: https://npmjs.org/package/seneca-perm
 
-Provides a permissions system for actions. This plugin works by wrapping existing actions with a permission
+Provides a **permissions system for actions**. This plugin works by wrapping existing actions with a permission
 checking action. If the permission test passes, the parent action can proceed. If not, a permission error
 is generated.
 
@@ -134,8 +136,8 @@ is generated.
 [vcache-npm-downloads]: https://img.shields.io/npm/dm/seneca-vcache.svg?style=flat-square
 [vcache-npm-url]: https://npmjs.org/package/seneca-vcache
 
-Provides a data caching mechanism for data entities. Using this module will give your Seneca app a big
-performance boost. The caching mechanism goes beyond simple key-based caching using memcached. In addition,
+Provides a **data caching mechanism for data entities**. Using this module will give your Seneca app a big
+performance boost. The caching mechanism goes beyond simple key-based caching using `memcached`. In addition,
 a smaller "hot" cache is maintained within the Node.js process. Data entities are given transient version numbers
 and these are used to synchronize the hot cache with memcached.
 
@@ -146,7 +148,7 @@ and these are used to synchronize the hot cache with memcached.
 [cart-npm-downloads]: https://img.shields.io/npm/dm/seneca-cart.svg?style=flat-square
 [cart-npm-url]: https://npmjs.org/package/seneca-cart
 
-Provides complete shopping cart management business logic. This plugin works really well with the built-in
+Provides complete **shopping cart management business logic**. This plugin works really well with the built-in
 data entity API. Adds actions for adding, removing and editing items in a container (cart).
 
 ### [Pay](https://npmjs.org/package/seneca-pay)
@@ -156,7 +158,7 @@ data entity API. Adds actions for adding, removing and editing items in a contai
 [pay-npm-downloads]: https://img.shields.io/npm/dm/seneca-pay.svg?style=flat-square
 [pay-npm-url]: https://npmjs.org/package/seneca-pay
 
-Provides all the necessary components to build payments into your microservice. Includes support for Paypal
+Provides all the necessary components to build **payments** into your microservice. Includes support for Paypal
 express payments in the box. Makes setting up payment redirects a breeze.
 
 ### [CMS](https://npmjs.org/package/seneca-cms)
@@ -166,7 +168,7 @@ express payments in the box. Makes setting up payment redirects a breeze.
 [cms-npm-downloads]: https://img.shields.io/npm/dm/seneca-cms.svg?style=flat-square
 [cms-npm-url]: https://npmjs.org/package/seneca-cms
 
-Provides a simple content management system. Use it to create a more specialized system that fits your needs.
+Provides a **simple content management system**. Use it to create a more specialized system that fits your needs.
 Handles the management of a system's unique entities in a more coarse fashion than using the Entity API
 directly (which is used internally by this plugin).
 
@@ -177,7 +179,7 @@ directly (which is used internally by this plugin).
 [settings-npm-downloads]: https://img.shields.io/npm/dm/seneca-settings.svg?style=flat-square
 [settings-npm-url]: https://npmjs.org/package/seneca-settings
 
-Rich settings for user accounts. Can handle many different types of values including ratings,
+**Rich settings for user accounts**. Can handle many different types of values including ratings,
 toggles, colors and ranges.
 
 ## Storage plugins
