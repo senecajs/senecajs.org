@@ -3,17 +3,20 @@ layout: main.html
 ---
 
 # API reference
-The Seneca API is pretty tiny. We try hard to keep any non-essential functionality out of core. Instead, we push it
-out to plugins. The core API is documented below. If you have any further questions, [get in touch](). We
+The Seneca API is pretty *tiny*. We try hard to keep any non-essential functionality out of core.
+Instead, we push it out to [plugins][]. The core API is documented below. If you have any further questions, [get in touch][]. We
 love to talk!
 
 ## use (name [, options])
 - __name:__ - `string`: name of the plugin. Used to build the argument to the require function.
 - __options:__ - `object`: options for the plugin. Contents depend on plugin.
 
-The use method loads and registers plugins. You can refer directly to built-in plugins by name; for example,
-echo, options, mem-store. External plugins need to be installed with npm install first. You can then 
-refer to them by their npm module name. For convenience, you can omit the seneca- prefix on standard plugins.
+The use method *loads and registers plugins*. You can refer directly to built-in plugins by name; for example,
+[`echo`](https://github.com/rjrodger/seneca-echo), [`settings`](https://github.com/rjrodger/seneca-settings), [`mem-store`](https://github.com/senecajs/seneca-mem-store).
+
+External plugins need to be installed with `npm install` first. You can then refer to them by their npm module name.
+
+For convenience, you can omit the `seneca-` prefix on standard plugins.
 
 ``` js
 seneca.use('mem-store', {
@@ -25,15 +28,15 @@ seneca.use('mem-store', {
 
 ___Example: registering the built-in mem-store plugin with custom options___
 
-The second argument to the use method is an options object containing configuration properties specific to the plugin. Refer to the documentation for each plugin to find out how to use them. If you're using the options
+The second argument to the use method is an `options` object containing configuration properties specific to the plugin. Refer to the documentation for each plugin to find out how to use them. If you're using the options
 plugin, properties in the options argument override externally loaded options.
 
 ## ready (ready)
 - __ready__ - `function(err)`: callback to execute after all plugins initialize.
 
-Each plugin has the option to define an action with the pattern init:name. If this action is defined, it is
+Each plugin has the option to define an action with the pattern `init:name`. If this action is defined, it is
 called in series and in order for any plugins that define it. You can ensure that database connections and other
-external dependencies are in place before using them. Just a reminder: the order of plugin registration is
+external dependencies are in place before using them. **Just a reminder:** the order of plugin registration is
 significant.
 
 This method takes a callback function as an argument. You would normally complete the initialization of other parts of your app, such as setting up express, inside this callback.
@@ -65,12 +68,14 @@ They both achieve the same result. It's a matter of preference which you use.
 - __paramspec__ - `object`: matches the parameter specification.
 - __action__ - `function(...)`: matches the action signature.
 
-This method adds an action to the Seneca instance. You provide a key/value pair pattern that Seneca matches against objects that are submitted using the add method. When an object is submitted, Seneca checks the object's top-level
+This method adds an **action** to the Seneca instance.
+You provide a *key/value pair* pattern that Seneca matches against objects that are
+submitted using the `add` method. When an object is submitted, Seneca checks the object's top-level
 properties in alphabetical order to see if there is a matching action.
 
-The action is a function that accepts two arguments. The first is the object that was submitted. The second
-is a callback that you should call once your action has completed its work. The callback has the standard
-signature function( err, result ). The callback must always be called, especially to report errors. The action
+The `action` is a function that accepts two arguments. The first is the object that was submitted. The second
+is a *callback* that you should call once your action has completed its work. The callback has the standard
+signature `function( err, result )`. The callback must always be called, especially to report errors. The action
 result is optional; you do not have to supply one if it does not make sense for your action.
 
 ``` js
@@ -94,11 +99,12 @@ inside a plugin do get some logging metadata, however, so they're easier to mana
 
 ## make (entity-canon [, properties])
 - __entity-canon__ - `string`
+
    <!-- see [Entity canon](/entity-canon-format) for information. -->
 - __properties__ - `object`: optional, default data for the new entity.
 
-This method creates new entities using the built-in [Data entity]() functionality. The `entity-canon` string
-is documented in [Entity canon format](). It is essentially a namespaced way to refer to the same type or
+This method creates new entities using the built-in [Data entity][] functionality. The `entity-canon` string
+is documented in [Entity canon format][]. It is essentially a namespaced way to refer to the same type or
 shape of object for storage purposes:
 
 ```js
@@ -111,14 +117,14 @@ A set of default or pre-set options can be passed to the above method to create 
 
 ```js
 var stockItem = seneca.make('stock-item', {
-  stockItem.price = 0.00  
+  stockItem.price = 0.00
   stockItem.quantity = 0
 })
 
 ```
 
 ## export (name)
-- __name:__ string, reference to an object provided by a plugin. 
+- __name:__ string, reference to an object provided by a plugin.
 
 ## pin (pin-pattern)
 - __pin-pattern:__ object or string.
@@ -152,6 +158,7 @@ ___Example: calling listen on port 10101 over http___
 
 The options object for this method allows you to set the `type`, `host` and `port` settings for the default transport. The exact options that you need vary by transport plugin. If you are using a custom transport, consult its documentation for information on the available options.
 
+
 ```js
 seneca.ready(function (err) {
   if (err) return
@@ -167,3 +174,9 @@ seneca.ready(function (err) {
 ___Example: calling listen on a custom host and port over tcp___
 
 Seneca allows multiple transport types to be run simultaneously over different ports. This gives clients maximum flexibility with minimal setup.
+
+
+[plugins]: /plugins/
+[get in touch]: https://gitter.im/senecajs/seneca
+[Data entity]: /tutorials/understanding-data-entities.html
+[Entity canon format]:
