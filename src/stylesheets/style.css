@@ -38,6 +38,8 @@ body {
   color: #333333;
   font-size: 1.8rem;
   line-height: 2;
+  padding-left:10px;
+  padding-right: 10px;
 }
 
 .navbar-default .navbar-brand {
@@ -273,6 +275,10 @@ a:visited {
 }
 
 @media (min-width:769px){
+  .navbar {
+    position: fixed !important;
+  }
+
   .companies .button-primary{
     margin-top:30px;
   }
@@ -291,7 +297,22 @@ a:visited {
   }
 }
 
+@media (max-width:848px) {
+  .fullwidthtop {
+    margin-top: 122px !important;
+  }
+}
+
+@media (min-width:849px) {
+  .fullwidthtop {
+    margin-top: 67px !important;
+  }
+}
+
 @media (max-width:768px){
+  .fullwidthtop {
+    margin-top: 0 !important;
+  }
   .companies-company-logo{
     display:block;
     margin:0 auto 20px;
