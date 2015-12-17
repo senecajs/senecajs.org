@@ -3,7 +3,7 @@
 
 #senecajs.org
 This repo contains the documentation website for [Seneca.js][]. This documentation is available at
-[senecajs.org][Seneca.js] or can be ran locally by cloning this repo and following the steps below.
+[senecajs.org][] or can be ran locally by cloning this repo and following the steps below.
 
 ## Run Locally
 After cloning, you will need to get dependencies via npm,
@@ -35,6 +35,7 @@ Copyright Richard Rodger and other contributors, Licensed under [MIT][].
 [/src/pages]: ./src/pages
 [/contribute]: ./src/pages/contribute/index.md
 [Seneca.js]: https://www.npmjs.com/package/seneca
+[senecajs.org]: http://www.senecajs.org/
 
 [Seneca]: http://senecajs.org
 [Metalsmith]: http://metalsmith.io
