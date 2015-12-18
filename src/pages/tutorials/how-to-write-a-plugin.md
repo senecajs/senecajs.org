@@ -25,7 +25,7 @@ discussed too.
 
 
 There are many Seneca plugins published on [NPM][]. Most of them
-can be extended and modifed by overriding their actions. You'll also
+can be extended and modified by overriding their actions. You'll also
 need to know how to do this.
 
 
@@ -95,7 +95,7 @@ of _this_), is a Seneca instance that you can use to define
 actions. That means you don't need to
 call `require('seneca')` when defining a plugin. This
 Seneca instance provides the standard API, but the logging methods are
-special - they append infomation about the plugin. So when you
+special - they append information about the plugin. So when you
 call `this.log.debug('stuff about my plugin')`, the log
 output will contain extra fields identifying the plugin, such as its
 name. In this example, you haven't given the plugin a name (you'll see
@@ -303,7 +303,7 @@ logging output that time. Why didn't you see an "add" line for your
 "name0" plugin? During the execution of its definition function, it
 didn't have a name. You only gave it one when you returned a
 name. Sometimes this is useful, because you can set a name
-dynamically. Still, is it possible to set the name intially? Yes! Just
+dynamically. Still, is it possible to set the name initially? Yes! Just
 give the defining function a name:
 
 
@@ -769,7 +769,7 @@ zed undefined { red: 50, green: 110, blue: 150 }
 
 
 
-Finally, you can specify options on the command line, either via an argument, or an evironment variable. Here are some examples using the _zed-dev.js_ script. Use the `--seneca.options` command line argument to provide option values. You can use "dot notation" to specify nested options, and you can specify multiple options:
+Finally, you can specify options on the command line, either via an argument, or an environment variable. Here are some examples using the _zed-dev.js_ script. Use the `--seneca.options` command line argument to provide option values. You can use "dot notation" to specify nested options, and you can specify multiple options:
 
 
 ```bash

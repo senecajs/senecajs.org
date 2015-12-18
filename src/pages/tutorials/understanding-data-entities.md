@@ -554,7 +554,7 @@ $ node main.js --seneca.log=type:act
 This shows the _role:entity, cmd:save_ action of both data
 stores. Seneca actions use a JSON-in/JSON-out model. You can trace
 this using the `IN` and `OUT` markers in the log
-entries. The `IN` and `OUT` entries are connected by an action identifer, such as _wa8xc5_.
+entries. The `IN` and `OUT` entries are connected by an action identifier, such as _wa8xc5_.
 This lets you trace actions when they interleave asynchronously.
 
 
