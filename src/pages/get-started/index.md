@@ -30,6 +30,8 @@ This guide will walk you through seneca principles and teach you how to build mi
 
 All the samples are available on the [getting-started github repositery][getting-started-repo],
 and you might like to have the [api documentation][api-doc] open at your side.
+If you want to practice, a more interactive tutorial you could also the seneca Nodeshool workshop,
+[*Seneca in practice*][seneca-in-practice].
 
 And now, let's build some microservices!
 
@@ -1259,6 +1261,7 @@ Changes to one service do not affect the others. This is how microservices give 
 
 [microservice system]: http://martinfowler.com/articles/microservices.html
 [getting-started-repo]: https://github.com/senecajs/getting-started
+[seneca-in-practice]: https://github.com/senecajs/seneca-in-practice
 [sum.js]: https://github.com/senecajs/getting-started/blob/master/sum.js
 [api-doc]: http://senecajs.org/api/
 [Node.js]: https://nodejs.org/en/
