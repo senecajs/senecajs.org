@@ -4,16 +4,18 @@ layout: main.html
 # Getting started
 Welcome to the Seneca _Getting started_ guide! This guide assumes that you have already installed [Node.js][].
 
-Seneca lets you build a microservices system without worrying about production. You don't need to know where the other services are located, how many of them there
+## What is Seneca?
+
+_Seneca_ lets you build a microservices system without worrying about production. You don't need to know where the other services are located, how many of them there
 are, or what they do. Everything external to your business logic - such as databases, caches and third-party integrations - is likewise hidden behind microservices.
 
 This decoupling makes your system easy to continuously build and change. It works because Seneca has the following two core features:
 
-* **Transport independence**. You can send messages between services in many ways, all hidden from your business logic.
+- **Transport independence**: You can send messages between services in many ways, all hidden from your business logic.
 
-* **Pattern matching**. Instead of fragile service discovery, you just let the world know what sort of messages you care about.
+- **Pattern matching**: Instead of fragile service discovery, you just let the world know what sort of messages you care about.
 
-Messages are JSON documents. They can have any internal structure you like. Messages can be sent via HTTP/S,
+*Messages* are JSON documents. They can have any internal structure you like. Messages can be sent via HTTP/S,
 TCP connections, message queues, publish/subscribe services or any mechanism that moves bits
 around. From your perspective as the writer of a service, you just send messages out into the
 world. You don't need to know which services receive them.
@@ -21,6 +23,15 @@ world. You don't need to know which services receive them.
 Then there are the messages you'd like to receive. You specify the property patterns that you care
 about, and Seneca (with a little configuration help) makes sure that you get any messages sent by other services that match those patterns. The patterns are very simple: just a list of key-value
 pairs that must match the top-level properties of the JSON message document.
+
+## About this Guide
+
+This guide will walk you through seneca principles and teach you how to build microservices with it.
+
+All the samples are available on the [getting-started github repositery][getting-started-repo],
+and you might like to have the [api documentation][api-doc] open at your side.
+
+And now, let's build some microservices!
 
 ## A simple microservice
 Let's start with some code. Here's a service that sums two numbers:
@@ -433,7 +444,7 @@ The sample code (in file minimal-plugin.js) produces the following output:
 
 ``` js
 $ node minimal-plugin.js
-2015-07-03T15:23:00.038Z    gh7s1570egff/1435936980028/65900/-    INFO    hello    Seneca/0.6.2/gh7s1570egff/1435936980028/65900/-    
+2015-07-03T15:23:00.038Z    gh7s1570egff/1435936980028/65900/-    INFO    hello    Seneca/0.6.2/gh7s1570egff/1435936980028/65900/-
 { foo: 'bar' }
 ```
 
@@ -481,7 +492,7 @@ Running this file [math-plugin.js][] generates the following output:
 
 ``` js
 $ node math-plugin.js
-2015-07-03T15:43:13.067Z    xn5vquvubvjq/1435938193058/65962/-    INFO    hello    Seneca/0.6.2/xn5vquvubvjq/1435938193058/65962/-    
+2015-07-03T15:43:13.067Z    xn5vquvubvjq/1435938193058/65962/-    INFO    hello    Seneca/0.6.2/xn5vquvubvjq/1435938193058/65962/-
 null { answer: 3 }
 ```
 
@@ -489,16 +500,16 @@ Let's look at the logging output relevant to this plugin by grepping for the str
 
 ``` js
 $ node math-plugin.js --seneca.log.all | grep math
-2015...    alqs...    DEBUG    delegate  {plugin$={name=math,tag=undefined},ungate$=true,fatal$=true}    29ny56    
-2015...    alqs...    DEBUG    register  init     math    
+2015...    alqs...    DEBUG    delegate  {plugin$={name=math,tag=undefined},ungate$=true,fatal$=true}    29ny56
+2015...    alqs...    DEBUG    register  init     math
 2015...    alqs...    DEBUG    plugin    math     DEFINE    {}
-2015...    alqs...    DEBUG    plugin    math     ADD    qlh13h47d0nu    cmd:sum,role:math    sum    
-2015...    alqs...    DEBUG    plugin    math     ADD    10lk4seu3aee    cmd:product,role:math    product    
-2015...    alqs...    DEBUG    plugin    math     options    set    {math={}}    
-2015...    alqs...    DEBUG    act                -    -    DEFAULT    {init=math,tag=}    
+2015...    alqs...    DEBUG    plugin    math     ADD    qlh13h47d0nu    cmd:sum,role:math    sum
+2015...    alqs...    DEBUG    plugin    math     ADD    10lk4seu3aee    cmd:product,role:math    product
+2015...    alqs...    DEBUG    plugin    math     options    set    {math={}}
+2015...    alqs...    DEBUG    act                -    -    DEFAULT    {init=math,tag=}
 2015...    alqs...    DEBUG    register  ready    math    {}
-2015...    alqs...    DEBUG    register  install  math    {exports=[]:}    
-2015...    alqs...    DEBUG    act       math     -    IN    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {role=math,cmd=sum,left=1,right=2}    ENTRY    A;qlh13h47d0nu    -    
+2015...    alqs...    DEBUG    register  install  math    {exports=[]:}
+2015...    alqs...    DEBUG    act       math     -    IN    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {role=math,cmd=sum,left=1,right=2}    ENTRY    A;qlh13h47d0nu    -
 2015...    alqs...    DEBUG    act       math     -    OUT    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {answer=3}    EXIT    A;qlh13h47d0nu    5
 ```
 
@@ -509,7 +520,7 @@ There is detailed logging information on the plugin definition and initializatio
 20.. al.. DEBUG plugin math   ADD ql.. cmd:sum,role:math     sum
 20.. al.. DEBUG plugin math   ADD 10.. cmd:product,role:math product
 ...
-20.. al.. DEBUG act    math - IN  pg.. cmd:sum,role:math {role=math,cmd=sum,left=1,right=2} ENTRY A;ql.. -    
+20.. al.. DEBUG act    math - IN  pg.. cmd:sum,role:math {role=math,cmd=sum,left=1,right=2} ENTRY A;ql.. -
 20.. al.. DEBUG act    math - OUT pg.. cmd:sum,role:math {answer=3} EXIT A;ql.. 5
 ...
 ```
@@ -649,7 +660,7 @@ We're just using it to show the action tree:
 
 ``` js
 $ node math-tree.js --seneca.print.tree
-2015-07-09T15:21:31.158Z 9vjqzroin2k4/1436455291148/78025/- INFO    hello    Seneca/0.6.2/9vjqzroin2k4/1436455291148/78025/-    
+2015-07-09T15:21:31.158Z 9vjqzroin2k4/1436455291148/78025/- INFO    hello    Seneca/0.6.2/9vjqzroin2k4/1436455291148/78025/-
 Seneca action patterns for instance: 9vjqzroin2k4/1436455291148/78025/-
 ├─┬ cmd:sum
 │ └─┬ role:math
@@ -787,20 +798,20 @@ It's hard to see the log entries that you care about; that is, the ones relevant
 ``` js
 $ node math-pin-service.js --seneca.log=plugin:math
 20.. 85.. DEBUG    plugin    math  DEFINE    {}
-20.. 85.. DEBUG    plugin    math  ADD    (f3ysr)    cmd:sum,role:math    sum    
-20.. 85.. DEBUG    plugin    math  ADD    (9mocb)    cmd:product,role:math    product    
-20.. 85.. DEBUG    plugin    math  ADD    (ydx70)    cmd:sum,role:math        
-20.. 85.. DEBUG    plugin    math  ADD    (ka7rj)    cmd:product,role:math        
-20.. 85.. DEBUG    plugin    math  options    set    {math:{}}    
-20.. 85.. DEBUG    act    math  IN    2682lsrziy1i/rst61586f7wl    cmd:sum,role:math    {role:math,cmd:sum,left:1,right:2}    ENTRY    (ydx70)    LISTEN    o2..    -    
-20.. 85.. DEBUG    act    math  IN    1k46jra7rhpd/rst61586f7wl    cmd:sum,role:math    {role:math,cmd:sum,left:1,right:2}    PRIOR;(ydx70)    (f3ysr)    -    -    -    
-20.. 85.. DEBUG    act    math  OUT    1k46jra7rhpd/rst61586f7wl    cmd:sum,role:math    {answer:3}    PRIOR;(ydx70)    (f3ysr)    -    -    0    -    
+20.. 85.. DEBUG    plugin    math  ADD    (f3ysr)    cmd:sum,role:math    sum
+20.. 85.. DEBUG    plugin    math  ADD    (9mocb)    cmd:product,role:math    product
+20.. 85.. DEBUG    plugin    math  ADD    (ydx70)    cmd:sum,role:math
+20.. 85.. DEBUG    plugin    math  ADD    (ka7rj)    cmd:product,role:math
+20.. 85.. DEBUG    plugin    math  options    set    {math:{}}
+20.. 85.. DEBUG    act    math  IN    2682lsrziy1i/rst61586f7wl    cmd:sum,role:math    {role:math,cmd:sum,left:1,right:2}    ENTRY    (ydx70)    LISTEN    o2..    -
+20.. 85.. DEBUG    act    math  IN    1k46jra7rhpd/rst61586f7wl    cmd:sum,role:math    {role:math,cmd:sum,left:1,right:2}    PRIOR;(ydx70)    (f3ysr)    -    -    -
+20.. 85.. DEBUG    act    math  OUT    1k46jra7rhpd/rst61586f7wl    cmd:sum,role:math    {answer:3}    PRIOR;(ydx70)    (f3ysr)    -    -    0    -
 20.. 85.. DEBUG    act    math  OUT    2682lsrziy1i/rst61586f7wl    cmd:sum,role:math    {answer:3}    EXI(ydx70)    LISTEN    o2..    1    -
 
 $ node math-pin-client.js --seneca.log=pin:role:math
-20.. o2.. DEBUG    act    remote$ IN    2682lsrziy1i/rst61586f7wl    role:math    {role:math,cmd:sum,left:1,right:2}    ENTRY    CLIENT    -    -    -    
+20.. o2.. DEBUG    act    remote$ IN    2682lsrziy1i/rst61586f7wl    role:math    {role:math,cmd:sum,left:1,right:2}    ENTRY    CLIENT    -    -    -
 nu
-20.. o2.. DEBUG    act    remote$ OUT    2682lsrziy1i/rst61586f7wl    role:math    {answer:3}    EXIT    CLIENT    -    85..    15    -    
+20.. o2.. DEBUG    act    remote$ OUT    2682lsrziy1i/rst61586f7wl    role:math    {answer:3}    EXIT    CLIENT    -    85..    15    -
 null { answer: 3 }
 ```
 
@@ -968,7 +979,7 @@ product.save$( console.log )
 Run the file <a href="">product.js</a> to test this. You'll see the output:
 
 ``` js
-2015-07-10T10:33:18.195Z f7ajdotgpxu9/1436524398186/79031/- INFO    hello    Seneca/0.6.2/f7ajdotgpxu9/1436524398186/79031/-    
+2015-07-10T10:33:18.195Z f7ajdotgpxu9/1436524398186/79031/- INFO    hello    Seneca/0.6.2/f7ajdotgpxu9/1436524398186/79031/-
 null $-/-/product:{id=3i402d;name=Apple;price=1.99}
 ```
 
@@ -1106,12 +1117,12 @@ And then run both:
 
 ``` js
 $ node shop-test.js
-20.. j0.. INFO hello  Seneca/0.6.2/j0z5x7zz2r0l/1436529606670/79365/-    
+20.. j0.. INFO hello  Seneca/0.6.2/j0z5x7zz2r0l/1436529606670/79365/-
 20.. j0.. INFO client {port:9003,pin:role:shop,info:purchase}
 
 $ node shop-stats.js
-20.. wb.. INFO hello  Seneca/0.6.2/wbxim58g0vgd/1436529589836/79362/-    
-20.. wb.. INFO listen {port:9003,pin:role:shop,info:purchase}    
+20.. wb.. INFO hello  Seneca/0.6.2/wbxim58g0vgd/1436529589836/79362/-
+20.. wb.. INFO listen {port:9003,pin:role:shop,info:purchase}
 { Apple: 1 }
 ```
 
@@ -1247,7 +1258,9 @@ http://localhost:3000/api/calculate/sum?left=2&right=3 → {"answer":5}
 Changes to one service do not affect the others. This is how microservices give you [continuous delivery][].
 
 [microservice system]: http://martinfowler.com/articles/microservices.html
+[getting-started-repo]: https://github.com/senecajs/getting-started
 [sum.js]: https://github.com/senecajs/getting-started/blob/master/sum.js
+[api-doc]: http://senecajs.org/api/
 [Node.js]: https://nodejs.org/en/
 [Error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [sum-product.js]: https://github.com/senecajs/getting-started/blob/master/sum-product.js
