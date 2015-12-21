@@ -5,7 +5,7 @@ layout: main.html
 # Contribute
 [Seneca][], [Senecajs.org][], and all official plugins are __open__ projects and encourage
 participation. If you feel you can help in any way, be it with documentation, examples, extra
-testing, or new features, please be our guest.
+testing, or new features, please be our guest! =)
 
 ## Helping out
 Contributing is not always about adding new features. There are plenty of other ways to get
@@ -19,9 +19,11 @@ involved. For instance:
 Like any other project, there is plenty to be done by people of all skill levels and specialities.
 If you have any questions, or want to help out, please stop by our issues boards.
 
+- For issues or question about how to contribute, [go to Seneca/contribe][contrib] and its [issues][contrib-issues]
 - For issues or questions on documentation, go to [Senecajs.org][org_issues].
 - For issues or questions on Seneca itself, go to [Seneca][code_issues].
 
+<!-- TODO: embed contribute -->
 ## Contributing guides
 
 - [Adding a tutorial][]
@@ -61,3 +63,5 @@ THE SOFTWARE.
 [other]: https://github.com/senecajs/senecajs.org/contributors
 [contributors]: /contributors/
 [Richard Rodger]: https://github.com/rjrodger
+[contrib]: https://github.com/senecajs/contrib
+[contrib-issues]: https://github.com/senecajs/contrib/issues
