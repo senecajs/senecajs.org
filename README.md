@@ -19,7 +19,7 @@ npm run docs
 ```
 
 ## Contributing
-Seneca and it's docs are __open projects__ and encourage participation. If you feel you can help in
+Seneca and its docs are __open projects__ and encourage participation. If you feel you can help in
 any way, be it with examples, extra testing, tutorials, or new features please be our guest.
 
 Please make all content changes in the [/src/pages][] folder. All changes are built just before we
