@@ -35,7 +35,8 @@ metalsmith.use(partials({
 
 metalsmith.use(layouts({
   engine: 'handlebars',
-  directory: 'src/template/layouts'
+  directory: 'src/template/layouts',
+  default: 'main.html'
 }))
 
 metalsmith.use(moveUp({
