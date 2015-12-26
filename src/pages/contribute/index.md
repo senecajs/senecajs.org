@@ -23,7 +23,20 @@ If you have any questions, or want to help out, please stop by our issues boards
 - For issues or questions on documentation, go to [Senecajs.org][org_issues].
 - For issues or questions on Seneca itself, go to [Seneca][code_issues].
 
-<!-- TODO: embed contribute -->
+### How to Contribute details
+
+A number of org level documents can be consulted there:
+
+- [Governance][]
+- [Guidelines][]
+- [Styleguide][]
+- [How we work][]
+- [Our tools][]
+- [Code of conduct][]
+
+These are replica of the doc in [Seneca/contribe][contrib] repository.
+The documents above apply to all repositories under this org.
+
 ## Contributing guides
 
 - [Adding a tutorial][]
@@ -65,3 +78,12 @@ THE SOFTWARE.
 [Richard Rodger]: https://github.com/rjrodger
 [contrib]: https://github.com/senecajs/contrib
 [contrib-issues]: https://github.com/senecajs/contrib/issues
+
+[issues board]: https://github.com/senecajs/contrib/issues
+[Governance]: ./details/governance.html
+[Guidelines]: ./details/guidelines.html
+[Styleguide]: ./details/styleguide.html
+[Code of Conduct]: ./details/code-of-conduct.html
+[Our tools]: ./details/our-tools.html
+[How we Work]: ./details/how-we-work.html
+[Code of conduct]: ./details/code-of-conduct.html
