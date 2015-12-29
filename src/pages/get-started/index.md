@@ -28,7 +28,7 @@ pairs that must match the top-level properties of the JSON message document.
 
 This guide will walk you through seneca principles and teach you how to build microservices with it.
 
-All the samples are available on the [getting-started github repositery][getting-started-repo],
+All the samples are available on the [getting-started github repository][getting-started-repo],
 and you might like to have the [api documentation][api-doc] open at your side.
 If you want to practice, a more interactive tutorial you could also the seneca Nodeshool workshop,
 [*Seneca in practice*][seneca-in-practice].
