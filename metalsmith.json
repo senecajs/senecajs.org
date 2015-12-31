@@ -16,7 +16,6 @@
       "directory": "src/template/layouts",
       "default": "main.html"
     },
-    "metalsmith-metallic": true,
     "metalsmith-move-up": {
      "pattern": [
       "pages/**",
