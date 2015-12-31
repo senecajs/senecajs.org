@@ -25,7 +25,8 @@
     "Michele Capra (https://github.com/piccoloaiutante)",
     "Paulo Vieira (https://github.com/paulovieira)",
     "Lloyd Benson (https://github.com/lloydbenson)",
-    "Bogdan Rotund (https://github.com/Bogdan-Rotund)"
+    "Bogdan Rotund (https://github.com/Bogdan-Rotund)",
+    "Adrien Becchis (https://github.com/AdrieanKhisbe)"
   ],
   "dependencies": {
     "handlebars": "^3.0.3",
