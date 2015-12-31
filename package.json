@@ -7,8 +7,9 @@
   "private": "true",
   "scripts": {
     "test": "echo \"INFO: No test specified.\"",
-    "build": "node build.js",
-    "docs": "node build.js -s",
+    "start": "npm run build && npm run docs",
+    "build": "metalsmith",
+    "docs": "metalsmith-start -p 4000",
     "deploy": "surge --project ./dist/ --domain senecajs.org"
   },
   "contributors": [
@@ -42,6 +43,7 @@
     "metalsmith-move-up": "1.0.0",
     "metalsmith-register-partials": "^1.0.2",
     "metalsmith-serve": "0.0.4",
+    "metalsmith-start": "^1.4.2",
     "metalsmith-watch": "^0.2.0",
     "minimist": "^1.1.1"
   },
