@@ -18,3 +18,4 @@ layout: main.html
 - Paulo Vieira (https://github.com/paulovieira)
 - Lloyd Benson (https://github.com/lloydbenson)
 - Bogdan Rotund (https://github.com/Bogdan-Rotund)
+- Marco Piraccini (https://github.com/marcopiraccini)
