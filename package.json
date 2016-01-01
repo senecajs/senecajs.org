@@ -1,6 +1,6 @@
 {
   "name": "seneca-docs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The website for senecajs",
   "main": "build.js",
   "license": "MIT",
@@ -30,8 +30,8 @@
     "Adrien Becchis (https://github.com/AdrieanKhisbe)"
   ],
   "dependencies": {
-    "handlebars": "^3.0.3",
-    "metalsmith": "^1.7.0",
+    "handlebars": "^4.0.5",
+    "metalsmith": "^2.1.0",
     "metalsmith-annotate": "^0.1.1",
     "metalsmith-download": "0.0.1",
     "metalsmith-drafts": "0.0.1",
@@ -44,6 +44,6 @@
     "metalsmith-start": "^1.4.2"
   },
   "devDependencies": {
-    "surge": "^0.15.0"
+    "surge": "^0.17.4"
   }
 }
