@@ -41,10 +41,7 @@
     "metalsmith-markdown": "^0.2.1",
     "metalsmith-move-up": "1.0.0",
     "metalsmith-register-partials": "^1.0.2",
-    "metalsmith-serve": "0.0.4",
-    "metalsmith-start": "^1.4.2",
-    "metalsmith-watch": "^0.2.0",
-    "minimist": "^1.1.1"
+    "metalsmith-start": "^1.4.2"
   },
   "devDependencies": {
     "surge": "^0.15.0"
