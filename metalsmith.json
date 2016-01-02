@@ -1,0 +1,30 @@
+{
+  "source": "src",
+  "destination": "dist",
+  "plugins": {
+    "metalsmith-drafts": true,
+    "metalsmith-markdown": {
+      "smartypants": true,
+      "gfm": true,
+      "tables": true
+    },
+    "metalsmith-register-partials": {
+      "directory": "src/template/partials"
+    },
+    "metalsmith-layouts": {
+      "engine": "handlebars",
+      "directory": "src/template/layouts",
+      "default": "main.html"
+    },
+    "metalsmith-move-up": {
+     "pattern": [
+      "pages/**",
+      "images/favicon.ico"
+    ]
+    },
+    "metalsmith-ignore": [
+      "drafts/*",
+      "unfinished/*"
+    ]
+  }
+}
