@@ -40,7 +40,6 @@
     "metalsmith-less": "^2.0.0",
     "metalsmith-markdown": "^0.2.1",
     "metalsmith-move-up": "1.0.0",
-    "metalsmith-register-partials": "^1.0.2",
     "metalsmith-start": "^2.0.1"
   },
   "devDependencies": {

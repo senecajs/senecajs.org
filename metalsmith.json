@@ -8,13 +8,11 @@
       "gfm": true,
       "tables": true
     },
-    "metalsmith-register-partials": {
-      "directory": "src/template/partials"
-    },
     "metalsmith-layouts": {
       "engine": "handlebars",
       "directory": "src/template/layouts",
-      "default": "main.html"
+      "default": "main.html",
+      "partials": "src/template/partials"
     },
     "metalsmith-move-up": {
      "pattern": [
