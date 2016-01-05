@@ -6,6 +6,7 @@ node_js: 4
 branches:
   only:
     - master
-after_success:
+script:
   - npm run build
+after_success:
   - surge --project ./dist/ --domain senecajs.org
