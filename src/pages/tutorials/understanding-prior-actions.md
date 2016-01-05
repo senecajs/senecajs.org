@@ -5,20 +5,28 @@ layout: main.html
 # Understanding Prior Actions
 
 ## The Seneca software component model
-Software components are supposed to make your life easier. They are supposed to let you write production-ready code faster. They do this in four ways. Software components are:
+Software *components* are supposed to make your life easier. They are supposed to let you write production-ready code faster. They do this in four ways.
 
-* _self-contained_, so they don't step on each other's toes;
-* _reusable_, so you don't have to write so much code;
-* _extensible_, so they're actually useful in the real world;
-* _composable_, so you can build bigger things.
+Software components are:
+- **self-contained**, so they don't step on each other's toes;
+- **reusable**, so you don't have to write so much code;
+- **extensible**, so they're actually useful in the real world;
+- **composable**, so you can build bigger things.
 
 [plugins][] are designed to deliver on these four features.
 
 
 ## Pattern-based APIs make this easy
-Seneca plugins are fundamentally just a list of action patterns. This makes them self-contained because you must use messages (that match the patterns) to interact with the plugin. They are reusable, because you can load them into any Seneca microservice. They are extensible because you can override patterns with your own functionality. And they are composable because you can build up pattern behaviour with a function callback chain.
+Seneca plugins are fundamentally just a list of action patterns.
 
-The ease of extensibility and composability are the primary benefits of the pattern-based approach. Let's look at a simple example. Here's a plugin that converts color values between representations.
+- This makes them _self-contained_ because you must use messages (that match the patterns) to interact with the plugin.
+- They are _reusable_, because you can load them into any Seneca microservice.
+- They are _extensible_ because you can override patterns with your own functionality.
+- And they are _composable_ because you can build up pattern behaviour with a function callback chain.
+
+The ease of extensibility and composability are the primary benefits of the _pattern-based approach_.
+
+Let's look at a simple example. Here's a plugin that converts color values between representations.
 
 ``` js
 var seneca = require('seneca')()
@@ -34,17 +42,17 @@ seneca.use( function color() {
   }
 
   this
-    .add('role:color,cmd:convert', function( msg, respond ) {
+    .add('role:color,cmd:convert', function (msg, respond) {
       var out = { hex: map_name_hex[msg.name] }
       respond( null, out )
     })
 })
 
 // prints { hex: 'FF0000' }
-seneca.act('role:color,cmd:convert,name:red', console.log )
+seneca.act('role:color,cmd:convert,name:red', console.log)
 
 // prints { hex: undefined } as yellow not recognized
-seneca.act('role:color,cmd:convert,name:yellow', console.log )
+seneca.act('role:color,cmd:convert,name:yellow', console.log)
 ```
 
 This plugin only supports a limited range of colors. One way you can extend the set of supported colors is by adding special cases (in this case, we're ignoring the fact that the color name to hex feature is just a simple mapping data structure).
@@ -58,9 +66,9 @@ seneca.add('role:color,cmd:convert,name:yellow', function( msg, respond ) {
 seneca.act('role:color,cmd:convert,name:yellow', console.log )
 ```
 
-_This is standard Seneca best practice_. You are allowed to define your own special cases.
+**This is standard Seneca best practice**. You are allowed to _define your own special cases_.
 
-But what if you have many new colors you want to add? Another way to extend the _color_ plugin is to _override_ the existing pattern:
+But what if you have many new colors you want to add? Another way to extend the `color` plugin is to **_override_** the existing pattern:
 
 ``` js
 var more_name_hex = {
@@ -68,89 +76,95 @@ var more_name_hex = {
   fuchsia: 'FF00FF'
 }
 
-seneca.add('role:color,cmd:convert', function( msg, respond ) {
-  this.prior( msg, function( err, out ) {
-    if( err ) return respond( out )
+seneca.add('role:color,cmd:convert', function (msg, respond) {
+  this.prior(msg, function (err, out) {
+    if (err) return respond(out)
 
-    if( null == out.hex ) {
+    if (!out.hex) {
       out.hex = more_name_hex[msg.name]
     }
 
-    respond( null, out )
+    respond(null, out)
   })
 })
 
 // prints { hex: 'FFFF00' }, from override
-seneca.act('role:color,cmd:convert,name:cyan', console.log )
+seneca.act('role:color,cmd:convert,name:cyan', console.log)
 
 // prints { hex: '00FFFF' }, from more specific custom pattern
-seneca.act('role:color,cmd:convert,name:yellow', console.log )
+seneca.act('role:color,cmd:convert,name:yellow', console.log)
 
 // prints { hex: 'FF0000' }, from color plugin
-seneca.act('role:color,cmd:convert,name:red', console.log )
+seneca.act('role:color,cmd:convert,name:red', console.log)
 ```
 
-The function this.prior is a reference to the _original_ action function for the _role:color,cmd:convert_ pattern. This original action function knows how to handle the colors black, red, green, blue and white.
+The function `this.prior` is a reference to the _original_ action function for the `role:color,cmd:convert` pattern. This original action function knows how to handle the colors black, red, green, blue and white.
 
-The new action function for _role:color,cmd:convert_ first passes on the input message to the original action function, and if the original action function does recognize a color and produce a hex value, then the new action function does nothing. This original action function is known as the _prior_. If the prior does not provide a hex value, then the new action function checks for the colors it knows about, cyan and fuchsia, and handles those. The color yellow is still handled by the special case action function that specifically matches _name:yellow_.
+The new action function for `role:color,cmd:convert` first passes on the input message to the original action function, and if the original action function does recognize a color and produce a hex value, then the new action function does nothing.
 
-Priors can be used in this way to customize the behavior of any action pattern.
+This _original action function_ is known as the **_prior_**. If the prior does not provide a hex value, then the new action function checks for the colors it knows about, cyan and fuchsia, and handles those. The color yellow is still handled by the special case action function that specifically matches `name:yellow`.
+
+Priors can be used in this way to *customize the behavior of any action pattern*.
 
 
 ## Understanding priors
-Priors can be stacked. Each time you override an action pattern, you get a prior. This prior may have its own prior from a previous definition of the action pattern. Thus you can compose layers of additional functionality.
+**_Priors_** can be stacked. Each time you override an action pattern, you get a prior.
+This prior may have its own prior from a previous definition of the action pattern. Thus you can compose layers of additional functionality.
 
-For example, you can add validation, auditing, throttling, custom logging, input and output data manipulation, or trigger other messages. The calling code has no visibility of these customizations, and no need to know about them, so the plugin remains self-contained.
+For example, you can add *validation*, *auditing*, *throttling*, custom logging, input and output data manipulation, or trigger other messages. The calling code has no visibility of these customizations, and no need to know about them, so the plugin remains self-contained.
 
 If you call `this.prior`, and there is no previous definition, then you get an empty response (null) back. In production code you should always handle this case.
 
-Priors can be _strict_. This means that a prior only exists if there is an _exact_ matching action pattern. Normally, priors are not strict, so that sub-patterns will be priors. Here's an example.
+Priors can be _strict_. This means that a prior only exists if there is an **exact** matching action pattern. Normally, priors are not strict, so that *sub-patterns will be priors*. Here's an example.
 
 For the following patterns, added in this order:
 
-* **a:1**
-* **a:1,b:2**
-* **a:1,b:2,c:3**
+- **a:1**
+- **a:1,b:2**
+- **a:1,b:2,c:3**
 
 The prior chain is:
 
 a:1,b:2,c:3 → a:1,b:2 → a:1.
 
-In the example above, for _role:color,cmd:convert,name:yellow_, the prior is _role:color,cmd:convert_.
+In the example above, for `role:color,cmd:convert,name:yellow`, the prior is `role:color,cmd:convert`.
 
 If you use the strict setting, then the priors will only be for exact matches. For the following patterns, added in this order:
 
-* **a:1**
-* **a:1,b:2,strict$:{add:false}**
-* **a:1,b:2,c:3**
+- **a:1**
+- **a:1,b:2,strict$:{add:false}**
+- **a:1,b:2,c:3**
 
-The prior chain is
-
-a:1,b:2,c:3 → a:1,b:2 only.
+The prior chain is `a:1,b:2,c:3` → `a:1,b:2` only.
 
 You can make every prior strict by setting the top level option:
 
-`seneca( {strict:{add:true}} )`
+`seneca({ strict: { add: true } })`
 
 
 
-## Add order is significant
-In the same way that the order of plugin definition is significant, the order of pattern overrides is also significant. Seneca checks only at definition time for matching priors. This is deliberate, so that you have well-defined behaviour you can determine simply from reading the code.
+## Add order is significant!
+In the same way that the order of plugin definition is significant,
+the order of pattern overrides is also significant.
+
+Seneca *checks only at definition time* for matching priors.
+This is deliberate, so that you have well-defined behaviour
+you can determine simply from reading the code.
 
 Using the example above, if you add patterns in the order:
 
-* **a:1**
-* **a:1,b:2**
-* **a:1,b:2,c:3**
+- **a:1**
+- **a:1,b:2**
+- **a:1,b:2,c:3**
 
 Then there are _no_ priors.
 
-For this reason, take care when adding plugins whose purpose is mainly to extend existing patterns. They should be added after the main plugin that adds functionality.
+**For this reason, take care when adding plugins whose purpose is mainly to extend existing patterns. They should be added after the main plugin that adds functionality.**
 
 ## Best practices for data entities
 The Seneca [data entity patterns][] can be extended to handle special cases. You use calls to `this.prior` to perform the underlying data operations.
 
-For example, Let's say you want to add a _last_updated_ field to every data entity. Override the _role:entity,cmd:save_ pattern to do this:
+For example, Let's say you want to add a `last_updated` field to every data entity. Override the `role:entity,cmd:save` pattern to do this:
 
 ``` js
 var seneca = require('seneca')()
@@ -164,54 +178,58 @@ seneca.add('role:entity,cmd:save', function( msg, respond ) {
 seneca.make$('foo').data$({bar:1}).save$( console.log )
 ```
 
-The _role:entity,cmd:save_ message contains an _ent_ property with the Seneca entity data, which you can modify as desired.
+The `role:entity,cmd:save` message contains an `ent` property with the Seneca entity data, which you can modify as desired.
 
 In production systems, you'll tend to want to do a number of things to entities:
 
-* **define general custom behaviors for all entities,**
-* **define custom behaviors for certain types of entity,**
-* **define custom behaviors for single entities.**
+- **define general custom behaviors for all entities,**
+- **define custom behaviors for certain types of entity,**
+- **define custom behaviors for single entities.**
 
 Use the standard `role:entity,cmd:save|load|remove|list` action patterns to define general customizations, as per the example above.
 
 To define custom behaviour for a specific entity, make sure to add the pattern using the non-strict (default!) option:
 
 ``` js
-seneca.add('role:entity,cmd:save,name:bar', function( msg, respond ) {
+seneca.add('role:entity,cmd:save,name:bar', function (msg, respond) {
   msg.ent.zed = 1
-  this.prior( msg, respond )
+  this.prior(msg, respond)
 })
 
 // prints $-/-/foo;id=m3l3zp;{a:1,last_updated:1441384489162}
-seneca.make$('foo').data$({a:1}).save$( console.log )
+seneca.make$('foo').data$({ a: 1 }).save$(console.log)
 
 // prints $-/-/bar;id=air0bm;{b:1,zed:1,last_updated:1441384489162}
-seneca.make$('bar').data$({b:1}).save$( console.log )
+seneca.make$('bar').data$({ b: 1 }).save$(console.log)
 ```
 
-The _bar_ entity still gets the _last_updated field_. If you had used `strict$:{add:true}`, then it would not have.
+The `bar` _entity_ still gets the `last_updated` _field_. If you had used `strict$:{add:true}`, then it would not have.
 
-Take care when using the base and zone fields for name-spacing entities. If you define a custom behavior for all entities of the same base, this will work as intended. But if you also define custom behaviors only using a name, then an entity that matches both the name and base will not trigger the base behavior, as it will not have the correct prior. Here's a simple example of how the patterns work:
+Take care when using the `base` and `zone` fields for *name-spacing entities*.
+If you define a custom behavior for all entities of the same base, this will work as intended.
+But if you also define custom behaviors only using a name, then an entity that matches both the name and base will not trigger the base behavior, as it will not have the correct prior.
 
-* **a:1**
-* **a:1,b:2**
-* **a:1,c:2**
+Here's a simple example of how the patterns work:
+
+- **a:1**
+- **a:1,b:2**
+- **a:1,c:2**
 
 has the prior chains:
 
-* **a:1,b:2 → a:1**
-* **a:1,c:2 → a:1**
+- **a:1,b:2** → **a:1**
+- **a:1,c:2** → **a:1**
 
-Thus, the input message {a:1, b:2, c:3} will match \__a:1,b:2_ as b precedes c alphabetically, and patterns are disambiguated alphabetically. It will _not_ also match \__a:1,c:3\__.
+Thus, the input message `{a:1, b:2, c:3}` will match \_`a:1,b:2` as `b` precedes `c` alphabetically, and patterns are disambiguated alphabetically. It will _not_ also match \_`a:1,c:3\`.
 
 Similarly, if you have:
 
-* **role:entity,cmd:save,name:foo**
-* **role:entity,cmd:save,base:bar**
+- **role:entity,cmd:save,name:foo**
+- **role:entity,cmd:save,base:bar**
 
 Then `{role:entity,cmd:save,name:foo,base:bar}` will not trigger any custom priors for _base:bar_.
 
-The rule to follow is: if you are defining _base_ behaviors, only define _name,base_ behaviors for specific entities. if you are defining _zone_ behaviors, only define _base,zone_ and _name,base,zone behaviors_.
+The rule to follow is: if you are defining `base` behaviors, only define `name,base` behaviors for specific entities. If you are defining `zone` behaviors, only define `base,zone` and `name,base,zone behaviors`.
 
 ## Debugging priors
 You can trace the structure of action patterns priors using the `--seneca.print.tree` command line option. Run the following code:
@@ -262,11 +280,11 @@ Seneca action patterns for instance: 5ftqv0kxp9zn/1441386055436/36136/-
 null { a: 1, b: 2, c: 3 }
 ```
 
-The last line { a: 1, b: 2, c: 3 } is the expected output from the prior chain for the action pattern _a:1,b:2,c:3_. Above that is an textual tree diagram of the defined patterns in the Seneca instance.
+The last line `{ a: 1, b: 2, c: 3 }` is the expected output from the prior chain for the action pattern `a:1,b:2,c:3`. Above that is an textual tree diagram of the defined patterns in the Seneca instance.
 
 Each pattern is represented by a leaf of the tree. On each leaf is a stack of prior function identifiers, showing the order in which the priors will be called.
 
-For _a:1,b:2,c:3_, you can see that the priors for _a:1,b:2 (d77dx)_, and _a:1 (e7roo)_ will form the prior chain.
+For `a:1,b:2,c:3`, you can see that the priors for `a:1,b:2` (_d77dx_), and `a:1` (_e7roo_) will form the prior chain.
 
 You can also use the option `--seneca.print.tree.all` to see all the system action patterns, not just your own.
 
@@ -289,9 +307,9 @@ $ node prior-debug.js --seneca.log.all --seneca.log.short
 
 Here you can see the definitions of the action patterns, which gives the action identifiers:
 
-* **a:1 → (kjnse)**
-* **a:1,b:2 → (xtpzn)**
-* **a:1,b:2,c:3 → (460jf)**
+- `a:1` → (*kjnse*)
+- `a:1,b:2` → (*xtpzn*)
+- `a:1,b:2,c:3` → (*460jf*)
 
 These identifiers are included in the log lines of the IN/OUT actions calls so that you can follow the prior calls.
 
@@ -300,14 +318,14 @@ In addition, the message and transaction identifiers, starting with 0j/12, allow
 For more details on Seneca logging, read the [logging tutorial][].
 
 ## Help
-If you have questions on priors, you can:
+If you have questions on **priors**, you can:
 
 * Tweet to [@senecajs][],
 * [github issue][],
-* Start a [conversation][].
+* Start a [conversation on gitter][conversation].
 
 
-<br /><br /><br />
+<br/><br/><br/>
 
 That's all folks! Corrections and comments: please tweet [@senecajs][].
 
