@@ -16,7 +16,7 @@ that demonstrate how to use Seneca in a number of different ways and with differ
 
 ## Sample projects
 Sample projects are awesome. At Seneca, we have a good chunk of them available to study and extend. Seneca examples contains
-multiple small, singularly focused sample projects. Both Well! and nodezoo are examples of larger-scale projects which are
+multiple small, singularly focused sample projects. Both _Well!_ and _nodezoo_ are examples of larger-scale projects which are
 closer to production ready apps than trivial examples.
 
 ### Seneca examples
@@ -61,5 +61,5 @@ Here are some talks about Seneca and Microservices:
 [How Microservices fail and what to do about it - Richard Rodger (Microservices Dublin 2015)]: https://www.youtube.com/watch?v=f40EybJwgBo
 [Pattern matching is awesome! - Dean McDonnell (Node.js Dublin 2015)]: http://pattern-matching-is-awesome.mcdonnelldean.me/
 [Introducing the Seneca MVP framework for Node.js - Richard Rodger (Node.js Dublin 2012)]: http://www.slideshare.net/rjrodger/introducing-the-seneca-mvp-framework-for-nodejs
-[We are not Object-Oriented anymore - Matteo Collina (FullStack London 2015)]: http://thenewstack.io/microservices-node-js/ 
+[We are not Object-Oriented anymore - Matteo Collina (FullStack London 2015)]: http://thenewstack.io/microservices-node-js/
 [The proof is in the pudding - seneca+hapi - Wyatt Preul (Nodevember 2015)]: https://www.youtube.com/watch?v=l7zFZcgAFzg

@@ -8,6 +8,7 @@ title: Seneca with Promises
 Even though Seneca does not come with promises built in, it is pretty trivial to use your favorite promise library and use it. In this tutorial we will use one of the most popular libraries out there, [Bluebird][].
 
 ### Basic Example
+
 ```js
 var Promise = require('bluebird');
 var seneca = require('seneca')();
@@ -29,7 +30,7 @@ seneca.add({cmd: 'reject'}, function (args, done) {
 // Use the new promisified act() with no callback
 act({cmd: 'resolve'})
   .then(function (result) {
-    // result will be {message: "Yay, I've been resolved!"} since 
+    // result will be {message: "Yay, I've been resolved!"} since
     // its guaranteed to resolve
   })
   .catch(function (err) {

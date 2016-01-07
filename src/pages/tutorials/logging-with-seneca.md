@@ -9,19 +9,14 @@ output. Clone the [main Seneca repository][] from github, and open the _doc/exam
 folder.
 
 
-
 You'll use the Sales Tax example code. This code shows you how to
 handle sales tax rules using Seneca. Take a look at
 the [main README][] for
 details. For this tutorial, you'll focus on the logging output.
 
 
-
-
-
 Here's some code to calculate sales tax. It won't work, because you
 haven't actually told Seneca how to do that yet.
-
 
 
 ```js
@@ -34,18 +29,16 @@ seneca.act({cmd: 'salestax', net: 100}, function (err, result) {
 ```
 
 
-
 This invokes a Seneca action that, hopefully, calculates sales
-tax. Arbitrarily you're using the property _cmd_ to indicate what
-you want done (calculate sales tax), and _net_ is net price
-before tax. The callback function returns the total price, and uses
-the standard Node.js signature (error object as first parameter).
-
+tax. Arbitrarily you're using the property `cmd` to indicate what
+you want done (calculate sales tax), and `net` is net price
+before tax. The `callback` function returns the total price, and uses
+the _standard Node.js signature_ (error object as first parameter).
 
 
 Let's try to run this code, even though it will fail. In the examples
-folder, this code is saved in the file _sales-tax-error.js_. Run
-this file using Node.js, and you'll see the following output:
+folder, this code is saved in the file `sales-tax-error.js`. Run
+this file using _Node.js_, and you'll see the following output:
 
 
 
@@ -61,13 +54,10 @@ action not found for args = {"cmd":"salestax","net":100}
 
 
 Seneca outputs some logging information so you can track what's going
-on. The _INIT_ entries log the start and end of the initialization phase, when Seneca loads plugins.
-The _ERROR_ entry tells you what went wrong: no action pattern matched the input args in the JSON document:
+on. The `INIT` entries log the start and end of the initialization phase, when Seneca loads plugins.
+The `ERROR` entry tells you what went wrong: no action pattern matched the input args in the JSON document:
 `{"cmd":"salestax","net":100}`. The code also prints the JavaScript Error object to the console. That's the line:
 `if( err ) return console.error(err);`
-
-
-
 
 
 You can fix this by defining an action:
@@ -82,7 +72,7 @@ seneca.add( {cmd:'salestax'}, function(args,callback){
 ```
 
 
-The file _sales-tax.js_ in the examples folder contains the new code. Run it:
+The file `sales-tax.js` in the examples folder contains the new code. Run it:
 
 
 ```bash
@@ -124,14 +114,12 @@ node sales-tax.js --seneca.log.print
 
 So you might be wondering how to get finer-grained logging output. Logging can be filtered on:
 
-- _level_: DEBUG, INFO, WARN, ERROR, FATAL_
-- _type_: short string code, examples: init, plugin, error, ..._
-- _plugin_: the names of the plugin_
-- _tag_: an identifier tag, used when you have multiple instances of the same plugin_
+- `level`: `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`
+- `type`: short string code, examples: `init`, `plugin`, `error`, ...
+- `plugin`: the names of the plugin
+- `tag`: an identifier tag, used when you have multiple instances of the same plugin
 
 Let do that now:
-
-
 
 
 ```bash
@@ -141,16 +129,14 @@ node sales-tax.js --seneca.log=type:act
 123
 ```
 
-
-
-The command line argument _--seneca.log_ accepts a
-comma-separated list of filters. The filter _type:act_ means only
-output the log entries of type _act_. The _type_ is the third
-field. The _act_ entries are very low level debugging logs
+The command line argument `--seneca.log` accepts a
+comma-separated list of filters. The filter `type:act` means only
+output the log entries of type `act`. The `type` is the third
+field. The `act` entries are very low level debugging logs
 showing the operation of individual actions. The logs show the input
-arguments, _in_, and the eventual output of the
-action _out_. Because these can be separated in time, a random
-action identifier (above: _actid0_) is generated for each action, so that you
+arguments, `in`, and the eventual output of the
+action `out`. Because these can be separated in time, a random
+action identifier (above: `actid0`) is generated for each action, so that you
 can match up the input and output.
 
 
@@ -165,7 +151,7 @@ country which applies that rate (using two letter country codes).
 
 
 
-Here's the client code, in the file _sales-tax-log.js_:
+Here's the client code, in the file `sales-tax-log.js`:
 
 
 ``` js
@@ -185,11 +171,11 @@ seneca.ready(function (err) {
 
 
 Since you're using log files to trace the commands, you can drop the
-callback function from the _act_ method call.
+callback function from the `act` method call.
 
 
 
-Now you need a plugin - that's in the _sales-tax-plugin.js_ file:
+Now you need a plugin - that's in the `sales-tax-plugin.js` file:
 
 
 ``` js
@@ -230,7 +216,7 @@ module.exports = function (options) {
 ```
 
 
-The plugin creates a separate instance of the _salestax_ object
+The plugin creates a separate instance of the `salestax` object
 for each country and one instance that matches a call with no country. This object stores the country rate, country code,
 and the number of times that sales tax for that country is calculated
 (hit count).
@@ -273,7 +259,7 @@ net:	300	total:	360	tax:	{hits=2,rate=0.2,country=UK}
 ```
 
 
-These logs appear because the plugin calls _seneca.log.debug_ and provides the information about the sales tax calculation:
+These logs appear because the plugin calls `seneca.log.debug` and provides the information about the sales tax calculation:
 
 
 ``` js
@@ -285,7 +271,7 @@ seneca.add({ role: plugin, cmd: 'salestax', country: country }, function (args, 
 ```
 
 
-The object _seneca.log_ has convenience functions for the built-in log levels:
+The object `seneca.log` has convenience functions for the built-in log levels:
 
 - seneca.log.debug
 - seneca.log.info
@@ -302,7 +288,7 @@ filter matches.
 
 
 
-Here's another example. This time, you filter on the _act_ log
+Here's another example. This time, you filter on the `act` log
 entry type. This allows you to see the data passing into and out of
 actions:
 
@@ -318,9 +304,9 @@ $ node sales-tax-log.js --seneca.log=type:act
 ```
 
 
-You can see two entries for each action, _in_
-and _out_. Each entry shows the JSON document data being passed
-into Seneca, and out of, Seneca. You can also see that each pair has the same action identifier, such as _uk74hd_.
+You can see two entries for each action, `in`
+and `out`. Each entry shows the JSON document data being passed
+into Seneca, and out of, Seneca. You can also see that each pair has the same action identifier, such as `uk74hd`.
 
 
 
@@ -349,14 +335,14 @@ net:	300	total:	360	tax:	{hits=2,rate=0.2,country=UK}
 
 
 This shows the detailed processing of the sales tax calculation. The
-action identifiers, which you can get using _args.actid$_ inside
-an action function.You need to specify two _--seneca.log_
-filters, as the type is _plugin_ for one, and _act_ for the
+action identifiers, which you can get using `args.actid$` inside
+an action function.You need to specify two `--seneca.log`
+filters, as the type is `plugin` for one, and `act` for the
 other.
 
 
 
-The _tag_ filter can be used to focus on a specific, tagged, plugin instance. Here's how you look at UK sales tax operations only:
+The `tag` filter can be used to focus on a specific, tagged, plugin instance. Here's how you look at UK sales tax operations only:
 
 
 ```bash
@@ -376,11 +362,11 @@ Console logs are fun, but live logs in your web browser are awesome! Seneca can 
 
 
 You'll need to create an app that provides a sales-tax calculation HTTP JSON API. Using the
-_web_ plugin this is easy. This plugin accepts JSON documents from remote clients
+`web` plugin this is easy. This plugin accepts JSON documents from remote clients
 over HTTP and submits them to the local Seneca instance.
 
 
-Here the code, in _sales-tax-app.js_, that sets up the app:
+Here the code, in `sales-tax-app.js`, that sets up the app:
 
 ```js
 var connect = require('connect')
@@ -406,7 +392,7 @@ seneca.use('admin', {server: app, local: true})
 ```
 
 The script sets up a simple HTTP server, using the
-Node.js _connect_ module. The _web_ plugin is preloaded by Seneca and works locally without any configuration,
+Node.js `connect` module. The `web` plugin is preloaded by Seneca and works locally without any configuration,
 so all you have to do is hook it as a [connect][]
 or [express][] middleware, or directly
 with the standard HTTP API:
@@ -418,11 +404,11 @@ app.use(seneca.export('web'))
 app.listen(3000)
 ```
 
-The _admin_ and _data-editor_ plugins together provide a web administration interface for
+The `admin` and `data-editor` plugins together provide a web administration interface for
 Seneca. It uses web sockets, so you need to provide a reference to the
 http server object in the plugin options. To expose the
 administration web interface locally without requiring a password,
-use the _local:true_ option:
+use the `local:true` option:
 
 
 ``` js
@@ -447,7 +433,7 @@ There's nothing to log yet, so let's generate some sales tax calculations!
 
 
 
-The file _sales-tax-app-client.js_ contains the client
+The file `sales-tax-app-client.js` contains the client
 code. We're using the standard Node HTTP client here:
 
 
@@ -487,7 +473,7 @@ With the app up and running, run the client: you'll see log entries in the web i
 
 
 You can define your own log handlers programmatically when you setup Seneca. The file
-_sales-tax-log-handler.js_ shows you how to do this:
+`sales-tax-log-handler.js` shows you how to do this:
 
 
 ``` js
@@ -516,21 +502,21 @@ seneca.ready(function (err) {
 
 
 Running this script will output log entries both to the console (only where plugin is "shop" ), and
-to a log file _shop.log_, which gets everything. In production you mostly just want to output to the console and use
+to a log file `shop.log`, which gets everything. In production you mostly just want to output to the console and use
 the operating system tools for file redirection. The file handler is mostly for creating special log files.
 
 
 
 The logging map allows you to send log entries to multiple locations based on the filters you specify. You can still use the
-command line argument _--seneca.log=..._ to add further filters.
+command line argument `--seneca.log=...` to add further filters.
 
 
 The built-in handlers are:
 
-- _seneca.loghandler.print_: logs to the console
-- _seneca.loghandler.file(filepath)_: logs to a file
-- _seneca.loghandler.stream(WriteStream)_: logs to a stream
-- _seneca.loghandler.emitter(EventEmitter)_: logs using events
+- `seneca.loghandler.print`: logs to the console
+- `seneca.loghandler.file(filepath)`: logs to a file
+- `seneca.loghandler.stream(WriteStream)`: logs to a stream
+- `seneca.loghandler.emitter(EventEmitter)`: logs using events
 
 
 You can write your own handler. It's just a function that takes the
@@ -540,7 +526,7 @@ log entry as first argument. The log entry is an array of values.
 
 Here's an example using the [LogEntries.com][] service. This is cloud logging service that
 stores your logs and makes them searchable. I wrote their Node.js API module :) - `$ npm install node-logentries`.
-This example is in the file _sales-tax-logentries.js_:
+This example is in the file `sales-tax-logentries.js`:
 
 
 ``` js
@@ -575,19 +561,14 @@ seneca.ready(function (err) {
 ```
 
 
-You'll need to register a LogEntries.com account and get a token for this to work.
-
-
+You'll need to register a [LogEntries.com](https://logentries.com/) account and get a token for this to work.
 
 You can use custom handler functions to send logs anywhere you want, and process them anyway you need.
 
 
-
 ## One More Thing ...
 
-
-
-Log filters are dynamic. You can add new ones at runtime using the _seneca.logroute_ method:
+*Log filters are dynamic*. You can add new ones at runtime using the `seneca.logroute` method:
 
 
 ``` js
@@ -600,8 +581,7 @@ multiple handlers for the same filter, the logs will be sent to all
 the handlers.This feature enables the administration web site to
 dynamically modify the filters at runtime.
 
-
-
+-----
 
 That's all folks! Corrections and comments: please tweet [@senecajs][].
 
