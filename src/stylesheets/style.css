@@ -220,15 +220,16 @@ span.star {
 
 
 a {
-	color: #f07057;
+  color: #379199;
+
 }
 
 a:hover {
-	color: #333;
+  color: #f07057;
 }
 
 a:visited {
-	color: #379199;
+  color: #045E66; /* 20% darker */
 }
 
 
