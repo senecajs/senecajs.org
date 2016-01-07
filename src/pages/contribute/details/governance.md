@@ -1,6 +1,5 @@
 **This file is borrowed with permission from the [hapi governance](https://github.com/hapijs/contrib/blob/master/Governance.md)**
 
-
 ### This document is a draft and serves as the basis for an open discussion
 
 ## TL;DR

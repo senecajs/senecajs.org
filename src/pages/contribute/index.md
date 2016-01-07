@@ -19,13 +19,12 @@ involved. For instance:
 Like any other project, there is plenty to be done by people of all skill levels and specialities.
 If you have any questions, or want to help out, please stop by our issues boards.
 
-- For issues or question about how to contribute, [go to Seneca/contribe][contrib] and its [issues][contrib-issues]
-- For issues or questions on documentation, go to [Senecajs.org][org_issues].
+- For issues or questions about how to contribute or our documentation, go to [Senecajs.org][] and it's [issues][org_issues]
 - For issues or questions on Seneca itself, go to [Seneca][code_issues].
 
 ### How to Contribute details
 
-A number of org level documents can be consulted there:
+A number of org level documents can be consulted at the following links:
 
 - [Governance][]
 - [Guidelines][]
@@ -34,7 +33,7 @@ A number of org level documents can be consulted there:
 - [Our tools][]
 - [Code of conduct][]
 
-These are replica of the doc in [Seneca/contribe][contrib] repository.
+This is our main contribution documentation.
 The documents above apply to all repositories under this org.
 
 ## Contributing guides
@@ -44,8 +43,12 @@ The documents above apply to all repositories under this org.
 ## Contributors
 To see a list of all contributors, go [here][contributors].
 
+## Acknowledgements
+
+- [Hapi][]: for allowing us to use their org assests as the basis of our own.
+
 ## License
-[Seneca][] and [its docs][senecajs.org] are licensed under MIT and
+[Seneca][] and [its docs][Senecajs.org] are licensed under MIT and
 are the copyright of [Richard Rodger][] and [other][contributors] [contributors][].
 
 Copyright (c) 2010 - 2015 Richard Rodger and other contributors.
@@ -70,16 +73,14 @@ THE SOFTWARE.
 
 [Adding a tutorial]: ./adding-a-tutorial.html
 [Seneca]: https://github.com/senecajs/seneca
-[Senecajs.org]: https://github.com/senecajs/senecajs.org
 [code_issues]: https://github.com/senecajs/seneca/issues
+[Senecajs.org]: https://github.com/senecajs/senecajs.org
 [org_issues]: https://github.com/senecajs/senecajs.org/issues
 [other]: https://github.com/senecajs/senecajs.org/contributors
 [contributors]: /contributors/
 [Richard Rodger]: https://github.com/rjrodger
-[contrib]: https://github.com/senecajs/contrib
-[contrib-issues]: https://github.com/senecajs/contrib/issues
+[Hapi]: https://github.com/hapijs
 
-[issues board]: https://github.com/senecajs/contrib/issues
 [Governance]: ./details/governance.html
 [Guidelines]: ./details/guidelines.html
 [Styleguide]: ./details/styleguide.html
