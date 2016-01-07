@@ -51,7 +51,7 @@ To see a list of all contributors, go [here][contributors].
 [Seneca][] and [its docs][Senecajs.org] are licensed under MIT and
 are the copyright of [Richard Rodger][] and [other][contributors] [contributors][].
 
-Copyright (c) 2010 - 2015 Richard Rodger and other contributors.
+> Copyright (c) 2010 - 2015 Richard Rodger and other contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

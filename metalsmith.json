@@ -11,8 +11,8 @@
     "metalsmith-layouts": {
       "engine": "handlebars",
       "directory": "src/template/layouts",
-      "default": "main.html",
-      "partials": "src/template/partials"
+      "partials": "src/template/partials",
+      "pattern": "pages/*"
     },
     "metalsmith-move-up": {
      "pattern": [
