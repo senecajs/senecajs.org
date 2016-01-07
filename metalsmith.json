@@ -12,7 +12,7 @@
       "engine": "handlebars",
       "directory": "src/template/layouts",
       "partials": "src/template/partials",
-      "pattern": "pages/*"
+      "pattern": "pages/**/*"
     },
     "metalsmith-move-up": {
      "pattern": [
