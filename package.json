@@ -33,6 +33,8 @@
     "handlebars": "^4.0.5",
     "metalsmith": "^2.1.0",
     "metalsmith-annotate": "^0.1.1",
+    "metalsmith-assets": "^0.1.0",
+    "metalsmith-broken-link-checker": "^0.1.8",
     "metalsmith-download": "0.0.1",
     "metalsmith-drafts": "0.0.1",
     "metalsmith-ignore": "^0.1.2",
