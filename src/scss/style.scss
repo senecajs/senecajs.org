@@ -1,3 +1,13 @@
+// Config
+$primary-color: #379199;
+$secondary-color: #f07057;
+$error-color: #d00;
+$dark-grey : #333;
+$grey : #666;
+$light-grey: #ddd;
+$background-color: #f0f0f0;
+$white: #fff;
+
 html {
   font-size: 10px;
 }
@@ -8,11 +18,11 @@ body {
   font-family: "Muli";
   font-size: 1.6rem;
   line-height: 1.5;
-  color: #333333;
+  color: $dark-grey;
 }
 
 .navbar {
-  box-shadow: 0 1px 5px 0px #333;
+  box-shadow: 0 1px 5px 0px $dark-grey;
   font-family: "Muli";
   letter-spacing: .06rem;
   background-color: white;
@@ -36,7 +46,7 @@ body {
 
 .navbar-default {
   .navbar-nav > li > a {
-    color: #333333;
+    color: $dark-grey;
     font-size: 1.8rem;
     line-height: 2;
     padding-left: 10px;
@@ -46,7 +56,7 @@ body {
   .navbar-brand {
     font-family: 'Cinzel';
     font-size: 4.5rem;
-    color: #333333;
+    color: $dark-grey;
   }
 }
 
@@ -82,7 +92,7 @@ pre {
   margin-bottom: 30px;
   font-weight: normal;
   line-height: 1.8;
-  background-color: #f0f0f0;
+  background-color: $background-color;
 }
 
 /*~~~~~~~~~~~ Navigation ~~~~~~~~~~~*/
@@ -176,27 +186,27 @@ h4 {
   padding: 30px;
   margin-top: 51px;
   margin-bottom: 30px;
-  background-color: #379199;
-  box-shadow: 0 1px 5px -1px #333;
+  background-color: $primary-color;
+  box-shadow: 0 1px 5px -1px $dark-grey;
 }
 
 .header-box {
   padding: 0;
   font-size: 21px;
   line-height: 2;
-  color: #fff;
+  color: $white;
   text-align: center;
 }
 
 span.rule-r {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $light-grey;
   height: 1px;
   float: right;
   width: 46%;
 }
 
 span.rule-l {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $light-grey;
   height: 1px;
   float: left;
   width: 46%;
@@ -218,14 +228,14 @@ span.star {
 /* ~~~~~~~~~ Links ~~~~~~~~~ */
 
 a {
-  color: #379199;
+  color: $primary-color;
 
   &:hover {
-    color: #f07057;
+    color: $secondary-color;
   }
 
   &:visited {
-    color: #045E66; /* 20% darker */
+    color: darken($primary-color, 25%);
   }
 }
 
@@ -236,7 +246,7 @@ a {
   font-size: 90%;
   padding: 20px 20px;
   text-align: center;
-  color: #333;
+  color: $dark-grey;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: background .35s ease-in-out;
@@ -341,7 +351,7 @@ a {
   }
 
   h1 {
-    color: #d00;
+    color: $error-color;
   }
 }
 
@@ -351,16 +361,16 @@ a {
   width: 100%;
   padding: 30px;
   margin-top: 50px;
-  color: #ffffff;
+  color: $white;
   margin-bottom: 30px;
   font-size: 21px;
   float: left;
   text-align: center;
-  background-color: #379199;
-  box-shadow: 0 -1px 5px 0 #333;
+  background-color: $primary-color;
+  box-shadow: 0 -1px 5px 0 $dark-grey;
 
   a {
-    color: #fff;
+    color: $white;
     text-decoration: none;
     font-size: 2rem;
   }
@@ -375,13 +385,13 @@ a {
   margin-bottom: -50px;
   font-size: 15px;
   font-weight: lighter;
-  color: #fff;
+  color: $white;
   text-align: center;
-  box-shadow: 0 -1px 5px 0 #333;
-  background-color: #666;
+  box-shadow: 0 -1px 5px 0 $dark-grey;
+  background-color: $grey;
 
   a {
-    color: #fff;
+    color: $white;
     text-decoration: underline;
   }
 }
