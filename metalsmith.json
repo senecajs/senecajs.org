@@ -16,6 +16,10 @@
       "gfm": true,
       "tables": true
     },
+    "metalsmith-sass": {
+      "outputDir": "stylesheets",
+      "outputStyle": "expanded"
+    },
     "metalsmith-layouts": {
       "engine": "handlebars",
       "directory": "src/template/layouts",
