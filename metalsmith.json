@@ -3,6 +3,10 @@
   "destination": "dist",
   "plugins": {
     "metalsmith-drafts": true,
+    "metalsmith-assets": {
+      "source": "./assets",
+      "destination": "."
+    },
     "metalsmith-markdown": {
       "smartypants": true,
       "gfm": true,
