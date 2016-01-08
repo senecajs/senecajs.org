@@ -2,6 +2,7 @@
   "source": "src",
   "destination": "dist",
   "plugins": {
+    "metalsmith-broken-link-checker": true,
     "metalsmith-drafts": true,
     "metalsmith-assets": {
       "source": "./assets",
