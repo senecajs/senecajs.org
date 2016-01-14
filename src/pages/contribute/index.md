@@ -26,6 +26,7 @@ If you have any questions, or want to help out, please stop by our issues boards
 
 A number of org level documents can be consulted at the following links:
 
+- [Principles][]
 - [Governance][]
 - [Guidelines][]
 - [Styleguide][]
@@ -81,6 +82,7 @@ THE SOFTWARE.
 [Richard Rodger]: https://github.com/rjrodger
 [Hapi]: https://github.com/hapijs
 
+[Principles]: ./details/principles.html
 [Governance]: ./details/governance.html
 [Guidelines]: ./details/guidelines.html
 [Styleguide]: ./details/styleguide.html
