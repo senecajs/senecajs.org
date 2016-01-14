@@ -24,7 +24,8 @@
       "engine": "handlebars",
       "directory": "src/template/layouts",
       "partials": "src/template/partials",
-      "pattern": "pages/**/*"
+      "pattern": "pages/**/*",
+      "default": "main.html"
     },
     "metalsmith-move-up": {
      "pattern": [
