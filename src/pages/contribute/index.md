@@ -7,7 +7,6 @@ layout: main.html
 participation. If you feel you can help in any way, be it with documentation, examples, extra
 testing, or new features, please be our guest! =)
 
-## Helping out
 Contributing is not always about adding new features. There are plenty of other ways to get
 involved. For instance:
 
@@ -22,9 +21,10 @@ If you have any questions, or want to help out, please stop by our issues boards
 - For issues or questions about how to contribute or our documentation, go to [Senecajs.org][] and it's [issues][org_issues]
 - For issues or questions on Seneca itself, go to [Seneca][code_issues].
 
-### How to Contribute details
-
-A number of org level documents can be consulted at the following links:
+## How to Contribute
+Before staring please read our code of [Code of Conduct][]. It contains very important information for
+all contributors to the Senecajs org. We also have a list of org level documents you can look through.
+They will give great information on how we work and how to contribute.
 
 - [Principles][]
 - [Governance][]
@@ -32,21 +32,21 @@ A number of org level documents can be consulted at the following links:
 - [Styleguide][]
 - [How we work][]
 - [Our tools][]
-- [Code of conduct][]
 
-This is our main contribution documentation.
-The documents above apply to all repositories under this org.
-
-## Contributing guides
+### Contributing guides
 
 - [Adding a tutorial][]
 
-## Contributors
-To see a list of all contributors, go [here][contributors].
+### Contributors List
+All contributors to the SenecaJs org are given a place on our list. If you would rather we removed
+your name please open an issue.
+
+- [Contributor list][contributors].
 
 ## Acknowledgements
 
 - [Hapi][]: for allowing us to use their org assests as the basis of our own.
+- [Chakra Core][]: For their awesome CoC
 
 ## License
 [Seneca][] and [its docs][Senecajs.org] are licensed under MIT and
@@ -90,3 +90,9 @@ THE SOFTWARE.
 [Our tools]: ./details/our-tools.html
 [How we Work]: ./details/how-we-work.html
 [Code of conduct]: ./details/code-of-conduct.html
+
+[email]: mailto:hello@nearform.com
+[homepage]: http://contributor-covenant.org
+[version]: http://contributor-covenant.org/version/1/3/0/
+[opencoc]: http://todogroup.org/opencodeofconduct/
+[Chakra Core]: https://github.com/Microsoft/ChakraCore
