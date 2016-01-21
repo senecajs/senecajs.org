@@ -18,18 +18,18 @@ involved. For instance:
 Like any other project, there is plenty to be done by people of all skill levels and specialities.
 If you have any questions, or want to help out, please stop by our issues boards.
 
-- For issues or questions about how to contribute or our documentation, go to [Senecajs.org][] and it's [issues][org_issues]
+- For issues or questions about how to contribute or our documentation, go to [Senecajs.org][] and its [issues][org_issues]
 - For issues or questions on Seneca itself, go to [Seneca][code_issues].
 
-## How to Contribute
-Before staring please read our code of [Code of Conduct][]. It contains very important information for
-all contributors to the Senecajs org. We also have a list of org level documents you can look through.
-They will give great information on how we work and how to contribute.
+## How to contribute
+Before you start, please read our code of [code of conduct][]. It contains very important information for
+all contributors to Senecajs.org. We also have a list of org level documents you can look through.
+They give great information on how we work and how to contribute.
 
 - [Principles][]
 - [Governance][]
 - [Guidelines][]
-- [Styleguide][]
+- [Style guide][]
 - [How we work][]
 - [Our tools][]
 
@@ -37,9 +37,9 @@ They will give great information on how we work and how to contribute.
 
 - [Adding a tutorial][]
 
-### Contributors List
-All contributors to the SenecaJs org are given a place on our list. If you would rather we removed
-your name please open an issue.
+### Contributors list
+All contributors to the Senecajs org are given a place on our list. If you would rather we removed
+your name, please open an issue.
 
 - [Contributor list][contributors].
 
