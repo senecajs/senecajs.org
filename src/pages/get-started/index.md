@@ -39,7 +39,7 @@ And now, let's build some microservices!
 Let's start with some code. Here's a service that sums two numbers:
 
 ``` js
-var seneca = require( 'seneca' )()
+var seneca = require('seneca')()
 
 seneca.add({role: 'math', cmd: 'sum'}, function (msg, respond) {
   var sum = msg.left + msg.right
@@ -51,8 +51,8 @@ To call this service, you write:
 
 ``` js
 seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, function (err, result) {
-  if (err) return console.error( err )
-  console.log( result )
+  if (err) return console.error(err)
+  console.log(result)
 })
 ```
 
@@ -128,8 +128,8 @@ sample code, these arguments are simply printed to the console:
 
 ``` js
 seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, function (err, result) {
-  if( err ) return console.error( err )
-  console.log( result )
+  if (err) return console.error(err)
+  console.log(result)
 })
 ```
 
@@ -159,7 +159,7 @@ You can use the `role: math, cmd: sum` action pattern as a template to define a 
 ``` js
 seneca.add({role: 'math', cmd: 'product'}, function (msg, respond) {
   var product = msg.left * msg.right
-  respond(null, { answer: product } )
+  respond(null, { answer: product })
 })
 ```
 
@@ -179,7 +179,7 @@ Running this code produces:
 Putting this all together, you get:
 
 ``` js
-var seneca = require( 'seneca' )()
+var seneca = require('seneca')()
 
 seneca.add({role: 'math', cmd: 'sum'}, function (msg, respond) {
   var sum = msg.left + msg.right
@@ -188,7 +188,7 @@ seneca.add({role: 'math', cmd: 'sum'}, function (msg, respond) {
 
 seneca.add({role: 'math', cmd: 'product'}, function (msg, respond) {
   var product = msg.left * msg.right
-  respond( null, { answer: product } )
+  respond(null, { answer: product })
 })
 
 
@@ -231,7 +231,7 @@ The more specific pattern always wins. In other words, the pattern with the high
 Here's some code to illustrate this:
 
 ``` js
-var seneca = require( 'seneca' )()
+var seneca = require('seneca')()
 
 seneca.add({role: 'math', cmd: 'sum'}, function (msg, respond) {
   var sum = msg.left + msg.right
@@ -246,7 +246,7 @@ seneca.act({role: 'math', cmd: 'sum', left: 1.5, right: 2.5, integer: true}, con
 
 seneca.add({role: 'math', cmd: 'sum', integer: true}, function (msg, respond) {
   var sum = Math.floor(msg.left) + Math.floor(msg.right)
-  respond( null, { answer: sum } )
+  respond(null, { answer: sum })
 })
 
 // this still matches role: math, cmd: sum
@@ -282,7 +282,7 @@ Action patterns can call other action patterns to do their work. Let's modify ou
 code to use this approach:
 
 ``` js
-var seneca = require( 'seneca' )()
+var seneca = require('seneca')()
 
 seneca.add('role: math, cmd: sum', function (msg, respond) {
   var sum = msg.left + msg.right
@@ -344,11 +344,11 @@ easy to understand which pattern will trigger which action function.
 
 Here are some examples:
 
-* a:1, b:2 wins over a:1 as it has more properties.
-* a:1, b:2 wins over a:1, c:3 as b comes before c alphabetically.
-* a:1, b:2, d:4 wins over a:1, c:3, d:4 as b comes before c alphabetically.
-* a:1, b:2, c:3 wins over a:1, b:2 as it has more properties.
-* a:1, b:2, c:3 wins over a:1, c:3 as it has more properties.
+* `a:1, b:2` wins over `a:1` as it has more properties.
+* `a:1, b:2` wins over `a:1, c:3` as b comes before c alphabetically.
+* `a:1, b:2, d:4` wins over `a:1, c:3, d:4` as b comes before c alphabetically.
+* `a:1, b:2, c:3` wins over `a:1, b:2` as it has more properties.
+* `a:1, b:2, c:3` wins over `a:1, c:3` as it has more properties.
 
 To see this in action, run the file [pattern-wins.js][]. For more details, see the [patrun module][].
 
@@ -362,26 +362,26 @@ numbers. Also, it's useful to include the original input arguments in the output
 purposes. You can add a validation check and debugging information using the following code:
 
 ``` js
-var seneca = require( 'seneca' )()
+var seneca = require('seneca')()
 
 seneca
   .add(
     'role:math,cmd:sum',
-    function( msg, respond ) {
+    function (msg, respond) {
       var sum = msg.left + msg.right
-      respond( null, { answer: sum } )
+      respond(null, { answer: sum })
     })
 
   // override role:math,cmd:sum with additional functionality
   .add(
     'role:math,cmd:sum',
-    function( msg, respond ) {
+    function (msg, respond) {
 
       // bail out early if there's a problem
-      if( !Number.isFinite( msg.left ) ||
-          !Number.isFinite( msg.right ) )
+      if (!Number.isFinite(msg.left) ||
+          !Number.isFinite(msg.right))
       {
-        return respond( new Error("Expected left and right to be numbers.") )
+        return respond(new Error("Expected left and right to be numbers."))
       }
 
       // call previous action function for role:math,cmd:sum
@@ -391,26 +391,26 @@ seneca
         left:  msg.left,
         right: msg.right,
 
-      }, function( err, result ) {
-        if( err ) return respond( err )
+      }, function (err, result) {
+        if (err) return respond(err)
 
         result.info = msg.left+'+'+msg.right
-        respond( null, result )
+        respond(null, result)
       })
     })
 
   // enhanced role:math,cmd:sum
-  .act( 'role:math,cmd:sum,left:1.5,right:2.5',
+  .act('role:math,cmd:sum,left:1.5,right:2.5',
         console.log // prints { answer: 4, info: '1.5+2.5' }
-      )
+     )
 ```
 
 The Seneca instance provided to an action function via the the `this` context variable has a special `prior` method that calls the previous action definition for the current action pattern.
 
 The prior function has parameters:
 
-* msg: the msg object, which you may have modified.
-* response_callback: a callback function where you can modify the result.
+* `msg`: the msg object, which you may have modified.
+* `response_callback`: a callback function where you can modify the result.
 
 The example code shows you how to modify both the inbound message and the outbound result. Modification of either is optional. You may leave the data unchanged and use this mechanism for enhanced logging or auditing.
 
@@ -429,12 +429,12 @@ Likewise, a Seneca plugin is just a set of action patterns. A plugin can have a 
 A Seneca plugin is a function that has a single parameter `options`. You pass this plugin definition function to the `seneca.use method`. Here is the minimal Seneca plugin (it does nothing!):
 
 ``` js
-function minimal_plugin( options ) {
+function minimal_plugin(options) {
   console.log(options)
 }
 
-require( 'seneca' )()
-  .use( minimal_plugin, {foo:'bar'} )
+require('seneca')()
+  .use(minimal_plugin, {foo:'bar'})
 ```
 
 The `seneca.use` method takes two parameters:
@@ -473,21 +473,21 @@ You can see that Seneca loads four built-in plugins by default: [basic][], [tran
 Let's give the plugin some action patterns. The `this` context variable of the plugin definition function is an instance of Seneca that you can use to do this. Here's a `math` plugin:
 
 ``` js
-function math( options ) {
+function math(options) {
 
-  this.add( 'role:math,cmd:sum', function( msg, respond ) {
-    respond( null, { answer: msg.left + msg.right } )
+  this.add('role:math,cmd:sum', function (msg, respond) {
+    respond(null, { answer: msg.left + msg.right })
   })
 
-  this.add( 'role:math,cmd:product', function( msg, respond ) {
-    respond( null, { answer: msg.left * msg.right } )
+  this.add('role:math,cmd:product', function (msg, respond) {
+    respond(null, { answer: msg.left * msg.right })
   })
 
 }
 
-require( 'seneca' )()
-  .use( math )
-  .act( 'role:math,cmd:sum,left:1,right:2', console.log )
+require('seneca')()
+  .use(math)
+  .act('role:math,cmd:sum,left:1,right:2', console.log)
 ```
 
 Running this file [math-plugin.js][] generates the following output:
@@ -531,70 +531,70 @@ With Seneca, you build up your system by defining a set of patterns that corresp
 
 Plugins often need to do some initialization work, such as connecting to a database. You don't do this work in the body of the plugin definition function. The definition function is synchronous by design, because all it does is _define_ the plugin. In fact, you should not call `seneca.act` at all in the plugin definition - call `seneca.add` only.
 
-To initialize a plugin, you add a special action pattern: `init:`<plugin-name>. This action pattern is called in sequence for each plugin. The init function _must_ call its `respond` callback without errors. If plugin initialization fails, then Seneca exits the Node.js process. You want your microservices to fail fast (and scream loudly) when there's a problem. All plugins must complete initialization before any actions are executed.
+To initialize a plugin, you add a special action pattern: `init:<plugin-name>`. This action pattern is called in sequence for each plugin. The init function _must_ call its `respond` callback without errors. If plugin initialization fails, then Seneca exits the Node.js process. You want your microservices to fail fast (and scream loudly) when there's a problem. All plugins must complete initialization before any actions are executed.
 
 To demonstrate initialization, let's add simplistic custom logging to the _math_ plugin. When the plugin starts, it opens a log file and writes a log of all operations to the file. The file needs to open successfully and be writable. If this fails, the microservice should fail:
 
 ``` js
 var fs = require('fs')
 
-function math( options ) {
+function math(options) {
 
   // the logging function, built by init
   var log
 
   // place all the patterns together
   // this make it easier to see them at a glance
-  this.add( 'role:math,cmd:sum',     sum )
-  this.add( 'role:math,cmd:product', product )
+  this.add('role:math,cmd:sum',     sum)
+  this.add('role:math,cmd:product', product)
 
   // this is the special initialization pattern
-  this.add( 'init:math', init )
+  this.add('init:math', init)
 
 
-  function init( msg, respond ) {
+  function init(msg, respond) {
     // log to a custom file
-    fs.open( options.logfile, 'a', function( err, fd ) {
+    fs.open(options.logfile, 'a', function (err, fd) {
 
       // cannot open for writing, so fail
       // this error is fatal to Seneca
-      if( err ) return respond( err )
+      if (err) return respond(err)
 
       log = make_log(fd)
       respond()
     })
   }
 
-  function sum( msg, respond ) {
+  function sum(msg, respond) {
     var out = { answer: msg.left + msg.right }
-    log( 'sum '+msg.left+'+'+msg.right+'='+out.answer+'\n' )
-    respond( null, out )
+    log('sum '+msg.left+'+'+msg.right+'='+out.answer+'\n')
+    respond(null, out)
   }
 
-  function product( msg, respond ) {
+  function product(msg, respond) {
     var out = { answer: msg.left * msg.right }
-    log( 'product '+msg.left+'*'+msg.right+'='+out.answer+'\n' )
-    respond( null, out )
+    log('product '+msg.left+'*'+msg.right+'='+out.answer+'\n')
+    respond(null, out)
   }
 
 
-  function make_log( fd ) {
-    return function( entry ) {
-      fs.write( fd, new Date().toISOString()+' '+entry, null, 'utf8', function(err) {
-        if( err ) return console.log( err )
+  function make_log(fd) {
+    return function (entry) {
+      fs.write(fd, new Date().toISOString()+' '+entry, null, 'utf8', function (err) {
+        if (err) return console.log(err)
 
         // ensure log entry is flushed
-        fs.fsync( fd, function(err) {
-          if( err ) return console.log( err )
+        fs.fsync(fd, function (err) {
+          if (err) return console.log(err)
         })
       })
     }
   }
 }
 
-require( 'seneca' )()
-  .use( math, {logfile:'./math.log'} )
-  .act( 'role:math,cmd:sum,left:1,right:2', console.log )
+require('seneca')()
+  .use(math, {logfile:'./math.log'})
+  .act('role:math,cmd:sum,left:1,right:2', console.log)
 ```
 
 In this plugin code, the patterns are organized at the top of the plugin so that they are easy to see. The action functions are defined below these patterns. You can also see how the options are used to provide the location for the custom log file (it should go without saying that this is not a way to do production logging!).
@@ -607,23 +607,23 @@ This code is available in the [math-plugin-init.js][] file.
 
 Let's turn the _math_ plugin into a real microservice. First, you need to get organized. The business logic of the _math_ plugin - that is, the functionality that it provides - is separate from whatever way it communicates with the outside world. Sometimes you might expose a web service; other times you might listen on a message bus.
 
-It makes sense to put the business logic - that is, the plugin definition - in its own file. Node.js modules are perfect for this:
+It makes sense to put the business logic - that is, the plugin definition - in its own file. _Node.js_ modules are perfect for this:
 
 ``` js
-module.exports = function math( options ) {
+module.exports = function math(options) {
 
-  this.add( 'role:math,cmd:sum', function sum( msg, respond ) {
-    respond( null, { answer: msg.left + msg.right } )
+  this.add('role:math,cmd:sum', function sum(msg, respond) {
+    respond(null, { answer: msg.left + msg.right })
   })
 
-  this.add( 'role:math,cmd:product', function product( msg, respond ) {
-    respond( null, { answer: msg.left * msg.right } )
+  this.add('role:math,cmd:product', function product(msg, respond) {
+    respond(null, { answer: msg.left * msg.right })
   })
 
-  this.wrap( 'role:math', function( msg, respond ) {
+  this.wrap('role:math', function (msg, respond) {
     msg.left  = Number(msg.left).valueOf()
     msg.right = Number(msg.right).valueOf()
-    this.prior( msg, respond )
+    this.prior(msg, respond)
   })
 
 }
@@ -633,13 +633,13 @@ This plugin is defined in the [math.js][] file. You export the plugin definition
 
 ``` js
 // these are equivalent
-require( 'seneca' )()
-  .use( require('./math.js') )
-  .act( 'role:math,cmd:sum,left:1,right:2', console.log )
+require('seneca')()
+  .use(require('./math.js'))
+  .act('role:math,cmd:sum,left:1,right:2', console.log)
 
-require( 'seneca' )()
-  .use( 'math' ) // finds ./math.js in local folder
-  .act( 'role:math,cmd:sum,left:1,right:2', console.log )
+require('seneca')()
+  .use('math') // finds ./math.js in local folder
+  .act('role:math,cmd:sum,left:1,right:2', console.log)
 ```
 
 The `seneca.wrap` method matches a set of patterns and overrides all of them with the same action extension function. This is the same as calling `seneca.add` manually for each one. It takes the following two parameters:
@@ -679,8 +679,8 @@ Here, you can see the name/value pairs of the action patterns arranged in a tree
 Everything is still in the same process. Let's change that. First you need a microservice:
 
 ``` js
-require( 'seneca' )()
-  .use( 'math' )
+require('seneca')()
+  .use('math')
   .listen()
 ```
 
@@ -688,7 +688,7 @@ Running this code ([math-service.js][]) starts a microservice process that liste
 
 You can try it out by sending a request to the microservice. Open the URL: `http://localhost:10101/act?role=math&cmd=sum&left=1&right=2` in a web browser or use curl on the command line:
 
-``` js
+``` bash
 $ curl -d '{"role":"math","cmd":"sum","left":1,"right":2}' http://localhost:10101/act
 ```
 
@@ -701,7 +701,7 @@ What you get back is:
 Next, you need a microservice client:
 
 ``` js
-require( 'seneca' )()
+require('seneca')()
   .client()
   .act('role:math,cmd:sum,left:1,right:2',console.log)
 ```
@@ -728,15 +728,15 @@ With Seneca, you create microservices by calling `seneca.listen` and you talk to
 
 As long as the client and listen parameters are the same, the two services can communicate. Here are some examples:
 
-* `seneca.client( 8080 ) → seneca.listen( 8080 )`
-* `seneca.client( 8080, '192.168.0.2' ) → seneca.listen( 8080, '192.168.0.2' )`
-* `seneca.client( { port:8080, host:'192.168.0.2' } ) → seneca.listen( { port:8080, host:'192.168.0.2' } )`
+* `seneca.client(8080)` → `seneca.listen(8080)`
+* `seneca.client(8080, '192.168.0.2')` → `seneca.listen(8080, '192.168.0.2')`
+* `seneca.client({ port: 8080, host: '192.168.0.2' })` → `seneca.listen({ port: 8080, host: '192.168.0.2' })`
 
 Seneca provides you with **transport independence** because your business logic does not need to know how messages are transported or which service will get them. This is specified in the service setup code or configuration. In this case, the code in the _math.js_ plugin _never_ changes.
 
 The HTTP transport provides an easy way to integrate with Seneca microservices, but it does have all the overhead of HTTP. Another transport that you can use is direct TCP connections. Seneca provides both HTTP and TCP options via the built-in [transport][]. Let's move to TCP:
 
-* `seneca.client( { type:'tcp' } ) → seneca.listen( { type:'tcp' } )`
+* `seneca.client({ type: 'tcp' })` → `seneca.listen({ type: 'tcp' })`
 
 The default _client/listen_ configuration sends all messages that the client does not recognize over the listening server. Locally defined patterns are executed locally. It's usually preferable to specify exactly which patterns should be sent to which service. You can do this using a _pin_.
 
@@ -745,26 +745,26 @@ Let's put all this together into an example that sends `role:math` messages out 
 First, the listening service ([math-pin-service.js][]):
 
 ``` js
-require( 'seneca' )()
+require('seneca')()
 
-  .use( 'math' )
+  .use('math')
 
   // listen for role:math messages
   // IMPORTANT: must match client
-  .listen( { type:'tcp', pin:'role:math' } )
+  .listen({ type: 'tcp', pin: 'role:math' })
 ```
 
 Then, the client ([math-pin-client.js][]):
 
 ``` js
-require( 'seneca' )()
+require('seneca')()
 
   // a local pattern
-  .add( 'say:hello', function( msg, respond ){ respond( null, {text:"Hi!"} ) } )
+  .add('say:hello', function (msg, respond){ respond(null, {text: "Hi!"}) })
 
   // send any role:math patterns out over the network
   // IMPORTANT: must match listening service
-  .client( { type:'tcp', pin:'role:math' } )
+  .client({ type: 'tcp', pin: 'role:math' })
 
   // executed remotely
   .act('role:math,cmd:sum,left:1,right:2',console.log)
@@ -777,10 +777,10 @@ You can use filtered logging to trace the flow of messages. You can use the comm
 
 * `date-time`: when the log entry occurred.
 * `seneca-id`: identifier for the Seneca process.
-* `level`: one of DEBUG, INFO, WARN, ERROR, FATAL.
+* `level`: one of _DEBUG_, _INFO_, _WARN_, _ERROR_, _FATAL_.
 * `type`: entry code, such as act, plugin, etc.
 * `plugin`: plugin name (actions without a plugin have root$).
-* `case`: entry case, such as IN, OUT, ADD, etc.
+* `case`: entry case, such as _IN_, _OUT_, _ADD_, etc.
 * `action-id/transaction-id`: tracing identifier, **stays the same over the network**.
 * `pin`: the action pattern for this message.
 * `message`: the inbound or outbound message (truncated if too long).
@@ -840,13 +840,13 @@ The most important thing to remember is that you don't want to expose your inter
 Let's look at a simple example using [Express][]. Here's the Express app ([app.js][]):
 
 ``` js
-var seneca = require( 'seneca' )()
-      .use( 'api' )
-      .client( { type:'tcp', pin:'role:math' } )
+var seneca = require('seneca')()
+      .use('api')
+      .client({ type:'tcp', pin:'role:math' })
 
-var app = require( 'express' )()
-      .use( require('body-parser').json() )
-      .use( seneca.export( 'web' ) )
+var app = require('express')()
+      .use(require('body-parser').json())
+      .use(seneca.export('web'))
       .listen(3000)
 ```
 
@@ -855,7 +855,7 @@ You create a seneca instance, load the _api_ plugin, and then use `seneca.client
 The integration between Seneca and Express happens in this line:
 
 ``` js
-      .use( seneca.export( 'web' ) )
+      .use(seneca.export('web'))
 ```
 
 Seneca exports a middleware function that Express can use.
@@ -863,27 +863,27 @@ Seneca exports a middleware function that Express can use.
 Here's the _api_ plugin ([api.js][]):
 
 ``` js
-module.exports = function api( options ) {
+module.exports = function api(options) {
 
   var valid_ops = { sum:'sum', product:'product' }
 
-  this.add( 'role:api,path:calculate', function( msg, respond ) {
-    this.act( 'role:math', {
+  this.add('role:api,path:calculate', function (msg, respond) {
+    this.act('role:math', {
       cmd:   valid_ops[msg.operation],
       left:  msg.left,
       right: msg.right,
-    }, respond )
+    }, respond)
   })
 
 
-  this.add( 'init:api', function( msg, respond ) {
+  this.add('init:api', function (msg, respond) {
     this.act('role:web',{use:{
       prefix: '/api',
       pin:    'role:api,path:*',
       map: {
         calculate: { GET:true, suffix:'/:operation' }
       }
-    }}, respond )
+    }}, respond)
   })
 
 }
@@ -975,7 +975,7 @@ product.name = 'Apple'
 product.price = 1.99
 
 // sends role:entity,cmd:save,name:product messsage
-product.save$( console.log )
+product.save$(console.log)
 ```
 
 Run the file <a href="">product.js</a> to test this. You'll see the output:
@@ -994,30 +994,30 @@ Because all data operations go via the same set of messages, you can very easily
 Let's build a little shop, and integrate it into our existing microservice system. First, here's a simple shop plugin, with some messages for adding products, getting product details, and making a purchase ([shop.js][]):
 
 ``` js
-module.exports = function( options ) {
+module.exports = function (options) {
 
-  this.add( 'role:shop,get:product', function( msg, respond ) {
-    this.make( 'product' ).load$( msg.id, respond )
+  this.add('role:shop,get:product', function (msg, respond) {
+    this.make('product').load$(msg.id, respond)
   })
 
-  this.add( 'role:shop,add:product', function( msg, respond ) {
-    this.make( 'product' ).data$(msg.data).save$(respond)
+  this.add('role:shop,add:product', function (msg, respond) {
+    this.make('product').data$(msg.data).save$(respond)
   })
 
-  this.add( 'role:shop,cmd:purchase', function( msg, respond ) {
-    this.make( 'product' ).load$(msg.id, function( err, product ) {
-      if( err ) return respond( err )
+  this.add('role:shop,cmd:purchase', function (msg, respond) {
+    this.make('product').load$(msg.id, function (err, product) {
+      if (err) return respond(err)
 
       this
-        .make( 'purchase' )
+        .make('purchase')
         .data$({
           when:    Date.now(),
           product: product.id,
           name:    product.name,
           price:   product.price,
         })
-        .save$( function( err, purchase ) {
-          if( err ) return respond( err )
+        .save$(function (err, purchase) {
+          if (err) return respond(err)
 
           this.act('role:shop,info:purchase',{purchase:purchase})
           respond(null,purchase)
@@ -1025,7 +1025,7 @@ module.exports = function( options ) {
     })
   })
 
-  this.add( 'role:shop,info:purchase', function( msg, respond ) {
+  this.add('role:shop,info:purchase', function (msg, respond) {
     this.log.info('purchase',msg.purchase)
     respond()
   })
@@ -1051,33 +1051,33 @@ var seneca = require('seneca')()
       // uncomment to send messages to the shop-stats service
       // .client({port:9003,pin:'role:shop,info:purchase'})
 
-      .error( assert.fail )
+      .error(assert.fail)
 
 add_product()
 
 function add_product() {
   seneca.act(
-    'role:shop,add:product,data:{name:Apple,price:1.99}',
-    function( err, save_apple ) {
+    'role:shop,add:product,data:{name:Apple, price:1.99}',
+    function (err, save_apple) {
 
       this.act(
         'role:shop,get:product', {id:save_apple.id},
-        function( err, load_apple ) {
+        function (err, load_apple) {
 
-          assert.equal( load_apple.name, save_apple.name )
+          assert.equal(load_apple.name, save_apple.name)
 
-          do_purchase( load_apple )
+          do_purchase(load_apple)
         })
     })
 }
 
-function do_purchase( apple ) {
+function do_purchase(apple) {
   seneca.act(
-    'role:shop,cmd:purchase',{id:apple.id},
-    function( err, purchase) {
-      assert.equal( purchase.product, apple.id )
+    'role:shop,cmd:purchase',{id: apple.id},
+    function (err, purchase) {
+      assert.equal(purchase.product, apple.id)
     }
-  )
+ )
 }
 ```
 
@@ -1096,7 +1096,7 @@ Let's run a separate service to capture the purchase message events. For the sak
 ``` js
 var stats = {}
 require('seneca')()
-  .add('role:shop,info:purchase',function( msg, respond ) {
+  .add('role:shop,info:purchase',function (msg, respond) {
     var product_name = msg.purchase.name
     stats[product_name] = stats[product_name] || 0
     stats[product_name]++
@@ -1152,10 +1152,10 @@ In this example, we're using `--seneca.log.all` to log at the highest level of d
 We need a [shop-service.js][]:
 
 ``` js
-require( 'seneca' )()
-  .use( 'shop' )
-  .listen( { port:9002, pin:'role:shop' } )
-  .client( { port:9003, pin:'role:shop,info:purchase' } )
+require('seneca')()
+  .use('shop')
+  .listen({ port:9002, pin:'role:shop' })
+  .client({ port:9003, pin:'role:shop,info:purchase' })
 ```
 
 This service listens for inbound `role:shop` messages, **but** sends any `role:shop,info:purchase` messages out onto the network. Seneca lets you mix and match `client` and `listen` configurations. **Remember, the client and listen pins must match**.
@@ -1173,16 +1173,16 @@ The shop functionality is exposed via the URL endpoints `/api/shop/get` and `/ap
 ``` js
   ...
 
-  this.add( 'role:api,path:shop', function( msg, respond ) {
+  this.add('role:api,path:shop', function (msg, respond) {
     var shopmsg = { role:'shop', id:msg.id }
-    if( 'get'      == msg.operation ) shopmsg.get = 'product'
-    if( 'purchase' == msg.operation ) shopmsg.cmd = 'purchase'
+    if ('get'      == msg.operation) shopmsg.get = 'product'
+    if ('purchase' == msg.operation) shopmsg.cmd = 'purchase'
 
-    this.act( shopmsg, respond )
+    this.act(shopmsg, respond)
   })
 
 
-  this.add( 'init:api', function( msg, respond ) {
+  this.add('init:api', function (msg, respond) {
 
     ...
 
@@ -1201,14 +1201,14 @@ The shop functionality is exposed via the URL endpoints `/api/shop/get` and `/ap
 Finally, we need to update the web server to send `role:shop` messages to the `shop-service` ([app-all.js][]):
 
 ``` js
-var seneca = require( 'seneca' )()
-      .use( 'api-all' )
-      .client( { type:'tcp', pin:'role:math' } )
-      .client( { port:9002,  pin:'role:shop' } )
+var seneca = require('seneca')()
+      .use('api-all')
+      .client({ type:'tcp', pin:'role:math' })
+      .client({ port:9002,  pin:'role:shop' })
 
-var app = require( 'express' )()
-      .use( require('body-parser').json() )
-      .use( seneca.export( 'web' ) )
+var app = require('express')()
+      .use(require('body-parser').json())
+      .use(seneca.export('web'))
       .listen(3000)
 
 // create a dummy product
