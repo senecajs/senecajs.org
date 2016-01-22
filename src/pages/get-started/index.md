@@ -333,7 +333,7 @@ patterns and messages more concise in your code.
 The code for the sample above is available in the [sum-reuse.js][] file.
 
 ## Patterns are unique
-The action patterns that you define are unique. They can trigger only one function. The patterns
+The action patterns that you define are **unique**. They can trigger only one function. The patterns
 resolve using the following rules:
 
 * More properties win.
@@ -345,19 +345,19 @@ easy to understand which pattern will trigger which action function.
 Here are some examples:
 
 * `a:1, b:2` wins over `a:1` as it has more properties.
-* `a:1, b:2` wins over `a:1, c:3` as b comes before c alphabetically.
-* `a:1, b:2, d:4` wins over `a:1, c:3, d:4` as b comes before c alphabetically.
+* `a:1, b:2` wins over `a:1, c:3` as `b` comes before `c` alphabetically.
+* `a:1, b:2, d:4` wins over `a:1, c:3, d:4` as `b` comes before `c` alphabetically.
 * `a:1, b:2, c:3` wins over `a:1, b:2` as it has more properties.
 * `a:1, b:2, c:3` wins over `a:1, c:3` as it has more properties.
 
-To see this in action, run the file [pattern-wins.js][]. For more details, see the [patrun module][].
+To see this in action, run the file [pattern-wins.js][]. _For more details, see the [patrun module][]_.
 
-It is sometimes useful to have a way of enhancing the behavior of an action without rewriting it
-fully. For example, you might want to perform custom validation of the message properties,
+It is sometimes useful to have a way of _enhancing the behavior of an action without rewriting it
+fully_. For example, you might want to perform custom validation of the message properties,
 capture message statistics, add additional information to action results, or throttle message
 flow rates.
 
-In the sample code, the addition action expects the left and right properties to be finite
+In the sample code, the addition action expects the `left` and `right` properties to be finite
 numbers. Also, it's useful to include the original input arguments in the output for debugging
 purposes. You can add a validation check and debugging information using the following code:
 
@@ -426,7 +426,7 @@ A Seneca instance is just a set of action patterns. You can organize action patt
 
 Likewise, a Seneca plugin is just a set of action patterns. A plugin can have a name, which is used to annotate logging entries. Plugins can be given a set of options to control their behavior. Plugins also provide a mechanism for executing initialization functions in the correct order. For example, you want your database connection to be established before you try to read data from the database.
 
-A Seneca plugin is a function that has a single parameter `options`. You pass this plugin definition function to the `seneca.use method`. Here is the minimal Seneca plugin (it does nothing!):
+A Seneca plugin is a function that has a single parameter `options`. You pass this plugin definition function to the `seneca.use` method. Here is the minimal Seneca plugin (it does nothing!):
 
 ``` js
 function minimal_plugin(options) {
@@ -434,7 +434,7 @@ function minimal_plugin(options) {
 }
 
 require('seneca')()
-  .use(minimal_plugin, {foo:'bar'})
+  .use(minimal_plugin, {foo: 'bar'})
 ```
 
 The `seneca.use` method takes two parameters:
@@ -442,7 +442,7 @@ The `seneca.use` method takes two parameters:
 * `plugin`: plugin definition function or plugin name.
 * `options`: options object for the plugin.
 
-The sample code (in file minimal-plugin.js) produces the following output:
+The sample code (in file [minimal-plugin.js][]) produces the following output:
 
 ``` js
 $ node minimal-plugin.js
@@ -468,7 +468,7 @@ $ node minimal-plugin.js --seneca.log.all | grep plugin | grep DEFINE
 2015...    3qf7...    DEBUG    plugin    minimal_plugin  DEFINE    {foo=bar}
 ```
 
-You can see that Seneca loads four built-in plugins by default: [basic][], [transport][],[web][] and [mem-store][]. These provide core functionalities for basic microservices. You can also see that your _minimal_plugin_ is in the list as well, and also shown are the options you provided: `{foo=bar}`. The name _minimal_plugin_ is obtained from the plugin definition function name, so you should always give your plugin definition function a name.
+You can see that Seneca loads four _built-in_ plugins by default: [basic][], [transport][],[web][] and [mem-store][]. These provide core functionalities for basic microservices. You can also see that your `minimal_plugin` is in the list as well, and also shown are the options you provided: `{foo=bar}`. The name `minimal_plugin` is obtained from the plugin definition function name, so you should always give your plugin definition function a name.
 
 Let's give the plugin some action patterns. The `this` context variable of the plugin definition function is an instance of Seneca that you can use to do this. Here's a `math` plugin:
 
@@ -1273,6 +1273,7 @@ Changes to one service do not affect the others. This is how microservices give 
 [pattern-wins.js]: https://github.com/senecajs/getting-started/blob/master/pattern-wins.js
 [patrun module]: https://www.npmjs.com/package/patrun
 [sum-valid.js]: https://github.com/senecajs/getting-started/blob/master/sum-valid.js
+[minimal-plugin.js]: https://github.com/senecajs/getting-started/blob/master/minimal-plugin.js
 [grepping]: http://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/
 [basic]: https://www.npmjs.com/package/seneca-basic
 [transport]: https://www.npmjs.com/package/seneca-transport
@@ -1283,8 +1284,8 @@ Changes to one service do not affect the others. This is how microservices give 
 [math.js]: https://github.com/senecajs/getting-started/blob/master/math.js
 [require]: https://nodejs.org/api/modules.html
 [math-tree.js]: https://github.com/senecajs/getting-started/blob/master/math-tree.js
-[math-service.js]: https://github.com/senecajs/getting-started/blob/master/math-service.js
 [math-client.js]: https://github.com/senecajs/getting-started/blob/master/math-client.js
+[math-service.js]: https://github.com/senecajs/getting-started/blob/master/math-service.js
 [math-pin-service.js]: https://github.com/senecajs/getting-started/blob/master/math-pin-service.js
 [Express]: http://expressjs.com
 [app.js]: https://github.com/senecajs/getting-started/blob/master/app.js
