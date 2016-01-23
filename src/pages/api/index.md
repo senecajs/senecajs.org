@@ -147,6 +147,64 @@ var stockItem = seneca.make('stock-item', {
 ## export(name)
 - __name:__ string, reference to an object provided by a plugin.
 
+The export method returns an object provided by a plugin.
+
+___Example: Existing plugins (e.g. options plugin)___
+
+To use options plugin, define `options.js` file (or any other name) with some sample plugin configuration.
+
+```
+module.exports = {
+  'mongo-store': {
+    host: 'localhost',
+    port: 27017,
+    name: 'somedb'
+  },
+  'redis-store': {
+    host: 'localhost',
+    port: 6379
+  }
+}
+
+```
+
+Load in options plugin and then call `seneca.export` on it
+
+```
+seneca.use('options', 'options.js')
+
+var options = seneca.export('options')
+```
+
+___Example: Your own plugin___
+
+At the bottom of your own plugin - in the return block - define an `export` field and assign its value to an object.
+
+```
+module.exports = function (options) {
+  var seneca = this
+
+  // example object
+  var someobj = {
+    q: 'whatever',
+    params: []
+  }
+
+  return {
+    name: 'someplugin',
+    export: someobj // the important line
+  }
+}
+```
+
+Then use `seneca.export` as usual.
+
+```
+seneca.use('someplugin')
+
+var someobj = seneca.export('someplugin')
+```
+
 ## pin(pin-pattern)
 - __pin-pattern:__ object or string.
 
