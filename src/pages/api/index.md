@@ -149,7 +149,63 @@ var stockItem = seneca.make('stock-item', {
 
 ## pin(pin-pattern)
 - __pin-pattern:__ object or string.
-  <!--[pin pattern format](/desc-pin-pattern-format)-->
+
+The pin method builds an object from selected actions. The options object for this method allows you to specify the `role` and `cmd` as filters.
+
+```
+var cmd = seneca.pin({role: '*', cmd: '*'})
+```
+
+___Example: Storing all math actions in an object___
+
+First, define the actions.
+
+```
+seneca.add({role: 'math', cmd: 'add'}, function (args, cb) {
+  return cb(null, { answer: args.left + args.right })
+})
+
+seneca.add({role: 'math', cmd: 'subtract'}, function (args, cb) {
+  return cb(null, { answer: args.left - args.right })
+})
+
+seneca.add({role: 'math', cmd: 'multiply'}, function (args, cb) {
+  return cb(null, { answer: args.left * args.right })
+})
+
+// note: not part of math role
+seneca.add({role: 'foo', cmd: 'bar'}, function (args, cb) {
+  return cb(null, { answer: args.left * args.right })
+})
+```
+
+Then use the pin method.
+
+```
+var math = seneca.pin({role: 'math', cmd: '*'})
+
+math.add({left: 3, right: 2}, function (err, res) {
+  if (err) return console.error(err)
+  console.log('add: ' + res.answer)
+})
+
+math.subtract({left: 3, right: 2}, function (err, res) {
+  if (err) return console.error(err)
+  console.log('subtract: ' + res.answer)
+})
+
+math.multiply({left: 3, right: 2}, function (err, res) {
+  if (err) return console.error(err)
+  console.log('multiply: ' + res.answer)
+})
+
+// this will produce error as bar is part of foo, not math
+math.bar({}, function (err, res) {
+  if (err) return console.error(err)
+  console.log('bar: ' + res.answer)
+})
+```
+<!--[pin pattern format](/desc-pin-pattern-format)-->
 
 ## log._level_([entry, ..])
 - __entry:__ JavaScript value, converted to string.
