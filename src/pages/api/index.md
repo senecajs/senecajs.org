@@ -94,8 +94,8 @@ However, if you do provide a result it needs to be an object or array, unless
 you have disabled `strict` mode.
 
 ```javascript
-seneca.add({ foo:'bar' }, function (args, cb) {
-  cb(null, { zoo: args.zoo })
+seneca.add({ foo:'bar' }, function (msg, respond) {
+  respond(null, { zoo: msg.zoo })
 })
 
 seneca.act({ foo:'bar', zoo:'qaz' }, function (err, out) {
@@ -118,13 +118,13 @@ ability to ship functionality and reuse it in other services.
   result is provided by the `action` handler then it will be passed as the
   second argument.
 
-The act method is used to run code defined using `add`. It is composed of input pattern and a callback. When pattern is matched against an action, that action is performed and the result is provided in the callback.
+The act method is used to fire actions defined using `add`. It is composed of input pattern and a callback. When pattern is matched against an action, that action is performed and the result is provided in the callback.
 
 ___Example: Simple___
 
 ```javascript
-seneca.add({cmd: 'salestax'}, function (args, cb) {
-  cb(null, {total: '123'})
+seneca.add({cmd: 'salestax'}, function (msg, respond) {
+  respond(null, {total: '123'})
 })
 
 seneca.act({cmd: 'salestax'}, function (err, res) {
@@ -133,13 +133,13 @@ seneca.act({cmd: 'salestax'}, function (err, res) {
 })
 ```
 
-___Example: With args___
+___Example: With arguments___
 
 ```javascript
-seneca.add({ cmd: 'salestax' }, function (args, cb) {
+seneca.add({ cmd: 'salestax' }, function (msg, respond) {
   var rate  = 0.23
-  var total = args.net * (1 + rate)
-  cb(null, { total: total })
+  var total = msg.net * (1 + rate)
+  respond(null, { total: total })
 })
 
 seneca.act({cmd: 'salestax', net: 100}, function (err, res) {
@@ -154,34 +154,34 @@ Note how more specific acts match against more specific definitions
 
 ```javascript
 // fixed rate
-seneca.add({ cmd: 'salestax' }, function (args, cb) {
+seneca.add({ cmd: 'salestax' }, function (msg, respond) {
   var rate  = 0.23
-  var total = args.net * (1 + rate)
-  cb(null, { total: total })
+  var total = msg.net * (1 + rate)
+  respond(null, { total: total })
 })
 
 // local rates
-seneca.add({ cmd: 'salestax', country: 'US' }, function (args, cb) {
+seneca.add({ cmd: 'salestax', country: 'US' }, function (msg, respond) {
   var state = {
     'NY': 0.04,
     'CA': 0.0625
     // ...
   }
-  var rate = state[args.state]
-  var total = args.net * (1 + rate)
-  cb(null, { total: total })
+  var rate = state[msg.state]
+  var total = msg.net * (1 + rate)
+  respond(null, { total: total })
 })
 
 // categories
-seneca.add({ cmd: 'salestax', country: 'IE' }, function (args, cb) {
+seneca.add({ cmd: 'salestax', country: 'IE' }, function (msg, respond) {
   var category = {
     'top': 0.23,
     'reduced': 0.135
     // ...
   }
-  var rate = category[args.category]
-  var total = args.net * (1 + rate)
-  cb(null, { total: total })
+  var rate = category[msg.category]
+  var total = msg.net * (1 + rate)
+  respond(null, { total: total })
 })
 
 // will match least specific action
@@ -326,21 +326,21 @@ ___Example: Storing all math actions in an object___
 First, define the actions.
 
 ```javascript
-seneca.add({role: 'math', cmd: 'add'}, function (args, cb) {
-  return cb(null, { answer: args.left + args.right })
+seneca.add({role: 'math', cmd: 'add'}, function (msg, respond) {
+  return respond(null, { answer: msg.left + msg.right })
 })
 
-seneca.add({role: 'math', cmd: 'subtract'}, function (args, cb) {
-  return cb(null, { answer: args.left - args.right })
+seneca.add({role: 'math', cmd: 'subtract'}, function (msg, respond) {
+  return respond(null, { answer: msg.left - msg.right })
 })
 
-seneca.add({role: 'math', cmd: 'multiply'}, function (args, cb) {
-  return cb(null, { answer: args.left * args.right })
+seneca.add({role: 'math', cmd: 'multiply'}, function (msg, respond) {
+  return respond(null, { answer: msg.left * msg.right })
 })
 
 // note: not part of math role
-seneca.add({role: 'foo', cmd: 'bar'}, function (args, cb) {
-  return cb(null, { answer: args.left * args.right })
+seneca.add({role: 'foo', cmd: 'bar'}, function (msg, respond) {
+  return respond(null, { answer: msg.left * msg.right })
 })
 ```
 
