@@ -275,20 +275,31 @@ seneca.log.warn('You should NOT do this')
 seneca.log.error('Oh no!')
 seneca.log.fatal('Terminating due to...')
 seneca.log.debug('Args for this function are: ' + someObj)
+
 ```
 These logs can be filtered by running the app with `--seneca.log=level:{?}` flag. For example, if your source file was called `main.js`:
 ```
+
 node main.js --seneca.log=level:info
 node main.js --seneca.log=level:warn
 node main.js --seneca.log=level:error
 node main.js --seneca.log=level:fatal
 node main.js --seneca.log=level:debug
 ```
+
 Note that `seneca.log.debug` will not output if `--seneca.log=level:debug` flag is not used. For more information on the `--seneca.log` flag see [logging tutorial][].
 
 ## close([done])
 - __done:__ function, optional, callback with signature function(err), called
   after all close actions are complete.
+
+The close method terminates seneca. `err` param in the callback function contains an error if one occured during termination(`{role:seneca, cmd:close}`).
+
+```
+seneca.close(function (err) {
+  if (err) console.error('err: ' + err)
+})
+```
 
 ## client(options)
 - __options:__ object, transport options.
