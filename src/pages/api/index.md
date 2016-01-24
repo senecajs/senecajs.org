@@ -118,6 +118,113 @@ ability to ship functionality and reuse it in other services.
   result is provided by the `action` handler then it will be passed as the
   second argument.
 
+The act method is used to run code defined using `add`. It is composed of input pattern and a callback. When pattern is matched against an action, that action is performed and the result is provided in the callback.
+
+___Example: Simple___
+
+```javascript
+seneca.add({cmd: 'salestax'}, function (args, cb) {
+  cb(null, {total: '123'})
+})
+
+seneca.act({cmd: 'salestax'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('Total: ' + res.total)
+})
+```
+
+___Example: With args___
+
+```javascript
+seneca.add({ cmd: 'salestax' }, function (args, cb) {
+  var rate  = 0.23
+  var total = args.net * (1 + rate)
+  cb(null, { total: total })
+})
+
+seneca.act({cmd: 'salestax', net: 100}, function (err, res) {
+  if (err) console.error(err)
+  console.log('Total: ' + res.total)
+})
+```
+
+___Example: Specific Patterns___
+
+Note how more specific acts match against more specific actions
+
+```javascript
+// fixed rate
+seneca.add({ cmd: 'salestax' }, function (args, cb) {
+  var rate  = 0.23
+  var total = args.net * (1 + rate)
+  cb(null, { total: total })
+})
+
+// local rates
+seneca.add({ cmd: 'salestax', country: 'US' }, function (args, cb) {
+  var state = {
+    'NY': 0.04,
+    'CA': 0.0625
+    // ...
+  }
+  var rate = state[args.state]
+  var total = args.net * (1 + rate)
+  cb(null, { total: total })
+})
+
+// categories
+seneca.add({ cmd: 'salestax', country: 'IE' }, function (args, cb) {
+  var category = {
+    'top': 0.23,
+    'reduced': 0.135
+    // ...
+  }
+  var rate = category[args.category]
+  var total = args.net * (1 + rate)
+  cb(null, { total: total })
+})
+
+// will match least specific action
+seneca.act({cmd: 'salestax', net: 100}, function (err, res) {
+  if (err) console.error(err)
+  console.log('Generic: ' + res.total)
+})
+
+// will match the same as generic
+seneca.act({cmd: 'salestax', net: 100, country: 'DE'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('DE: ' + res.total)
+})
+
+// will find its own specific match
+seneca.act({cmd: 'salestax', net: 100, country: 'US', state: 'NY'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('US, NY: ' + res.total)
+})
+
+// will find its own, even more specific match
+seneca.act({cmd: 'salestax', net: 100, country: 'IE', category: 'reduced'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('IE: ' + res.total)
+})
+```
+
+___Example: Chaining___
+
+Acts can be chained
+
+```javascript
+seneca
+.act({cmd: 'salestax', net: 500, country: 'IE', category: 'top'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('IE: ' + res.total)
+})
+.act({cmd: 'salestax', net: 500, country: 'IE', category: 'reduced'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('IE: ' + res.total)
+})
+```
+
 ## make(entity-canon [, properties])
 - __entity-canon__ - `string`
 - __properties__ - `object`: optional, default data for the new entity.
