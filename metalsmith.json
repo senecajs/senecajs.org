@@ -16,6 +16,9 @@
       "gfm": true,
       "tables": true
     },
+    "metalsmith-headings-identifier": {
+      "linkTemplate": "<a href='#%s' class='linkable'><span>🏛</span></a> "
+    },
     "metalsmith-sass": {
       "outputDir": "stylesheets",
       "outputStyle": "expanded"
