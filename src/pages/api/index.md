@@ -150,7 +150,7 @@ seneca.act({cmd: 'salestax', net: 100}, function (err, res) {
 
 ___Example: Specific Patterns___
 
-Note how more specific acts match against more specific actions
+Note how more specific acts match against more specific definitions
 
 ```javascript
 // fixed rate
@@ -260,7 +260,7 @@ ___Example: Existing plugins (e.g. options plugin)___
 
 To use options plugin, define `options.js` file (or any other name) with some sample plugin configuration.
 
-```
+```javascript
 module.exports = {
   'mongo-store': {
     host: 'localhost',
@@ -277,7 +277,7 @@ module.exports = {
 
 Load in options plugin and then call `seneca.export` on it
 
-```
+```javascript
 seneca.use('options', 'options.js')
 
 var options = seneca.export('options')
@@ -287,7 +287,7 @@ ___Example: Your own plugin___
 
 At the bottom of your own plugin - in the return block - define an `export` field and assign its value to an object.
 
-```
+```javascript
 module.exports = function (options) {
   var seneca = this
 
@@ -306,7 +306,7 @@ module.exports = function (options) {
 
 Then use `seneca.export` as usual.
 
-```
+```javascript
 seneca.use('someplugin')
 
 var someobj = seneca.export('someplugin')
@@ -317,7 +317,7 @@ var someobj = seneca.export('someplugin')
 
 The pin method builds an object from selected actions. The options object for this method allows you to specify the `role` and `cmd` as filters.
 
-```
+```javascript
 var cmd = seneca.pin({role: '*', cmd: '*'})
 ```
 
@@ -325,7 +325,7 @@ ___Example: Storing all math actions in an object___
 
 First, define the actions.
 
-```
+```javascript
 seneca.add({role: 'math', cmd: 'add'}, function (args, cb) {
   return cb(null, { answer: args.left + args.right })
 })
@@ -346,7 +346,7 @@ seneca.add({role: 'foo', cmd: 'bar'}, function (args, cb) {
 
 Then use the pin method.
 
-```
+```javascript
 var math = seneca.pin({role: 'math', cmd: '*'})
 
 math.add({left: 3, right: 2}, function (err, res) {
@@ -376,7 +376,8 @@ math.bar({}, function (err, res) {
 - __entry:__ JavaScript value, converted to string.
 
 The log._level_ method outputs information in similar manner to console._level_ (e.g. `console.error`). Specifying the level allows us to filter these logs.
-```
+
+```javascript
 seneca.log.info('Seneca just finished doing this important step')
 seneca.log.warn('You should NOT do this')
 seneca.log.error('Oh no!')
@@ -384,9 +385,10 @@ seneca.log.fatal('Terminating due to...')
 seneca.log.debug('Args for this function are: ' + someObj)
 
 ```
-These logs can be filtered by running the app with `--seneca.log=level:{?}` flag. For example, if your source file was called `main.js`:
-```
 
+These logs can be filtered by running the app with `--seneca.log=level:{?}` flag. For example, if your source file was called `main.js`:
+
+```
 node main.js --seneca.log=level:info
 node main.js --seneca.log=level:warn
 node main.js --seneca.log=level:error
@@ -401,7 +403,7 @@ Note that `seneca.log.debug` will not output if `--seneca.log=level:debug` flag 
 
 The close method terminates seneca. `err` param in the callback function contains an error if one occured during termination(`{role:seneca, cmd:close}`).
 
-```
+```javascript
 seneca.close(function (err) {
   if (err) console.error('err: ' + err)
 })
@@ -473,7 +475,7 @@ seneca.listen({
 
 Then, in another file (e.g. `main.js`).
 
-```
+```javascript
 var seneca = require('seneca')({default_plugins:{'mem-store':false}}) // disable store in this service
 
 var client = seneca.client({
