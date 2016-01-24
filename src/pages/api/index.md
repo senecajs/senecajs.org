@@ -268,6 +268,24 @@ math.bar({}, function (err, res) {
 ## log._level_([entry, ..])
 - __entry:__ JavaScript value, converted to string.
 
+The log._level_ method outputs information in similar manner to console._level_ (e.g. `console.error`). Specifying the level allows us to filter these logs.
+```
+seneca.log.info('Seneca just finished doing this important step')
+seneca.log.warn('You should NOT do this')
+seneca.log.error('Oh no!')
+seneca.log.fatal('Terminating due to...')
+seneca.log.debug('Args for this function are: ' + someObj)
+```
+These logs can be filtered by running the app with `--seneca.log=level:{?}` flag. For example, if your source file was called `main.js`:
+```
+node main.js --seneca.log=level:info
+node main.js --seneca.log=level:warn
+node main.js --seneca.log=level:error
+node main.js --seneca.log=level:fatal
+node main.js --seneca.log=level:debug
+```
+Note that `seneca.log.debug` will not output if `--seneca.log=level:debug` flag is not used. For more information on the `--seneca.log` flag see [logging tutorial][].
+
 ## close([done])
 - __done:__ function, optional, callback with signature function(err), called
   after all close actions are complete.
@@ -324,6 +342,7 @@ define it. You can ensure that database connections and other external
 dependencies are in place before using them. **Just a reminder:** the order of
 plugin registration is significant.
 
+[logging tutorial]: /tutorials/logging-with-seneca.html
 [plugins]: /plugins/
 [get in touch]: https://gitter.im/senecajs/seneca
 [Data entity]: /tutorials/understanding-data-entities.html
