@@ -147,9 +147,123 @@ var stockItem = seneca.make('stock-item', {
 ## export(name)
 - __name:__ string, reference to an object provided by a plugin.
 
+The export method returns an object provided by a plugin.
+
+___Example: Existing plugins (e.g. options plugin)___
+
+To use options plugin, define `options.js` file (or any other name) with some sample plugin configuration.
+
+```
+module.exports = {
+  'mongo-store': {
+    host: 'localhost',
+    port: 27017,
+    name: 'somedb'
+  },
+  'redis-store': {
+    host: 'localhost',
+    port: 6379
+  }
+}
+
+```
+
+Load in options plugin and then call `seneca.export` on it
+
+```
+seneca.use('options', 'options.js')
+
+var options = seneca.export('options')
+```
+
+___Example: Your own plugin___
+
+At the bottom of your own plugin - in the return block - define an `export` field and assign its value to an object.
+
+```
+module.exports = function (options) {
+  var seneca = this
+
+  // example object
+  var someobj = {
+    q: 'whatever',
+    params: []
+  }
+
+  return {
+    name: 'someplugin',
+    export: someobj // the important line
+  }
+}
+```
+
+Then use `seneca.export` as usual.
+
+```
+seneca.use('someplugin')
+
+var someobj = seneca.export('someplugin')
+```
+
 ## pin(pin-pattern)
 - __pin-pattern:__ object or string.
-  <!--[pin pattern format](/desc-pin-pattern-format)-->
+
+The pin method builds an object from selected actions. The options object for this method allows you to specify the `role` and `cmd` as filters.
+
+```
+var cmd = seneca.pin({role: '*', cmd: '*'})
+```
+
+___Example: Storing all math actions in an object___
+
+First, define the actions.
+
+```
+seneca.add({role: 'math', cmd: 'add'}, function (args, cb) {
+  return cb(null, { answer: args.left + args.right })
+})
+
+seneca.add({role: 'math', cmd: 'subtract'}, function (args, cb) {
+  return cb(null, { answer: args.left - args.right })
+})
+
+seneca.add({role: 'math', cmd: 'multiply'}, function (args, cb) {
+  return cb(null, { answer: args.left * args.right })
+})
+
+// note: not part of math role
+seneca.add({role: 'foo', cmd: 'bar'}, function (args, cb) {
+  return cb(null, { answer: args.left * args.right })
+})
+```
+
+Then use the pin method.
+
+```
+var math = seneca.pin({role: 'math', cmd: '*'})
+
+math.add({left: 3, right: 2}, function (err, res) {
+  if (err) return console.error(err)
+  console.log('add: ' + res.answer)
+})
+
+math.subtract({left: 3, right: 2}, function (err, res) {
+  if (err) return console.error(err)
+  console.log('subtract: ' + res.answer)
+})
+
+math.multiply({left: 3, right: 2}, function (err, res) {
+  if (err) return console.error(err)
+  console.log('multiply: ' + res.answer)
+})
+
+// this will produce error as bar is part of foo, not math
+math.bar({}, function (err, res) {
+  if (err) return console.error(err)
+  console.log('bar: ' + res.answer)
+})
+```
+<!--[pin pattern format](/desc-pin-pattern-format)-->
 
 ## log._level_([entry, ..])
 - __entry:__ JavaScript value, converted to string.
