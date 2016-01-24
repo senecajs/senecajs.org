@@ -290,8 +290,7 @@ node main.js --seneca.log=level:debug
 Note that `seneca.log.debug` will not output if `--seneca.log=level:debug` flag is not used. For more information on the `--seneca.log` flag see [logging tutorial][].
 
 ## close([done])
-- __done:__ function, optional, callback with signature function(err), called
-  after all close actions are complete.
+- __done:__ function, optional, callback with signature function(err), called after all close actions are complete.
 
 The close method terminates seneca. `err` param in the callback function contains an error if one occured during termination(`{role:seneca, cmd:close}`).
 
@@ -300,9 +299,6 @@ seneca.close(function (err) {
   if (err) console.error('err: ' + err)
 })
 ```
-
-## client(options)
-- __options:__ object, transport options.
 
 ## listen(options)
 - __options__  - `object`: transport options.
@@ -344,6 +340,51 @@ ___Example: calling listen on a custom host and port over tcp___
 
 Seneca allows multiple transport types to be run simultaneously over different
 ports. This gives clients maximum flexibility with minimal setup.
+
+
+## client(options)
+- __options:__ object, transport options.
+
+The client method connects to a listening seneca service.
+
+___Example: Accessing store in another seneca instance___
+
+Setup a sample service (e.g. `store-provider.js`), using `listen` (see section above for more info on `listen` method).
+
+```javascript
+var seneca = require('seneca')()
+
+seneca.use('level-store', {
+  folder: 'db' // make sure this folder exists
+}) 
+
+seneca.listen({
+  host: 'localhost',
+  port: '4050'
+})
+```
+
+Then, in another file (e.g. `main.js`).
+
+```
+var seneca = require('seneca')({default_plugins:{'mem-store':false}}) // disable store in this service
+
+var client = seneca.client({
+  host: 'localhost',
+  port: '4050',
+  pins: [{role: 'entity', cmd: '*'}, {cmd: 'ensure_entity'}, {cmd: 'define_sys_entity'}]  // pin actions from other service
+})
+
+// sample db usage
+client.make$('fruit').save$({name: 'apple'}, function (err, res) {
+  if (err) console.error(err)
+
+  client.make$('fruit').load$({name: 'apple'}, function (err, res) {
+    if (err) console.error(err)
+    console.log('res:' + res)
+  })
+})
+```
 
 # Plugin Interface
 
