@@ -37,6 +37,7 @@
     "metalsmith-broken-link-checker": "^0.1.8",
     "metalsmith-download": "0.0.1",
     "metalsmith-drafts": "0.0.1",
+    "metalsmith-headings-identifier": "0.0.11",
     "metalsmith-ignore": "^0.1.2",
     "metalsmith-layouts": "^1.0.0",
     "metalsmith-less": "^2.0.0",
