@@ -94,8 +94,8 @@ However, if you do provide a result it needs to be an object or array, unless
 you have disabled `strict` mode.
 
 ```javascript
-seneca.add({ foo:'bar' }, function (args, cb) {
-  cb(null, { zoo: args.zoo })
+seneca.add({ foo:'bar' }, function (msg, respond) {
+  respond(null, { zoo: msg.zoo })
 })
 
 seneca.act({ foo:'bar', zoo:'qaz' }, function (err, out) {
@@ -117,6 +117,113 @@ ability to ship functionality and reuse it in other services.
 - __callback:__ - `function`: any errors are passed as the first argument. If a
   result is provided by the `action` handler then it will be passed as the
   second argument.
+
+The act method is used to fire actions defined using `add`. It is composed of input pattern and a callback. When pattern is matched against an action, that action is performed and the result is provided in the callback.
+
+___Example: Simple___
+
+```javascript
+seneca.add({cmd: 'salestax'}, function (msg, respond) {
+  respond(null, {total: '123'})
+})
+
+seneca.act({cmd: 'salestax'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('Total: ' + res.total)
+})
+```
+
+___Example: With arguments___
+
+```javascript
+seneca.add({ cmd: 'salestax' }, function (msg, respond) {
+  var rate  = 0.23
+  var total = msg.net * (1 + rate)
+  respond(null, { total: total })
+})
+
+seneca.act({cmd: 'salestax', net: 100}, function (err, res) {
+  if (err) console.error(err)
+  console.log('Total: ' + res.total)
+})
+```
+
+___Example: Specific Patterns___
+
+Note how more specific acts match against more specific definitions
+
+```javascript
+// fixed rate
+seneca.add({ cmd: 'salestax' }, function (msg, respond) {
+  var rate  = 0.23
+  var total = msg.net * (1 + rate)
+  respond(null, { total: total })
+})
+
+// local rates
+seneca.add({ cmd: 'salestax', country: 'US' }, function (msg, respond) {
+  var state = {
+    'NY': 0.04,
+    'CA': 0.0625
+    // ...
+  }
+  var rate = state[msg.state]
+  var total = msg.net * (1 + rate)
+  respond(null, { total: total })
+})
+
+// categories
+seneca.add({ cmd: 'salestax', country: 'IE' }, function (msg, respond) {
+  var category = {
+    'top': 0.23,
+    'reduced': 0.135
+    // ...
+  }
+  var rate = category[msg.category]
+  var total = msg.net * (1 + rate)
+  respond(null, { total: total })
+})
+
+// will match least specific action
+seneca.act({cmd: 'salestax', net: 100}, function (err, res) {
+  if (err) console.error(err)
+  console.log('Generic: ' + res.total)
+})
+
+// will match the same as generic
+seneca.act({cmd: 'salestax', net: 100, country: 'DE'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('DE: ' + res.total)
+})
+
+// will find its own specific match
+seneca.act({cmd: 'salestax', net: 100, country: 'US', state: 'NY'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('US, NY: ' + res.total)
+})
+
+// will find its own, even more specific match
+seneca.act({cmd: 'salestax', net: 100, country: 'IE', category: 'reduced'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('IE: ' + res.total)
+})
+```
+
+___Example: Chaining___
+
+Acts can be chained
+
+```javascript
+seneca
+.act({cmd: 'salestax', net: 500, country: 'IE', category: 'top'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('IE: ' + res.total)
+})
+.act({cmd: 'salestax', net: 500, country: 'IE', category: 'reduced'}, function (err, res) {
+  if (err) console.error(err)
+  console.log('IE: ' + res.total)
+})
+```
 
 ## make(entity-canon [, properties])
 - __entity-canon__ - `string`
@@ -153,7 +260,7 @@ ___Example: Existing plugins (e.g. options plugin)___
 
 To use options plugin, define `options.js` file (or any other name) with some sample plugin configuration.
 
-```
+```javascript
 module.exports = {
   'mongo-store': {
     host: 'localhost',
@@ -170,7 +277,7 @@ module.exports = {
 
 Load in options plugin and then call `seneca.export` on it
 
-```
+```javascript
 seneca.use('options', 'options.js')
 
 var options = seneca.export('options')
@@ -180,7 +287,7 @@ ___Example: Your own plugin___
 
 At the bottom of your own plugin - in the return block - define an `export` field and assign its value to an object.
 
-```
+```javascript
 module.exports = function (options) {
   var seneca = this
 
@@ -199,7 +306,7 @@ module.exports = function (options) {
 
 Then use `seneca.export` as usual.
 
-```
+```javascript
 seneca.use('someplugin')
 
 var someobj = seneca.export('someplugin')
@@ -210,7 +317,7 @@ var someobj = seneca.export('someplugin')
 
 The pin method builds an object from selected actions. The options object for this method allows you to specify the `role` and `cmd` as filters.
 
-```
+```javascript
 var cmd = seneca.pin({role: '*', cmd: '*'})
 ```
 
@@ -218,28 +325,28 @@ ___Example: Storing all math actions in an object___
 
 First, define the actions.
 
-```
-seneca.add({role: 'math', cmd: 'add'}, function (args, cb) {
-  return cb(null, { answer: args.left + args.right })
+```javascript
+seneca.add({role: 'math', cmd: 'add'}, function (msg, respond) {
+  return respond(null, { answer: msg.left + msg.right })
 })
 
-seneca.add({role: 'math', cmd: 'subtract'}, function (args, cb) {
-  return cb(null, { answer: args.left - args.right })
+seneca.add({role: 'math', cmd: 'subtract'}, function (msg, respond) {
+  return respond(null, { answer: msg.left - msg.right })
 })
 
-seneca.add({role: 'math', cmd: 'multiply'}, function (args, cb) {
-  return cb(null, { answer: args.left * args.right })
+seneca.add({role: 'math', cmd: 'multiply'}, function (msg, respond) {
+  return respond(null, { answer: msg.left * msg.right })
 })
 
 // note: not part of math role
-seneca.add({role: 'foo', cmd: 'bar'}, function (args, cb) {
-  return cb(null, { answer: args.left * args.right })
+seneca.add({role: 'foo', cmd: 'bar'}, function (msg, respond) {
+  return respond(null, { answer: msg.left * msg.right })
 })
 ```
 
 Then use the pin method.
 
-```
+```javascript
 var math = seneca.pin({role: 'math', cmd: '*'})
 
 math.add({left: 3, right: 2}, function (err, res) {
@@ -268,12 +375,39 @@ math.bar({}, function (err, res) {
 ## log._level_([entry, ..])
 - __entry:__ JavaScript value, converted to string.
 
-## close([done])
-- __done:__ function, optional, callback with signature function(err), called
-  after all close actions are complete.
+The log._level_ method outputs information in similar manner to console._level_ (e.g. `console.error`). Specifying the level allows us to filter these logs.
 
-## client(options)
-- __options:__ object, transport options.
+```javascript
+seneca.log.info('Seneca just finished doing this important step')
+seneca.log.warn('You should NOT do this')
+seneca.log.error('Oh no!')
+seneca.log.fatal('Terminating due to...')
+seneca.log.debug('Args for this function are: ' + someObj)
+
+```
+
+These logs can be filtered by running the app with `--seneca.log=level:{?}` flag. For example, if your source file was called `main.js`:
+
+```
+node main.js --seneca.log=level:info
+node main.js --seneca.log=level:warn
+node main.js --seneca.log=level:error
+node main.js --seneca.log=level:fatal
+node main.js --seneca.log=level:debug
+```
+
+Note that `seneca.log.debug` will not output if `--seneca.log=level:debug` flag is not used. For more information on the `--seneca.log` flag see [logging tutorial][].
+
+## close([done])
+- __done:__ function, optional, callback with signature function(err), called after all close actions are complete.
+
+The close method terminates seneca. `err` param in the callback function contains an error if one occured during termination(`{role:seneca, cmd:close}`).
+
+```javascript
+seneca.close(function (err) {
+  if (err) console.error('err: ' + err)
+})
+```
 
 ## listen(options)
 - __options__  - `object`: transport options.
@@ -316,6 +450,51 @@ ___Example: calling listen on a custom host and port over tcp___
 Seneca allows multiple transport types to be run simultaneously over different
 ports. This gives clients maximum flexibility with minimal setup.
 
+
+## client(options)
+- __options:__ object, transport options.
+
+The client method connects to a listening seneca service.
+
+___Example: Accessing store in another seneca instance___
+
+Setup a sample service (e.g. `store-provider.js`), using `listen` (see section above for more info on `listen` method).
+
+```javascript
+var seneca = require('seneca')()
+
+seneca.use('level-store', {
+  folder: 'db' // make sure this folder exists
+}) 
+
+seneca.listen({
+  host: 'localhost',
+  port: '4050'
+})
+```
+
+Then, in another file (e.g. `main.js`).
+
+```javascript
+var seneca = require('seneca')({default_plugins:{'mem-store':false}}) // disable store in this service
+
+var client = seneca.client({
+  host: 'localhost',
+  port: '4050',
+  pins: [{role: 'entity', cmd: '*'}, {cmd: 'ensure_entity'}, {cmd: 'define_sys_entity'}]  // pin actions from other service
+})
+
+// sample db usage
+client.make$('fruit').save$({name: 'apple'}, function (err, res) {
+  if (err) console.error(err)
+
+  client.make$('fruit').load$({name: 'apple'}, function (err, res) {
+    if (err) console.error(err)
+    console.log('res:' + res)
+  })
+})
+```
+
 # Plugin Interface
 
 Each plugin has the option to define an action with the pattern `init: name`. If
@@ -324,6 +503,7 @@ define it. You can ensure that database connections and other external
 dependencies are in place before using them. **Just a reminder:** the order of
 plugin registration is significant.
 
+[logging tutorial]: /tutorials/logging-with-seneca.html
 [plugins]: /plugins/
 [get in touch]: https://gitter.im/senecajs/seneca
 [Data entity]: /tutorials/understanding-data-entities.html
