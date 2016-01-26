@@ -901,7 +901,7 @@ The initialisation action makes a call to the pattern `role:web`, and defines th
 
 Your URL endpoint starts with `/api/....`
 
-The pin is `role:math,path:*`. This means map any patterns that have _role = 'api'_, and where a _path_ property is defined. In this case, there is only one match: `role:api,path:calculate`.
+The pin is `role:api,path:*`. This means map any patterns that have _role = 'api'_, and where a _path_ property is defined. In this case, there is only one match: `role:api,path:calculate`.
 
 The map has the property `calculate` corresponding to the value of the path property.
 
