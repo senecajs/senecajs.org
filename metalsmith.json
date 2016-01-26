@@ -2,10 +2,6 @@
   "source": "src",
   "destination": "dist",
   "plugins": {
-    "metalsmith-broken-link-checker": {
-      "allowRedirects": true,
-      "warn": true
-    },
     "metalsmith-drafts": true,
     "metalsmith-assets": {
       "source": "./assets",
@@ -40,5 +36,9 @@
       "drafts/*",
       "unfinished/*"
     ]
+  },
+  "metalsmith-broken-link-checker": {
+    "allowRedirects": true,
+    "warn": true
   }
 }
