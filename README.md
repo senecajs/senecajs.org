@@ -5,6 +5,8 @@
 This repo contains the documentation website for [Seneca.js][]. This documentation is available at
 [senecajs.org][] or can be ran locally by cloning this repo and following the steps below.
 
+__Lead Maintainer:__ [Dean McDonnell][lead]
+
 ## Contributing
 Seneca and its docs are __open projects__ and encourage participation. If you feel you can help in
 any way, be it with examples, extra testing, tutorials, or new features please be our guest.
@@ -37,6 +39,6 @@ Copyright Richard Rodger and other contributors, Licensed under [MIT][].
 [/contribute]: ./src/pages/contribute/index.md
 [Seneca.js]: https://www.npmjs.com/package/seneca
 [senecajs.org]: http://www.senecajs.org/
-
+[lead]: https://github.com/mcdonnelldean
 [Seneca]: http://senecajs.org
 [Metalsmith]: http://metalsmith.io
