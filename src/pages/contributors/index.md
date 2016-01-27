@@ -19,3 +19,4 @@ layout: main.html
 - Lloyd Benson (https://github.com/lloydbenson)
 - Bogdan Rotund (https://github.com/Bogdan-Rotund)
 - Marco Piraccini (https://github.com/marcopiraccini)
+- Adrien Becchis (https://github.com/AdrieanKhisbe)
