@@ -29,20 +29,28 @@ Well! is a simple networking game implemented as a mobile web app. Its purpose i
 ### nodezoo
 nodezoo is a search engine for Node.js modules. The nodezoo search engine is an example of a real-world service built using Node.js microservices. Each microservice is published in its own GitHub repository. The code base is intended to be used as a larger-scale example and as a starting point for your own projects. See the repo at [nodezoo][].
 
+## Seneca Articles
+
+- [Seneca 1.0.0: A microservices framework for Node.js](http://www.richardrodger.com/seneca-microservices-nodejs#.VqjAZRiLT-k)
+- [Monolithic Node.js](http://www.richardrodger.com/monolithic-nodejs#.VqjAixiLT-k)
+
 ## Seneca Talks
 
 Here are some talks about Seneca and Microservices:
 
-- [How to build big apps - Richard Rodger (Node Dublin 2012)][]
-- [Introducing the Seneca MVP framework for Node.js - Richard Rodger (Node.js Dublin 2012)][]
-- [Microservices - Richard Rodger (NodeConf EU 2014)][]
-- [Measuring Microservices - Richard Rodger (Microservices Dublin 2015)][]
-- [Measuring Microservices - Richard Rodger (Codemotion Rome 2015)][]
-- [How Microservices fail and what to do about it - Richard Rodger (Microservices Dublin 2015)][]
-- [Pattern matching is awesome! - Dean McDonnell (Node.js Dublin 2015)][]
-- [We are not Object-Oriented anymore - Matteo Collina (FullStack London 2015)][]
+<!--
 - [The proof is in the pudding - seneca+hapi - Wyatt Preul (Nodevember 2015)][]
+- [Pattern matching is awesome! - Dean McDonnell (Node.js Dublin 2015)][]
+- [How Microservices fail and what to do about it - Richard Rodger (Microservices Dublin 2015)][]
+-->
+- [We are not Object-Oriented anymore - Matteo Collina (FullStack London 2015)](https://skillsmatter.com/skillscasts/6819-we-are-not-object-oriented-anymore-or-why-the-node-callback-style-is-awesome#showModal?modal-signup-complete)
+- [Measuring Microservices - Richard Rodger (microxchg.io Berlin 2015)](http://www.infoq.com/presentations/measuring-microservices)
+- [Microservices - Richard Rodger (NodeConf EU 2014)](https://www.youtube.com/watch?v=fVfWuked2qE)
 
+<!--
+- [Introducing the Seneca MVP framework for Node.js - Richard Rodger (Node.js Dublin 2012)][]
+- [How to build big apps - Richard Rodger (Node Dublin 2012)][]
+-->
 
 [Logging with Seneca]: /tutorials/logging-with-seneca.html
 [Seneca with promises]: /tutorials/seneca-with-promises.html

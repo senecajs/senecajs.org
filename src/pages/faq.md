@@ -44,7 +44,7 @@ But you can always add more mud to a ball of mud.
 Some things that work well:
 
    * Separate the business logic from the execution. Put your business
-     logic into separate plugins - either seperate node modules,
+     logic into separate plugins - either separate node modules,
      different repositories, or simply different files in the same
      repository.
 
