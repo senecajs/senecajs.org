@@ -36,15 +36,15 @@ architecture, so that will be discussed too.
 
 ## Contents
 
-- [A Simple Plugin]()
-- <a href="#wp-module">A Plugin is a Module</a>
-- <a href="#wp-name">Give Your Plugin a Name</a>
-- <a href="#wp-options">Dealing with Options</a>
+- [A Simple Plugin](#wp-simple)
+- [Initializing a Plugin](#wp-init)
+- [A Plugin is a Module](#wp-module)
+- [Give Your Plugin a Name](#wp-name)
+- [Dealing with Options](#wp-options)
 
 
 
-
-<small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small>
+<a name="wp-simple"></a>
 ## A Simple Plugin
 
 
@@ -61,22 +61,6 @@ var plugin = function( options ) {
 
 }
 ```
-
-
-A plugin is just a function. You can see that there is no callback
-passed into this function that defines the plugin. So, how does Seneca
-know that the plugin has fully initialized? It's an important
-questions, because the plugin might depend on establishing a database
-connection before it can operate properly.
-
-
-
-As with most things in Seneca, you define an action pattern to handle
-initialization, and make sure it happens in the proper order. We'll
-talk about plugin initialization a little later. Many plugins don't
-even need to initialize because all they do is define a set of action
-patterns.
-
 
 
 The example above defines a single action
@@ -138,7 +122,65 @@ output is a JavaScript object with single property _color_, the
 value of which is set from the original options given to the plugin.
 
 
-<small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small></a>
+<a name="wp-init"></a>
+## Initializing a Plugin
+
+Let's look at our example again.
+
+
+``` js
+// simple.js
+
+var plugin = function( options ) {
+
+  this.add( {foo:'bar'}, function( args, done ) {
+    done( null, {color: options.color} )
+  })
+
+}
+```
+
+As we can see, a plugin is just a function. You can see that there is no callback
+passed into this function that defines the plugin. So, how does Seneca
+know that the plugin has fully initialized? It's an important
+question, because the plugin might depend on establishing a database
+connection before it can operate properly.
+
+
+
+Many plugins don't even need to initialize, because all they do is define a set of action
+patterns. Let's say in this case we would like to initialise our plugin. As with most things in Seneca,
+you define an action pattern to handle initialization and make sure it happens in the proper order. 
+
+
+``` js
+// init.js
+
+var plugin = function( options ) {
+
+  seneca.add( {init:'pluginName'}, function( args, done ) {
+    // do stuff, e.g.
+    console.log('connecting to db...')
+    setTimeout(function(){
+      console.log('connected!')
+      done()
+    }, 1000)
+  })
+
+  this.add( {foo:'bar'}, function( args, done ) {
+    done( null, {color: options.color} )
+  })
+
+  return 'pluginName'
+
+}
+```
+
+For this to work, our plugin needs to have a name. Plugin name and `init` value must be exactly the same. In this case `return 'pluginName'` serves that purpose. See [Give Your Plugin a Name](#wp-name) for alternatives to this approach.
+
+When plugin is fed into `use` method, seneca waits for its init to finish before continuing. That's why we call `done()` even when it does nothing.
+
+
 <a name="wp-module"></a>
 ## A Plugin is a Module
 
@@ -239,7 +281,6 @@ seneca.use( 'echo' )
 ```
 
 
-<small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small>
 <a name="wp-name"></a>
 ## Give Your Plugin a Name
 
@@ -502,7 +543,6 @@ null { color: 'green', tag: 'BBB' }
 ```
 
 
-<small style="float:right"><a href="#how-to-write-a-seneca-plugin">[top]</a></small>
 <a name="wp-options"></a>
 ## Dealing with Options
 

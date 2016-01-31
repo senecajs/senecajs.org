@@ -252,6 +252,7 @@ var stockItem = seneca.make('stock-item', {
 ```
 
 ## export(name)
+
 - __name:__ string, reference to an object provided by a plugin.
 
 The export method returns an object provided by a plugin.
