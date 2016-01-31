@@ -11,6 +11,7 @@ that demonstrate how to use Seneca in a number of different ways and with differ
 - [Logging with Seneca][]
 - [How to write a plugin][]
 - [Understanding data entities][]
+- [Understanding query syntax][]
 - [Understanding prior actions][]
 - [Seneca with promises][]
 
@@ -56,6 +57,7 @@ Here are some talks about Seneca and Microservices:
 [Seneca with promises]: /tutorials/seneca-with-promises.html
 [How to write a plugin]: /tutorials/how-to-write-a-plugin.html
 [Understanding data entities]: /tutorials/understanding-data-entities.html
+[Understanding query syntax]: /tutorials/understanding-query-syntax.html
 [Understanding prior actions]: /tutorials/understanding-prior-actions.html
 [Seneca samples]: https://github.com/rjrodger/seneca-examples
 [Well!]: https://github.com/nearform/well
