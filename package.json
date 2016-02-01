@@ -27,7 +27,8 @@
     "Paulo Vieira (https://github.com/paulovieira)",
     "Lloyd Benson (https://github.com/lloydbenson)",
     "Bogdan Rotund (https://github.com/Bogdan-Rotund)",
-    "Adrien Becchis (https://github.com/AdrieanKhisbe)"
+    "Adrien Becchis (https://github.com/AdrieanKhisbe)",
+    "Karolina Szczur (http://thefox.is)"
   ],
   "dependencies": {
     "handlebars": "^4.0.5",
