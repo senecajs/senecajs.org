@@ -85,7 +85,7 @@ THE SOFTWARE.
 [Principles]: ./details/principles.html
 [Governance]: ./details/governance.html
 [Guidelines]: ./details/guidelines.html
-[Styleguide]: ./details/styleguide.html
+[Style guide]: ./details/styleguide.html
 [Code of Conduct]: ./details/code-of-conduct.html
 [Our tools]: ./details/our-tools.html
 [How we Work]: ./details/how-we-work.html
