@@ -20,3 +20,4 @@ layout: main.html
 - Bogdan Rotund (https://github.com/Bogdan-Rotund)
 - Marco Piraccini (https://github.com/marcopiraccini)
 - Adrien Becchis (https://github.com/AdrieanKhisbe)
+- Kamil Mech (https://github.com/kamil-mech)
