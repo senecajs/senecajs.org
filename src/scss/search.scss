@@ -1,0 +1,54 @@
+.seneca-navbar .seneca-search {
+  position: relative;
+  display: table;
+  padding:15px 0px 0px 0px;
+  border-bottom: 2px solid #333;
+  margin: 0 auto;
+  width: 200px;
+  &:before {
+    content: "\f002";
+    display: table-cell;
+    color: #333;
+    vertical-align: middle;
+    font-family: "FontAwesome";
+    text-align: center;
+    width: 30px;
+  }
+}
+
+.seneca-navbar .seneca-search--input {
+  width: 170px;
+  display: table-cell;
+  margin: 0 auto;
+  font-weight: normal;
+  box-shadow: none;
+  border-color: transparent;
+  background-color: transparent;
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+    border: 0px;
+  }
+}
+
+// Screen big enough to display all menu elements, but still too small to
+// display the search input.
+@media (min-width: 768px) {
+  .seneca-navbar .seneca-search {
+    display: none;
+  }
+}
+
+// Screen big enough to display the search input alongside the menu
+@media (min-width: 1280px) {
+  .seneca-navbar .seneca-search {
+    display: table;
+  }
+  .seneca-navbar .seneca-search {
+    width: 300px;
+  }
+  .seneca-navbar .seneca-search--input {
+    margin: 0px;
+    width: 270px;
+  }
+}
