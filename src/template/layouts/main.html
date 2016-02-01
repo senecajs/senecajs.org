@@ -6,9 +6,9 @@
   <body>
     {{> menu}}
 
-    <div class="fullwidthtop">
-      <div class="row clearfix">
-        <div class="col-md-12 column">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
           <div class="header-box">
             <img src="/images/icon-top.png" alt="design, develop, organise code" title="design, develop, organise code" height="auto" width="460">
           </div>
@@ -16,10 +16,10 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="row clearfix hp">
-        {{{contents}}}
-      </div>
+    <main role="main">
+      {{{contents}}}
+    </main>
+      
       <div class="callout">
         <p>
           Issues? From spelling errors to broken tutorials and everything in between, report
