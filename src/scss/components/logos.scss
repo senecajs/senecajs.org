@@ -1,0 +1,36 @@
+/*********************************************************************
+*
+* LOGOS
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+.logo {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  transition: opacity .5s ease-in;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:hover {
+    opacity: .6;
+  }
+}
+
+.logo-seneca,
+.logo-seneca-inversed {
+  height: 39px;
+  width: 200px;
+}
+
+.logo-seneca {
+  background-image: url("/images/logo-seneca.svg");
+}
+
+.logo-seneca-inversed {
+  background-image: url("/images/logo-seneca-inversed.svg");  
+}
