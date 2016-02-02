@@ -17,19 +17,18 @@
   }
   
   .nav-search {
-    margin-right: $ui-spacing;
+    margin-left: $ui-spacing-half;
   }
   
-  .logo-seneca {
+  .logo-seneca,
+  .nav-search {
     float: left;
   }
   
-  .nav-search,
-  .nav-items,
-  .nav-menu-handle {
+  .nav-bar {
     float: right;
   }
-    
+  
 }
 
 .nav-menu-handle {
@@ -44,7 +43,7 @@
   .nav-items {
     display: none;
   }
-  
+    
   .nav-main .nav-search {
     margin: 0;
   }
@@ -67,9 +66,9 @@
   
   .nav-menu-handle:checked ~ .nav-items {
     display: block;
-    position: absolute;
-    top: 60px;
-    left: -82px;
+    position: fixed;
+    top: 75px;
+    left: 0;
     width: 100vw;
     background-color: white;
     
@@ -88,20 +87,4 @@
     .nav-items li {
       padding: $ui-spacing-third 0;
     }
-}
-
-@media screen and (min-width: $mobile-sm) and (max-width: $desktop-lg) {
-  
-  .nav-bar {
-    width: calc(100% - 50px);
-  }
-  
-}
-
-@media screen and (min-width: $desktop-lg + $breakpoint-step) {
-  
-  .nav-bar {
-    width: calc(100% - 200px);
-  }
-  
 }
