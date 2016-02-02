@@ -31,6 +31,9 @@ input, select {
 input[type="search"] {
   width: 100%;
   box-sizing: border-box;
+  padding-left: $ui-spacing + $ui-spacing-fourth;
+  position: relative;
+  background: url("/images/icon-search.svg") no-repeat 10px 50%;
 }
 
 @media screen and (max-width: 30em) {
