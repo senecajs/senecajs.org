@@ -41,10 +41,6 @@ $font-h4             : 1.25rem; /* 20px */
 $line-height-base    : 1.5;
 $line-height-headings: 1.25;
 
-// Border radius
-
-$ui-radius           : 3px;
-
 // Colours
 
 $green               : #379199;
@@ -52,7 +48,14 @@ $green-light         : lighten($green, 20%);
 $green-lighter       : lighten($green, 50%);
 
 $red                 : #d00;
-$grey-dark           : #333;
-$grey                : #666;
-$grey-light          : #ddd;
-$grey-lighter        : #f0f0f0;
+$gray-dark           : #333;
+$gray                : #666;
+$gray-light          : #ddd;
+$gray-lighter        : #f0f0f0;
+
+// Border radius
+
+$ui-radius           : 3px;
+
+// Border
+$ui-border           : 1px solid $gray-light;
