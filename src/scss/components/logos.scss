@@ -21,7 +21,6 @@
   }
 }
 
-.logo-seneca,
 .logo-seneca-inversed {
   height: 39px;
   width: 200px;
@@ -30,9 +29,27 @@
 .logo-seneca {
   position: relative;
   top: 3px;
+  height: 39px;
   background-image: url("/images/logo-seneca.svg");
 }
 
 .logo-seneca-inversed {
   background-image: url("/images/logo-seneca-inversed.svg");  
+}
+
+@media screen and (min-width: $mobile-sm) and (max-width: $desktop-lg) {
+  
+  .logo.logo-seneca {
+    width: 50px;
+    background-size: cover;
+  }
+  
+}
+
+@media screen and (min-width: $desktop-lg + 1) {
+  
+  .logo-seneca {
+    width: 200px;
+  }
+  
 }

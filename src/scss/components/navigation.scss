@@ -7,12 +7,10 @@
 @import "../globals/variables";
 
 .nav-main {
-  padding: $ui-spacing-half 0;
   border-bottom: $ui-border;
   
-  li:not(.nav-item-search) a {
-    display: block;
-    padding: $ui-spacing-third 0;
+  li {
+    padding: $ui-spacing 0;
   }
     
 }

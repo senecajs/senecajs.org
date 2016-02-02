@@ -14,8 +14,8 @@ input, select {
   transition: all .3s ease-in;
   
   &:focus {
-    // border: 1px solid $blue-light;
-    // box-shadow: 0 0 5px $blue-light;
+    border: 1px solid $green-light;
+    box-shadow: 0 0 5px $green-light;
     outline: none;
   }
 }

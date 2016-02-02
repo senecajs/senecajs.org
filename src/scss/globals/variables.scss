@@ -58,4 +58,10 @@ $gray-lighter        : #f0f0f0;
 $ui-radius           : 3px;
 
 // Border
+
 $ui-border           : 1px solid $gray-light;
+
+// Breakpoints
+
+$mobile-sm           : 30em; /* 480px */
+$desktop-lg          : 75em; /* 1200px */
