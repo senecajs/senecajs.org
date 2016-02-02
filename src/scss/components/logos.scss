@@ -37,7 +37,22 @@
   background-image: url("/images/logo-seneca-inversed.svg");  
 }
 
-@media screen and (min-width: $mobile-sm) and (max-width: $desktop-lg) {
+@media screen and (max-width: $mobile-rg) {
+  
+  .logo.logo-seneca {
+    width: 30px;
+    height: 24px;
+    top: 10px;
+    background-size: cover;
+  }
+  
+  input[type="search"] {
+    max-width: 150px;
+  }
+  
+}
+
+@media screen and (min-width: $mobile-rg + $breakpoint-step) and (max-width: $desktop-lg) {
   
   .logo.logo-seneca {
     width: 50px;

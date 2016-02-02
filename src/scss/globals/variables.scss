@@ -63,6 +63,10 @@ $ui-border           : 1px solid $gray-light;
 
 // Breakpoints
 
-$mobile-sm           : 30em; /* 480px */
 $desktop-lg          : 75em; /* 1200px */
+$desktop-rg          : 64em; /* 1024px */
+
+$mobile-rg           : 48em; /* 786px */
+$mobile-sm           : 30em; /* 480px */
+
 $breakpoint-step     : 0.0625em; /* 1px */

@@ -36,6 +36,16 @@ input[type="search"] {
   background: url("/images/icon-search.svg") no-repeat 10px 50%;
 }
 
+// Checkbox
+
+input[type="checkbox"] {
+  
+  &:focus {
+    border: none;
+    box-shadow: none;
+  }
+}
+
 @media screen and (max-width: 30em) {
     
   select,
