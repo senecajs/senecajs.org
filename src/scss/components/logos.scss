@@ -46,9 +46,9 @@
   
 }
 
-@media screen and (min-width: $desktop-lg + 1) {
+@media screen and (min-width: $desktop-lg + $breakpoint-step) {
   
-  .logo-seneca {
+  .logo.logo-seneca {
     width: 200px;
   }
   

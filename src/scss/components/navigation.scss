@@ -8,9 +8,44 @@
 
 .nav-main {
   border-bottom: $ui-border;
+  padding: $ui-spacing-half 0;
   
-  li {
-    padding: $ui-spacing 0;
+  .nav-items li {
+    padding: $ui-spacing-third 0;
+  }
+  
+  .nav-bar {
+    padding-left: $ui-spacing-half;
+    float: right;
+  }
+  
+  .nav-search {
+    margin-right: $ui-spacing;
+  }
+  
+  .logo-seneca {
+    float: left;
+  }
+  
+  .nav-search,
+  .nav-items {
+    float: right;
   }
     
+}
+
+@media screen and (min-width: $mobile-sm) and (max-width: $desktop-lg) {
+  
+  .nav-bar {
+    width: calc(100% - 50px);
+  }
+  
+}
+
+@media screen and (min-width: $desktop-lg + $breakpoint-step) {
+  
+  .nav-bar {
+    width: calc(100% - 200px);
+  }
+  
 }
