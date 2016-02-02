@@ -1,0 +1,34 @@
+/*********************************************************************
+*
+* ICONS
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+
+.icon-github,
+.icon-twitter,
+.icon-docs {
+  height: 31px;
+  background-position: 0 0;
+}
+
+.icon-github {
+  width: 32px;
+  background-image: url("/images/icon-github.svg");
+}
+
+.icon-docs {
+  width: 41px;
+  background-image: url("/images/icon-docs.svg");
+}
+
+.icon-twitter {
+  width: 37px;
+  background-image: url("/images/icon-twitter.svg");
+}

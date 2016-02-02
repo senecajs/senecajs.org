@@ -1,0 +1,20 @@
+/*********************************************************************
+*
+* FOOTER
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+.footer-top {
+  padding: $ui-spacing 0;
+  background-color: $green;
+  
+  a {
+    color: $green-lighter;
+  }
+}
+
+.footer-bottom {
+  padding-top: $ui-spacing;
+}

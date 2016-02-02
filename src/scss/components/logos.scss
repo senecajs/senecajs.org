@@ -33,8 +33,9 @@
   background-image: url("/images/logo-seneca.svg");
 }
 
-.logo-seneca-inversed {
-  background-image: url("/images/logo-seneca-inversed.svg");  
+.logo-seneca-lg {
+  width: 350px;
+  max-width: 100%;
 }
 
 @media screen and (max-width: $mobile-rg) {
