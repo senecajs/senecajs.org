@@ -14,21 +14,27 @@
 .icon-github,
 .icon-twitter,
 .icon-docs {
-  height: 31px;
   background-position: 0 0;
+  
+  &:hover {
+    background-position: 0 -34px;
+  }
 }
 
 .icon-github {
-  width: 32px;
   background-image: url("/images/icon-github.svg");
 }
 
 .icon-docs {
-  width: 41px;
   background-image: url("/images/icon-docs.svg");
 }
 
 .icon-twitter {
-  width: 37px;
   background-image: url("/images/icon-twitter.svg");
+}
+
+.link-has-icon {
+  display: inline-block;
+  padding-left: $ui-spacing + $ui-spacing-half;
+  line-height: 1.9;
 }
