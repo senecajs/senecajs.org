@@ -66,7 +66,7 @@
   .nav-menu-handle:checked ~ .nav-items {
     display: block;
     position: fixed;
-    top: 75px;
+    top: 74px;
     left: 0;
     width: 100vw;
     background-color: white;
@@ -75,7 +75,7 @@
       display: block;
       padding: $ui-spacing-half;
       width: 100%;
-      border-bottom: $ui-border;
+      border-top: $ui-border;
     }
   }
   

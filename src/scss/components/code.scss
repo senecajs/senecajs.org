@@ -6,13 +6,24 @@
 
 @import "../globals/variables";
 
-.hljs {
+.hljs, code {
   display: inline-block;
   overflow-x: auto;
   border-radius: $ui-radius;
-  padding: $ui-spacing-half;
   background-color: $gray-lighter;
-  font-family: $font-monospaced;
+  font-family: $font-monospaced;  
+}
+
+code {
+  padding: 2px $ui-spacing-third;
+  position: relative;
+  top: 8px;
+  font-size: $font-small;
+  color: $gray;
+}
+
+.hljs {
+  padding: $ui-spacing-half;
 }
 
 .hljs,
