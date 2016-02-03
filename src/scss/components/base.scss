@@ -57,3 +57,11 @@ a {
 img, iframe, video {
   max-width: 100%;
 }
+
+// Separator
+.separator {
+  position: relative;
+  margin: $ui-spacing 0;
+  height: 1px;
+  background-color: $gray-light;
+}
