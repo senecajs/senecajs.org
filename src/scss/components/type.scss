@@ -48,6 +48,11 @@ h1, h2, h3, h4 {
 
 // Helpers
 
+strong,
+b {
+  font-weight: $font-weight-bold
+}
+
 .txt-small {
   font-size: $font-small;
 }
