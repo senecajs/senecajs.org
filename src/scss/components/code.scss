@@ -9,8 +9,9 @@
 .hljs {
   display: inline-block;
   overflow-x: auto;
+  border-radius: $ui-radius;
   padding: $ui-spacing-half;
-  background: $gray-lighter;
+  background-color: $gray-lighter;
   font-family: $font-monospaced;
 }
 

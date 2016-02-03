@@ -11,10 +11,8 @@ header {
   background-color: $green;
   color: white;
   
-  pre > code {
-    display: inline-block;
-    padding: $ui-spacing-third;
-    border-radius: $ui-radius;
+  .hljs {
+    padding: $ui-spacing-third $ui-spacing-half;
     background-color: $green-lighter;
     color: $gray-dark;
   }
