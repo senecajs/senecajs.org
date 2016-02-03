@@ -35,6 +35,6 @@
 
 .link-has-icon {
   display: inline-block;
-  padding-left: $ui-spacing + $ui-spacing-half;
-  line-height: 1.9;
+  padding-left: $ui-spacing-double;
+  font-size: $font-large;
 }
