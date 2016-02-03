@@ -6,19 +6,23 @@
 
 @import "../globals/variables";
 
-.logo {
+.logo,
+.logo-company {
   display: inline-block;
-  background-repeat: no-repeat;
-  background-size: contain;
   cursor: pointer;
   transition: opacity .5s ease-in;
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-
+  
   &:hover {
     opacity: .6;
   }
+}
+
+.logo {
+  background-repeat: no-repeat;
+  background-size: contain;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .logo-seneca-inversed {
@@ -39,7 +43,6 @@
 }
 
 .logo-company {
-  display: inline-block;
   margin: $ui-spacing-half $ui-spacing;
 }
 

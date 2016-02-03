@@ -1,0 +1,21 @@
+/*********************************************************************
+*
+* HEADER
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+header {
+  padding: $ui-spacing 0;
+  background-color: $green;
+  color: white;
+  
+  pre > code {
+    display: inline-block;
+    padding: $ui-spacing-third;
+    border-radius: $ui-radius;
+    background-color: $green-lighter;
+    color: $gray-dark;
+  }
+}
