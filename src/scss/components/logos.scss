@@ -38,6 +38,11 @@
   max-width: 100%;
 }
 
+.logo-company {
+  display: inline-block;
+  margin: $ui-spacing-half $ui-spacing;
+}
+
 @media screen and (max-width: $mobile-rg) {
   
   .logo.logo-seneca {
