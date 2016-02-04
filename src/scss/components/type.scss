@@ -24,10 +24,6 @@ code, pre, kbd, samp {
 
 // Headings
 
-h1 {
-  font-size: $font-h1;
-}
-
 h2 {
   font-size: $font-h2;
 }
@@ -71,4 +67,26 @@ b {
 
 .txt-right {
   text-align: right;
+}
+
+@media screen and (max-width: $mobile-rg) {
+  
+  h1 {
+    font-size: $font-h3;
+  }
+  
+  h1, h2, h3 {
+    line-height: $line-height-headings;
+  }
+  
+  .txt-lead {
+    font-size: $font-base;
+  }
+  
+}
+
+@media screen and (min-width: $mobile-rg + $breakpoint-step) {
+  h1 {
+    font-size: $font-h1;
+  }
 }
