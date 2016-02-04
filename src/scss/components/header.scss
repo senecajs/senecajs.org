@@ -11,6 +11,7 @@ header {
   padding: $ui-spacing 0;
   background-color: $green;
   color: white;
+  box-shadow: 0 2px 20px rgba($gray-dark, 0.5);
   
   .hljs {
     padding: $ui-spacing-third $ui-spacing-half;
