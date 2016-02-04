@@ -6,29 +6,33 @@
   <body class="error">
     {{> menu}}
 
-    <div class="fullwidthtop">
-      <div class="row clearfix">
-        <div class="col-md-12 column">
-          <div class="header-box">
-            <img src="/images/icon-top.png" alt="design, develop, organise code" title="design, develop, organise code" height="auto" width="460">
+    
+    <header role="banner">
+      <div class="container-fluid">
+        <div class="row center-xs">
+          <div class="col-xs-12 col-md-10 col-lg-10">
+            <img src="images/illustration-top.svg" alt="Design, develop and organize code" title="Design, develop and organize code" height="auto" width="460" class="mtb">
           </div>
+          <!-- col -->
         </div>
       </div>
-    </div>
-
-    <div class="container">
-      <div class="row clearfix">
-        <div class="col-md-12 column">
+    </header>
+    
+    <main class="container-fluid" role="main">
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10">
           {{{contents}}}
         </div>
       </div>
-      <div class="callout">
-        <p>
-          Issues? From spelling errors to broken tutorials and everything in between, report
-          them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a>
-        </p>
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10">
+          <p>
+            Issues? From spelling errors to broken tutorials and everything in between, report
+            them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a>
+          </p>
+        </div>
       </div>
-    </div>
+    </main>
     {{> footer}}
 
     {{> algolia}}
