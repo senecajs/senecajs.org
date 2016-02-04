@@ -65,3 +65,8 @@ img, iframe, video {
   height: 1px;
   background-color: $gray-light;
 }
+
+hr {
+  margin: $ui-spacing 0;
+  border: $ui-border;
+}
