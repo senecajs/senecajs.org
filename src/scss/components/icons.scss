@@ -21,6 +21,27 @@
   }
 }
 
+.icon-download,
+.icon-start,
+.icon-updates {
+  height: 40px; 
+}
+
+.icon-start {
+  width: 23px; 
+  background-image: url("/images/icon-start.svg");
+}
+
+.icon-updates {
+  width: 41px;
+  background-image: url("/images/icon-updates.svg");
+}
+
+.icon-download {
+  width: 42px;
+  background-image: url("/images/icon-download.svg");
+}
+
 .icon-github {
   background-image: url("/images/icon-github.svg");
 }
