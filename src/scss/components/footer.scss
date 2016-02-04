@@ -6,8 +6,8 @@
 
 @import "../globals/variables";
 
-footer {
-  padding-bottom: $ui-spacing;
+.footer-top,
+.footer-bottom {
   box-shadow: 0 -2px 20px rgba($gray-dark, 0.4);
 }
 
@@ -21,5 +21,5 @@ footer {
 }
 
 .footer-bottom {
-  padding-top: $ui-spacing;
+  padding: $ui-spacing 0;
 }
