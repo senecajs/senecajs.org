@@ -8,6 +8,13 @@
 
 .nav-main {
   padding: $ui-spacing-half 0;
+  box-shadow: 0 2px 20px rgba($gray-dark, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 20;
   
   .nav-bar {
     padding-left: $ui-spacing-half;
@@ -35,7 +42,6 @@
   position: absolute;
   left: -100%;
 }
-
 
 @media screen and (max-width: $desktop-rg) {
   
@@ -76,6 +82,10 @@
       padding: $ui-spacing-half;
       width: 100%;
       border-top: $ui-border;
+      
+      &:last-child {
+        border-bottom: $ui-border;
+      }
     }
   }
   

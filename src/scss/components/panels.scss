@@ -1,0 +1,20 @@
+/*********************************************************************
+*
+* PANELS
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+.panel {
+  display: inline-block;
+  width: 100%;
+  padding: $ui-spacing-half;
+  border-radius: $ui-radius;
+  font-size: $font-large;
+}
+
+.panel-highlighted {
+  padding: $ui-spacing $ui-spacing-half;
+  background-color: $green-lighter;
+}
