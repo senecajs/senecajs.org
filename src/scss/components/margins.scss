@@ -1,0 +1,57 @@
+/*********************************************************************
+*
+* MARGINS
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+.m0 {
+  margin: 0;
+}
+
+// Bottom margin
+
+.mb0 {
+  margin-bottom: 0;
+}
+
+.mbhalf {
+  margin-bottom: $ui-spacing-half;
+}
+
+.mb {
+  margin-bottom: $ui-spacing;
+}
+
+.mb2x {
+  margin-bottom: $ui-spacing-double;
+}
+
+// Top margin
+
+.mt0 {
+  margin-top: 0;
+}
+
+.mthalf {
+  margin-top: $ui-spacing-half;
+}
+
+.mt {
+  margin-top: $ui-spacing;
+}
+
+.mt2x {
+  margin-top: $ui-spacing-double;
+}
+
+// Top and Bottom Margin
+
+.mtb {
+  margin: $ui-spacing 0;
+}
+
+.mtb2x {
+  margin: $ui-spacing-double 0;
+}

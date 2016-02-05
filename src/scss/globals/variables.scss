@@ -1,0 +1,72 @@
+/*********************************************************************
+*
+* VARIABLES
+*
+*********************************************************************/
+
+// Whitespace
+
+$ui-spacing          : 30px;
+$ui-spacing-fourth   : $ui-spacing/6; /* 5px */
+$ui-spacing-third    : $ui-spacing/3; /* 10px */
+$ui-spacing-half     : $ui-spacing/2; /* 15px */
+$ui-spacing-double   : $ui-spacing*2; /* 60px */
+
+// Font families
+
+$font-merriweather   : Merriweather, Georgia, Times, serif;
+$font-open-sans      : Open Sans, Helvetica, Arial, sans-serif;
+$font-monospaced     : Menlo, Monaco, Consolas, monospaced;
+
+// Font weight
+
+$font-weight-base    : 400;
+$font-weight-bold    : 700;
+
+// Font sizes
+
+$font-base           : 1rem; /* 16px */
+$font-small          : 0.875rem; /* 14px */
+$font-large          : 1.375rem; /* 20px */
+
+// Heading sizes
+
+$font-h1             : 2.25rem; /* 36px */
+$font-h2             : 2rem; /* 32px */
+$font-h3             : 1.625rem; /* 26px */
+$font-h4             : 1.25rem; /* 20px */
+
+// Line height
+
+$line-height-base    : 1.65;
+$line-height-headings: 1.25;
+
+// Colours
+
+$green               : #379199;
+$green-light         : lighten($green, 20%);
+$green-lighter       : lighten($green, 50%);
+
+$red                 : #d00;
+$gray-dark           : #333;
+$gray                : #666;
+$gray-light          : #ddd;
+$gray-lighter        : #f0f0f0;
+
+// Border radius
+
+$ui-radius           : 3px;
+
+// Border
+
+$ui-border           : 1px solid $gray-light;
+
+// Breakpoints
+
+$desktop-lg          : 75em; /* 1200px */
+$desktop-rg          : 64em; /* 1024px */
+
+$mobile-rg           : 48em; /* 786px */
+$mobile-sm           : 30em; /* 480px */
+
+$breakpoint-step     : 0.0625em; /* 1px */

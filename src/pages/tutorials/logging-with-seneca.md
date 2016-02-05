@@ -1,25 +1,19 @@
 ---
 layout: main.html
-title: Ya
 ---
 
 # Logging with Seneca
-This tutorial shows you how to control Seneca's logging
-output. Clone the [main Seneca repository][] from github, and open the _doc/examples_
-folder.
+This tutorial shows you  how to control Seneca's logging output. Clone the [main Seneca repository][] from github, and
+open the _doc/examples_folder.
 
 
-You'll use the Sales Tax example code. This code shows you how to
-handle sales tax rules using Seneca. Take a look at
-the [main README][] for
-details. For this tutorial, you'll focus on the logging output.
+You'll use the Sales Tax example code. This code shows you how to handle sales tax rules using Seneca. Take a look at
+the [main README][] for details. For this tutorial, you'll focus on the logging output.
 
 
-Here's some code to calculate sales tax. It won't work, because you
-haven't actually told Seneca how to do that yet.
+Here's some code to calculate sales tax. It won't work, because you haven't actually told Seneca how to do that yet.
 
-
-```js
+```
 var seneca = require('seneca')()
 
 seneca.act({cmd: 'salestax', net: 100}, function (err, result) {
@@ -29,20 +23,14 @@ seneca.act({cmd: 'salestax', net: 100}, function (err, result) {
 ```
 
 
-This invokes a Seneca action that, hopefully, calculates sales
-tax. Arbitrarily you're using the property `cmd` to indicate what
-you want done (calculate sales tax), and `net` is net price
-before tax. The `callback` function returns the total price, and uses
-the _standard Node.js signature_ (error object as first parameter).
+This invokes a Seneca action that, hopefully, calculates sales tax. Arbitrarily you're using the property `cmd` to
+indicate what you want done (calculate sales tax), and `net` is net price before tax. The `callback` function returns
+the total price, and uses the _standard Node.js signature_ (error object as first parameter).
 
 
-Let's try to run this code, even though it will fail. In the examples
-folder, this code is saved in the file `sales-tax-error.js`. Run
-this file using _Node.js_, and you'll see the following output:
+Let's try to run this code, even though it will fail. In the examples folder, this code is saved in the file `sales-tax-error.js`. Run this file using _Node.js_, and you'll see the following output:
 
-
-
-```bash
+```
 $ node sales-tax-error.js
 [-isodate-]	INFO	init	start
 [-isodate-]	INFO	init	end
@@ -63,7 +51,7 @@ The `ERROR` entry tells you what went wrong: no action pattern matched the input
 You can fix this by defining an action:
 
 
-```js
+```
 seneca.add( {cmd:'salestax'}, function(args,callback){
   var rate= 0.23
   var total = args.net * (1+rate)
@@ -75,7 +63,7 @@ seneca.add( {cmd:'salestax'}, function(args,callback){
 The file `sales-tax.js` in the examples folder contains the new code. Run it:
 
 
-```bash
+```
 $ node sales-tax.js
 [-isodate-]	INFO	init	start
 [-isodate-]	INFO	init	end
@@ -88,7 +76,7 @@ Well that worked! 23% sales tax on a price of $100 gives a total of $123. Fabulo
 
 You might find that logging output annoying. Turn it off with:
 
-```bash
+```
 $ node sales-tax.js --seneca.log.quiet
 123
 ```
@@ -99,7 +87,7 @@ Or you might be a logging freak, in which case, here's the all-you-can-eat versi
 
 
 
-```bash
+```
 node sales-tax.js --seneca.log.print
 [-isodate-]	INFO	init	start
 ... lots of init stuff ...
@@ -122,7 +110,7 @@ So you might be wondering how to get finer-grained logging output. Logging can b
 Let do that now:
 
 
-```bash
+```
 node sales-tax.js --seneca.log=type:act
 [-isodate-]	DEBUG	act	in	actid0	{cmd=salestax,net=100}
 [-isodate-]	DEBUG	act	out	actid0	{total=123}
@@ -154,7 +142,7 @@ country which applies that rate (using two letter country codes).
 Here's the client code, in the file `sales-tax-log.js`:
 
 
-``` js
+```
 var seneca = require('seneca')()
 
 seneca.use('sales-tax-plugin', {country: 'IE', rate: 0.23})
@@ -178,7 +166,7 @@ callback function from the `act` method call.
 Now you need a plugin - that's in the `sales-tax-plugin.js` file:
 
 
-``` js
+```
 module.exports = function (options) {
   var seneca = this
   var plugin = 'shop'
@@ -228,7 +216,7 @@ a set of options and it's called in the Seneca context (eg the `this` object). U
 return a plugin object:
 
 
-``` js
+```
 module.exports = function (options) {
   var seneca = this
 
@@ -245,7 +233,7 @@ module.exports = function (options) {
 Run this code, and filter the log to show only debug output from the sales-tax plugin:
 
 
-```bash
+```
 $ node sales-tax-log.js --seneca.log=plugin:shop
 
 [-isodate-]	DEBUG	plugin	sales-tax	IE	annv4h
@@ -262,7 +250,7 @@ net:	300	total:	360	tax:	{hits=2,rate=0.2,country=UK}
 These logs appear because the plugin calls `seneca.log.debug` and provides the information about the sales tax calculation:
 
 
-``` js
+```
 seneca.add({ role: plugin, cmd: 'salestax', country: country }, function (args, callback) {
   var total = calc(parseFloat(args.net, 10))
   seneca.log.debug('apply-tax', args.net, total, rate, country)
@@ -293,7 +281,7 @@ entry type. This allows you to see the data passing into and out of
 actions:
 
 
-```bash
+```
 $ node sales-tax-log.js --seneca.log=type:act
 [-isodate-]	DEBUG	act	in	uk74hd	{cmd=salestax,country=IE,net=100}
 [-isodate-]	DEBUG	act	out	uk74hd	{total=123}
@@ -314,7 +302,7 @@ Let's put this all together. You want to see the input and output
 data of the actions, and anything the sale tax plugin decides to log:
 
 
-```bash
+```
 $ node sales-tax-log.js --seneca.log=plugin:sales-tax --seneca.log=type:act
 
 [-isodate-]	DEBUG	act	in	cpvycd	{cmd=salestax,country=IE,net=100}
@@ -342,10 +330,11 @@ other.
 
 
 
-The `tag` filter can be used to focus on a specific, tagged, plugin instance. Here's how you look at UK sales tax operations only:
+The `tag` filter can be used to focus on a specific, tagged, plugin instance. Here's how you look at UK sales tax
+operations only:
 
 
-```bash
+```
 $ node sales-tax-log.js --seneca.log=plugin:sales-tax,tag:UK
 [-isodate-]	DEBUG	plugin	sales-tax	UK	i2r7wn
 net:	200	total:	240	tax:	{hits=1,rate=0.2,country=UK}
@@ -359,8 +348,6 @@ net:	300	total:	360	tax:	{hits=2,rate=0.2,country=UK}
 
 Console logs are fun, but live logs in your web browser are awesome! Seneca can do this too:
 
-
-
 You'll need to create an app that provides a sales-tax calculation HTTP JSON API. Using the
 `web` plugin this is easy. This plugin accepts JSON documents from remote clients
 over HTTP and submits them to the local Seneca instance.
@@ -368,7 +355,7 @@ over HTTP and submits them to the local Seneca instance.
 
 Here the code, in `sales-tax-app.js`, that sets up the app:
 
-```js
+```
 var connect = require('connect')
 var connect_query = require('connect-query')
 var body_parser = require('body-parser')
@@ -391,14 +378,11 @@ seneca.use('data-editor')
 seneca.use('admin', {server: app, local: true})
 ```
 
-The script sets up a simple HTTP server, using the
-Node.js `connect` module. The `web` plugin is preloaded by Seneca and works locally without any configuration,
-so all you have to do is hook it as a [connect][]
-or [express][] middleware, or directly
-with the standard HTTP API:
+The script sets up a simple HTTP server, using the Node.js `connect` module. The `web` plugin is preloaded by Seneca and
+works locally without any configuration, so all you have to do is hook it as a [connect][] or [express][] middleware, or directly with the standard HTTP API:
 
 
-``` js
+```
 var app = connect()
 app.use(seneca.export('web'))
 app.listen(3000)
@@ -411,7 +395,7 @@ administration web interface locally without requiring a password,
 use the `local:true` option:
 
 
-``` js
+```
 seneca.use('data-editor')
 seneca.use('admin', {server: app, local: true})
 ```
@@ -421,7 +405,7 @@ Run this app, and open [localhost:3000/admin][]. You can
 still use command line logging - you can have multiple separate logging channels.
 
 
-```bash
+```
 $ node sales-tax-app.js --seneca.log=plugin:shop
 ```
 
@@ -437,7 +421,7 @@ The file `sales-tax-app-client.js` contains the client
 code. We're using the standard Node HTTP client here:
 
 
-``` js
+```
 var http = require('http')
 
 http.get({
@@ -453,7 +437,7 @@ http.get({
 
 But you can also test it with cUrl:
 
-```bash
+```
 $ curl -S 'http://localhost:3000/shop/salestax?net=100&country=UK'
 $ {"total":120}
 ```
@@ -476,7 +460,7 @@ You can define your own log handlers programmatically when you setup Seneca. The
 `sales-tax-log-handler.js` shows you how to do this:
 
 
-``` js
+```
 var seneca = require('seneca')
 
 // need this to get a reference to seneca.loghandler
@@ -529,7 +513,7 @@ stores your logs and makes them searchable. I wrote their Node.js API module :) 
 This example is in the file `sales-tax-logentries.js`:
 
 
-``` js
+```
 var logentries = require('node-logentries')
 
 var log = logentries.logger({
@@ -571,7 +555,7 @@ You can use custom handler functions to send logs anywhere you want, and process
 *Log filters are dynamic*. You can add new ones at runtime using the `seneca.logroute` method:
 
 
-``` js
+```
 seneca.logroute( {level:'all', handler:seneca.handler.print} )
 ```
 
@@ -583,7 +567,7 @@ dynamically modify the filters at runtime.
 
 -----
 
-That's all folks! Corrections and comments: please tweet [@senecajs][].
+That's all folks!
 
 [main Seneca repository]: http://github.com/senecajs/seneca
 [main README]: https://github.com/senecajs/seneca

@@ -1,109 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     {{> head}}
   </head>
   <body>
     {{> menu}}
-
-    <div class="fullwidthtop">
-      <div class="row clearfix">
-        <div class="col-md-12 column">
-          <div class="header-box">
-            <img src="images/icon-top.png" alt="design, develop, organize code" title="design, develop, organize code" height="auto" width="460">
-            <h1 class="hp">Design, develop and organize your code</h1>
-            <h2 class="hp">Seneca is a microservices toolkit for Node.js. <br>
-            It helps you write clean, organized code that you can scale and deploy at any time.</h2>
+    
+    <header role="banner">
+      <div class="container-fluid">
+        <div class="row center-xs">
+          <div class="col-xs-12 col-md-10 col-lg-10">
+            <img src="images/illustration-top.svg" alt="Design, develop and organize code" title="Design, develop and organize code" height="auto" width="320" class="mt">
+            <h1>Design, develop and organize your code</h1>
+            <p class="txt-lead">Seneca is a microservices toolkit for Node.js. <br>
+            It helps you write clean, organized code that you can scale and deploy at any time.</p>
+            <pre><code class="txt-lead">$ npm install seneca --save</code></pre>
           </div>
+          <!-- col -->
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class='container'>
-      <div class='row clearfix hp'>
-        <section class="install">
-          <pre> $ npm install seneca --save </pre>
-        </section>
-      </div>
+    <div class="container-fluid">
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10">
+    
+          <div class="row">
+            <h2 class="col-xs-12 mb2x">What is Seneca?</h2>
+            <div class="col-xs-12 col-md-6 txt-left">
+              <p>Seneca is a microservices toolkit for Node.js. It provides plugins that look after the foundations of your app. This leaves you free to focus on the real, business code. No need to worry about which database to use, how to structure your components, or how to manage dependencies. Just start coding.</p>
+            </div>
 
-      {{> seperator}}
-
-      <h1 class="center">What is Seneca?</h1>
-      <div class="row clearfix">
-        <div class="col-md-6 column">
-          <p>
-            Seneca is a microservices toolkit for Node.js. It provides plugins that look after the foundations of your app. This leaves you free to focus on the real, business code. No need to worry about which database to use, how to structure your components, or how to manage dependencies. Just start coding.
-          </p>
-        </div>
-
-        <div class="col-md-6 column">
-          <p>
-            You write everything as a command. Your commands get called whenever they match a set of properties. Your calling code doesn't know, or care, which command gets the work done. One JavaScript object goes in, and another comes out, asynchronously.
-          </p>
-        </div>
-      </div>
-
-      {{> seperator}}
-
-      <h1 class="center">Try Seneca now</h1>
-      <div class="row clearfix hp">
-        <div class="col-md-4">
-          <a class="grey-box" href="https://github.com/senecajs/seneca">
-            <i class="fa fa-download fa-5x"></i>
-            <h3>Download and install</h3>
-          </a>
-        </div>
-
-        <div class="col-md-4">
-          <a class="grey-box" href="/get-started/">
-            <i class="fa fa-bolt fa-5x"></i>
-            <h3>Quick start</h3>
-          </a>
-        </div>
-
-        <div class="col-md-4">
-          <a class="grey-box" href="https://github.com/senecajs/seneca/releases">
-            <i class="fa fa-refresh fa-5x"></i>
-            <h3>Updates and releases</h3>
-          </a>
-        </div>
-      </div>
-
-      {{> seperator}}
-
-      <section class="content row">
-        {{{ contents }}}
-      </section>
-
-      {{> seperator}}
-
-      <section class="usingSeneca">
-        <h1 class="center">Who's using Seneca</h1>
-        <div class="row clearfix">
-          <div class="cf">
-          <a href="http://www.intel.ie/content/www/ie/en/homepage.html" class="companies-logo"><img src="images/intel.png" width="100" alt="intel logo"></a>
-            <a href="https://coderdojo.com/" class="companies-logo"><img src="images/coderDojo.png" width="170" alt="coderDojo logo"></a>
-            <a href="http://www.globalsecurity.ie/" class="companies-logo"><img src="images/gsd.jpg" width="100" alt="Global Security Devices logo"></a>
-            <a href="http://solidearth.com/" class="companies-logo"><img src="images/solid-earth.png" width="170" alt="solid earth real estae technology logo"></a>
-            <a href="http://www.businesspost.ie/" class="companies-logo"><img src="images/sunday-business-post.png" width="170" alt="Sunday business post logo"></a>
-            <a href="http://www.londonschoolofmarketing.com/london-school-of-marketing-home" class="companies-logo"><img src="images/london-school-of-marketing.png" width="210" alt="London school of marketing logo"></a>
-            <a href="http://3funnel.com/" class="companies-logo"><img src="images/3funnel.png" width="170" alt="3funnel logo"></a>
-            <a href="http://i-sight.com/" class="companies-logo"><img src="images/iSight.png" height="80" alt="i-sight logo"></a>
-            <a href="http://www.openjawtech.com/" class="companies-logo"><img src="images/openjaw2.png" height="65" alt="openjaw technlolgy logo"></a>
-            <a href="https://ninjablocks.com/" class="companies-logo"><img src="images/ninja-long-black.png" width="170" alt="ninjablocks logo"></a>
-            <a href="https://www.nearform.com/" class="companies-logo"><img src="images/nearform.png" width="160" alt="nearform logo"></a>
-            <a href="http://oddnetworks.co/" class="companies-logo"><img src="images/odd-networks-logo.svg" width="160" alt="odd networks logo"></a>
-            <a href="http://www.thecitysecret.com/" class="companies-logo"><img src="images/tcs-logo.svg" width="160" alt="tcs logo"></a>
+            <div class="col-xs-12 col-md-6 txt-left">
+              <p>You write everything as a command. Your commands get called whenever they match a set of properties. Your calling code doesn't know, or care, which command gets the work done. One JavaScript object goes in, and another comes out, asynchronously.</p>
+            </div>
           </div>
-        </div>
-        <br />
-          <p>Do you use Seneca too?
-            <a href="https://github.com/senecajs/senecajs.org/issues/new">Let us know</a>.
-          </p>
-        </div>
-      </section>
+          <!-- row -->
 
+          {{> seperator}}
+    
+          <div class="row">
+            <h1 class="col-xs-12 mb2x">Try Seneca now</h1>
+            
+            <div class="col-xs-12 col-md-4">
+              <a class="panel panel-highlighted panel-download" href="https://github.com/senecajs/seneca">
+                <p class="txt-center mb0"><i class="icon icon-download"></i></p>
+                <p class="mb0">Download and install</p>
+              </a>
+            </div>
+
+              <div class="col-xs-12 col-md-4">
+                <a href="/get-started/" class="panel panel-highlighted panel-start">
+                  <p class="txt-center mb0"><i class="icon icon-start"></i></p>
+                  <p class="mb0">Quick start</p>
+                </a>
+              </div>
+
+              <div class="col-xs-12 col-md-4">
+                <a href="https://github.com/senecajs/seneca/releases" class="panel panel-highlighted panel-updates">
+                  <p class="txt-center mb0"><i class="icon icon-updates"></i></p>
+                  <p class="mb0">Updates and releases</p>
+                </a>
+              </div>
+            </div>
+            <!-- row -->
+            
+          {{> seperator}}
+
+          <div class="row txt-left">
+            <div class="col-xs-12">
+            <h2 class="txt-center mb2x">Examples</h2>
+              {{{ contents }}}
+            </div>
+          </div>
+          <!-- row -->
+
+          {{> seperator}}
+          
+          <div class="row">
+            <h2 class="col-xs-12 txt-center mb2x">Who’s using Seneca</h2>
+            <div class="col-xs-12">
+              <a href="http://www.intel.ie/content/www/ie/en/homepage.html" class="logo-company">
+                <img src="images/logo-intel.svg" height="50" alt="Intel">
+              </a>
+              <a href="https://coderdojo.com/" class="logo-company">
+                <img src="images/logo-coderdojo.svg" height="50" alt="coderDojo">
+              </a>
+              <a href="http://www.globalsecurity.ie/" class="logo-company">
+                <img src="images/logo-gsd.png" height="50" alt="Global Security Devices">
+              </a>
+              <a href="http://solidearth.com/" class="logo-company">
+                <img src="images/logo-solid-earth.png" height="50" alt="Solid Earth Real Estate">
+              </a>
+              <a href="http://www.businesspost.ie/" class="logo-company">
+                <img src="images/logo-sunday-business-post.png" height="50" alt="Sunday Business Post">
+              </a>
+              <a href="http://www.londonschoolofmarketing.com/london-school-of-marketing-home" class="logo-company">
+                <img src="images/logo-london-school-of-marketing.png" height="50" alt="London School of Marketing">
+              </a>
+              <a href="http://3funnel.com/" class="logo-company">
+                <img src="images/logo-3funnel.png" height="50" alt="3funnel">
+              </a>
+              <a href="http://i-sight.com/" class="logo-company">
+                <img src="images/logo-isight.png" height="50" alt="i-sight">
+              </a>
+              <a href="http://www.openjawtech.com/" class="logo-company">
+                <img src="images/logo-openjaw.png" height="50" alt="Openjaw Technology">
+              </a>
+              <a href="https://ninjablocks.com/" class="logo-company">
+                <img src="images/logo-ninjablocks.png" height="50" alt="Ninjablocks">
+              </a>
+              <a href="https://www.nearform.com/" class="logo-company">
+                <img src="images/logo-nearform.png" height="50" alt="nearForm">
+              </a>
+              <a href="http://oddnetworks.co/" class="logo-company">
+                <img src="images/logo-odd-networks.svg" height="50" alt="Odd Networks">
+              </a>
+              <a href="http://www.thecitysecret.com/" class="logo-company">
+                <img src="images/logo-tcs.svg" height="50" alt="TCS">
+              </a>
+            </div>
+            <div class="col-xs-12 txt-left">
+              <p class="mtb2x">Do you use Seneca too?
+                <a href="https://github.com/senecajs/senecajs.org/issues/new">Let us know</a>.
+              </p>
+            </div>
+          </div>
+          <!-- row -->
+          
+        </div>
+        <!-- main col -->
+      </div>
+      <!-- main row -->
     </div>
+    <!-- container fluid -->
 
     {{> footer}}
 

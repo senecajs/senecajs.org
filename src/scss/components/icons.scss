@@ -1,0 +1,62 @@
+/*********************************************************************
+*
+* ICONS
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+
+.icon-github,
+.icon-twitter,
+.icon-docs {
+  background-position: 0 0;
+  
+  &:hover {
+    background-position: 0 -34px;
+  }
+}
+
+.icon-download,
+.icon-start,
+.icon-updates {
+  height: 40px; 
+}
+
+.icon-start {
+  width: 23px; 
+  background-image: url("/images/icon-start.svg");
+}
+
+.icon-updates {
+  width: 41px;
+  background-image: url("/images/icon-updates.svg");
+}
+
+.icon-download {
+  width: 42px;
+  background-image: url("/images/icon-download.svg");
+}
+
+.icon-github {
+  background-image: url("/images/icon-github.svg");
+}
+
+.icon-docs {
+  background-image: url("/images/icon-docs.svg");
+}
+
+.icon-twitter {
+  background-image: url("/images/icon-twitter.svg");
+}
+
+.link-has-icon {
+  display: inline-block;
+  padding-left: $ui-spacing-double;
+  font-size: $font-large;
+  line-height: 1.5;
+}

@@ -1,22 +1,29 @@
-<nav class="navbar navbar-default navbar-fixed-top seneca-navbar" role="navigation">
-  <div class="navbar-960">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-        <img src="/images/logo-small.png" alt="Seneca" />
-        <span>Seneca</span>
-      </a>
+<nav class="nav-main" role="navigation">
+  <div class="container-fluid cf">
+    <a class="logo logo-seneca" href="/" title="Seneca">Seneca</a>  
+    
+    <div class="nav-search">
+      <input type="search" id="seneca-search-input" placeholder="Search the docs...">  
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="navbar-font seneca-search">
-        <input type="text" id="seneca-search-input" class="form-control seneca-search--input" placeholder="Search the docs...">
-      </li>
-      <li class="navbar-font"><a href='/get-started/'>Getting started</a></li>
-      <li class="navbar-font"><a href='/tutorials/'>Tutorials</a></li>
-      <li class="navbar-font"><a href='/faq.html'>FAQ</a></li>
-      <li class="navbar-font"><a href='/api/'>API</a></li>
-      <li class="navbar-font"><a href='/plugins/'>Plugins</a></li>
-      <li class="navbar-font"><a href='/support/'>Support</a></li>
-      <li class="navbar-font"><a href='/contribute/'>Contribute</a></li>
-    </ul>
+    <!-- nav search -->  
+    
+    <div class="nav-bar">
+      
+      <input type="checkbox" name="nav-menu-handle" id="nav-menu-handle" class="nav-menu-handle">
+      <label for="nav-menu-handle"></label>
+      
+      <ul class="list-unstyled list-inline nav-items">
+        <li><a href='/get-started/'>Getting started</a></li>
+        <li><a href='/tutorials/'>Tutorials</a></li>
+        <li><a href='/faq.html'>FAQ</a></li>
+        <li><a href='/api/'>API</a></li>
+        <li><a href='/plugins/'>Plugins</a></li>
+        <li><a href='/support/'>Support</a></li>
+        <li><a href='/contribute/'>Contribute</a></li>
+      </ul>
+      <!-- nav items -->
+    </div>  
+
   </div>
+  <!-- container -->
 </nav>

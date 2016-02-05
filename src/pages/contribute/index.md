@@ -82,14 +82,14 @@ THE SOFTWARE.
 [Richard Rodger]: https://github.com/rjrodger
 [Hapi]: https://github.com/hapijs
 
-[Principles]: ./details/principles.html
-[Governance]: ./details/governance.html
-[Guidelines]: ./details/guidelines.html
-[Style guide]: ./details/styleguide.html
-[Code of Conduct]: ./details/code-of-conduct.html
-[Our tools]: ./details/our-tools.html
-[How we Work]: ./details/how-we-work.html
-[Code of conduct]: ./details/code-of-conduct.html
+[Principles]: ./principles.html
+[Governance]: ./governance.html
+[Guidelines]: ./guidelines.html
+[Style guide]: ./styleguide.html
+[Code of Conduct]: ./code-of-conduct.html
+[Our tools]: ./our-tools.html
+[How we Work]: ./how-we-work.html
+[Code of conduct]: ./code-of-conduct.html
 
 [email]: mailto:hello@nearform.com
 [homepage]: http://contributor-covenant.org

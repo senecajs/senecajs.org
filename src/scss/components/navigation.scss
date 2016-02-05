@@ -1,0 +1,103 @@
+/*********************************************************************
+*
+* NAVIGATION
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+.nav-main {
+  padding: $ui-spacing-half 0;
+  box-shadow: 0 2px 20px rgba($gray-dark, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 20;
+  
+  .nav-bar {
+    padding-left: $ui-spacing-half;
+    float: right;
+    position: relative;
+  }
+  
+  .nav-search {
+    margin-left: $ui-spacing-half;
+  }
+  
+  .logo-seneca,
+  .nav-search {
+    float: left;
+  }
+  
+  .nav-bar {
+    float: right;
+  }
+  
+}
+
+.nav-menu-handle {
+  visibility: hidden;
+  position: absolute;
+  left: -100%;
+}
+
+@media screen and (max-width: $desktop-rg) {
+  
+  .nav-search {
+    width: 65%;
+  }
+  
+  .nav-items {
+    display: none;
+  }
+    
+  .nav-main .nav-search {
+    margin: 0;
+  }
+  
+  .nav-main label {
+    float: right;
+    margin-left: $ui-spacing-half;
+    margin-top: $ui-spacing-half;
+    display: block;
+    height: 20px;
+    width: 23px;
+    background: url("/images/icon-menu.svg") no-repeat 0 0;
+    background-size: contain;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: .5;
+    }
+  }
+  
+  .nav-menu-handle:checked ~ .nav-items {
+    display: block;
+    position: fixed;
+    top: 74px;
+    left: 0;
+    width: 100vw;
+    background-color: white;
+    
+    li {
+      display: block;
+      padding: $ui-spacing-half;
+      width: 100%;
+      border-top: $ui-border;
+      
+      &:last-child {
+        border-bottom: $ui-border;
+      }
+    }
+  }
+  
+}
+
+@media screen and (min-width: $desktop-rg + $breakpoint-step) {
+  
+    .nav-items li {
+      padding: $ui-spacing-third 0;
+    }
+}

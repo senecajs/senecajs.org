@@ -1,0 +1,37 @@
+/*********************************************************************
+*
+* LISTS
+*
+*********************************************************************/
+
+@import "../globals/variables";
+
+.list-unstyled {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-default {
+  padding-left: $ui-spacing-half;
+}
+
+.list-inline {
+  li {
+    display: inline-block;
+    
+    &:not(:last-child) {
+      margin-right: $ui-spacing;
+    }
+  }
+}
+      
+@media screen and (max-width: 48em) {
+
+  .list-inline {
+    li:not(:last-child) {
+      margin-right: $ui-spacing-half;
+    }
+  }
+
+}

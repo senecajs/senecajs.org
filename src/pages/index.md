@@ -2,7 +2,7 @@
 layout: splash.html
 ---
 
-#### Example: a bare bones microservice
+#### A bare bones microservice
 ```javascript
 var seneca = require('seneca')()
 
@@ -13,7 +13,7 @@ seneca.add({ role:'user', cmd:'login' }, function (args, callback) {
 seneca.listen()
 ```
 
-#### Example: a bare bones client
+#### A bare bones client
 ```javascript
 var seneca = require('seneca')()
 var client = seneca.client()
