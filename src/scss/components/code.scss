@@ -6,26 +6,32 @@
 
 @import "../globals/variables";
 
-.hljs, code {
-  display: inline-block;
-  overflow-x: auto;
+pre {
+  word-break: break-word;
+  word-wrap: break-word;
   border-radius: $ui-radius;
   background-color: $gray-lighter;
+  line-height: $line-height-base;
+  padding: $ui-spacing-half;
+  margin-bottom: $ui-spacing;
+  
+  code {
+    white-space: pre-wrap;
+  }
+}
+
+pre, code {
   font-family: $font-monospaced;  
 }
 
-code {
-  padding: 2px $ui-spacing-third;
-  position: relative;
-  top: 8px;
-  font-size: $font-small;
-  color: $gray;
+.hljs, code {
+  display: inline-block;
 }
 
-.hljs {
-  padding: $ui-spacing-half;
-  margin-bottom: $ui-spacing;
-  min-width: 300px;
+p code,
+li code {
+  font-size: $font-small;
+  color: $gray;
 }
 
 .hljs,

@@ -45,6 +45,10 @@
 
 @media screen and (max-width: $desktop-rg) {
   
+  .nav-search {
+    width: 65%;
+  }
+  
   .nav-items {
     display: none;
   }

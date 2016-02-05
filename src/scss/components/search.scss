@@ -6,6 +6,10 @@
 
 @import "../globals/variables";
 
+.algolia-autocomplete {
+  width: 100%;
+}
+
 .aa-dropdown-menu {
   border: $ui-border;
   padding: 0;
