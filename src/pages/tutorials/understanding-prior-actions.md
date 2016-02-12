@@ -153,9 +153,10 @@ you can determine simply from reading the code.
 
 Using the example above, if you add patterns in the order:
 
-- **a:1**
-- **a:1,b:2**
 - **a:1,b:2,c:3**
+- **a:1,b:2**
+- **a:1**
+
 
 Then there are _no_ priors.
 
@@ -213,12 +214,12 @@ Here's a simple example of how the patterns work:
 
 - **a:1**
 - **a:1,b:2**
-- **a:1,c:2**
+- **a:1,c:3**
 
 has the prior chains:
 
 - **a:1,b:2** → **a:1**
-- **a:1,c:2** → **a:1**
+- **a:1,c:3** → **a:1**
 
 Thus, the input message `{a:1, b:2, c:3}` will match \_`a:1,b:2` as `b` precedes `c` alphabetically, and patterns are disambiguated alphabetically. It will _not_ also match \_`a:1,c:3\`.
 
