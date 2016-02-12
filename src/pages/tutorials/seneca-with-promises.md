@@ -65,7 +65,7 @@ var seneca = require('seneca')({ timeout: 500 });
 
 var act = Promise.promisify(seneca.act, seneca);
 
-// Add a command that takes a longer time that the seneca's timeout period
+// Add a command that takes a longer time than the seneca's timeout period
 seneca.add({cmd: 'timeout'}, function (args, done) {
     setTimeout(function () {
         done(null, {message: 'resolve'});
