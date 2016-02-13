@@ -8,108 +8,6 @@ functionality out of core.  Instead, we push it out to [plugins][]. The core API
 is documented below. If you have any further questions, [get in touch][]. We
 love to talk!
 
-## use(name [, options])
-- __name:__ - `string`: name of the plugin. Used to build the argument to the
-  require function.
-- __options:__ - `object`: options for the plugin. Contents depend on plugin.
-
-## use(module [, options])
-- __module:__ - `function`: function to execute to initialize the plugin
-- __options:__ - `object`: options for the plugin. Contents depend on plugin.
-
-The use method *loads and registers plugins*. You can refer directly to built-in
-plugins by name; for example, [`echo`](https://github.com/rjrodger/seneca-echo),
-[`settings`](https://github.com/rjrodger/seneca-settings),
-[`mem-store`](https://github.com/senecajs/seneca-mem-store).
-
-After a plugin is installed, you can refer to it by the module name.
-
-For convenience, you can omit the `seneca-` prefix on standard plugins.
-
-```javascript
-seneca.use('mem-store', {
-  web: {
-    dump: true
-  }
-})
-```
-
-___Example: registering the built-in mem-store plugin with custom options___
-
-The second argument to the `use` method is an `options` object, which contains
-configuration properties specific to the plugin. Refer to the documentation for
-each plugin to find out how to use them. If you're using the options plugin,
-properties in the options argument override externally loaded options.
-
-
-## ready(callback)
-- __ready__ - `function (err)`: callback to execute after all plugins initialize.
-  If an error occurs during the startup process then the callback function will
-  have an Error instance passed to it.
-
-This method takes a callback function as an argument. You should complete the
-initialization of other parts of your app, such as setting up HTTP listeners,
-inside this callback.
-
-```javascript
-seneca.use('mongo-store', {...})
-
-seneca.ready(function (err) {
-  // handle err / start inserting data.
-})
-```
-
-___Example: waiting for the database connection before inserting data___
-
-You can call `ready` more than once. If you need to register additional plugins
-dynamically (this is perfectly fine), you can call `ready` again to wait for the
-new plugins to initialize. Seneca also emits a `'ready'` event, which you can
-also use:
-
-```javascript
-seneca.on('ready', function (err) {...})
-```
-
-___Example: adding callback for the ready event, emitted by Seneca___
-
-They both achieve the same result. It's a matter of preference which you use.
-
-## add(pattern [, paramspec], action)
-- __pattern__ - `object` or `string`: matches the pattern specification.
-- __paramspec__ - `object`: matches the parameter specification.
-- __action__ - `function(...)`: matches the action signature.
-
-This method adds an **action** to the Seneca instance.  You provide a
-*key/value pair* pattern that Seneca matches against objects that are submitted
-using the `add` method. When an object is submitted, Seneca checks the object's
-top-level properties in alphabetical order to see if there is a matching action.
-
-The `action` parameter is a function that accepts two arguments. The first is
-the pattern object that was submitted to `act()` below. The second is a
-*callback* that you must call once your action has completed its work. The
-callback has the standard node.js signature: `function (err, result)`. The
-callback must be executed, especially to report errors. The action result is
-optional; you do not to supply one if it does not make sense for your action.
-However, if you do provide a result it needs to be an object or array, unless
-you have disabled `strict` mode.
-
-```javascript
-seneca.add({ foo:'bar' }, function (msg, respond) {
-  respond(null, { zoo: msg.zoo })
-})
-
-seneca.act({ foo:'bar', zoo:'qaz' }, function (err, out) {
-  console.log(out.zoo)
-})
-```
-
-___Example: defining an action___
-
-You can define actions any time, anywhere. They don't need to be associated with
-a plugin. Actions defined inside a plugin do get some logging metadata, however,
-so they can be easier to debug.  The key usefulness of a plugin, though, is the
-ability to ship functionality and reuse it in other services.
-
 ## act(input [, callback])
 - __input:__ - `object`: matches enumerable keys against previously added action
   patterns.  Once a match is discovered, the entire `input` object is passed to
@@ -225,30 +123,95 @@ seneca
 })
 ```
 
-## make(entity-canon [, properties])
-- __entity-canon__ - `string`
-- __properties__ - `object`: optional, default data for the new entity.
+## add(pattern [, paramspec], action)
+- __pattern__ - `object` or `string`: matches the pattern specification.
+- __paramspec__ - `object`: matches the parameter specification.
+- __action__ - `function(...)`: matches the action signature.
 
-This method creates new entities using the built-in [Data entity][] functionality.
-The `entity-canon` string is documented in [Entity canon format][]. It is
-essentially a namespaced way to refer to the same type or shape of object for
-storage purposes:
+This method adds an **action** to the Seneca instance.  You provide a
+*key/value pair* pattern that Seneca matches against objects that are submitted
+using the `add` method. When an object is submitted, Seneca checks the object's
+top-level properties in alphabetical order to see if there is a matching action.
+
+The `action` parameter is a function that accepts two arguments. The first is
+the pattern object that was submitted to `act()` below. The second is a
+*callback* that you must call once your action has completed its work. The
+callback has the standard node.js signature: `function (err, result)`. The
+callback must be executed, especially to report errors. The action result is
+optional; you do not to supply one if it does not make sense for your action.
+However, if you do provide a result it needs to be an object or array, unless
+you have disabled `strict` mode.
 
 ```javascript
-var stockItem = seneca.make('stock-item')
-stockItem.price = 1.22
-stockItem.quantity = 22
-```
-
-A set of default or pre-set options can be passed to the above method to create
-a pre-populated object:
-
-```javascript
-var stockItem = seneca.make('stock-item', {
-  stockItem.price = 0.00
-  stockItem.quantity = 0
+seneca.add({ foo:'bar' }, function (msg, respond) {
+  respond(null, { zoo: msg.zoo })
 })
 
+seneca.act({ foo:'bar', zoo:'qaz' }, function (err, out) {
+  console.log(out.zoo)
+})
+```
+
+___Example: defining an action___
+
+You can define actions any time, anywhere. They don't need to be associated with
+a plugin. Actions defined inside a plugin do get some logging metadata, however,
+so they can be easier to debug.  The key usefulness of a plugin, though, is the
+ability to ship functionality and reuse it in other services.
+
+## client(options)
+- __options:__ object, transport options.
+
+The client method connects to a listening seneca service.
+
+___Example: Accessing store in another seneca instance___
+
+Setup a sample service (e.g. `store-provider.js`), using `listen` (see section above for more info on `listen` method).
+
+```javascript
+var seneca = require('seneca')()
+
+seneca.use('level-store', {
+  folder: 'db' // make sure this folder exists
+})
+
+seneca.listen({
+  host: 'localhost',
+  port: '4050'
+})
+```
+
+Then, in another file (e.g. `main.js`).
+
+```javascript
+var seneca = require('seneca')({default_plugins:{'mem-store':false}}) // disable store in this service
+
+var client = seneca.client({
+  host: 'localhost',
+  port: '4050',
+  pins: [{role: 'entity', cmd: '*'}, {cmd: 'ensure_entity'}, {cmd: 'define_sys_entity'}]  // pin actions from other service
+})
+
+// sample db usage
+client.make$('fruit').save$({name: 'apple'}, function (err, res) {
+  if (err) console.error(err)
+
+  client.make$('fruit').load$({name: 'apple'}, function (err, res) {
+    if (err) console.error(err)
+    console.log('res:' + res)
+  })
+})
+```
+
+## close([done])
+- __done:__ function, optional, callback with signature function(err), called after all close actions are complete.
+
+The close method terminates seneca. `err` param in the callback function contains an error if one occured during termination(`{role:seneca, cmd:close}`).
+
+```javascript
+seneca.close(function (err) {
+  if (err) console.error('err: ' + err)
+})
 ```
 
 ## export(name)
@@ -313,6 +276,98 @@ seneca.use('someplugin')
 var someobj = seneca.export('someplugin')
 ```
 
+## listen(options)
+- __options__  - `object`: transport options.
+
+The listen method tells the underlying transport to start listening for traffic.
+This method is usually called last, after you have finished any setup and have
+loaded all plugins. The built-in transport supports HTTP and TCP. The default
+port is set to `10101`, while the default transport type is HTTP.
+
+```javascript
+seneca.ready(function (err) {
+  if (err) return
+
+  seneca.listen()
+})
+```
+
+___Example: calling listen on port 10101 over http___
+
+The options object for this method allows you to set the `type`, `host` and `port`
+settings for the default transport. The exact options that you need vary by
+transport plugin. If you are using a custom transport, consult its documentation
+for information on the available options.
+
+
+```javascript
+seneca.ready(function (err) {
+  if (err) return
+
+  seneca.listen({
+    type: 'tcp',
+    host: '192.168.1.200',
+    port: '4050'
+  })
+})
+```
+
+___Example: calling listen on a custom host and port over tcp___
+
+Seneca allows multiple transport types to be run simultaneously over different
+ports. This gives clients maximum flexibility with minimal setup.
+
+## log._level_([entry, ..])
+- __entry:__ JavaScript value, converted to string.
+
+The log._level_ method outputs information in similar manner to console._level_ (e.g. `console.error`). Specifying the level allows us to filter these logs.
+
+```javascript
+seneca.log.info('Seneca just finished doing this important step')
+seneca.log.warn('You should NOT do this')
+seneca.log.error('Oh no!')
+seneca.log.fatal('Terminating due to...')
+seneca.log.debug('Args for this function are: ' + someObj)
+
+```
+
+These logs can be filtered by running the app with `--seneca.log=level:{?}` flag. For example, if your source file was called `main.js`:
+
+```
+node main.js --seneca.log=level:info
+node main.js --seneca.log=level:warn
+node main.js --seneca.log=level:error
+node main.js --seneca.log=level:fatal
+node main.js --seneca.log=level:debug
+```
+
+Note that `seneca.log.debug` will not output if `--seneca.log=level:debug` flag is not used. For more information on the `--seneca.log` flag see [logging tutorial][].
+
+## make(entity-canon [, properties])
+- __entity-canon__ - `string`
+- __properties__ - `object`: optional, default data for the new entity.
+
+This method creates new entities using the built-in [Data entity][] functionality.
+The `entity-canon` string is documented in [Entity canon format][]. It is
+essentially a namespaced way to refer to the same type or shape of object for
+storage purposes:
+
+```javascript
+var stockItem = seneca.make('stock-item')
+stockItem.price = 1.22
+stockItem.quantity = 22
+```
+
+A set of default or pre-set options can be passed to the above method to create
+a pre-populated object:
+
+```javascript
+var stockItem = seneca.make('stock-item', {
+  stockItem.price = 0.00
+  stockItem.quantity = 0
+})
+```
+
 ## pin(pin-pattern)
 - __pin-pattern:__ object or string.
 
@@ -373,128 +428,70 @@ math.bar({}, function (err, res) {
 ```
 <!--[pin pattern format](/desc-pin-pattern-format)-->
 
-## log._level_([entry, ..])
-- __entry:__ JavaScript value, converted to string.
+## ready(callback)
+- __ready__ - `function (err)`: callback to execute after all plugins initialize.
+  If an error occurs during the startup process then the callback function will
+  have an Error instance passed to it.
 
-The log._level_ method outputs information in similar manner to console._level_ (e.g. `console.error`). Specifying the level allows us to filter these logs.
-
-```javascript
-seneca.log.info('Seneca just finished doing this important step')
-seneca.log.warn('You should NOT do this')
-seneca.log.error('Oh no!')
-seneca.log.fatal('Terminating due to...')
-seneca.log.debug('Args for this function are: ' + someObj)
-
-```
-
-These logs can be filtered by running the app with `--seneca.log=level:{?}` flag. For example, if your source file was called `main.js`:
-
-```
-node main.js --seneca.log=level:info
-node main.js --seneca.log=level:warn
-node main.js --seneca.log=level:error
-node main.js --seneca.log=level:fatal
-node main.js --seneca.log=level:debug
-```
-
-Note that `seneca.log.debug` will not output if `--seneca.log=level:debug` flag is not used. For more information on the `--seneca.log` flag see [logging tutorial][].
-
-## close([done])
-- __done:__ function, optional, callback with signature function(err), called after all close actions are complete.
-
-The close method terminates seneca. `err` param in the callback function contains an error if one occured during termination(`{role:seneca, cmd:close}`).
+This method takes a callback function as an argument. You should complete the
+initialization of other parts of your app, such as setting up HTTP listeners,
+inside this callback.
 
 ```javascript
-seneca.close(function (err) {
-  if (err) console.error('err: ' + err)
-})
-```
+seneca.use('mongo-store', {...})
 
-## listen(options)
-- __options__  - `object`: transport options.
-
-The listen method tells the underlying transport to start listening for traffic.
-This method is usually called last, after you have finished any setup and have
-loaded all plugins. The built-in transport supports HTTP and TCP. The default
-port is set to `10101`, while the default transport type is HTTP.
-
-```javascript
 seneca.ready(function (err) {
-  if (err) return
-
-  seneca.listen()
+  // handle err / start inserting data.
 })
 ```
 
-___Example: calling listen on port 10101 over http___
+___Example: waiting for the database connection before inserting data___
 
-The options object for this method allows you to set the `type`, `host` and `port`
-settings for the default transport. The exact options that you need vary by
-transport plugin. If you are using a custom transport, consult its documentation
-for information on the available options.
-
+You can call `ready` more than once. If you need to register additional plugins
+dynamically (this is perfectly fine), you can call `ready` again to wait for the
+new plugins to initialize. Seneca also emits a `'ready'` event, which you can
+also use:
 
 ```javascript
-seneca.ready(function (err) {
-  if (err) return
-
-  seneca.listen({
-    type: 'tcp',
-    host: '192.168.1.200',
-    port: '4050'
-  })
-})
+seneca.on('ready', function (err) {...})
 ```
 
-___Example: calling listen on a custom host and port over tcp___
+___Example: adding callback for the ready event, emitted by Seneca___
 
-Seneca allows multiple transport types to be run simultaneously over different
-ports. This gives clients maximum flexibility with minimal setup.
+They both achieve the same result. It's a matter of preference which you use.
 
+## use(module [, options])
+- __module:__ - `function`: function to execute to initialize the plugin
+- __options:__ - `object`: options for the plugin. Contents depend on plugin.
 
-## client(options)
-- __options:__ object, transport options.
+The use method *loads and registers plugins*. You can refer directly to built-in
+plugins by name; for example, [`echo`](https://github.com/rjrodger/seneca-echo),
+[`settings`](https://github.com/rjrodger/seneca-settings),
+[`mem-store`](https://github.com/senecajs/seneca-mem-store).
 
-The client method connects to a listening seneca service.
+After a plugin is installed, you can refer to it by the module name.
 
-___Example: Accessing store in another seneca instance___
-
-Setup a sample service (e.g. `store-provider.js`), using `listen` (see section above for more info on `listen` method).
+For convenience, you can omit the `seneca-` prefix on standard plugins.
 
 ```javascript
-var seneca = require('seneca')()
-
-seneca.use('level-store', {
-  folder: 'db' // make sure this folder exists
-}) 
-
-seneca.listen({
-  host: 'localhost',
-  port: '4050'
+seneca.use('mem-store', {
+  web: {
+    dump: true
+  }
 })
 ```
 
-Then, in another file (e.g. `main.js`).
+## use(name [, options])
+- __name:__ - `string`: name of the plugin. Used to build the argument to the
+  require function.
+- __options:__ - `object`: options for the plugin. Contents depend on plugin.
 
-```javascript
-var seneca = require('seneca')({default_plugins:{'mem-store':false}}) // disable store in this service
+___Example: registering the built-in mem-store plugin with custom options___
 
-var client = seneca.client({
-  host: 'localhost',
-  port: '4050',
-  pins: [{role: 'entity', cmd: '*'}, {cmd: 'ensure_entity'}, {cmd: 'define_sys_entity'}]  // pin actions from other service
-})
-
-// sample db usage
-client.make$('fruit').save$({name: 'apple'}, function (err, res) {
-  if (err) console.error(err)
-
-  client.make$('fruit').load$({name: 'apple'}, function (err, res) {
-    if (err) console.error(err)
-    console.log('res:' + res)
-  })
-})
-```
+The second argument to the `use` method is an `options` object, which contains
+configuration properties specific to the plugin. Refer to the documentation for
+each plugin to find out how to use them. If you're using the options plugin,
+properties in the options argument override externally loaded options.
 
 # Plugin Interface
 
