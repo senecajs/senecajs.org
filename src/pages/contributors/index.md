@@ -22,3 +22,6 @@ layout: main.html
 - Adrien Becchis (https://github.com/AdrieanKhisbe)
 - Kamil Mech (https://github.com/kamil-mech)
 - Karolina Szczur (https://github.com/thefoxis)
+- Cristian Kiss (https://github.com/ckiss)
+- Mircea Alexandru (https://github.com/mirceaalexandru)
+- Mihai Dima (https://github.com/mihaidma)
