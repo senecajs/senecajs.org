@@ -34,7 +34,8 @@
     },
     "metalsmith-ignore": [
       "drafts/*",
-      "unfinished/*"
+      "unfinished/*",
+      "*~"
     ]
   },
   "metalsmith-broken-link-checker": {
