@@ -78,7 +78,7 @@ var more_name_hex = {
 
 seneca.add('role:color,cmd:convert', function (msg, respond) {
   this.prior(msg, function (err, out) {
-    if (err) return respond(out)
+    if (err) return respond(err)
 
     if (!out.hex) {
       out.hex = more_name_hex[msg.name]
