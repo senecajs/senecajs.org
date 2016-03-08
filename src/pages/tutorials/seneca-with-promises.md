@@ -155,4 +155,24 @@ Promise.all(cmds)
   });
 ```
 
+### Working with entities API
+[Entities in Seneca](http://senecajs.org/tutorials/understanding-data-entities.html) provide a way to model your data in an [Active Record](http://www.martinfowler.com/eaaCatalog/activeRecord.html) fashion, where each entity exposes methods to interact with it such as `save$`, `load$`, `remove$` and `list$`.
+
+Once an entity is created, via `seneca.make`, those methods can be promisified using the same technique as before, with `Promise.promisify`.
+
+```js
+'use strict';
+const seneca = require('seneca')();
+const Promise = require('bluebird');
+  
+var entity = seneca.make('base', 'name', { some: 'data' });
+// Promisify the .save$() method
+var save$ = Promise.promisify(entity.save$, { context: entity });
+save$()
+  .then(console.log)
+  .catch(console.error);
+```
+
+You may also promisify any of the other API CRUD methods this way.
+
 [Bluebird]: https://www.npmjs.com/package/bluebird
