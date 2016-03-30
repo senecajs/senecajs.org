@@ -31,7 +31,7 @@ closer to production ready apps than trivial examples.
 
 ### Seneca examples
 For convenience, we have a number of sample apps in a single repository. This repository covers single concepts
-as well as popular plugins. See the repo at [Seneca samples][].
+as well as popular plugins. See the repo at [Seneca examples][].
 
 ### Well!
 Well! is a simple networking game implemented as a mobile web app. Its purpose is to serve as an example of a real app, built with Node.js, Sencha Touch, and Seneca. See the repo at [Well!][].
@@ -68,9 +68,9 @@ Here are some talks about Seneca and Microservices:
 [Understanding data entities]: /tutorials/understanding-data-entities.html
 [Understanding query syntax]: /tutorials/understanding-query-syntax.html
 [Understanding prior actions]: /tutorials/understanding-prior-actions.html
-[Seneca samples]: https://github.com/rjrodger/seneca-examples
+[Seneca examples]: https://github.com/rjrodger/seneca-examples
 [Well!]: https://github.com/nearform/well
-[nodezoo]: https://github.com/rjrodger/nodezoo
+[nodezoo]: https://github.com/nodezoo/nodezoo-workshop
 
 
 [How to build big apps - Richard Rodger (Node Dublin 2012)]: https://www.youtube.com/watch?v=Qv0VQf7iJGQ
