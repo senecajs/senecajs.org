@@ -125,6 +125,4 @@ SOA Patterns provides architectural guidance through patterns and anti-patterns.
 
 # List Your Book!
 
-Submit a [github issue](https://github.com/senecajs/senecajs.org/issues) and we'll add you book. Please mark with prefix: `BOOK:`. Thanks!
-
-
+Submit a [github issue](https://github.com/senecajs/senecajs.org/issues) and we'll add your book. Please mark with prefix: `BOOK:`. Thanks!

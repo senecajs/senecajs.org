@@ -14,8 +14,9 @@
 .icon-github,
 .icon-twitter,
 .icon-docs {
+  height: 33px;
   background-position: 0 0;
-  
+
   &:hover {
     background-position: 0 -34px;
   }
@@ -24,11 +25,11 @@
 .icon-download,
 .icon-start,
 .icon-updates {
-  height: 40px; 
+  height: 40px;
 }
 
 .icon-start {
-  width: 23px; 
+  width: 23px;
   background-image: url("/images/icon-start.svg");
 }
 
