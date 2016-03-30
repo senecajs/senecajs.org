@@ -91,8 +91,5 @@ Things that don't work well:
      linear construction of your service from a list of plugins.
 
 Looking for an example structure to copy? The
-[nodezoo workshop](https://github.com/rjrodger/nodezoo) is a good
+[nodezoo workshop](https://github.com/nodezoo/nodezoo-workshop) is a good
 place to find one.
-
-
-
