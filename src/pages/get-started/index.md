@@ -30,7 +30,7 @@ This guide will walk you through seneca principles and teach you how to build mi
 
 All the samples are available on the [getting-started github repository][getting-started-repo],
 and you might like to have the [api documentation][api-doc] open at your side.
-If you want to practice, a more interactive tutorial you could also the seneca Nodeshool workshop,
+If you want to practice, a more interactive tutorial you could also try the seneca Nodeshool workshop,
 [*Seneca in practice*][seneca-in-practice].
 
 And now, let's build some microservices!
@@ -84,7 +84,7 @@ The `seneca.add` method adds a new action pattern to the Seneca instance. It has
 The action function has two parameters:
 
 * `msg`: the matching inbound message (provided as a plain object).
-* `respond`: a callback function that you use to provide a respond to the message.
+* `respond`: a callback function that you use to provide a response to the message.
 
 The respond function is a callback with the standard `error, result` signature.
 
@@ -405,7 +405,7 @@ seneca
      )
 ```
 
-The Seneca instance provided to an action function via the the `this` context variable has a special `prior` method that calls the previous action definition for the current action pattern.
+The Seneca instance provided to an action function via the `this` context variable has a special `prior` method that calls the previous action definition for the current action pattern.
 
 The prior function has parameters:
 
@@ -646,7 +646,7 @@ The `seneca.wrap` method matches a set of patterns and overrides all of them wit
 
 * `pin`: a pin is a pattern-matching pattern.
 * `action`: action extension function.
-*
+
 A `pin` is a pattern that matches other patterns (it "pins" them). The pin `role:math` matches the patterns `role:math,cmd:sum` and `role:math,cmd:product` that are registered with Seneca.
 
 In this case, you use `seneca.wrap` to make sure that the `left` and `right` properties are parsed as numeric values, even if they are provided as strings.
@@ -1245,9 +1245,9 @@ $ curl -d '{"id":"mbm07t"}' -H "content-type:application/json" http://localhost:
 {"when":1436536799159,"product":"mbm07t","name":"Apple","price":1.99,"id":"ny09dx"}
 ```
 
-You need to do this using `curl` on the command line, as it has to be a HTTP POST request. Also note the need for the corrent content type header: `application/json`.
+You need to do this using `curl` on the command line, as it has to be a HTTP POST request. Also note the need for the correct content type header: `application/json`.
 
-Look at the logging output of all services. You'll be able to trace the action identifiers and transaction identifiers accross all the services.
+Look at the logging output of all services. You'll be able to trace the action identifiers and transaction identifiers across all the services.
 
 Don't forget that the _math_ service still works:
 
