@@ -166,7 +166,7 @@ The client method connects to a listening seneca service.
 
 ___Example: Accessing store in another seneca instance___
 
-Setup a sample service (e.g. `store-provider.js`), using `listen` (see section above for more info on `listen` method).
+Setup a sample service (e.g. `store-provider.js`), using `listen` (see section below for more info on `listen` method).
 
 ```javascript
 var seneca = require('seneca')()
