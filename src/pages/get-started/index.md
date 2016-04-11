@@ -1245,7 +1245,7 @@ $ curl -d '{"id":"mbm07t"}' -H "content-type:application/json" http://localhost:
 {"when":1436536799159,"product":"mbm07t","name":"Apple","price":1.99,"id":"ny09dx"}
 ```
 
-You need to do this using `curl` on the command line, as it has to be a HTTP POST request. Also note the need for the correct content type header: `application/json`.
+You can do this using `curl` on the command line, to create a HTTP POST request. Note the need for the correct content type header: `application/json`.
 
 Look at the logging output of all services. You'll be able to trace the action identifiers and transaction identifiers across all the services.
 
@@ -1259,14 +1259,12 @@ http://localhost:3000/api/calculate/sum?left=2&right=3 → {"answer":5}
 
 Changes to one service do not affect the others. This is how microservices give you [continuous delivery][].
 
-[microservice system]: http://martinfowler.com/articles/microservices.html
 [getting-started-repo]: https://github.com/senecajs/getting-started
 [seneca-in-practice]: https://github.com/senecajs/seneca-in-practice
 [sum.js]: https://github.com/senecajs/getting-started/blob/master/sum.js
 [api-doc]: http://senecajs.org/api/
 [Node.js]: https://nodejs.org/en/
 [Error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[sum-product.js]: https://github.com/senecajs/getting-started/blob/master/sum-product.js
 [sum-integer.js]: https://github.com/senecajs/getting-started/blob/master/sum-integer.js
 [jsonic]: https://github.com/rjrodger/jsonic
 [sum-reuse.js]: https://github.com/senecajs/getting-started/blob/master/sum-reuse.js
@@ -1300,9 +1298,7 @@ Changes to one service do not affect the others. This is how microservices give 
 [assert]: https://nodejs.org/api/assert.html
 [shop.js]: https://github.com/senecajs/getting-started/blob/master/shop.js
 [shop-stats.js]: https://github.com/senecajs/getting-started/blob/master/shop-stats.js
-[Docker]: https://www.docker.com
 [shop-service.js]: https://github.com/senecajs/getting-started/blob/master/shop-service.js
-[math-pin-service.js]: https://github.com/senecajs/getting-started/blob/master/math-pin-service.js
 [math-pin-client.js]: https://github.com/senecajs/getting-started/blob/master/math-pin-client.js
 [app-all.js]: https://github.com/senecajs/getting-started/blob/master/app-all.js
 [message bus]: https://www.npmjs.com/package/seneca-rabbitmq-transport
@@ -1311,4 +1307,3 @@ Changes to one service do not affect the others. This is how microservices give 
 [service discovery]: https://www.consul.io
 [continuous delivery]: https://www.thoughtworks.com/talks/software-development-21st-century-xconf-europe-2014
 [api-all.js]: https://github.com/senecajs/getting-started/blob/master/api-all.js
-[app-all.js]: https://github.com/senecajs/getting-started/blob/master/app-all.js
