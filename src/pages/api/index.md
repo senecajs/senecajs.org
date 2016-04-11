@@ -16,7 +16,7 @@ love to talk!
   result is provided by the `action` handler then it will be passed as the
   second argument.
 
-The act method is used to fire actions defined using `add`. It is composed of input pattern and a callback. When pattern is matched against an action, that action is performed and the result is provided in the callback.
+The act method is used to fire actions defined using `add`. It is composed of an input pattern and a callback. When a pattern is matched against an action, that action is performed and the result is provided in the callback.
 
 ___Example: Simple___
 
@@ -138,7 +138,7 @@ the pattern object that was submitted to `act()` below. The second is a
 *callback* that you must call once your action has completed its work. The
 callback has the standard node.js signature: `function (err, result)`. The
 callback must be executed, especially to report errors. The action result is
-optional; you do not to supply one if it does not make sense for your action.
+optional; you do not have to supply one if it does not make sense for your action.
 However, if you do provide a result it needs to be an object or array, unless
 you have disabled `strict` mode.
 
