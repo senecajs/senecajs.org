@@ -15,6 +15,10 @@
   margin-bottom: $ui-spacing;
 }
 
+.panel-equal-height {
+  display: flex;
+}
+
 .panel-highlighted {
   padding: $ui-spacing $ui-spacing-half;
   background-color: $green-lighter;
