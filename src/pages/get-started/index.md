@@ -69,7 +69,7 @@ The example code to try this out is in [sum.js][]. To run the code, follow these
 When you run `sum.js`, you get the following output:
 
 ``` js
-2015-07-02T12:38:08.788Z ... INFO  hello  ...
+2016 ... INFO  hello  ...
 {answer: 3}
 ```
 
@@ -260,7 +260,7 @@ seneca.act({role: 'math', cmd: 'sum', left: 1.5, right: 2.5, integer: true}, con
 And the output it generates is:
 
 ``` js
-2015-07-02T15:34:06.094Z  ...  INFO  hello  ...
+2016  ...  INFO  hello  ...
 null { answer: 4 }
 null { answer: 4 }
 null { answer: 4 }
@@ -446,7 +446,7 @@ The sample code (in file [minimal-plugin.js][]) produces the following output:
 
 ``` js
 $ node minimal-plugin.js
-2015-07-03T15:23:00.038Z    gh7s1570egff/1435936980028/65900/-    INFO    hello    Seneca/0.6.2/gh7s1570egff/1435936980028/65900/-
+2016 ...    INFO    hello  ...
 { foo: 'bar' }
 ```
 
@@ -461,11 +461,11 @@ You can narrow this down by [grepping][] the log output for log lines relevant t
 
 ``` js
 $ node minimal-plugin.js --seneca.log.all | grep plugin | grep DEFINE
-2015...    3qf7...    DEBUG    plugin    basic           DEFINE    {}
-2015...    3qf7...    DEBUG    plugin    transport       DEFINE    {}
-2015...    3qf7...    DEBUG    plugin    web             DEFINE    {}
-2015...    3qf7...    DEBUG    plugin    mem-store       DEFINE    {}
-2015...    3qf7...    DEBUG    plugin    minimal_plugin  DEFINE    {foo=bar}
+2016...    3qf7...    DEBUG    plugin    basic           DEFINE    {}
+2016...    3qf7...    DEBUG    plugin    transport       DEFINE    {}
+2016...    3qf7...    DEBUG    plugin    web             DEFINE    {}
+2016...    3qf7...    DEBUG    plugin    mem-store       DEFINE    {}
+2016...    3qf7...    DEBUG    plugin    minimal_plugin  DEFINE    {foo=bar}
 ```
 
 You can see that Seneca loads four _built-in_ plugins by default: [basic][], [transport][],[web][] and [mem-store][]. These provide core functionalities for basic microservices. You can also see that your `minimal_plugin` is in the list as well, and also shown are the options you provided: `{foo=bar}`. The name `minimal_plugin` is obtained from the plugin definition function name, so you should always give your plugin definition function a name.
@@ -494,7 +494,7 @@ Running this file [math-plugin.js][] generates the following output:
 
 ``` js
 $ node math-plugin.js
-2015-07-03T15:43:13.067Z    xn5vquvubvjq/1435938193058/65962/-    INFO    hello    Seneca/0.6.2/xn5vquvubvjq/1435938193058/65962/-
+2016...    INFO    hello   ...
 null { answer: 3 }
 ```
 
@@ -502,17 +502,17 @@ Let's look at the logging output relevant to this plugin by grepping for the str
 
 ``` js
 $ node math-plugin.js --seneca.log.all | grep math
-2015...    alqs...    DEBUG    delegate  {plugin$={name=math,tag=undefined},ungate$=true,fatal$=true}    29ny56
-2015...    alqs...    DEBUG    register  init     math
-2015...    alqs...    DEBUG    plugin    math     DEFINE    {}
-2015...    alqs...    DEBUG    plugin    math     ADD    qlh13h47d0nu    cmd:sum,role:math    sum
-2015...    alqs...    DEBUG    plugin    math     ADD    10lk4seu3aee    cmd:product,role:math    product
-2015...    alqs...    DEBUG    plugin    math     options    set    {math={}}
-2015...    alqs...    DEBUG    act                -    -    DEFAULT    {init=math,tag=}
-2015...    alqs...    DEBUG    register  ready    math    {}
-2015...    alqs...    DEBUG    register  install  math    {exports=[]:}
-2015...    alqs...    DEBUG    act       math     -    IN    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {role=math,cmd=sum,left=1,right=2}    ENTRY    A;qlh13h47d0nu    -
-2015...    alqs...    DEBUG    act       math     -    OUT    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {answer=3}    EXIT    A;qlh13h47d0nu    5
+2016...    alqs...    DEBUG    delegate  {plugin$={name=math,tag=undefined},ungate$=true,fatal$=true}    29ny56
+2016...    alqs...    DEBUG    register  init     math
+2016...    alqs...    DEBUG    plugin    math     DEFINE    {}
+2016...    alqs...    DEBUG    plugin    math     ADD    qlh13h47d0nu    cmd:sum,role:math    sum
+2016...    alqs...    DEBUG    plugin    math     ADD    10lk4seu3aee    cmd:product,role:math    product
+2016...    alqs...    DEBUG    plugin    math     options    set    {math={}}
+2016...    alqs...    DEBUG    act                -    -    DEFAULT    {init=math,tag=}
+2016...    alqs...    DEBUG    register  ready    math    {}
+2016...    alqs...    DEBUG    register  install  math    {exports=[]:}
+2016...    alqs...    DEBUG    act       math     -    IN    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {role=math,cmd=sum,left=1,right=2}    ENTRY    A;qlh13h47d0nu    -
+2016...    alqs...    DEBUG    act       math     -    OUT    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {answer=3}    EXIT    A;qlh13h47d0nu    5
 ```
 
 There is detailed logging information on the plugin definition and initialization, but you can mostly ignore this for now. The most interesting lines are the ones showing the addition of action patterns within the _math_ plugin, and then the execution of the `role:math,cmd:sum,left:1,right:2` action, showing the inbound and outbound messages:
@@ -662,7 +662,7 @@ We're just using it to show the action tree:
 
 ``` js
 $ node math-tree.js --seneca.print.tree
-2015-07-09T15:21:31.158Z 9vjqzroin2k4/1436455291148/78025/- INFO    hello    Seneca/0.6.2/9vjqzroin2k4/1436455291148/78025/-
+2016 ... INFO    hello    ...
 Seneca action patterns for instance: 9vjqzroin2k4/1436455291148/78025/-
 ├─┬ cmd:sum
 │ └─┬ role:math
@@ -945,7 +945,7 @@ You'll need to persist your data. Especially if you plan to build real-world sys
 
 The pattern matching approach also means you can postpone the debate about microservice data — do services "own" data, do they access a shared database, etc. The pattern matching approach means you can reconfigure your system any which way later on.
 
-Seneca provides a simple data abstraction layer ("ORM"), based on the following operations:
+[seneca-entity][] provides a simple data abstraction layer ("ORM"), based on the following operations:
 
 * **load**: load an entity by identifier
 * **save**: create or update (if you provide an identifier) an entity
@@ -961,27 +961,30 @@ The patterns are:
 
 A plugin can provide access to a database (say [MySQL][]) by providing implementations of these patterns.
 
-The reason that Seneca supports data persistence as a core feature is that it makes microservice development much easier when data persistence is provided by the same mechanism as everything else: pattern-matched messages.
+Microservice development is made much easier when data persistence is provided by the same mechanism as everything else: pattern-matched messages.
 
-Using the data persistence patterns directly can become tedious, so Seneca also provides a more familiar [ActiveRecord][]-style interface. To create a record object, you call the `seneca.make` method. The record object has methods `load$`, `save$`, `list$` and `remove$` (the trailing $ avoids clashes with data fields). The data fields are just the object properties.
+Using the data persistence patterns directly can become tedious, so [seneca-entity][] also provides a more familiar [ActiveRecord][]-style interface. To create a record object, you call the `seneca.make` method. The record object has methods `load$`, `save$`, `list$` and `remove$` (the trailing $ avoids clashes with data fields). The data fields are just the object properties.
+
+To use [seneca-entity][] include the module in your package.json and add a seneca.use statement to require it into your seneca instance.
 
 Let's create and save a simple data entity that stores "product" details:
 
 ``` js
 var seneca = require('seneca')()
+seneca.use('entity')
 
 var product = seneca.make('product')
 product.name = 'Apple'
 product.price = 1.99
 
 // sends role:entity,cmd:save,name:product messsage
-product.save$(console.log)
+product.save$( console.log )
 ```
 
 Run the file <a href="">product.js</a> to test this. You'll see the output:
 
 ``` js
-2015-07-10T10:33:18.195Z f7ajdotgpxu9/1436524398186/79031/- INFO    hello    Seneca/0.6.2/f7ajdotgpxu9/1436524398186/79031/-
+2016 ... INFO    hello    ...
 null $-/-/product:{id=3i402d;name=Apple;price=1.99}
 ```
 
@@ -994,30 +997,30 @@ Because all data operations go via the same set of messages, you can very easily
 Let's build a little shop, and integrate it into our existing microservice system. First, here's a simple shop plugin, with some messages for adding products, getting product details, and making a purchase ([shop.js][]):
 
 ``` js
-module.exports = function (options) {
+module.exports = function( options ) {
 
-  this.add('role:shop,get:product', function (msg, respond) {
-    this.make('product').load$(msg.id, respond)
+  this.add( 'role:shop,get:product', function( msg, respond ) {
+    this.make( 'product' ).load$( msg.id, respond )
   })
 
-  this.add('role:shop,add:product', function (msg, respond) {
-    this.make('product').data$(msg.data).save$(respond)
+  this.add( 'role:shop,add:product', function( msg, respond ) {
+    this.make( 'product' ).data$(msg.data).save$(respond)
   })
 
-  this.add('role:shop,cmd:purchase', function (msg, respond) {
-    this.make('product').load$(msg.id, function (err, product) {
-      if (err) return respond(err)
+  this.add( 'role:shop,cmd:purchase', function( msg, respond ) {
+    this.make( 'product' ).load$(msg.id, function( err, product ) {
+      if( err ) return respond( err )
 
       this
-        .make('purchase')
+        .make( 'purchase' )
         .data$({
           when:    Date.now(),
           product: product.id,
           name:    product.name,
           price:   product.price,
         })
-        .save$(function (err, purchase) {
-          if (err) return respond(err)
+        .save$( function( err, purchase ) {
+          if( err ) return respond( err )
 
           this.act('role:shop,info:purchase',{purchase:purchase})
           respond(null,purchase)
@@ -1025,7 +1028,7 @@ module.exports = function (options) {
     })
   })
 
-  this.add('role:shop,info:purchase', function (msg, respond) {
+  this.add( 'role:shop,info:purchase', function( msg, respond ) {
     this.log.info('purchase',msg.purchase)
     respond()
   })
@@ -1036,7 +1039,7 @@ The `role:shop,get:product` pattern retrieves a product from the "database". You
 
 The `role:shop,add:product` pattern adds a new product to the "database". You provide the data fields via the `data` object property. The `data$` method is a shortcut for setting all the data fields from the provided object (in this case, `msg.data`). Again, respond is passed along.
 
-The `role:shop,cmd:purchase` pattern creates a new row in the `purchase` table (a small part of what would happen in the real world when you hit the _Checkout_ button). The `product` identifier and details for that transaction are recorded (prices change!). The action function also emits a `role:shop,info:purchase` message, **but does not expect a response**. This a [common microservice pattern][] — letting the world know that something has happened, but not caring who gets the message.
+The `role:shop,cmd:purchase` pattern creates a new row in the `purchase` table (a small part of what would happen in the real world when you hit the _Checkout_ button). The `product` identifier and details for that transaction are recorded (prices change!). The action function also emits a `role:shop,info:purchase` message, **but does not expect a response**. This is a [common microservice pattern][] — letting the world know that something has happened, but not caring who gets the message.
 
 Finally, you provide a default implementation for the `role:shop,info:purchase`message. This is useful for debugging and unit testing. In the example code, you can see that it uses the `seneca.log.info` method to log the purchase event. The `seneca.log` object provides a method for each of the log levels: `debug, info, warn, error, fatal`. These methods also annotate your log entries with the name of your plugin.
 
@@ -1046,38 +1049,39 @@ Let's create simple unit test for this plugin. Writing unit tests for Seneca plu
 var assert = require('assert')
 
 var seneca = require('seneca')()
+      .use('entity')
       .use('shop')
 
       // uncomment to send messages to the shop-stats service
       // .client({port:9003,pin:'role:shop,info:purchase'})
 
-      .error(assert.fail)
+      .error( assert.fail )
 
 add_product()
 
 function add_product() {
   seneca.act(
-    'role:shop,add:product,data:{name:Apple, price:1.99}',
-    function (err, save_apple) {
+    'role:shop,add:product,data:{name:Apple,price:1.99}',
+    function( err, save_apple ) {
 
       this.act(
         'role:shop,get:product', {id:save_apple.id},
-        function (err, load_apple) {
+        function( err, load_apple ) {
 
-          assert.equal(load_apple.name, save_apple.name)
+          assert.equal( load_apple.name, save_apple.name )
 
-          do_purchase(load_apple)
+          do_purchase( load_apple )
         })
     })
 }
 
-function do_purchase(apple) {
+function do_purchase( apple ) {
   seneca.act(
-    'role:shop,cmd:purchase',{id: apple.id},
-    function (err, purchase) {
-      assert.equal(purchase.product, apple.id)
+    'role:shop,cmd:purchase',{id:apple.id},
+    function( err, purchase) {
+      assert.equal( purchase.product, apple.id )
     }
- )
+  )
 }
 ```
 
@@ -1085,8 +1089,8 @@ This code uses the built-in Node.js [assert][] module. It loads the shop plugin,
 
 ```
 $ node shop-test.js
-20.. h3.. INFO hello  Seneca/0.6.2/h3s0y3fckpde/1436528824335/79305/-
-20.. h3.. INFO plugin shop ACT gj.. info:purchase,role:shop purchase {when:1436528824554,product:90vzcc,name:Apple,price:1.99,id:ntzosx}
+20.. h3.. INFO hello  ...
+20.. h3.. INFO plugin shop ACT gj.. info:purchase,role:shop purchase {when:1436528824554,product:90vzcc,name:Apple,price:1.99,id:3i402d}
 ```
 
 This output includes the log entry that you created with seneca.log.info in the implementation of the `role:shop,info:purchase` action.
@@ -1096,7 +1100,7 @@ Let's run a separate service to capture the purchase message events. For the sak
 ``` js
 var stats = {}
 require('seneca')()
-  .add('role:shop,info:purchase',function (msg, respond) {
+  .add('role:shop,info:purchase',function( msg, respond ) {
     var product_name = msg.purchase.name
     stats[product_name] = stats[product_name] || 0
     stats[product_name]++
@@ -1119,11 +1123,11 @@ And then run both:
 
 ``` js
 $ node shop-test.js
-20.. j0.. INFO hello  Seneca/0.6.2/j0z5x7zz2r0l/1436529606670/79365/-
+20.. j0.. INFO hello  ...
 20.. j0.. INFO client {port:9003,pin:role:shop,info:purchase}
 
 $ node shop-stats.js
-20.. wb.. INFO hello  Seneca/0.6.2/wbxim58g0vgd/1436529589836/79362/-
+20.. wb.. INFO hello  ...
 20.. wb.. INFO listen {port:9003,pin:role:shop,info:purchase}
 { Apple: 1 }
 ```
@@ -1152,10 +1156,11 @@ In this example, we're using `--seneca.log.all` to log at the highest level of d
 We need a [shop-service.js][]:
 
 ``` js
-require('seneca')()
-  .use('shop')
-  .listen({ port:9002, pin:'role:shop' })
-  .client({ port:9003, pin:'role:shop,info:purchase' })
+require( 'seneca' )()
+  .use('entity')
+  .use( 'shop' )
+  .listen( { port:9002, pin:'role:shop' } )
+  .client( { port:9003, pin:'role:shop,info:purchase' } )
 ```
 
 This service listens for inbound `role:shop` messages, **but** sends any `role:shop,info:purchase` messages out onto the network. Seneca lets you mix and match `client` and `listen` configurations. **Remember, the client and listen pins must match**.
@@ -1173,42 +1178,42 @@ The shop functionality is exposed via the URL endpoints `/api/shop/get` and `/ap
 ``` js
   ...
 
-  this.add('role:api,path:shop', function (msg, respond) {
-    var shopmsg = { role:'shop', id:msg.id }
-    if ('get'      == msg.operation) shopmsg.get = 'product'
-    if ('purchase' == msg.operation) shopmsg.cmd = 'purchase'
+  this.add( 'role:api,path:shop', function( msg, respond ) {
+    var shopmsg = { role:'shop', id:msg.pid }
+    if( 'get'      == msg.operation ) shopmsg.get = 'product'
+    if( 'purchase' == msg.operation ) shopmsg.cmd = 'purchase'
 
-    this.act(shopmsg, respond)
+    this.act( shopmsg, respond )
   })
 
-
-  this.add('init:api', function (msg, respond) {
+  this.add( 'init:api', function( msg, respond ) {
 
     ...
 
-    this.act('role:web',{use:{
-      prefix: '/api',
-      pin:    'role:api,path:*',
-      map: {
-        shop: { GET:true, POST:true, suffix:'/:operation' },
-      }
-    }})
+  this.act('role:web',{use:{
+    prefix: '/api',
+    pin:    'role:api,path:*',
+    map: {
+      shop: { GET:true, POST:true, suffix:'/:operation' },
+    }
+  }})
 
-    respond()
-  })
+  respond()
+})
 ```
 
 Finally, we need to update the web server to send `role:shop` messages to the `shop-service` ([app-all.js][]):
 
 ``` js
-var seneca = require('seneca')()
-      .use('api-all')
-      .client({ type:'tcp', pin:'role:math' })
-      .client({ port:9002,  pin:'role:shop' })
+var seneca = require( 'seneca' )()
+      .use('entity')
+      .use( 'api-all' )
+      .client( { type:'tcp', pin:'role:math' } )
+      .client( { port:9002,  pin:'role:shop' } )
 
-var app = require('express')()
-      .use(require('body-parser').json())
-      .use(seneca.export('web'))
+var app = require( 'express' )()
+      .use( require('body-parser').json() )
+      .use( seneca.export( 'web' ) )
       .listen(3000)
 
 // create a dummy product
@@ -1235,17 +1240,17 @@ Copy the product identifier, in this case `mbm07t`. You can use this to exercise
 First, get the product details:
 
 ``` js
-http://localhost:3000/api/shop/get?id=mbm07t → {"name":"Apple","price":1.99,"id":"mbm07t"}
+http://localhost:3000/api/shop/get?pid=mbm07t → {"name":"Apple","price":1.99,"id":"mbm07t"}
 ```
 
 Then, make a purchase:
 
 ``` js
-$ curl -d '{"id":"mbm07t"}' -H "content-type:application/json" http://localhost:3000/api/shop/purchase
+$ curl -d '{"pid":"mbm07t"}' -H "content-type:application/json" http://localhost:3000/api/shop/purchase
 {"when":1436536799159,"product":"mbm07t","name":"Apple","price":1.99,"id":"ny09dx"}
 ```
 
-You can do this using `curl` on the command line, to create a HTTP POST request. Note the need for the correct content type header: `application/json`.
+Using `curl` on the command line, you can create a HTTP POST request to make a purchase. Note the need for the correct content type header: `application/json`.
 
 Look at the logging output of all services. You'll be able to trace the action identifiers and transaction identifiers across all the services.
 
@@ -1261,6 +1266,7 @@ Changes to one service do not affect the others. This is how microservices give 
 
 [getting-started-repo]: https://github.com/senecajs/getting-started
 [seneca-in-practice]: https://github.com/senecajs/seneca-in-practice
+[seneca-entity]: https://github.com/senecajs/seneca-entity
 [sum.js]: https://github.com/senecajs/getting-started/blob/master/sum.js
 [api-doc]: http://senecajs.org/api/
 [Node.js]: https://nodejs.org/en/
