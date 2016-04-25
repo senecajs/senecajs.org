@@ -5,7 +5,7 @@ title: Seneca Roadmap
 
 ## Seneca Roadmap
 
-Seneca tries to follow a quartly release schedule with major changes gated behind subsequented releases.
+Seneca tries to follow a quarterly release schedule with major changes gated behind subsequent releases.
 This is to enforce the continuity of development, and to ensure that semver is properly followed.
 These goals may change at any time based on challenges encountered or contributions from the community.
 
