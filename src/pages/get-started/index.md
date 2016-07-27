@@ -2,79 +2,56 @@
 layout: main.html
 ---
 # Getting started
-Welcome to the Seneca _Getting started_ guide! This guide assumes that you have already installed [Node.js][].
+Welcome to the Seneca _Getting started_ guide! This guide assumes that you are already familiar
+with [Node.js][] and how to build simple applications with it.
 
 ## What is Seneca?
+Seneca lets you build message based microservice systems with ease. You don't need to know where
+the other services are located, how many of them there are, or what they do. Everything external to
+your business logic - such as databases, caches and third-party integrations - is likewise hidden
+behind microservices.
 
-_Seneca_ lets you build a microservices system without worrying about production. You don't need to know where the other services are located, how many of them there
-are, or what they do. Everything external to your business logic - such as databases, caches and third-party integrations - is likewise hidden behind microservices.
+This decoupling makes your system easy to continuously build and change. It works because Seneca
+has the following three core features:
 
-This decoupling makes your system easy to continuously build and change. It works because Seneca has the following two core features:
+- __Pattern matching__: Instead of fragile service discovery, you just let the world know what sort of messages you care about.
+- __Transport independence__: You can send messages between services in many ways, all hidden from your business logic.
+- __Componentisation__: Functionality is expressed as a set of plugins which can be composed together as microservices.
 
-- **Transport independence**: You can send messages between services in many ways, all hidden from your business logic.
-
-- **Pattern matching**: Instead of fragile service discovery, you just let the world know what sort of messages you care about.
-
-*Messages* are JSON documents. They can have any internal structure you like. Messages can be sent via HTTP/S,
-TCP connections, message queues, publish/subscribe services or any mechanism that moves bits
-around. From your perspective as the writer of a service, you just send messages out into the
-world. You don't need to know which services receive them.
+Messages are JSON objects. They can have any internal structure you like. Messages can be sent via
+HTTP/S, TCP, message queues, publish/subscribe services or any mechanism that moves bits around.
+From your perspective as the writer of a service, you just send messages out into the world. You
+don't need to know which services receive them.
 
 Then there are the messages you'd like to receive. You specify the property patterns that you care
-about, and Seneca (with a little configuration help) makes sure that you get any messages sent by other services that match those patterns. The patterns are very simple: just a list of key-value
-pairs that must match the top-level properties of the JSON message document.
-
-## About this Guide
+about, and Seneca (with a little configuration help) makes sure that you get any messages sent by
+other services that match those patterns. The patterns are very simple: just a list of key-value
+pairs that must match the top-level properties of the JSON message.
 
 This guide will walk you through seneca principles and teach you how to build microservices with it.
 
-All the samples are available on the [getting-started github repository][getting-started-repo],
-and you might like to have the [api documentation][api-doc] open at your side.
-If you want to practice, a more interactive tutorial you could also try the seneca Nodeshool workshop,
-[*Seneca in practice*][seneca-in-practice].
+Let's build some microservices!
 
-And now, let's build some microservices!
-
-## A simple microservice
-Let's start with some code. Here's a service that sums two numbers:
+## Patterns
+Let's start with some code. We will create two microservices, one that will do math operations and
+another that makes use
 
 ``` js
 var seneca = require('seneca')()
 
-seneca.add({role: 'math', cmd: 'sum'}, function (msg, respond) {
-  var sum = msg.left + msg.right
-  respond(null, {answer: sum})
+seneca.add('role:math,cmd:sum', (msg, reply) => {
+  reply(null, {answer: (msg.left + msg.right)})
 })
-```
 
-To call this service, you write:
-
-``` js
 seneca.act({role: 'math', cmd: 'sum', left: 1, right: 2}, function (err, result) {
   if (err) return console.error(err)
   console.log(result)
 })
 ```
 
-For the moment, this is all happening in the same process, without network traffic. In-process function calls are a type of message transport too!
 
-The example code to try this out is in [sum.js][]. To run the code, follow these steps:
-
-1. Open a terminal and cd to your projects folder.
-2. Run `git clone https://github.com/senecajs/getting-started`.
-3. cd into the _getting-started_ folder.
-4. Run `npm install` to install the required modules, including Seneca.
-5. Run `node sum.js`.
-
-When you run `sum.js`, you get the following output:
-
-``` js
-2016 ... INFO  hello  ...
-{answer: 3}
-```
-
-The first line logs information that Seneca prints to let you know that it has started. The
-second line is the result you get after the message has been matched and processed.
+For the moment, this is all happening in the same process, without network traffic. In-process
+function calls are a type of message transport too!
 
 The `seneca.add` method adds a new action pattern to the Seneca instance. It has two parameters:
 
