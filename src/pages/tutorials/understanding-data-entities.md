@@ -1,36 +1,41 @@
 ---
 layout: main.html
 ---
-# Understanding Data Entities
+# Entity
 The Seneca framework provides a data entity API based loosely on the [ActiveRecord style][]. Here's how it works.
 
 ## The Seneca Philosophy
 The Seneca framework is defined by a philosophy that [actions are better than objects][].
 
-The only first-class citizens in the Seneca framework are _actions_. You register actions in Seneca by defining a set of key-value pairs that the action matches.
-When a JSON document is submitted to Seneca, it triggers an action if a matching set of key-value pairs is found. The action returns another JSON document.
+The only first-class citizens in the Seneca framework are _actions_. You register actions
+in Seneca by defining a set of key-value pairs that the action matches. When a JSON
+object is submitted to Seneca, it triggers an action if a matching set of key-value pairs
+is found. The action returns another JSON object.
 
-Actions can call other actions, and wrap existing actions. Groups of actions can work together to provide specific functionality, such as user management. Such groups are called __plugins__.
-To keep things organized, a few conventions are used. A `role` property identifies a specific area of functionality. A `cmd` property identifies a specific action.
+Actions can call other actions, and wrap existing actions. Groups of actions can work
+together to provide specific functionality, such as user management. Such groups are
+called __plugins__. To keep things organized, a few conventions are used. A `role`
+property identifies a specific area of functionality. A `cmd` property identifies a
+specific action.
 
 For example:
 
 ``` js
-seneca.act( {role:'entity', cmd:'save', ent:{...}},
-            function(err,result){ ... } )
+seneca.act('role:entity,cmd:save', {ent:{...}}, (err,reply) => {...})
 ```
 
-
-This action will save data entities to persistent storage, as part of the group of actions that perform the `role` of data persistence.
-The `ent` property is an object containing the data of the data entity to save.
-
+This action will save data entities, as part of the group of actions that perform the
+`role` of data persistence. The `ent` property is an object containing the data of the
+data entity to save.
 
 In Seneca, data persistence is provided by a set of actions. These are:
-`save`, `load`, `list`, `remove`. This provides a consistent interface for all other actions that need to persist data.
+`save`, `load`, `list`, `remove`. This provides a consistent interface
+for all other actions that need to persist data.
 
 
-As convenience, these data entity actions are also available in the form of data entity objects, that expose the
-`cmd`'s as methods - just like the ActiveRecord pattern. However, you cannot add business logic to these objects.
+As convenience, these data entity actions are also available in the form of data entity
+objects, that expose the `cmd`'s as methods - just like the ActiveRecord pattern. However,
+you cannot add business logic to these objects.
 
 __Business logic belongs inside actions!__
 
@@ -40,6 +45,9 @@ First you need a Seneca instance:
 
 ``` js
 var seneca = require('seneca')()
+var entities = require('seneca-entity')
+
+seneca.use(entities)
 ```
 
 Then you can create data entity objects:
@@ -80,7 +88,7 @@ foo.save$(function(err,foo){
 ```
 
 
-The `save$` method invokes the `role:entity, cmd:save`
+The `save$` method invokes the `role:entity,cmd:save`
 action, passing in the foo object as the value of `ent` argument.
 
 
