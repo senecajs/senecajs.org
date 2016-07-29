@@ -6,13 +6,13 @@
 
 @import "../globals/variables";
 
-// Shared 
+// Shared
 input, select {
   border: $ui-border;
   border-radius: $ui-radius;
   padding: $ui-spacing-third;
   transition: all .3s ease-in;
-  
+
   &:focus {
     border: 1px solid $green-light;
     box-shadow: 0 0 5px $green-light;
@@ -39,7 +39,7 @@ input[type="search"] {
 // Checkbox
 
 input[type="checkbox"] {
-  
+
   &:focus {
     border: none;
     box-shadow: none;
@@ -47,7 +47,7 @@ input[type="checkbox"] {
 }
 
 @media screen and (max-width: 30em) {
-    
+
   select,
   input[type=search] {
     width: 100%;

@@ -7,6 +7,23 @@ The Seneca API is pretty tiny. We try hard to keep any non-essential functionali
 core. Instead, we push it out to plugins. The core API is documented below. If you have
 any further questions, get in touch. We love to talk!
 
+## Table of Contents
+- [Seneca([options])](#seneca-options-this)
+- [close([done])](#close-done-void)
+- [act(msg [,payload][,reply])](#act-msg-payload-reply)
+- [add(pattern [,spec], handler)](#add-pattern-spec-handler-this)
+- [has(pattern)](#has-pattern-boolean)
+- [sub(pattern, handler)](#sub-pattern-handler)
+- [listen(options)](#listen-options-)
+- [client(options)](#client-options-)
+- [use(plugin[,options])](#use-plugin-options-this)
+- [ready(callback)](#ready-callback-)
+- [export(name)](#export-name-)
+- [log.level([entry,..])](#log-level-entry-)
+- [decorate(name,handler)](#decorate-name-handler-)
+
+<hr>
+
 ## Seneca([options]) : this
 Creates a new instance of Seneca with the provided options.
 
