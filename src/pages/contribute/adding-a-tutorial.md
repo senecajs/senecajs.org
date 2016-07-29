@@ -7,7 +7,7 @@ The process of adding a tutorial or guide for seneca is very easy. All of our do
 in markdown with the ability to mix in HTML as needed too.
 
 Assuming you have fork of this site, your tutorial or guide should live in the
-[/src/pages/tutorials][] folder.
+[hello][] folder.
 
 ``` bash
 | -- src
@@ -43,4 +43,4 @@ your PR is accepted your changes will go live. You do not need to take any speci
 
 [localhost:4000]: http://localhost:4000/
 [/src/pages/tutorials/index.md]: https://github.com/senecajs/senecajs.org/blob/master/src/pages/tutorials/index.md
-[/src/pages/tutorials]: https://github.com/senecajs/senecajs.org/blob/master/src/pages/tutorials
+[hello]: https://github.com/senecajs/senecajs.org/blob/master/src/pages/tutorials
