@@ -5,7 +5,7 @@ layout: main.html
 # Contribute
 [Seneca][], [Senecajs.org][], and all official plugins are __open__ projects and encourage
 participation. If you feel you can help in any way, be it with documentation, examples, extra
-testing, or new features, please be our guest! =)
+testing, or new features, please be our guest.
 
 Contributing is not always about adding new features. There are plenty of other ways to get
 involved. For instance:
@@ -18,13 +18,13 @@ involved. For instance:
 Like any other project, there is plenty to be done by people of all skill levels and specialities.
 If you have any questions, or want to help out, please stop by our issues boards.
 
-- For issues or questions about how to contribute or our documentation, go to [Senecajs.org][] and its [issues][org_issues]
-- For issues or questions on Seneca itself, go to [Seneca][code_issues].
+- For issues or questions about contributing, it's ask [here][org_issues]
+- For issues or questions on Seneca itself, it's [here][code_issues].
 
 ## How to contribute
-Before you start, please read our code of [code of conduct][]. It contains very important information for
-all contributors to Senecajs.org. We also have a list of org level documents you can look through.
-They give great information on how we work and how to contribute.
+Before you start, please read our code of [code of conduct][]. It contains very important
+information for all contributors to Senecajs. We also have a list of org level documents
+you can look through. They give great information on how we work and how to contribute.
 
 - [Principles][]
 - [Governance][]
@@ -32,16 +32,6 @@ They give great information on how we work and how to contribute.
 - [Style guide][]
 - [How we work][]
 - [Our tools][]
-
-### Contributing guides
-
-- [Adding a tutorial][]
-
-### Contributors list
-All contributors to the Senecajs org are given a place on our list. If you would rather we removed
-your name, please open an issue.
-
-- [Contributor list][contributors].
 
 ## Acknowledgements
 
