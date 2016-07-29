@@ -7,7 +7,7 @@ The process of adding a tutorial or guide for seneca is very easy. All of our do
 in markdown with the ability to mix in HTML as needed too.
 
 Assuming you have fork of this site, your tutorial or guide should live in the
-[hello][] folder.
+[/src/pages/tutorials][] folder.
 
 ``` bash
 | -- src

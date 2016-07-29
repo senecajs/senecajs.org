@@ -8,15 +8,15 @@ core. Instead, we push it out to plugins. The core API is documented below. If y
 any further questions, get in touch. We love to talk!
 
 ## Table of Contents
-- [Seneca ([options]): this](#seneca-options-this)
-- [close([done]) : void](#close-done-void)
-- [act (msg [,payload][,reply]):this](#act-msg-payload-reply)
-- [add(pattern [,spec], handler):this](#add-pattern-spec-handler-this)
-- [has(pattern):boolean](#has-pattern-boolean)
+- [Seneca([options])](#seneca-options-this)
+- [close([done])](#close-done-void)
+- [act(msg [,payload][,reply])](#act-msg-payload-reply)
+- [add(pattern [,spec], handler)](#add-pattern-spec-handler-this)
+- [has(pattern)](#has-pattern-boolean)
 - [sub(pattern, handler)](#sub-pattern-handler)
 - [listen(options)](#listen-options-)
 - [client(options)](#client-options-)
-- [use(plugin[,options]):this](#use-plugin-options-this)
+- [use(plugin[,options])](#use-plugin-options-this)
 - [ready(callback)](#ready-callback-)
 - [export(name)](#export-name-)
 - [log.level([entry,..])](#log-level-entry-)
