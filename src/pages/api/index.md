@@ -78,6 +78,8 @@ require('seneca')
 - The default for `options.timeout` is ``
 - The default for `options.log` is ``
 
+<hr>
+
 ## close([done]) : void
 The close method gracefully closes Seneca. An optional callback can be provided to check
 for completion and handle any errors that occur during gracefully closing.
@@ -99,6 +101,8 @@ seneca.close((err) => {
   else console.log('close complete!')
 })
 ```
+
+<hr>
 
 ## act(msg [,payload] [, reply]) : this
 The `.act` method sends a given message to any interested handlers. The message sent is
@@ -144,6 +148,8 @@ seneca.act('role:store,cmd:save', data, (err, reply) => {
 })
 ```
 
+<hr>
+
 ## add(pattern [, spec], handler) : this
 The `.add` method allows handlers to be added to an instance of Seneca for the purposes
 of processing messages. Messages are matched against the `pattern` param and optionally
@@ -176,6 +182,8 @@ var foo = 'bar'
 ```js
 var foo = 'bar'
 ```
+
+<hr>
 
 ## has(pattern) : boolean
 The `.has` method will return a true or false depending on wether or not the provided
@@ -228,6 +236,7 @@ console.log(seneca.has('some:pin'))
 - Patterns pinned via `.listen` will not match to true, since they are used as a filter.
 - A response of `true` does not ensure a successful call, only that a handler is known.
 
+<hr>
 
 ## sub(pattern, handler)
 The `.sub` method allows the ability to listen for any messages that are emitted in the
@@ -254,6 +263,8 @@ var foo = 'bar'
 var foo = 'bar'
 ```
 
+<hr>
+
 ## listen(options)
 The `.listen` methods creates a listener that can handle messages external from external
 sources. By default HTTP is used but both transport and related options can be set via
@@ -277,6 +288,8 @@ var foo = 'bar'
 ```js
 var foo = 'bar'
 ```
+
+<hr>
 
 ## client(options)
 The `.client` methods creates a client that can send messages to external sources. By
@@ -312,6 +325,7 @@ seneca
 - The default for `options.port` is `101010`.
 - Pins via `options.pin` can be a JSonic string or plain object.
 
+<hr>
 
 ## use(plugin [, options]) : this
 The `.use()` method provides the ability to load plugins into seneca. Plugins are the
@@ -336,6 +350,8 @@ var foo = 'bar'
 ```js
 var foo = 'bar'
 ```
+
+<hr>
 
 ## ready(callback)
 The `.ready()` method fires the provided callback every time a set of plugins has been
@@ -405,6 +421,8 @@ seneca.ready((err) => {
 - Fires once per set of loaded plugins, not once per plugin
 - Multiple `ready` methods will be fired in the order they are encountered
 
+<hr>
+
 ## export(name)
 The `export` method provides the ability for plugins to export named functions or objects
 for use in later loaded plugins or in your own implementations.
@@ -425,6 +443,8 @@ var foo = 'bar'
 ```js
 var foo = 'bar'
 ```
+
+<hr>
 
 ## log.level([entry, ..])
 The `log.x` method set provides the ability to log.
@@ -450,6 +470,8 @@ var foo = 'bar'
 ### Notes
 - Logs are not JSON formatted.
 - Logs can be made shorter using the option `debug:{short_logs: false}`
+
+<hr>
 
 ## decorate(name, handler)
 The `decorate` method provides the ability to decorate Seneca with functions or objects
