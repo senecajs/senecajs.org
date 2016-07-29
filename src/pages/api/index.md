@@ -85,7 +85,7 @@ seneca.close((err) => {
 
 ## act(msg [,payload] [, reply]) : this
 The `.act` method sends a given message to any interested handlers. The message sent is
-'matched' by 1 or more handlers and a reply may or may not be returned. How a message is
+'matched' by 1 or more handlers and a reply may or may not be returned. A message is
 processed is based on the transport mechanism used to send it.
 
 ### Params
@@ -136,12 +136,12 @@ return value if one does not make sense.
 ### Params
 
 #### pattern - object | string
-The pattern to filter the handler to, only messages who match the pattern provided will
+The pattern to filter the handler to; only messages which match the pattern provided will
 be passed to the handler. The pattern can be a plain object or JSonic string.
 
 #### spec - object
 Optional. A parambulator spec object for validating the matched message. Messages that do
-not match are rejected, with an error returned to the caller if applicable.
+not match are rejected with an error returned to the caller if applicable.
 
 #### handler - function (msg, done)
 The handler that processes the message. Messages are provided as plain objects via the
