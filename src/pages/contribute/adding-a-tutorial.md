@@ -43,4 +43,4 @@ your PR is accepted your changes will go live. You do not need to take any speci
 
 [localhost:4000]: http://localhost:4000/
 [/src/pages/tutorials/index.md]: https://github.com/senecajs/senecajs.org/blob/master/src/pages/tutorials/index.md
-[hello]: https://github.com/senecajs/senecajs.org/blob/master/src/pages/tutorials
+[/src/pages/tutorials]: https://github.com/senecajs/senecajs.org/blob/master/src/pages/tutorials
