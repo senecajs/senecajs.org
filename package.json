@@ -25,13 +25,18 @@
     "Glen Keane (https://github.com/thekemkid)",
     "Vito Tardia (https://github.com/vtardia)",
     "Michele Capra (https://github.com/piccoloaiutante)",
+    "Marco Piraccini (https://github.com/marcopiraccini)",
+    "Mircea Alexandru (https://github.com/mirceaalexandru)",
+    "Mihai Dima (https://github.com/mihaidma)",
     "Paulo Vieira (https://github.com/paulovieira)",
     "Lloyd Benson (https://github.com/lloydbenson)",
     "Bogdan Rotund (https://github.com/Bogdan-Rotund)",
     "Adrien Becchis (https://github.com/AdrieanKhisbe)",
     "Tim Carry (https://github.com/pixelastic)",
     "Karolina Szczur (https://github.com/thefoxis)",
-    "Kamil Mech (https://github.com/kamil-mech)"
+    "Cristian Kiss (https://github.com/ckiss)",
+    "Kamil Mech (https://github.com/kamil-mech)",
+
   ],
   "dependencies": {
     "handlebars": "^4.0.5",
