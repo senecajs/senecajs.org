@@ -32,9 +32,9 @@
 
 .logo-seneca {
   position: relative;
-  top: -10px;
+  top: 5px;
   height: 100px;
-  background-image: url("/images/seneca-black-logo-hire.svg");
+  background-image: url("/images/logo-seneca.svg");
 }
 
 .logo-seneca-lg {
@@ -49,9 +49,9 @@
 @media screen and (max-width: $mobile-rg) {
 
   .logo.logo-seneca {
-    width: 45px;
-    height: 60px;
-    top: -5px;
+    width: 50px;
+    height: 40px;
+    top: 5px;
     background-size: cover;
   }
 
@@ -60,9 +60,9 @@
 @media screen and (min-width: $mobile-rg + $breakpoint-step) and (max-width: $desktop-lg) {
 
   .logo.logo-seneca {
-    width: 45px;
-    height: 60px;
-    top: -5px;
+    width: 50px;
+    height: 40px;
+    top: 5px;
     background-size: cover;
   }
 
