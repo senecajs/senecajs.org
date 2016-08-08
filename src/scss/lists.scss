@@ -1,10 +1,7 @@
-/*********************************************************************
-*
-* LISTS
-*
-*********************************************************************/
 
-@import "../globals/variables";
+//-- lists.scss
+
+@import "./variables";
 
 .list-unstyled {
   margin: 0;
@@ -19,13 +16,13 @@
 .list-inline {
   li {
     display: inline-block;
-    
+
     &:not(:last-child) {
       margin-right: $ui-spacing;
     }
   }
 }
-      
+
 @media screen and (max-width: 48em) {
 
   .list-inline {

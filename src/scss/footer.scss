@@ -1,10 +1,8 @@
-/*********************************************************************
-*
-* FOOTER
-*
-*********************************************************************/
 
-@import "../globals/variables";
+//-- footer.scss
+
+
+@import "./variables";
 
 .footer-top,
 .footer-bottom {
@@ -14,7 +12,7 @@
 .footer-top {
   padding: $ui-spacing-double 0 $ui-spacing 0;
   background-color: $green;
-  
+
   a {
     color: $green-lighter;
   }

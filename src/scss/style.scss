@@ -1,28 +1,20 @@
-/*********************************************************************
-*
-* Senecajs.org
-* Main stylesheet
-*
-*********************************************************************/
 
-// Global variables
-@import "globals/variables";
+//-- style.scss, Senecajs.org main stylesheet
 
-// Components
-@import "components/base";
-@import "components/type";
-@import "components/lists";
-@import "components/logos";
-@import "components/navigation";
-@import "components/forms";
-@import "components/search";
-@import "components/footer";
-@import "components/icons";
-@import "components/margins";
-@import "components/header";
-@import "components/code";
-@import "components/panels";
-@import "components/layout";
+@import "./base";
+@import "./type";
+@import "./lists";
+@import "./logos";
+@import "./navigation";
+@import "./forms";
+@import "./search";
+@import "./footer";
+@import "./icons";
+@import "./margins";
+@import "./header";
+@import "./code";
+@import "./panels";
+@import "./layout";
 
 
 // External libraries
