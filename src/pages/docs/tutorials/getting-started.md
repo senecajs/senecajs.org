@@ -1,5 +1,5 @@
 ---
-layout: main.html
+layout: content.html
 ---
 # Getting started
 Welcome to the Seneca _Getting started_ guide! This guide assumes that you are already familiar

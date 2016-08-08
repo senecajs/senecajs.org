@@ -1,5 +1,5 @@
 ---
-layout: main.html
+layout: content.html
 ---
 
 # Understanding Prior Actions

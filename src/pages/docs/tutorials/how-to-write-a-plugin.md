@@ -1,5 +1,5 @@
 ---
-layout: main.html
+layout: content.html
 title: How to Write a Seneca Plugin
 ---
 

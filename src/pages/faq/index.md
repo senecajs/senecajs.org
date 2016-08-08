@@ -1,5 +1,5 @@
 ---
-layout: main.html
+layout: content.html
 ---
 
 # Frequently Asked Questions

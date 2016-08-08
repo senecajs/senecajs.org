@@ -1,3 +1,3 @@
 ---
-layout: main.html
+layout: content.html
 ---
