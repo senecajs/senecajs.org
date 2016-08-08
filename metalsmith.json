@@ -34,7 +34,6 @@
     },
     "metalsmith-ignore": [
       "drafts/*",
-      "unfinished/*",
       "*~"
     ]
   },
