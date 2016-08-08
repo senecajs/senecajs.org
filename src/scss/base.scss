@@ -1,10 +1,7 @@
-/*********************************************************************
-*
-* BASE
-*
-*********************************************************************/
 
-@import "../globals/variables";
+//-- base.scss
+
+@import "./variables";
 
 // Box sizing
 *, *:after, *:before {
@@ -32,11 +29,11 @@ a {
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease-in;
-  
+
   &:hover {
     color: $green-light;
   }
-  
+
   &:focus {
     outline: none;
   }

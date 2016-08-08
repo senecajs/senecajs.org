@@ -4,7 +4,7 @@
 *
 *********************************************************************/
 
-@import "../globals/variables";
+@import "./variables";
 
 .algolia-autocomplete {
   width: 100%;
@@ -70,12 +70,12 @@
 // For bigger screens, when displaying results in two columns
 
 @media (min-width: 768px) {
-  
+
   // Bottom border of each suggestion
   .algolia-docsearch-suggestion {
     border-bottom-color: $gray-light;
   }
-  
+
   // Left column, with secondary category header
   .algolia-docsearch-suggestion--subcategory-column {
     border-right-color: $gray-light;

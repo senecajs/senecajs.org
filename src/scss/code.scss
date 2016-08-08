@@ -1,10 +1,7 @@
-/*********************************************************************
-*
-* CODE
-*
-*********************************************************************/
 
-@import "../globals/variables";
+//-- code.scss
+
+@import "./variables";
 
 pre {
   word-break: break-word;
@@ -14,14 +11,14 @@ pre {
   line-height: $line-height-base;
   padding: $ui-spacing-half;
   margin-bottom: $ui-spacing;
-  
+
   code {
     white-space: pre-wrap;
   }
 }
 
 pre, code {
-  font-family: $font-monospaced;  
+  font-family: $font-monospaced;
 }
 
 .hljs, code {
