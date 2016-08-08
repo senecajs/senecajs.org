@@ -1,6 +1,5 @@
 ---
-template: main.html
-title: Seneca Roadmap
+template: content.html
 ---
 
 ## Seneca Roadmap

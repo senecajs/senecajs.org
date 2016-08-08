@@ -1,5 +1,5 @@
 ---
-layout: main.html
+layout: content.html
 ---
 
 # API reference
@@ -8,19 +8,19 @@ core. Instead, we push it out to plugins. The core API is documented below. If y
 any further questions, get in touch. We love to talk!
 
 ## Table of Contents
-- [Seneca([options])](#seneca-options-this)
-- [close([done])](#close-done-void)
-- [act(msg [,payload][,reply])](#act-msg-payload-reply)
-- [add(pattern [,spec], handler)](#add-pattern-spec-handler-this)
-- [has(pattern)](#has-pattern-boolean)
-- [sub(pattern, handler)](#sub-pattern-handler)
-- [listen(options)](#listen-options-)
-- [client(options)](#client-options-)
-- [use(plugin[,options])](#use-plugin-options-this)
-- [ready(callback)](#ready-callback-)
-- [export(name)](#export-name-)
-- [log.level([entry,..])](#log-level-entry-)
-- [decorate(name,handler)](#decorate-name-handler-)
+- [Seneca()](#seneca-options-this)
+- [.close()](#close-done-void)
+- [.act()](#act-msg-payload-reply)
+- [.add()](#add-pattern-spec-handler-this)
+- [.has()](#has-pattern-boolean)
+- [.sub()](#sub-pattern-handler)
+- [.listen()](#listen-options-this)
+- [.client()](#client-options-this)
+- [.use()](#use-plugin-options-this)
+- [.ready()](#ready-callback-void)
+- [.export()](#export-name-this)
+- [.log.level()](#log-level-entry)
+- [.decorate()](#decorate-name-handler)
 
 <hr>
 
@@ -102,6 +102,9 @@ seneca.close((err) => {
 })
 ```
 
+### Notes
+...
+
 <hr>
 
 ## act(msg [,payload] [, reply]) : this
@@ -148,6 +151,9 @@ seneca.act('role:store,cmd:save', data, (err, reply) => {
 })
 ```
 
+### Notes
+...
+
 <hr>
 
 ## add(pattern [, spec], handler) : this
@@ -172,16 +178,10 @@ The handler that processes the message. Messages are provided as plain objects v
 complete execution. The signature for `done` is `function (err, reply)`.
 
 ### Usage
+...
 
-##### Usage a
-```js
-var foo = 'bar'
-```
-
-##### Usage b
-```js
-var foo = 'bar'
-```
+### Notes
+...
 
 <hr>
 
@@ -252,20 +252,14 @@ The pattern to match against for the provided handler.
 ...
 
 ### Usage
+...
 
-##### Using plain objects
-```js
-var foo = 'bar'
-```
-
-##### Using JSonic strings
-```js
-var foo = 'bar'
-```
+### Notes
+...
 
 <hr>
 
-## listen(options)
+## listen(options): this
 The `.listen` methods creates a listener that can handle messages external from external
 sources. By default HTTP is used but both transport and related options can be set via
 the `options` param.
@@ -278,20 +272,14 @@ object will be passed on to the chosen transport.
 
 
 ### Usage
+...
 
-##### Usage a
-```js
-var foo = 'bar'
-```
-
-##### Usage b
-```js
-var foo = 'bar'
-```
+### Notes
+...
 
 <hr>
 
-## client(options)
+## client(options): this
 The `.client` methods creates a client that can send messages to external sources. By
 default HTTP is used. Transport type and other options can be set by passing an object
 via the `options` param.
@@ -299,8 +287,8 @@ via the `options` param.
 ### Params
 
 #### options - object
-...
-
+The options used to decide which underlying transport to use. Additional options in this
+object will be passed on to the chosen transport.
 
 ### Usage
 
@@ -340,16 +328,10 @@ primary method of composition in Seneca and should be used liberally.
 ...
 
 ### Usage
+...
 
-##### Usage a
-```js
-var foo = 'bar'
-```
-
-##### Usage b
-```js
-var foo = 'bar'
-```
+### Notes
+...
 
 <hr>
 
@@ -375,8 +357,6 @@ var seneca = require('seneca')()
 
 function a () {console.log('plugin 1')}
 function b () {console.log('plugin 2')}
-function c () {console.log('plugin 3')}
-function d () {console.log('plugin 4')}
 
 seneca.use(a)
 seneca.use(b)
@@ -423,7 +403,7 @@ seneca.ready((err) => {
 
 <hr>
 
-## export(name)
+## export(name) : this
 The `export` method provides the ability for plugins to export named functions or objects
 for use in later loaded plugins or in your own implementations.
 
@@ -433,16 +413,7 @@ for use in later loaded plugins or in your own implementations.
 The name of the object or function you wish to export.
 
 ### Usage
-
-##### Usage a
-```js
-var foo = 'bar'
-```
-
-##### Usage b
-```js
-var foo = 'bar'
-```
+...
 
 <hr>
 
@@ -452,20 +423,10 @@ The `log.x` method set provides the ability to log.
 ### Params
 
 #### entry - string or object or array
-...
-
+The data to be logged.
 
 ### Usage
-
-##### Usage a
-```js
-var foo = 'bar'
-```
-
-##### Usage b
-```js
-var foo = 'bar'
-```
+..
 
 ### Notes
 - Logs are not JSON formatted.

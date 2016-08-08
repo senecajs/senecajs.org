@@ -1,5 +1,5 @@
 ---
-layout: main.html
+layout: content.html
 ---
 # Entity
 The Seneca framework provides a data entity API based loosely on the [ActiveRecord style][]. Here's how it works.
