@@ -164,6 +164,9 @@ Once an entity is created, via `seneca.make`, those methods can be promisified u
 'use strict';
 const seneca = require('seneca')();
 const Promise = require('bluebird');
+const Entity = requre('seneca-entity');
+
+seneca.use(Entity)
   
 var entity = seneca.make('base', 'name', { some: 'data' });
 // Promisify the .save$() method
