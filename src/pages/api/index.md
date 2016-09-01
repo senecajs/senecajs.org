@@ -420,17 +420,46 @@ The name of the object or function you wish to export.
 ## log.level([entry, ..])
 The `log.x` method set provides the ability to log.
 
+Supported log levels are: 'debug', 'info', 'warn', 'error', 'fatal'
+Logging suports level+ syntax: info+ means info and above: info, warn, error, fatal
+
+Convenience shortcut log levels:
+- `test` represents the `error+` level,
+- `silent` sets log level to `none`.
+
+The default logging level is `info+`
+
 ### Params
 
 #### entry - string or object or array
 The data to be logged.
 
 ### Usage
-..
 
-### Notes
-- Logs are not JSON formatted.
-- Logs can be made shorter using the option `debug:{short_logs: false}`
+##### Configuring a `warn` log level in Seneca
+```js
+var seneca = Seneca({
+  log: { level: 'warn+' }
+})
+seneca.log.debug('debug log level')
+seneca.log.info('info log level')
+seneca.log.warn('warn log level')
+seneca.log.error('error log level')
+seneca.log.fatal('fatal log level')
+
+// will output:
+// ["warn log level"]
+// ["error log level"]
+// ["fatal log level"]
+
+```
+
+##### Configuring a `test` log level in Seneca
+```js
+var seneca = Seneca({
+  log: 'test'
+})
+```
 
 <hr>
 
