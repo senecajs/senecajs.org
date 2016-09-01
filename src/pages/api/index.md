@@ -418,16 +418,9 @@ The name of the object or function you wish to export.
 <hr>
 
 ## log.level([entry, ..])
-The `log.x` method set provides the ability to log.
-
-- Supported log levels are: `debug`, `info`, `warn`, `error`, `fatal`
-- Logging suports level+ syntax: info+ means info and above: info, warn, error, fatal
-
-Convenience shortcut log levels:
-- `test` represents the `error+` level,
-- `silent` sets log level to `none`.
-
-The default logging level is `info+`.
+The `log.level` method set provides the ability to log directly off the Seneca instance.
+By default Seneca includes a logging adaptor that emits JSON based logs.
+You can swap out this adaptor for others. See [Logging with Seneca](http://senecajs.org/docs/tutorials/logging-with-seneca.html) for more information on adaptors.
 
 ### Params
 
@@ -460,6 +453,30 @@ var seneca = Seneca({
   log: 'test'
 })
 ```
+
+##### Object logging, JSON output
+```js
+var seneca = Seneca({
+  log: { level: 'error+' }
+})
+seneca.log.warn({notice: 'warn log level'})
+seneca.log.error({notice: 'error log level'})
+seneca.log.fatal({notice: 'fatal log level'})
+
+// Output:
+// {"notice":"error log level","level":"error","seneca":"c8i.../147.../13586/3.0.0/-","when":1472737155055}
+// {"notice":"fatal log level","level":"fatal","seneca":"c8i.../147.../13586/3.0.0/-","when":1472737155060}
+```
+
+### Notes
+- Supported log levels are: `debug`, `info`, `warn`, `error`, `fatal`
+- Logging suports level+ syntax: `info+` means info and above: info, warn, error, fatal
+
+Convenience shortcut log levels:
+- `test` represents the `error+` level,
+- `silent` sets log level to `none`.
+
+The default logging level is `info+`.
 
 <hr>
 
