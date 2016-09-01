@@ -420,14 +420,14 @@ The name of the object or function you wish to export.
 ## log.level([entry, ..])
 The `log.x` method set provides the ability to log.
 
-Supported log levels are: 'debug', 'info', 'warn', 'error', 'fatal'
-Logging suports level+ syntax: info+ means info and above: info, warn, error, fatal
+- Supported log levels are: `debug`, `info`, `warn`, `error`, `fatal`
+- Logging suports level+ syntax: info+ means info and above: info, warn, error, fatal
 
 Convenience shortcut log levels:
 - `test` represents the `error+` level,
 - `silent` sets log level to `none`.
 
-The default logging level is `info+`
+The default logging level is `info+`.
 
 ### Params
 
@@ -447,7 +447,7 @@ seneca.log.warn('warn log level')
 seneca.log.error('error log level')
 seneca.log.fatal('fatal log level')
 
-// will output:
+// Output:
 // ["warn log level"]
 // ["error log level"]
 // ["fatal log level"]
