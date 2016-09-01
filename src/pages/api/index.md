@@ -420,7 +420,7 @@ The name of the object or function you wish to export.
 ## log.level([entry, ..])
 The `log.level` method set provides the ability to log directly off the Seneca instance.
 By default Seneca includes a logging adaptor that emits JSON based logs.
-You can swap out this adaptor for others. See [Logging with Seneca](http://senecajs.org/docs/tutorials/logging-with-seneca.html) for more information on adaptors.
+You can swap out this adaptor for others. See [Logging with Seneca][] for more information on adaptors.
 
 ### Params
 
@@ -528,3 +528,5 @@ seneca
 
 ### Notes
 - Decoration attempts will throw if the name provided is already in use.
+
+[Logging with Seneca]: http://senecajs.org/docs/tutorials/logging-with-seneca.html
