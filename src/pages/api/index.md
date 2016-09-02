@@ -418,7 +418,9 @@ The name of the object or function you wish to export.
 <hr>
 
 ## log.level([entry, ..])
-The `log.x` method set provides the ability to log.
+The `log.level` method set provides the ability to log directly off the Seneca instance.
+By default Seneca includes a logging adaptor that emits JSON based logs.
+You can swap out this adaptor for others. See [Logging with Seneca][] for more information on adaptors.
 
 ### Params
 
@@ -426,11 +428,55 @@ The `log.x` method set provides the ability to log.
 The data to be logged.
 
 ### Usage
-..
+
+##### Configuring a `warn` log level in Seneca
+```js
+var seneca = Seneca({
+  log: { level: 'warn+' }
+})
+seneca.log.debug('debug log level')
+seneca.log.info('info log level')
+seneca.log.warn('warn log level')
+seneca.log.error('error log level')
+seneca.log.fatal('fatal log level')
+
+// Output:
+// ["warn log level"]
+// ["error log level"]
+// ["fatal log level"]
+
+```
+
+##### Configuring a `test` log level in Seneca
+```js
+var seneca = Seneca({
+  log: 'test'
+})
+```
+
+##### Object logging, JSON output
+```js
+var seneca = Seneca({
+  log: { level: 'error+' }
+})
+seneca.log.warn({notice: 'warn log level'})
+seneca.log.error({notice: 'error log level'})
+seneca.log.fatal({notice: 'fatal log level'})
+
+// Output:
+// {"notice":"error log level","level":"error","seneca":"c8i.../147.../13586/3.0.0/-","when":1472737155055}
+// {"notice":"fatal log level","level":"fatal","seneca":"c8i.../147.../13586/3.0.0/-","when":1472737155060}
+```
 
 ### Notes
-- Logs are not JSON formatted.
-- Logs can be made shorter using the option `debug:{short_logs: false}`
+- Supported log levels are: `debug`, `info`, `warn`, `error`, `fatal`
+- Logging suports level+ syntax: `info+` means info and above: info, warn, error, fatal
+
+Convenience shortcut log levels:
+- `test` represents the `error+` level,
+- `silent` sets log level to `none`.
+
+The default logging level is `info+`.
 
 <hr>
 
@@ -482,3 +528,5 @@ seneca
 
 ### Notes
 - Decoration attempts will throw if the name provided is already in use.
+
+[Logging with Seneca]: http://senecajs.org/docs/tutorials/logging-with-seneca.html
