@@ -10,17 +10,17 @@ any further questions, get in touch. We love to talk!
 ## Table of Contents
 - [Seneca()](#seneca-options-this)
 - [.close()](#close-done-void)
-- [.act()](#act-msg-payload-reply)
+- [.act()](#act-msg-payload-reply-this)
 - [.add()](#add-pattern-spec-handler-this)
 - [.has()](#has-pattern-boolean)
-- [.sub()](#sub-pattern-handler)
+- [.sub()](#sub-pattern-handler-)
 - [.listen()](#listen-options-this)
 - [.client()](#client-options-this)
 - [.use()](#use-plugin-options-this)
-- [.ready()](#ready-callback-void)
+- [.ready()](#ready-callback-)
 - [.export()](#export-name-this)
-- [.log.level()](#log-level-entry)
-- [.decorate()](#decorate-name-handler)
+- [.log.level()](#log-level-entry-)
+- [.decorate()](#decorate-name-handler-)
 
 <hr>
 
