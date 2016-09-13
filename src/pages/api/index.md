@@ -473,8 +473,9 @@ seneca.log.fatal({notice: 'fatal log level'})
 - Logging suports level+ syntax: `info+` means info and above: info, warn, error, fatal
 
 Convenience shortcut log levels:
-- `test` represents the `error+` level,
-- `silent` sets log level to `none`.
+- `all` sets log level to `debug+`,
+- `silent` sets log level to `none`,
+- `test` represents the `error+` level
 
 The default logging level is `info+`.
 
