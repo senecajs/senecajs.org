@@ -1276,7 +1276,7 @@ Changes to one service do not affect the others. This is how microservices give 
 [mem-store]: https://www.npmjs.com/package/seneca-mem-store
 [MongoDB]: https://www.npmjs.com/package/seneca-mongo-store
 [Postgres]: https://www.npmjs.com/package/seneca-postgres-store
-[common microservice pattern]: http://oredev.org/2013/wed-fri-conference/implementing-micro-service-architectures
+[common microservice pattern]: http://oredev.org/oredev2013/2013/wed-fri-conference/implementing-micro-service-architectures.html
 [shop-test.js]: https://github.com/senecajs/getting-started/blob/master/shop-test.js
 [assert]: https://nodejs.org/api/assert.html
 [shop.js]: https://github.com/senecajs/getting-started/blob/master/shop.js
