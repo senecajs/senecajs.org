@@ -271,6 +271,13 @@ the right solution.
 [couchdb-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-couchdb-store.svg?style=flat-square
 [couchdb-store-npm-url]: https://npmjs.org/package/seneca-couchdb-store
 
+### [CouchDB version 2 store](https://npmjs.org/package/seneca-couch2-store)
+[![version][couch2-store-npm-version]][couch2-store-npm-url]
+[![downloads][couch2-store-npm-downloads]][couch2-store-npm-url]
+[couch2-store-npm-version]: https://img.shields.io/npm/v/seneca-couch2-store.svg?style=flat-square
+[couch2-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-couch2-store.svg?style=flat-square
+[couch2-store-npm-url]: https://npmjs.org/package/seneca-couch2-store
+
 ### [SimpleDB store](https://npmjs.org/package/seneca-simpledb-store)
 [![version][simpledb-store-npm-version]][simpledb-store-npm-url]
 [![downloads][simpledb-store-npm-downloads]][simpledb-store-npm-url]
@@ -388,7 +395,7 @@ Seneca supports many different transports. Use the one that fits best with your 
 
 
 ## Got a plugin to share?
-Our docs are open source. Simply fork the [senecajs.org]() repository, add your plugin to the appropriate section,
+Our docs are open source. Simply fork the [senecajs.org] repository, add your plugin to the appropriate section,
 and send us on a pull request - that way, other people can find your awesome plugin easily.
 
 [senecajs.org]: https://github.com/senecajs/senecajs.org
