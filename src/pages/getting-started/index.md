@@ -1284,7 +1284,7 @@ Changes to one service do not affect the others. This is how microservices give 
 [shop-service.js]: https://github.com/senecajs/getting-started/blob/master/shop-service.js
 [math-pin-client.js]: https://github.com/senecajs/getting-started/blob/master/math-pin-client.js
 [app-all.js]: https://github.com/senecajs/getting-started/blob/master/app-all.js
-[message bus]: https://www.npmjs.com/package/seneca-rabbitmq-transport
+[message bus]: https://www.npmjs.com/package/seneca-amqp-transport
 [multiple clients]: https://www.npmjs.com/package/seneca-redis-transport
 [overlay network]: https://github.com/coreos/flannel
 [service discovery]: https://www.consul.io
