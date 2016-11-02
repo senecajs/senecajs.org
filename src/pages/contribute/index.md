@@ -39,4 +39,4 @@ up on Seneca's core principles and roadmap. All three are linked below.
 
 [Code of Conduct]: ./code-of-conduct.html
 [Principles]: ./principles.html
-[Roadmap]: ../roadmap.html
+[Roadmap]: ../roadmap
