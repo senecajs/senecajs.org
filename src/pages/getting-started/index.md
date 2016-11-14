@@ -817,14 +817,25 @@ The most important thing to remember is that you don't want to expose your inter
 Let's look at a simple example using [Express][]. Here's the Express app ([app.js][]):
 
 ``` js
-var seneca = require('seneca')()
-      .use('api')
-      .client({ type:'tcp', pin:'role:math' })
+var Express = require('express')
+var Router = Express.Router
+var context = new Router()
 
-var app = require('express')()
-      .use(require('body-parser').json())
-      .use(seneca.export('web'))
+var senecaWebConfig = {
+      context: context,
+      adapter: require('seneca-web-adapter-express'),
+      options: { parseBody: false } // so we can use body-parser
+}
+
+var app = Express()
+      .use( require('body-parser').json() )
+      .use( context )
       .listen(3000)
+
+var seneca = require('seneca')()
+      .use('seneca-web', senecaWebConfig )
+      .use('api')
+      .client( { type:'tcp', pin:'role:math' } )
 ```
 
 You create a seneca instance, load the _api_ plugin, and then use `seneca.client` to send any `role:math` actions out to an external service. Your Express app is the microservice client.
@@ -832,10 +843,10 @@ You create a seneca instance, load the _api_ plugin, and then use `seneca.client
 The integration between Seneca and Express happens in this line:
 
 ``` js
-      .use(seneca.export('web'))
+      .use('seneca-web', senecaWebConfig )
 ```
 
-Seneca exports a middleware function that Express can use.
+SenecaWeb will attach any of the routes defined through `seneca.act('role:web', {routes: routes})` to context.
 
 Here's the _api_ plugin ([api.js][]):
 
@@ -845,16 +856,19 @@ module.exports = function api(options) {
   var valid_ops = { sum:'sum', product:'product' }
 
   this.add('role:api,path:calculate', function (msg, respond) {
+    var operation = msg.args.params.operation
+    var left = msg.args.query.left
+    var right = msg.args.query.right
     this.act('role:math', {
-      cmd:   valid_ops[msg.operation],
-      left:  msg.left,
-      right: msg.right,
+      cmd:   valid_ops[operation],
+      left:  left,
+      right: right,
     }, respond)
   })
 
 
   this.add('init:api', function (msg, respond) {
-    this.act('role:web',{use:{
+    this.act('role:web',{routes:{
       prefix: '/api',
       pin:    'role:api,path:*',
       map: {
@@ -870,7 +884,7 @@ This is a normal Seneca plugin. The `role:api,path:calculate` pattern will be ex
 
 **Never use external input to create an action string. Always explicitly create the internal message. This avoids injection attacks.**
 
-The initialisation action makes a call to the pattern `role:web`, and defines the property `use`. This is a definition object that defines a route mapping from URLs to action patterns. It has the properties:
+The initialisation action makes a call to the pattern `role:web`, and defines the property `routes`. This is a definition object that defines a route mapping from URLs to action patterns. It has the properties:
 
 * `prefix`: the URL prefix
 * `pin`: the set of patterns to map
@@ -889,6 +903,12 @@ The calculate property has a subobject that indicates that the HTTP method is GE
 Your full URL endpoint is `/api/calculate/:operation`.
 
 The remaining message properties are obtained from the URL query string, and from any JSON body submitted with the HTTP request. In this case, we are using GET, so there is no body.
+
+SenecaWeb will provide information about the request to `msg.args`, this can include the following:
+
+* body - post parameters for the request
+* query - querystring parameters for the request
+* params - any route param replacements (e.g., `:operation`)
 
 You can re-use the microservice from the previous example. To run the app, start:
 
@@ -1156,9 +1176,14 @@ The shop functionality is exposed via the URL endpoints `/api/shop/get` and `/ap
   ...
 
   this.add( 'role:api,path:shop', function( msg, respond ) {
-    var shopmsg = { role:'shop', id:msg.pid }
-    if( 'get'      == msg.operation ) shopmsg.get = 'product'
-    if( 'purchase' == msg.operation ) shopmsg.cmd = 'purchase'
+    var id = null
+    if (msg.args.query.pid) { id = msg.args.query.pid }
+    if (msg.args.body.pid) { id = msg.args.body.pid }
+
+    var operation = msg.args.params.operation
+    var shopmsg = { role:'shop', id:id }
+    if( 'get'      == operation ) shopmsg.get = 'product'
+    if( 'purchase' == operation ) shopmsg.cmd = 'purchase'
 
     this.act( shopmsg, respond )
   })
@@ -1167,7 +1192,7 @@ The shop functionality is exposed via the URL endpoints `/api/shop/get` and `/ap
 
     ...
 
-  this.act('role:web',{use:{
+  this.act('role:web',{routes:{
     prefix: '/api',
     pin:    'role:api,path:*',
     map: {
@@ -1182,16 +1207,27 @@ The shop functionality is exposed via the URL endpoints `/api/shop/get` and `/ap
 Finally, we need to update the web server to send `role:shop` messages to the `shop-service` ([app-all.js][]):
 
 ``` js
+var Express = require('express')
+var Router = Express.Router
+var context = new Router()
+
+var senecaWebConfig = {
+      context: context,
+      adapter: require('seneca-web-adapter-express'),
+      options: { parseBody: false } // so we can use json body-parser
+}
+
+var app = Express()
+      .use( require('body-parser').json() )
+      .use( context )
+      .listen(3000)
+
 var seneca = require( 'seneca' )()
       .use('entity')
+      .use('seneca-web', senecaWebConfig )
       .use( 'api-all' )
       .client( { type:'tcp', pin:'role:math' } )
       .client( { port:9002,  pin:'role:shop' } )
-
-var app = require( 'express' )()
-      .use( require('body-parser').json() )
-      .use( seneca.export( 'web' ) )
-      .listen(3000)
 
 // create a dummy product
 seneca.act(
