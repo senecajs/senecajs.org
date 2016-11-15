@@ -817,6 +817,7 @@ The most important thing to remember is that you don't want to expose your inter
 Let's look at a simple example using [Express][]. Here's the Express app ([app.js][]):
 
 ``` js
+var SenecaWeb = require('seneca-web')
 var Express = require('express')
 var Router = Express.Router
 var context = new Router()
@@ -833,7 +834,7 @@ var app = Express()
       .listen(3000)
 
 var seneca = require('seneca')()
-      .use('seneca-web', senecaWebConfig )
+      .use(SenecaWeb, senecaWebConfig )
       .use('api')
       .client( { type:'tcp', pin:'role:math' } )
 ```
@@ -843,7 +844,7 @@ You create a seneca instance, load the _api_ plugin, and then use `seneca.client
 The integration between Seneca and Express happens in this line:
 
 ``` js
-      .use('seneca-web', senecaWebConfig )
+      .use(SenecaWeb, senecaWebConfig )
 ```
 
 SenecaWeb will attach any of the routes defined through `seneca.act('role:web', {routes: routes})` to context.
@@ -1207,6 +1208,7 @@ The shop functionality is exposed via the URL endpoints `/api/shop/get` and `/ap
 Finally, we need to update the web server to send `role:shop` messages to the `shop-service` ([app-all.js][]):
 
 ``` js
+var SenecaWeb = require('seneca-web')
 var Express = require('express')
 var Router = Express.Router
 var context = new Router()
@@ -1224,7 +1226,7 @@ var app = Express()
 
 var seneca = require( 'seneca' )()
       .use('entity')
-      .use('seneca-web', senecaWebConfig )
+      .use(SenecaWeb, senecaWebConfig )
       .use( 'api-all' )
       .client( { type:'tcp', pin:'role:math' } )
       .client( { port:9002,  pin:'role:shop' } )
