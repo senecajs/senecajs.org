@@ -1,0 +1,92 @@
+
+//-- code.scss
+
+@import "./variables";
+
+pre {
+  word-break: break-word;
+  word-wrap: break-word;
+  border-radius: $ui-radius;
+  background-color: $gray-lighter;
+  line-height: $line-height-base;
+  padding: $ui-spacing-half;
+  margin-bottom: $ui-spacing;
+
+  code {
+    white-space: pre-wrap;
+  }
+}
+
+pre, code {
+  font-family: $font-monospaced;
+}
+
+.hljs, code {
+  display: inline-block;
+}
+
+p code,
+li code {
+  font-size: $font-small;
+  color: $gray;
+}
+
+.hljs,
+.hljs-subst {
+  color: $gray-dark;
+}
+
+.hljs-keyword,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-meta-keyword,
+.hljs-doctag,
+.hljs-name {
+  font-weight: $font-weight-bold;
+}
+
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code,
+.hljs-addition,
+.hljs-literal {
+  color: $green;
+}
+
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-type,
+.hljs-string,
+.hljs-number,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion,
+.hljs-meta,
+.hljs-meta-string {
+  color: $green-light;
+}
+
+.hljs-title,
+.hljs-section {
+  color: $green-light;
+  font-weight: bold;
+}
+
+.hljs-comment {
+  color: $gray;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: $font-weight-bold;
+}

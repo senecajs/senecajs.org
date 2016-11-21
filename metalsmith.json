@@ -13,7 +13,8 @@
       "tables": true
     },
     "metalsmith-headings-identifier": {
-      "linkTemplate": "<a href='#%s' class='linkable' style='display:inline-block;font-size:small;text-decoration:none;vertical-align:middle'>&sect; </a>"
+      "linkTemplate": "<a href='#%s' class='linkable' style='margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle'>&sect;</a>",
+      "selector": "h1,h2,h3"
     },
     "metalsmith-sass": {
       "outputDir": "stylesheets",
@@ -24,7 +25,7 @@
       "directory": "src/template/layouts",
       "partials": "src/template/partials",
       "pattern": "pages/**/*",
-      "default": "main.html"
+      "default": "content.html"
     },
     "metalsmith-move-up": {
      "pattern": [
@@ -34,7 +35,6 @@
     },
     "metalsmith-ignore": [
       "drafts/*",
-      "unfinished/*",
       "*~"
     ]
   },

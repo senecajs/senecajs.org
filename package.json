@@ -6,11 +6,12 @@
   "license": "MIT",
   "private": "true",
   "scripts": {
-    "test": "echo \"INFO: No test specified.\"",
-    "start": "npm run build && npm run docs",
+    "test": "echo 'command not used'",
+    "start": "npm run docs",
     "build": "metalsmith",
-    "docs": "metalsmith-start -p 4000",
-    "deploy": "surge --project ./dist/ --domain senecajs.org"
+    "docs": "npm run build; metalsmith-start -p 4000",
+    "deploy": "surge --project ./dist/ --domain senecajs.org",
+    "stage": "surge --project ./dist/ --domain staging.senecajs.org"
   },
   "contributors": [
     "Richard Rodger (https://github.com/rjrodger)",
@@ -24,13 +25,18 @@
     "Glen Keane (https://github.com/thekemkid)",
     "Vito Tardia (https://github.com/vtardia)",
     "Michele Capra (https://github.com/piccoloaiutante)",
+    "Marco Piraccini (https://github.com/marcopiraccini)",
+    "Mircea Alexandru (https://github.com/mirceaalexandru)",
+    "Mihai Dima (https://github.com/mihaidma)",
     "Paulo Vieira (https://github.com/paulovieira)",
     "Lloyd Benson (https://github.com/lloydbenson)",
     "Bogdan Rotund (https://github.com/Bogdan-Rotund)",
     "Adrien Becchis (https://github.com/AdrieanKhisbe)",
     "Tim Carry (https://github.com/pixelastic)",
     "Karolina Szczur (https://github.com/thefoxis)",
-    "Kamil Mech (https://github.com/kamil-mech)"
+    "Cristian Kiss (https://github.com/ckiss)",
+    "Kamil Mech (https://github.com/kamil-mech)",
+    "Emer Rutherford (https://github.com/eeswr)"
   ],
   "dependencies": {
     "handlebars": "^4.0.5",
@@ -50,6 +56,6 @@
   },
   "devDependencies": {
     "metalsmith-sass": "^1.3.0",
-    "surge": "^0.17.4"
+    "surge": "^0.18.0"
   }
 }

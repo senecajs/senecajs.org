@@ -1,0 +1,49 @@
+/*********************************************************************
+*
+* PANELS
+*
+*********************************************************************/
+
+@import "./variables";
+
+.panel {
+  display: inline-block;
+  width: 100%;
+  padding: $ui-spacing-half;
+  border-radius: $ui-radius;
+  font-size: $font-large;
+  margin-bottom: $ui-spacing;
+}
+
+.panel-equal-height {
+  display: flex;
+}
+
+.panel-highlighted {
+  padding: $ui-spacing $ui-spacing-half;
+  background-color: $green-lighter;
+}
+
+.panel-download,
+.panel-start,
+.panel-updates {
+  transition: none;
+}
+
+.panel-download:hover {
+  .icon-download {
+    background-position: 0 -40px;
+  }
+}
+
+.panel-start:hover {
+  .icon-start {
+    background-position: 0 -40px;
+  }
+}
+
+.panel-updates:hover {
+  .icon-updates {
+    background-position: 0 -40px;
+  }
+}

@@ -3,25 +3,24 @@
   <head>
     {{> head}}
   </head>
-  <body class="error">
+  <body>
     {{> menu}}
     {{> banner-small}}
 
-    <main class="container-fluid" role="main">
+    <div class="container-fluid">
       <div class="row center-xs">
-        <div class="col-xs-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-md-10 col-lg-10 txt-left">
           {{{contents}}}
         </div>
       </div>
+
       <div class="row center-xs">
         <div class="col-xs-12 col-md-10 col-lg-10">
-          <p>
-            Issues? From spelling errors to broken tutorials and everything in between, report
-            them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a>
-          </p>
+          <p class="txt-lead mb mt2x">Issues? From spelling errors to broken tutorials and everything in between, report
+          them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a></p>
         </div>
       </div>
-    </main>
+    </div>
 
     {{> footer}}
     {{> algolia}}

@@ -1,5 +1,5 @@
 ---
-layout: main.html
+layout: content.html
 ---
 
 # Plugins
@@ -271,6 +271,13 @@ the right solution.
 [couchdb-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-couchdb-store.svg?style=flat-square
 [couchdb-store-npm-url]: https://npmjs.org/package/seneca-couchdb-store
 
+### [CouchDB version 2 store](https://npmjs.org/package/seneca-couch2-store)
+[![version][couch2-store-npm-version]][couch2-store-npm-url]
+[![downloads][couch2-store-npm-downloads]][couch2-store-npm-url]
+[couch2-store-npm-version]: https://img.shields.io/npm/v/seneca-couch2-store.svg?style=flat-square
+[couch2-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-couch2-store.svg?style=flat-square
+[couch2-store-npm-url]: https://npmjs.org/package/seneca-couch2-store
+
 ### [SimpleDB store](https://npmjs.org/package/seneca-simpledb-store)
 [![version][simpledb-store-npm-version]][simpledb-store-npm-url]
 [![downloads][simpledb-store-npm-downloads]][simpledb-store-npm-url]
@@ -287,12 +294,12 @@ Seneca supports many different transports. Use the one that fits best with your 
 [seneca-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-transport.svg?style=flat-square
 [seneca-transport-npm-url]: https://npmjs.org/package/seneca-transport
 
-### [RabbitMQ](https://npmjs.com/package/seneca-rabbitmq-transport)
-[![version][seneca-rabbitmq-transport-npm-version]][seneca-rabbitmq-transport-npm-url]
-[![downloads][seneca-rabbitmq-transport-npm-downloads]][seneca-rabbitmq-transport-npm-url]
-[seneca-rabbitmq-transport-npm-version]: https://img.shields.io/npm/v/seneca-rabbitmq-transport.svg?style=flat-square
-[seneca-rabbitmq-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-rabbitmq-transport.svg?style=flat-square
-[seneca-rabbitmq-transport-npm-url]: https://npmjs.org/package/seneca-rabbitmq-transport
+### [AMQP](https://npmjs.com/package/seneca-amqp-transport)
+[![version][seneca-amqp-transport-npm-version]][seneca-amqp-transport-npm-url]
+[![downloads][seneca-amqp-transport-npm-downloads]][seneca-amqp-transport-npm-url]
+[seneca-amqp-transport-npm-version]: https://img.shields.io/npm/v/seneca-amqp-transport.svg?style=flat-square
+[seneca-amqp-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-amqp-transport.svg?style=flat-square
+[seneca-amqp-transport-npm-url]: https://npmjs.org/package/seneca-amqp-transport
 
 ### [Kafka](https://npmjs.com/package/seneca-kafka-transport)
 [![version][seneca-kafka-transport-npm-version]][seneca-kafka-transport-npm-url]
@@ -336,13 +343,6 @@ Seneca supports many different transports. Use the one that fits best with your 
 [seneca-activemq-transport-npm-version]: https://img.shields.io/npm/v/seneca-activemq-transport.svg?style=flat-square
 [seneca-activemq-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-activemq-transport.svg?style=flat-square
 [seneca-activemq-transport-npm-url]: https://npmjs.org/package/seneca-activemq-transport
-
-### [AMQP](https://npmjs.com/package/seneca-amqp-transport)
-[![version][seneca-amqp-transport-npm-version]][seneca-amqp-transport-npm-url]
-[![downloads][seneca-amqp-transport-npm-downloads]][seneca-amqp-transport-npm-url]
-[seneca-amqp-transport-npm-version]: https://img.shields.io/npm/v/seneca-amqp-transport.svg?style=flat-square
-[seneca-amqp-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-amqp-transport.svg?style=flat-square
-[seneca-amqp-transport-npm-url]: https://npmjs.org/package/seneca-amqp-transport
 
 ### [Redis Queue](https://npmjs.com/package/seneca-redis-queue-transport)
 [![version][seneca-redis-queue-transport-npm-version]][seneca-redis-queue-transport-npm-url]
@@ -388,7 +388,7 @@ Seneca supports many different transports. Use the one that fits best with your 
 
 
 ## Got a plugin to share?
-Our docs are open source. Simply fork the [senecajs.org]() repository, add your plugin to the appropriate section,
+Our docs are open source. Simply fork the [senecajs.org] repository, add your plugin to the appropriate section,
 and send us on a pull request - that way, other people can find your awesome plugin easily.
 
 [senecajs.org]: https://github.com/senecajs/senecajs.org

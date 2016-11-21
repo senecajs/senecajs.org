@@ -1,0 +1,53 @@
+
+//-- forms.scss
+
+
+@import "./variables";
+
+// Shared
+input, select {
+  border: $ui-border;
+  border-radius: $ui-radius;
+  padding: $ui-spacing-third;
+  transition: all .3s ease-in;
+
+  &:focus {
+    border: 1px solid $green-light;
+    box-shadow: 0 0 5px $green-light;
+    outline: none;
+  }
+}
+
+// Inputs
+
+.input-large {
+  padding: $ui-spacing-half $ui-spacing-third;
+}
+
+// Search
+
+input[type="search"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: $ui-spacing + $ui-spacing-fourth;
+  position: relative;
+  background: url("/images/icon-search.svg") no-repeat 10px 50%;
+}
+
+// Checkbox
+
+input[type="checkbox"] {
+
+  &:focus {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 30em) {
+
+  select,
+  input[type=search] {
+    width: 100%;
+  }
+}

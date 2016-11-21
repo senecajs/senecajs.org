@@ -1,0 +1,23 @@
+
+//-- footer.scss
+
+
+@import "./variables";
+
+.footer-top,
+.footer-bottom {
+  box-shadow: 0 -2px 20px rgba($gray-dark, 0.4);
+}
+
+.footer-top {
+  padding: $ui-spacing-double 0 $ui-spacing 0;
+  background-color: $green;
+
+  a {
+    color: $green-lighter;
+  }
+}
+
+.footer-bottom {
+  padding: $ui-spacing 0;
+}
