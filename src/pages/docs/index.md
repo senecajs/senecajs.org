@@ -11,6 +11,7 @@ ways and with different complimentary technologies.
 
 - [Logging with Seneca][Tutorial01]
 - [How to write a plugin][Tutorial02]
+- [Unit testing][unit-testing]
 - [Understanding data entities][Tutorial03]
 - [Understanding query syntax][Tutorial04]
 - [Understanding prior actions][Tutorial05]
@@ -120,6 +121,7 @@ pattern.
 [Tutorial04]: /docs/tutorials/understanding-query-syntax.html
 [Tutorial05]: /docs/tutorials/understanding-prior-actions.html
 [Tutorial06]: /docs/tutorials/seneca-with-promises.html
+[unit-testing]: /docs/tutorials/unit-testing.html
 
 [Sample01]: https://github.com/rjrodger/seneca-examples
 [Sample02]: https://github.com/nodezoo/nodezoo-system

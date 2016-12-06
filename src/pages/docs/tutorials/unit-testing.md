@@ -24,14 +24,16 @@ the plugin might need.
 Let's build a simple color name to hex conversion service to
 demonstrate this approach.
 
+
 ## Contents
 
 - [The `color` plugin](#color-plugin)
 - [The `color` service](#color-service)
 - [Seneca test mode](#seneca-test-mode)
 - [A Seneca unit test](#seneca-unit-test)
-
-
+- [Testing Seneca actions](#seneca-action-test)
+- [Avoiding callback hell](#avoiding-callback-hell)
+- [Example unit test code](#example-code)
 
 
 
@@ -150,10 +152,148 @@ distinguish it from other callbacks in the unit test code.
 <a name="seneca-unit-test"></a>
 ## A Seneca unit test
 
+Let's write the unit test. The scaffolding code for
+[lab](https://github.com/hapijs/lab) is shown here. You'll have to
+modify this for other unit test frameworks.
 
-TODO
+```js
+// file: test/color-test.js
+var Lab = require('lab')
+var Code = require('code')
+var Seneca = require('seneca')
+
+var lab = exports.lab = Lab.script()
+var describe = lab.describe
+var it = lab.it
+var expect = Code.expect
+
+describe('color', function () {
+
+  it('to-hex', function (fin) {
+    var seneca = test_seneca(fin)
+
+    fin()
+  })
+})
+```
+
+The required modules are:
+
+  * `lab`: the _lab_ unit testing framework from the (hapi)[http://hapijs.com] project
+  * `code`: the assertion utility used by _hapi_.
+  * `seneca`: the Seneca module
+
+The variables `lab`, `describe`, `it` and `expect` are convenience
+definitions to make the unit test code more concise.
+
+The unit tests are organised into a suite _color_, and one unit test
+is defined: _to-hex_. This test call `fin` without errors, and so
+always passes.
+
+The `test_seneca` function defined above is used to create the Seneca
+instance.
 
 
+<a name="seneca-action-test"></a>
+## Testing Seneca actions
+
+Now you can write a real unit test. Call a Seneca action and verify
+the result.
+
+```js
+// file: test/color-test.js
+
+it('to-hex', function (fin) {
+  var seneca = test_seneca(fin)
+
+  seneca.act({
+    role: 'color',
+    to: 'hex',
+    color: 'red'
+  }, function (ignore, result) {
+    expect(result.hex).to.equal('FF0000')
+    fin()
+  })
+})
+```
+
+This test send a _role:color,to:hex_ message, and checks that the
+resulting hex code is correct. The `fin` callback is then called
+inside the action callback to complete the unit test successfully.
+
+If the result is incorrect, the `expect` assertion will fail by
+throwing an exception. This will be caught by Seneca, and passed to
+the `fin` callback. This happens because the `test_seneca` function
+sets up Seneca in test mode with `seneca.test(fin)`.
+
+If the execution of the action fails, it normally provides you with an
+Error object as the first argument of the callback function. In this
+case, you can ignore this possibility, as Seneca will already have
+called the _fin_ function with the error, and failing the unit test.
+
+When an error occurs in test mode, the log entry will contain two
+stacktraces, one for the locaton of the error, and one for the
+location from which the action was called with `seneca.act`.
 
 
+<a name="avoiding-callback-hell"></a>
+## Avoiding callback hell
 
+In many test scenarios, you want to execute a series of Seneca actions
+in sequence. You can use the the Seneca _gating_ feature to avoid
+callbacks. The method `seneca.gate()` returns a new Seneca instance
+that is _gated_. Each action must complete by calling their callbacks,
+before any further actions are executed.
+
+Gating is used by the plugin system to ensure that plugins are
+initialized correctly in order before Seneca microservices are ready
+to accept inbound messages. The gating feature is not limited to
+plugin initialization and you can use it for other purposes, such as
+unit testing.
+
+Once all the gated actions are complete, Seneca will call any
+functions registered with the `ready` method. Ready functions are
+called only once, and have no arguments. In a unit testing contect,
+pass the _fin_ callback to the `ready` method to complete the unit
+test.
+
+Heres an expanded unit test with two actions called in sequence:
+
+```
+// file: test/color-test.js
+it('to-hex', function (fin) {
+  var seneca = test_seneca(fin)
+
+  seneca
+    .gate()
+
+    .act({
+      role: 'color',
+      to: 'hex',
+      color: 'red'
+    }, function (ignore, result) {
+      expect(result.hex).to.equal('FF0000')
+    })
+
+    .act({
+      role: 'color',
+      to: 'hex',
+      color: 'not-a-color'
+    }, function (ignore, result) {
+      expect(result.hex).to.equal('000000')
+    })
+
+    .ready(fin)
+})
+```
+
+The Seneca methods `.gate`, and `.act` are chainable, allowing you to
+write relatively linear code without worrying about callbacks.
+
+
+<a name="example-code"></a>
+## Example unit test code
+
+You can find examples of more complex unit test following this pattern
+in the
+[ramanujan Seneca twitter clone microservice demonstration system](https://github.com/senecajs/ramanujan).
