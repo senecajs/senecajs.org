@@ -22,7 +22,8 @@ network communications. This also lets you define mock messages that
 the plugin might need.
 
 Let's build a simple color name to hex conversion service to
-demonstrate this approach.
+demonstrate this approach. Full source code is available in the
+[`code/unit-testing`](https://github.com/senecajs/senecajs.org/blob/master/code/unit-testing) folder.
 
 
 ## Contents
@@ -143,9 +144,7 @@ function test_seneca (fin) {
 ```
 
 This code is placed inside a file called `color-test.js` inside a
-`test` folder. Full source code is available in the
-[`code/unit-testing`](https://github.com/senecajs/senecajs.org/blob/master/code/unit-testing)
-folder. The test callback is named `fin` as a convention to
+`test` folder. The test callback is named `fin` as a convention to
 distinguish it from other callbacks in the unit test code.
 
 
@@ -179,7 +178,7 @@ describe('color', function () {
 
 The required modules are:
 
-  * `lab`: the _lab_ unit testing framework from the (hapi)[http://hapijs.com] project
+  * `lab`: the _lab_ unit testing framework from the [hapi](http://hapijs.com) project
   * `code`: the assertion utility used by _hapi_.
   * `seneca`: the Seneca module
 
