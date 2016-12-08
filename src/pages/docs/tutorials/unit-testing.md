@@ -21,7 +21,7 @@ Seneca instance in the unit test without needing to worry about
 network communications. This also lets you define mock messages that
 the plugin might need.
 
-Let's build a simple color name to hex conversion service to
+Let's build a simple color name-to-hex conversion service to
 demonstrate this approach. Full source code is available in the
 [`code/unit-testing`](https://github.com/senecajs/senecajs.org/blob/master/code/unit-testing) folder.
 
@@ -35,7 +35,7 @@ demonstrate this approach. Full source code is available in the
 - [Testing Seneca actions](#seneca-action-test)
 - [Avoiding callback hell](#avoiding-callback-hell)
 - [Example unit test code](#example-code)
-
+- [Using mock messages](#mock-messages)
 
 
 <a name="color-plugin"></a>
@@ -288,6 +288,71 @@ it('to-hex', function (fin) {
 
 The Seneca methods `.gate`, and `.act` are chainable, allowing you to
 write relatively linear code without worrying about callbacks.
+
+
+<a name="mock-messages"></a>
+## Using mock messages
+
+Often you will need test a microservice that depends on other
+microservices. Your microservice expects to be able to send out
+messages and get replies. To unit test the business logic for this
+kind of service, you can follow the same unit testing pattern
+described here by adding mock messages.
+
+When you create a new Seneca instance for testing in the `test_seneca`
+function, add the definitions of the mock messages. Let's look at an
+example. First, extend the color service to create a dependency on an
+external microservice:
+
+```js
+// file: color-extra.js
+module.exports = function color (options) {
+
+  this.add('role:color,to:hex', function (msg, reply) {
+
+    this.act('role:hexmap', {color:msg.color}, function (err, result) {
+      if (err) return reply(err)
+
+      var hex = result.hex || '000000'
+      reply(null, {hex: hex})
+    })
+  })
+}
+```
+
+This version of the color service uses the `role:hexmap` message to
+perform the color to hex-code mapping. This message will need to be
+mocked to build a unit test that does not have a network dependency.
+
+The `test_seneca` methods becomes:
+
+```js
+// file: test/color-mock-test.js
+function test_seneca (fin) {
+  return Seneca({log: 'test'})
+
+    .test(fin)
+
+    .use(require('../color-extra'))
+
+  // Define mock messages that the business logic needs
+    .add('role:hexmap', function (msg, reply) {
+      // As this is a mock, the result is hard-coded
+      reply(null, {hex: 'red' === msg.color ? 'FF0000' : '000000'})
+    })
+}
+
+```
+
+You can use this technique to implement any external interactions that
+your business logic needs. If you are using Seneca entities, then
+you'll also need to load the
+[seneca-entity](github.com/senecajs/seneca-entity) plugin to provide
+in-memory entities for your tests.
+
+You are not limited to the `test_seneca` function when you create mock
+messages. You can create them dynamically in each unit test to handle
+test-specific situations.
 
 
 <a name="example-code"></a>

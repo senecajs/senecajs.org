@@ -11,7 +11,7 @@ ways and with different complimentary technologies.
 
 - [Logging with Seneca][Tutorial01]
 - [How to write a plugin][Tutorial02]
-- [Unit testing][unit-testing]
+- [How to write unit tests][unit-testing]
 - [Understanding data entities][Tutorial03]
 - [Understanding query syntax][Tutorial04]
 - [Understanding prior actions][Tutorial05]
