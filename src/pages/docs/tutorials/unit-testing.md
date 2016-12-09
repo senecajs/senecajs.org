@@ -33,9 +33,10 @@ demonstrate this approach. Full source code is available in the
 - [Seneca test mode](#seneca-test-mode)
 - [A Seneca unit test](#seneca-unit-test)
 - [Testing Seneca actions](#seneca-action-test)
+- [Detailed logging](#detailed-logging)
 - [Avoiding callback hell](#avoiding-callback-hell)
-- [Example unit test code](#example-code)
 - [Using mock messages](#mock-messages)
+- [Example unit test code](#example-code)
 
 
 <a name="color-plugin"></a>
@@ -234,6 +235,42 @@ When an error occurs in test mode, the log entry will contain two
 stacktraces, one for the locaton of the error, and one for the
 location from which the action was called with `seneca.act`.
 
+
+<a name="detailed-logging"></a>
+## Detailed logging
+
+When test fails, and you need to investigate further, it can be very
+helpful to see the detailed Seneca logs. The default Seneca logs for
+production are output as JSON entries so that they can be sent to
+production logging services, and analysed in detail.
+
+There is a simpler approach for unit tests. When in test mode, Seneca will simplify the log output and use a plain text, tab-separated format. To activate full logging, call the `.test` method like so:
+
+```js
+...
+function test_seneca (fin) {
+  ...
+  seneca.test(fin, 'print')
+  ...
+}
+```
+
+You'll then get output that shows the exact sequence of messages. You can ignore the setup entries at the start of the output. Focus on the entries related to your business logic. In the case of the color test, these look like:
+
+```sh
+238/7p	plugin/init	color
+244/7p	add/ADD	role:color,to:hex
+244/7p	options/SET
+246/7p	plugin/install	color
+250/7p	act/DEFAULT	ce/81		{init:'color',tag:undefined}
+251/7p	act/OUT	ce/81		{}
+251/7p	plugin/ready	color
+252/7p	act/OUT	c7/m6	name:color,plugin:define,role:seneca,seq:2,tag:undefined	{role:'seneca',plugin:'define',name:'color',tag:undefined,seq:2}
+255/7p	act/IN	gn/mc	role:color,to:hex	{role:'color',to:'hex',color:'red'}
+256/7p	act/OUT	gn/mc	role:color,to:hex	{hex:'FF0000'}
+259/7p	act/IN	lf/9e	role:color,to:hex	{role:'color',to:'hex',color:'not-a-color'}
+260/7p	act/OUT	lf/9e	role:color,to:hex	{hex:'000000'}
+```
 
 <a name="avoiding-callback-hell"></a>
 ## Avoiding callback hell

@@ -58,6 +58,9 @@ function test_seneca (fin) {
   // activate unit test mode. Errors provide additional stack tracing context.
   // The fin callback is called when an error occurs anywhere.
     .test(fin)
+  
+  // For detailed logs, use this version instead
+  // .test(fin, 'print')
 
   // Load the microservice business logic
     .use(require('../color'))
