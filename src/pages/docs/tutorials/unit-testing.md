@@ -239,12 +239,15 @@ location from which the action was called with `seneca.act`.
 <a name="detailed-logging"></a>
 ## Detailed logging
 
-When test fails, and you need to investigate further, it can be very
+When a test fails, and you need to investigate further, it can be very
 helpful to see the detailed Seneca logs. The default Seneca logs for
 production are output as JSON entries so that they can be sent to
-production logging services, and analysed in detail.
+production logging services, and analysed in detail. But JSON is hard
+on the eyes.
 
-There is a simpler approach for unit tests. When in test mode, Seneca will simplify the log output and use a plain text, tab-separated format. To activate full logging, call the `.test` method like so:
+There is a simpler approach for unit tests. When in test mode, Seneca
+will simplify the log output and use a plain-text, tab-separated
+format. To activate test logging, call the `.test` method like so:
 
 ```js
 ...
@@ -255,7 +258,10 @@ function test_seneca (fin) {
 }
 ```
 
-You'll then get output that shows the exact sequence of messages. You can ignore the setup entries at the start of the output. Focus on the entries related to your business logic. In the case of the color test, these look like:
+You'll then get output that shows the exact sequence of messages. You
+can ignore the setup entries at the start of the output. Focus on the
+entries related to your business logic. In the case of the color test,
+these look like:
 
 ```sh
 238/7p	plugin/init	color
@@ -271,6 +277,9 @@ You'll then get output that shows the exact sequence of messages. You can ignore
 259/7p	act/IN	lf/9e	role:color,to:hex	{role:'color',to:'hex',color:'not-a-color'}
 260/7p	act/OUT	lf/9e	role:color,to:hex	{hex:'000000'}
 ```
+
+Note that in test mode, warnings and errors will be printed by
+default (in the simplified format), so you will always see those.
 
 <a name="avoiding-callback-hell"></a>
 ## Avoiding callback hell
