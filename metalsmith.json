@@ -35,7 +35,8 @@
     },
     "metalsmith-ignore": [
       "drafts/*",
-      "*~"
+      "*~",
+      ".#"
     ]
   },
   "metalsmith-broken-link-checker": {

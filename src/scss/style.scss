@@ -1,6 +1,11 @@
 
 //-- style.scss, Senecajs.org main stylesheet
 
+// External libraries
+@import "libs/flexboxgrid";
+@import "libs/normalize";
+
+
 @import "./base";
 @import "./type";
 @import "./lists";
@@ -15,8 +20,6 @@
 @import "./code";
 @import "./panels";
 @import "./layout";
+@import "./api";
 
 
-// External libraries
-@import "libs/flexboxgrid";
-@import "libs/normalize";
