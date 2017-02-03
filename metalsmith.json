@@ -3,9 +3,17 @@
   "destination": "dist",
   "plugins": {
     "metalsmith-drafts": true,
+    "metalsmith-ignore": [
+      "drafts/*",
+      "*~",
+      ".#"
+    ],
     "metalsmith-assets": {
       "source": "./assets",
       "destination": "."
+    },
+    "metalsmith-in-place": {
+      "pattern": "**/*.ejs"
     },
     "metalsmith-markdown": {
       "smartypants": true,
@@ -32,12 +40,7 @@
       "pages/**",
       "images/favicon.ico"
     ]
-    },
-    "metalsmith-ignore": [
-      "drafts/*",
-      "*~",
-      ".#"
-    ]
+    }
   },
   "metalsmith-broken-link-checker": {
     "allowRedirects": true,

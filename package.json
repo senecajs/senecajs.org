@@ -41,6 +41,7 @@
   "dependencies": {
     "code": "^4.0.0",
     "handlebars": "^4.0.5",
+    "jstransformer-ejs": "0.0.3",
     "lab": "^11.2.1",
     "metalsmith": "^2.1.0",
     "metalsmith-annotate": "^0.1.1",
@@ -50,6 +51,7 @@
     "metalsmith-drafts": "0.0.1",
     "metalsmith-headings-identifier": "0.0.11",
     "metalsmith-ignore": "^0.1.2",
+    "metalsmith-in-place": "^2.0.1",
     "metalsmith-layouts": "^1.0.0",
     "metalsmith-less": "^2.0.0",
     "metalsmith-markdown": "^0.2.1",

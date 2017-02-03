@@ -1,0 +1,228 @@
+---
+layout: api.html
+---
+
+
+<h1>Seneca API</h1>
+
+
+
+
+<div class="row">
+
+<%
+var items_top = [{
+  n: 'Instance',
+  d: 'Creating and using the Seneca instance object.'
+}, {
+  n: 'Options',
+  d: 'The configuration options and how they are defined.'
+}, {
+  n: 'Methods',
+  d: 'The public methods of the Seneca instance.'
+}, {
+  n: 'Plugins',
+  d: 'The plugin interface.'
+}, {
+  n: 'Messages',
+  d: 'The message meta data properties.'
+}, {
+  n: 'Utilities',
+  d: 'Utility functions and formats.'
+}]
+
+items_top.forEach(function (i) {
+%>
+<div class="col-xs-12 col-sm-4"><a href="#instance"><div class="api-box">
+<h4><%=i.n%></h4>
+<p class="top"><%=i.d%></p>
+</div></a></div>
+<% }) %>
+
+</div>
+
+
+
+
+<div class="cf">
+<h2 class="api-subhead">Instance</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+
+<div class="row"><br><br><br><br><br><br><br><br></div>
+
+<div class="cf">
+<h2 class="api-subhead">Options</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+
+<div class="row">
+
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="option-timeout">
+<h5><b>tag</b> <u>String</u> <u>'-'</u></h5>
+<p>Tag the Seneca instance with a short code that will be added to the instance identifier. Useful for tracing and debugging.</p>
+</div></div>
+
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="option-timeout">
+<h5><b>timeout</b> <u>Integer</u> <u>22222</u></h5>
+<p>The global timeout for actions. Once this timeout is exceeded, the sender of the message receives an error response via the callback of the <a href="#method-act">act</a> method.</p>
+</div></div>
+
+</div>
+
+
+
+
+<div class="cf">
+<h2 class="api-subhead">Methods</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+
+
+<div class="row">
+
+<div class="col-xs-12 col-sm-4"><a href="#method-add"><div class="api-box">
+<h5><b>add</b> <i>pattern</i>, <i>action</i></h5>
+<p>Add an <i>action</i> function to be called when inbound messages match the <i>pattern</i>.</p>
+<ul>
+<li><i>pattern</i>: <u>jsonic</u> | <u>Object</u></li>
+<li><i>action</i>: <u>Function</u></li>
+<ul>
+</div></a></div>
+
+<div class="col-xs-12 col-sm-4"><a href="#method-act"><div class="api-box">
+<h5><b>act</b> <i>message</i>, <i>callback?</i></h5>
+<p>Send a <i>message</i> and receive a response via the <i>callback</i>. If there is no <i>callback</i> the message is asynchronous.</p>
+<ul>
+<li><i>message</i>: <u>jsonic<u> | <u>Object</u></li>
+<li><i>callback</i>: <u>Function</u></li>
+<ul>
+</div></a></div>
+
+
+</div>
+
+
+
+
+<div class="cf">
+<h2 class="api-subhead">Option: tag</h2>
+<a class="api-back" href="#options">up</a>
+</div>
+
+<div class="row"><div class="col-xs-12 api-desc">
+
+<h4>Types and defaults</h4>
+<ul>
+<li><u>String</u>, <u>"-"</u></li>
+</ul>
+
+</div></div>
+
+
+
+
+<div class="cf">
+<h2 class="api-subhead">Option: timeout</h2>
+<a class="api-back" href="#options">up</a>
+</div>
+
+<div class="row"><div class="col-xs-12 api-desc">
+
+<h4>Types and defaults</h4>
+<ul>
+<li><u>Integer</u>, <u>22222</u></li>
+</ul>
+
+</div></div>
+
+
+
+
+<div class="cf">
+<h2 class="api-subhead">Method: add</h2>
+<a class="api-back" href="#methods">up</a>
+</div>
+
+<div class="row"><div class="col-xs-12 api-desc">
+
+<h4>Signatures</h4>
+<ul>
+<li><b>add</b> <i>pattern</i>, <i>action</i></li>
+<li><b>add</b> <i>pattern</i>, <i>sub_pattern</i>, <i>action</i></li>
+</ul>
+
+<h4>Parameters</h4>
+<table>
+<tr>
+  <td><i>pattern</i></td>
+  <td><u><a href="#utility-jsonic">jsonic</a></u> | <u>Object</u></td>
+  <td>The pattern that inbound messages must match to trigger this action.</td></tr>
+<tr>
+  <td><i>sub_pattern</i></td>
+  <td><u>Object</u></td>
+  <td>A convenience parameter that is merged into the <i>pattern</i> parameter with lower precedence.</td>
+</tr>
+<tr>
+  <td><i>action</i></td>
+  <td><u>Function</u></td>
+  <td>The function that executes the action for this pattern.</td>
+</tr>
+</table>
+
+</div></div>
+
+
+
+
+<div class="cf">
+<h2 class="api-subhead">Method: act</h2>
+<a class="api-back" href="#methods">up</a>
+</div>
+
+<div class="row"><div class="col-xs-12 api-desc">
+
+<h4>Signatures</h4>
+<ul>
+<li><b>act</b> <i>pattern</i>, <i>action</i></li>
+<li><b>act</b> <i>pattern</i>, <i>sub_pattern</i>, <i>action</i></li>
+</ul>
+
+<h4>Parameters</h4>
+<table>
+<tr>
+  <td><i>pattern</i></td>
+  <td><u><a href="#utility-jsonic">jsonic</a></u> | <u>Object</u></td>
+  <td>The pattern that inbound messages must match to trigger this action.</td></tr>
+<tr>
+  <td><i>sub_pattern</i></td>
+  <td><u>Object</u></td>
+  <td>A convenience parameter that is merged into the <i>pattern</i> parameter with lower precedence.</td>
+</tr>
+<tr>
+  <td><i>action</i></td>
+  <td><u>Function</u></td>
+  <td>The function that executes the action for this pattern.</td>
+</tr>
+</table>
+
+</div></div>
+
+
+
+
+<div class="row "><br><br><br><br><br><br><br><br></div>
+
+<div class="cf">
+<h2 class="api-subhead">Plugins</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+
+<div class="row"><br><br><br><br><br><br><br><br></div>
+
+<div class="cf">
+<h2 class="api-subhead">Messages</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+
+<div class="row"><br><br><br><br><br><br><br><br></div>

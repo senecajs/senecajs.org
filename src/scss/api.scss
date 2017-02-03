@@ -39,6 +39,11 @@
     b {
       font-size: 1.2rem;
     }
+
+    u {
+      text-decoration: none;
+      font-family: $font-monospaced;
+    }            
   }
 
   p {
@@ -91,12 +96,18 @@
   display: block;
   float: left;
   margin: 5rem 0rem 1rem 1rem;
-  font-size: $font-small*0.8;
+  font-size: $font-small;
 }
 
 .api-desc {
   margin: 0rem;
   padding: 0rem 0rem 0rem 0.6rem;
+
+  u {
+    text-decoration: none;
+    font-family: $font-monospaced;
+    font-size: 0.8rem;
+  }            
 
   h4 {
     font-size: 1rem;
