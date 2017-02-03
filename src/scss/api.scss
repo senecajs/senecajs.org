@@ -90,6 +90,15 @@
 .api-subhead {
   float: left;
   margin: 4rem 0rem 0rem 0rem;
+
+  i {
+    color: purple;
+  }            
+
+  b {
+    color: green;
+    font-family: $font-open-sans;
+  }
 }
 
 .api-back {
@@ -109,10 +118,15 @@
     font-size: 0.8rem;
   }            
 
+  b {
+    color: green;
+  }            
+
   h4 {
     font-size: 1rem;
     margin: 0.6rem 0rem 0rem 0rem;
     padding: 0rem;
+    font-weight: bold;
   }
 
   ul {
@@ -126,10 +140,6 @@
     padding: 0rem;
     list-style-type: none;
     color: black;
-
-    b {
-      color: green;
-    }            
 
     i {
       color: purple;
@@ -158,5 +168,13 @@
       font-family: $font-monospaced;
       font-size: 0.8rem;
     }            
+  }
+
+  p {
+    margin: 0rem 0rem 0.4rem 0rem;
+
+    &.desc {
+      margin: 0rem;
+    }
   }
 }
