@@ -62,23 +62,24 @@ var items_top = [{
 
 
 var items_instance = [{
-   n: 'Seneca (constructor)',
-   d: 'Create an instance of the Seneca object.'
+   n: 'id',
+   d: 'The unique identifier string of this Seneca instance.'
 
 }, {
-   n: 'id'
+   n: 'tag',
+   d: 'The tag string of this Seneca instance, defined by the <a href="#option-tag">tag</a> option.'
 
 }, {
-   n: 'tag'
+   n: 'start_time',
+   d: 'The start time (in local milliseconds) of this Seneca instance.'
 
 }, {
-   n: 'start_time'
+   n: 'version',
+   d: 'The current version of Seneca.'
 
 }, {
-   n: 'version'
-
-}, {
-   n: 'util'
+   n: 'util',
+   d: 'A namespace object for the <a href="#utilities">utility</a> functions.'
 
 }]
 
@@ -132,6 +133,11 @@ Q(items_options, function (i) {
 
 
 var items_methods = [{
+   n: 'Seneca (constructor)',
+   r: 'seneca-constructor',
+   d: 'Create an instance of the Seneca object.'
+
+}, {
    n: 'add',
    g: [['pattern', 'action'], ['pattern', 'sub_pattern', 'action']],
    p: { 
@@ -236,22 +242,27 @@ var items_messages = [{
 
 
 var items_modifiers = [{
-   n: 'default$'
+   n: 'default$',
+   r: 'default'
+}, {
+   n: 'id$',
+   r: 'id',
 
 }, {
-   n: 'id$'
+   n: 'mid$',
+   r: 'mid'
 
 }, {
-   n: 'mid$'
+   n: 'cid$',
+   r: 'cid'
 
 }, {
-   n: 'cid$'
+   n: 'timeout$',
+   r: 'timeout'
 
 }, {
-   n: 'timeout$'
-
-}, {
-   n: 'gate$'
+   n: 'gate$',
+   r: 'gate'
 
 }]
 
@@ -306,7 +317,7 @@ function sort_items (i) {
 <!-- Top level descriptions -->
 
 <% sort_items(items_top).forEach(function (i) { %>
-<div class="col-xs-12 col-sm-4"><a href="#<%=i.n.toLowerCase()%>"><div class="api-box">
+<div class="col-xs-12 col-sm-4"><a href="#<%=i.r||i.n.toLowerCase()%>"><div class="api-box">
 <h4><%=i.n%></h4>
 <p class="top"><%-i.d%></p>
 </div></a></div>
@@ -325,7 +336,7 @@ function sort_items (i) {
 </div>
 <div class="row">
 <% sort_items(items_instance).forEach(function (i) { %>
-<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.r||i.n%>">
 <h5><b><%=i.n%></b></h5>
 <p><%-i.d%></p>
 </div></div>
@@ -343,7 +354,7 @@ function sort_items (i) {
 </div>
 <div class="row">
 <% sort_items(items_options).forEach(function (i) { %>
-<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="option-<%=i.n%>">
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="option-<%=i.r||i.n%>">
 <h5><b><%=i.n%></b> <u><%=i.t[0].t%></u> <u><%=i.t[0].f%></u></h5>
 <p><%-i.d%></p>
 </div></div>
@@ -361,7 +372,7 @@ function sort_items (i) {
 </div>
 <div class="row">
 <% sort_items(items_methods).forEach(function (i) { var g = Q(i.g) %>
-<div class="col-xs-12 col-sm-4"><a href="#method-<%=i.n%>"><div class="api-box">
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="method-<%=i.r||i.n%>">
 <h5>
 <b><%=i.n%></b>
 <% Q(g[0], function (p0) { %>
@@ -380,7 +391,7 @@ function sort_items (i) {
 </li>
 <% }) %>
 <ul>
-</div></a></div>
+</div></div>
 <% }) %>
 
 </div>
@@ -396,7 +407,7 @@ function sort_items (i) {
 </div>
 <div class="row">
 <% sort_items(items_messages).forEach(function (i) { %>
-<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="message-<%=i.n%>">
 <h5><b><%=i.n%></b></h5>
 <p><%-i.d%></p>
 </div></div>
@@ -414,7 +425,7 @@ function sort_items (i) {
 </div>
 <div class="row">
 <% sort_items(items_modifiers).forEach(function (i) { %>
-<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="modifier-<%=i.r||i.n%>">
 <h5><b><%=i.n%></b></h5>
 <p><%-i.d%></p>
 </div></div>
@@ -432,7 +443,7 @@ function sort_items (i) {
 </div>
 <div class="row">
 <% sort_items(items_plugins).forEach(function (i) { %>
-<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="plugin-<%=i.n%>">
 <h5><b><%=i.n%></b></h5>
 <p><%-i.d%></p>
 </div></div>
@@ -450,7 +461,7 @@ function sort_items (i) {
 </div>
 <div class="row">
 <% sort_items(items_utilities).forEach(function (i) { %>
-<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="utility-<%=i.n%>">
 <h5><b><%=i.n%></b></h5>
 <p><%-i.d%></p>
 </div></div>
@@ -459,12 +470,41 @@ function sort_items (i) {
 
 
 
-<br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br>
 
 
+
+<div class="api-vs"></div>
+<!-- Full instance descriptions -->
+
+<% sort_items(items_instance).forEach(function (i) { %>
+<div class="cf">
+<h2 class="api-subhead">Instance: <b><%=i.n%></b></h2>
+<a class="api-back" href="#instance">up</a>
+</div>
+
+<div class="row"><div class="col-xs-12 api-desc">
+
+<h4>Description</h4>
+<p class="desc"><%-i.d%></p>
+
+<% if(i.m) { %>
+<h4>Details</h4>
+<%-i.m%>
+<% } %>
+
+<% if(i.x) { %>
+<h4>Example</h4>
+<pre><code class="lang-js hljs javascript"><%-i.x.trim()%></code></pre>
+<%-i.y%>
+<% } %>
+
+</div></div>
+<% }) %>
+
+
+
+
+<div class="api-vs"></div>
 <!-- Full option descriptions -->
 
 <% sort_items(items_options).forEach(function (i) { %>
@@ -519,12 +559,13 @@ function sort_items (i) {
 
 
 
+<div class="api-vs"></div>
 <!-- Full method descriptions -->
 
 <% items_methods.forEach(function (i) { %>
 <div class="cf">
   <h2 class="api-subhead">Method: <b><%=i.n%></b></h2>
-<a class="api-back" href="#methods">up</a>
+  <a class="api-back" href="#methods">up</a>
 </div>
 
 <div class="row"><div class="col-xs-12 api-desc">
@@ -571,21 +612,128 @@ function sort_items (i) {
 
 
 
-<div class="row "><br><br><br><br><br><br><br><br></div>
 
+<!-- Full plugin descriptions -->
+<div class="api-vs"></div>
+
+<% sort_items(items_plugins).forEach(function (i) { %>
 <div class="cf">
-<h2 class="api-subhead">Plugins</h2>
-<a class="api-back" href="#seneca-api">up</a>
+  <h2 class="api-subhead">Plugin: <b><%=i.n%></b></h2>
+  <a class="api-back" href="#plugins">up</a>
 </div>
 
-<div class="row"><br><br><br><br><br><br><br><br></div>
+<div class="row"><div class="col-xs-12 api-desc">
 
+<h4>Description</h4>
+<p class="desc"><%-i.d%></p>
+
+<% if(i.m) { %>
+<h4>Details</h4>
+<%-i.m%>
+<% } %>
+
+<% if(i.x) { %>
+<h4>Example</h4>
+<pre><code class="lang-js hljs javascript"><%-i.x.trim()%></code></pre>
+<%-i.y%>
+<% } %>
+
+</div></div>
+<% }) %>
+
+
+
+
+<!-- Full messages descriptions -->
+<div class="api-vs"></div>
+
+<% sort_items(items_messages).forEach(function (i) { %>
 <div class="cf">
-<h2 class="api-subhead">Messages</h2>
-<a class="api-back" href="#seneca-api">up</a>
+<h2 class="api-subhead">Message: <b><%=i.n%></b></h2>
+<a class="api-back" href="#messages">up</a>
 </div>
 
-<div class="row"><br><br><br><br><br><br><br><br></div>
+<div class="row"><div class="col-xs-12 api-desc">
+
+<h4>Description</h4>
+<p class="desc"><%-i.d%></p>
+
+<% if(i.m) { %>
+<h4>Details</h4>
+<%-i.m%>
+<% } %>
+
+<% if(i.x) { %>
+<h4>Example</h4>
+<pre><code class="lang-js hljs javascript"><%-i.x.trim()%></code></pre>
+<%-i.y%>
+<% } %>
+
+</div></div>
+<% }) %>
+
+
+
+<!-- Full modifiers descriptions -->
+<div class="api-vs"></div>
+
+<% sort_items(items_modifiers).forEach(function (i) { %>
+<div class="cf">
+<h2 class="api-subhead">Modifier: <b><%=i.n%></b></h2>
+<a class="api-back" href="#modifiers">up</a>
+</div>
+
+<div class="row"><div class="col-xs-12 api-desc">
+
+<h4>Description</h4>
+<p class="desc"><%-i.d%></p>
+
+<% if(i.m) { %>
+<h4>Details</h4>
+<%-i.m%>
+<% } %>
+
+<% if(i.x) { %>
+<h4>Example</h4>
+<pre><code class="lang-js hljs javascript"><%-i.x.trim()%></code></pre>
+<%-i.y%>
+<% } %>
+
+</div></div>
+<% }) %>
+
+
+
+
+<!-- Full utilties descriptions -->
+<div class="api-vs"></div>
+
+<% sort_items(items_utilities).forEach(function (i) { %>
+<div class="cf">
+<h2 class="api-subhead">Utility: <b><%=i.n%></b></h2>
+<a class="api-back" href="#utilities">up</a>
+</div>
+
+<div class="row"><div class="col-xs-12 api-desc">
+
+<h4>Description</h4>
+<p class="desc"><%-i.d%></p>
+
+<% if(i.m) { %>
+<h4>Details</h4>
+<%-i.m%>
+<% } %>
+
+<% if(i.x) { %>
+<h4>Example</h4>
+<pre><code class="lang-js hljs javascript"><%-i.x.trim()%></code></pre>
+<%-i.y%>
+<% } %>
+
+</div></div>
+<% }) %>
+
+
 
 
 
