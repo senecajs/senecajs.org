@@ -18,6 +18,10 @@ var example = {
   options: example_options()
 }
 
+var sub = {
+  options: sub_options()
+}
+
 
 /*
 Field names:
@@ -38,7 +42,7 @@ var items_top = [{
   d: 'Creating and using the Seneca instance object.'
 }, {
   n: 'Options',
-  d: 'The configuration options and how they are defined.'
+  d: 'The configuration options for Seneca.'
 }, {
   n: 'Methods',
   d: 'The public methods of the Seneca instance.'
@@ -49,14 +53,39 @@ var items_top = [{
   n: 'Messages',
   d: 'The message meta data properties.'
 }, {
+  n: 'Modifiers',
+  d: 'Message modifiers that control message processing.'
+}, {
   n: 'Utilities',
   d: 'Utility functions and formats.'
 }]
 
+
+var items_instance = [{
+   n: 'Seneca (constructor)',
+   d: 'Create an instance of the Seneca object.'
+
+}, {
+   n: 'id'
+
+}, {
+   n: 'tag'
+
+}, {
+   n: 'start_time'
+
+}, {
+   n: 'version'
+
+}, {
+   n: 'util'
+
+}]
+
+
 var items_options = [{
    n: 'tag',
    t: [{t:'String', f:'"-"'}],
-   f: "'_'",
    m: more.options.tag,
    x: example.options.tag,
    d: 'Tag the Seneca instance with a short code that will be added to the instance identifier. Useful for tracing and debugging.',
@@ -64,12 +93,42 @@ var items_options = [{
 }, {
    n: 'timeout',
    t: [{t:'Integer', f:'22222'}],
-   f: '22222',
    m: more.options.tag,
    x: example.options.tag,
    d: 'The global timeout for actions. Once this timeout is exceeded, the sender of the message receives an error response via the callback of the <a href="#method-act">act</a> method.'
+
+}, {
+   n: 'plugin',
+   t: [{t:'Object', f:'{...}'}],
+   m: more.options.plugin,
+   x: example.options.plugin,
+   d: 'Namespace for plugin options. Once loaded, plugin options are stored here for ease of shared access.'
+
+}, {
+   n: 'test',
+   t: [{t:'Boolean', f:'false'}],
+   d: 'When <code>true</code> Seneca is in unit testing mode. To enter enter this mode, use the <a href="#method-test">test</a> method.'
+
+}, {
+   n: 'debug',
+   t: [{t:'Object', f:'{...}'}],
+   s: sub.options.debug,
+   m: more.options.debug,
+   x: example.options.debug,
+   d: 'Namespace object for options related to debugging. They should all be <code>false</code> for production deployments.'
+
+}, {
+   n: 'strict',
+   t: [{t:'Object', f:'{...}'}],
+   s: sub.options.strict,
+   m: more.options.strict,
+   x: example.options.strict,
+   d: 'Namespace object for options related to strict behaviors. Mostly this is for backwards compatibility with older versions of Seneca that were not as strict.'
 }]
 
+Q(items_options, function (i) {
+  i.x = i.x || example.options[i.n]
+})
 
 
 var items_methods = [{
@@ -111,7 +170,109 @@ var items_methods = [{
      } 
    },
    d: 'Send a <i>message</i> and receive a response via the <i>callback</i>. If there is no <i>callback</i> the message is asynchronous.'
+
+}, {
+   n: 'use',
+
+}, {
+   n: 'listen',
+
+}, {
+   n: 'client',
+
+}, {
+   n: 'ready',
+
+}, {
+   n: 'options',
+
+}, {
+   n: 'log',
+
+}, {
+   n: 'test',
+
+}, {
+   n: 'find',
+
+}, {
+   n: 'has',
+
+}, {
+   n: 'list',
+
+}, {
+   n: 'gate',
+
+}, {
+   n: 'ungate',
+
 }]
+
+
+
+var items_messages = [{
+   n: 'id'
+
+}, {
+   n: 'mid'
+
+}, {
+   n: 'cid'
+
+}, {
+   n: 'sync'
+
+}, {
+   n: 'start'
+
+}, {
+   n: 'version'
+
+}, {
+   n: 'util'
+
+}]
+
+
+var items_modifiers = [{
+   n: 'default$'
+
+}, {
+   n: 'id$'
+
+}, {
+   n: 'mid$'
+
+}, {
+   n: 'cid$'
+
+}, {
+   n: 'timeout$'
+
+}, {
+   n: 'gate$'
+
+}]
+
+
+var items_plugins = [{
+   n: 'init'
+
+}]
+
+
+var items_utilities = [{
+   n: 'clean'
+
+}, {
+   n: 'deepextend'
+
+}, {
+   n: 'pattern'
+
+}]
+
 
 // Omit separator after last item.
 function S(I, A, sep) {
@@ -122,7 +283,7 @@ function S(I, A, sep) {
 // optional convenience iterator over elements or keys.
 function Q(x,iter) {
   var isobj = 0
-  var xa = null == x ? [] : Array.isArray(x) ? x : (isobj=1,Object.keys(x))
+  var xa = null == x ? [] : Array.isArray(x) ? x : 'object' === typeof x ? (isobj=1,Object.keys(x)) : [x]
   if (iter) xa.forEach(iter)
   return isobj ? x : xa
 }
@@ -131,10 +292,20 @@ function Q(x,iter) {
 function P(bool, x) {
   return !!bool ? x : ''
 }
+
+function sort_items (i) {
+   i.sort(function (a, b) {
+     return a.n < b.n ? -1 : a.n > b.n ? 1 : 0
+   })
+   return i
+} 
 %>
 
 
-<% items_top.forEach(function (i) { %>
+
+<!-- Top level descriptions -->
+
+<% sort_items(items_top).forEach(function (i) { %>
 <div class="col-xs-12 col-sm-4"><a href="#<%=i.n.toLowerCase()%>"><div class="api-box">
 <h4><%=i.n%></h4>
 <p class="top"><%-i.d%></p>
@@ -146,21 +317,32 @@ function P(bool, x) {
 
 
 
+<!-- Short instance descriptions -->
+
 <div class="cf">
 <h2 class="api-subhead">Instance</h2>
 <a class="api-back" href="#seneca-api">up</a>
 </div>
+<div class="row">
+<% sort_items(items_instance).forEach(function (i) { %>
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<h5><b><%=i.n%></b></h5>
+<p><%-i.d%></p>
+</div></div>
+<% }) %>
+</div>
 
-<div class="row"><br><br><br><br><br><br><br><br></div>
 
 
+
+<!-- Short options descriptions -->
 
 <div class="cf">
 <h2 class="api-subhead">Options</h2>
 <a class="api-back" href="#seneca-api">up</a>
 </div>
 <div class="row">
-<% items_options.forEach(function (i) { %>
+<% sort_items(items_options).forEach(function (i) { %>
 <div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="option-<%=i.n%>">
 <h5><b><%=i.n%></b> <u><%=i.t[0].t%></u> <u><%=i.t[0].f%></u></h5>
 <p><%-i.d%></p>
@@ -171,25 +353,24 @@ function P(bool, x) {
 
 
 
+<!-- Short method descriptions -->
+
 <div class="cf">
 <h2 class="api-subhead">Methods</h2>
 <a class="api-back" href="#seneca-api">up</a>
 </div>
-
-
 <div class="row">
-
-<% items_methods.forEach(function (i) { %>
+<% sort_items(items_methods).forEach(function (i) { var g = Q(i.g) %>
 <div class="col-xs-12 col-sm-4"><a href="#method-<%=i.n%>"><div class="api-box">
 <h5>
 <b><%=i.n%></b>
-<% i.g[0].forEach(function (p0) { %>
+<% Q(g[0], function (p0) { %>
 <i><%=p0%><%=P(Q(i.p[p0]).o,'?')%></i>
 <% }) %>
 </h5>
 <p><%-i.d%></p>
 <ul>
-<% i.g[0].forEach(function (pn) { var p = i.p[pn] %>
+<% Q(g[0], function (pn) { var p = i.p[pn] %>
 <li><i><%=pn%></i> :
 
 <% Q(p.t, function (t,I,A) { %>
@@ -207,9 +388,86 @@ function P(bool, x) {
 
 
 
+<!-- Short messages descriptions -->
+
+<div class="cf">
+<h2 class="api-subhead">Messages</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+<div class="row">
+<% sort_items(items_messages).forEach(function (i) { %>
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<h5><b><%=i.n%></b></h5>
+<p><%-i.d%></p>
+</div></div>
+<% }) %>
+</div>
+
+
+
+
+<!-- Short modifier descriptions -->
+
+<div class="cf">
+<h2 class="api-subhead">Modifiers</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+<div class="row">
+<% sort_items(items_modifiers).forEach(function (i) { %>
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<h5><b><%=i.n%></b></h5>
+<p><%-i.d%></p>
+</div></div>
+<% }) %>
+</div>
+
+
+
+
+<!-- Short plugin descriptions -->
+
+<div class="cf">
+<h2 class="api-subhead">Plugins</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+<div class="row">
+<% sort_items(items_plugins).forEach(function (i) { %>
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<h5><b><%=i.n%></b></h5>
+<p><%-i.d%></p>
+</div></div>
+<% }) %>
+</div>
+
+
+
+
+<!-- Short utilities descriptions -->
+
+<div class="cf">
+<h2 class="api-subhead">Utilities</h2>
+<a class="api-back" href="#seneca-api">up</a>
+</div>
+<div class="row">
+<% sort_items(items_utilities).forEach(function (i) { %>
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="instance-<%=i.n%>">
+<h5><b><%=i.n%></b></h5>
+<p><%-i.d%></p>
+</div></div>
+<% }) %>
+</div>
+
+
+
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+
+
 <!-- Full option descriptions -->
 
-<% items_options.forEach(function (i) { %>
+<% sort_items(items_options).forEach(function (i) { %>
 <div class="cf">
 <h2 class="api-subhead">Option: <b><%=i.n%></b></h2>
 <a class="api-back" href="#options">up</a>
@@ -217,7 +475,6 @@ function P(bool, x) {
 
 <div class="row"><div class="col-xs-12 api-desc">
 
-<h4>Types and defaults</h4>
 <ul>
 <% i.t.forEach(function (t) { %>
 <li><u><%=t.t%></u>, <u><%=t.f%></u></li>
@@ -227,12 +484,34 @@ function P(bool, x) {
 <h4>Description</h4>
 <p class="desc"><%-i.d%></p>
 
+<% if(i.s) { %>
+<h4>Sub-options</h4>
+<table>
+<% Q(i.s, function (s) { %>
+<tr>
+  <td><i><%=s.n%></i></td>
+  <td>
+<% Q(s.t, function(t,I,A) { %>
+    <u><%=t%></u><%=S(I,A,'|')%>
+<% }) %>
+  </td>
+  <td title="Default value."><u><%=s.f%></u></td>
+  <td><%-s.d%></td>
+</tr>
+<% }) %>
+</table>
+<% } %>
+
+<% if(i.m) { %>
 <h4>Details</h4>
 <%-i.m%>
+<% } %>
 
+<% if(i.x) { %>
 <h4>Example</h4>
 <pre><code class="lang-js hljs javascript"><%-i.x.trim()%></code></pre>
 <%-i.y%>
+<% } %>
 
 </div></div>
 <% }) %>
@@ -254,9 +533,9 @@ function P(bool, x) {
 
 <h4>Signatures</h4>
 <ul>
-<% i.g.forEach(function (g) { %>
+<% Q(i.g, function (g) { %>
 <li><b><%=i.n%></b> &nbsp;&nbsp;
-<% g.forEach(function (pn,I,A) { %>
+<% Q(g, function (pn,I,A) { %>
 <i><%=pn%></i><%=S(I,A,',')%> 
 <% }) %>
 </li>
@@ -277,7 +556,6 @@ function P(bool, x) {
   <td><%-p.d%></td>
 </tr>
 <% }) %>
-
 </table>
 
 
@@ -312,9 +590,27 @@ function P(bool, x) {
 
 
 <%
+function sub_options () {
+  return {
+  debug: [
+    { n:'deprecation', t:'Boolean', f:'true', 
+      d:'Deprecation warnings are logged at the debug level. Should be <code>false</code> in production. You should update your code.' },
+
+    { n:'undead', t:'Boolean', f:'false', 
+      d:'When <code>true</code>, fatal errors will not exit the process. Should only be used for debugging, and fatal errors are fatal because they leave Seneca in an indeterminate invalid state.' },
+   
+  ],
+
+  strict: [
+    { n:'result', t:'Boolean', f:'true', 
+      d:'The result provided by an action must be an Object or an Array that can be fully serialized to JSON. When <code>false</code> scalar values (Strings, Numbers, etc) are permitted. Use only to keep old code working while you migrate.' },
+  ],
+  }
+}
+
 function more_options () {
   return {
-   tag: `
+  tag: `
 <p>
 The <b>tag</b> value is a free form String that is appended to the end of the Seneca identifier. It is not meant to be a unique value. You use it identify groups of microservices.
 </p>
@@ -332,7 +628,26 @@ var seneca = require('seneca')({tag: 'foo'})
 
 // prints .../foo
 console.log(seneca.id)
-   `
-   }   
+   `,
+   test: `
+var Seneca = require('seneca')
+
+function unit_test(done) {
+  var seneca = Seneca().test(done)
+
+  // prints true
+  console.log(true === seneca.options().test)
+
+  seneca
+    .add('a:1', function () { 
+      throw new Error('failed!') 
+    })
+    .act('a:1')
+}
+
+// prints lots of error information
+unit_test(console.log)
+   `,
+   }
 }
 %>
