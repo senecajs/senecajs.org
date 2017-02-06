@@ -10,16 +10,37 @@ layout: api.html
 
 <%
 
+var require = this.process.mainModule.require
+var fs = require('fs')
+
 var more = {
-  options: more_options()
+  instance: more_instance(),
+  messages: more_messages(),
+  methods: more_methods(),
+  modifiers: more_modifiers(),
+  options: more_options(),
+  plugins: more_plugins(),
+  utilities: more_utilities(),
 }
 
 var example = {
-  options: example_options()
+  instance: example_instance(),
+  messages: example_messages(),
+  methods: example_methods(),
+  modifiers: example_modifiers(),
+  options: example_options(),
+  plugins: example_plugins(),
+  utilities: example_utilities(),
 }
 
 var sub = {
-  options: sub_options()
+  instance: sub_instance(),
+  messages: sub_messages(),
+  methods: sub_methods(),
+  modifiers: sub_modifiers(),
+  options: sub_options(),
+  plugins: sub_plugins(),
+  utilities: sub_utilities(),
 }
 
 
@@ -51,7 +72,7 @@ var items_top = [{
   d: 'The plugin interface.'
 }, {
   n: 'Messages',
-  d: 'The message meta data properties.'
+  d: 'The message metadata properties.'
 }, {
   n: 'Modifiers',
   d: 'Message modifiers that control message processing.'
@@ -127,9 +148,6 @@ var items_options = [{
    d: 'Namespace object for options related to strict behaviors. Mostly this is for backwards compatibility with older versions of Seneca that were not as strict.'
 }]
 
-Q(items_options, function (i) {
-  i.x = i.x || example.options[i.n]
-})
 
 
 var items_methods = [{
@@ -179,6 +197,19 @@ var items_methods = [{
 
 }, {
    n: 'use',
+   g: [['plugin', 'options']],
+   p: {
+     plugin: {
+       t:['String', 'Function', 'Object'],
+       d:'The plugin definition is either: the name of a module; a file path; an initialization function; or a metadata object.'
+     },
+     options: {
+       t:['Object'],
+       o:true,
+       d:"The options that control the plugin's behavior. These are placed under the property path <code>plugin.&lt;plugin-name&gt;</code> in the Seneca <a href='#option-plugin'>options</a> object."
+     }
+   },
+   d:'Load a plugin and use the action patterns that it defines. <a href="/docs/tutorials/how-to-write-a-plugin.html">Plugin initialization</a> must complete before further actions are executed.'
 
 }, {
    n: 'listen',
@@ -218,71 +249,95 @@ var items_methods = [{
 
 
 var items_messages = [{
-   n: 'id'
+   n: 'id',
+   d: 'The full message identifier, which concatenates the message and correlation identifiers.'
 
 }, {
-   n: 'mid'
-
-}, {
-   n: 'cid'
-
-}, {
-   n: 'sync'
-
-}, {
-   n: 'start'
-
-}, {
-   n: 'version'
-
-}, {
-   n: 'util'
+   n: 'sync',
+   d: 'When <code>true</code> the message is synchronous, otherwise the message is asynchronous.'
 
 }]
 
 
 var items_modifiers = [{
-   n: 'default$',
-   r: 'default'
-}, {
-   n: 'id$',
-   r: 'id',
+  n: 'default$',
+  r: 'default',
+  d: 'If the pattern is not found, provide a default response.'
 
 }, {
-   n: 'mid$',
-   r: 'mid'
+  n: 'timeout$',
+  r: 'timeout',
+  d: 'Specify a local timeout in milliseconds for this particular action execution.'
 
 }, {
-   n: 'cid$',
-   r: 'cid'
-
-}, {
-   n: 'timeout$',
-   r: 'timeout'
-
-}, {
-   n: 'gate$',
-   r: 'gate'
+  n: 'gate$',
+  r: 'gate',
+  d: 'This action is gated and must complete before any other actions can start.'
 
 }]
 
 
 var items_plugins = [{
-   n: 'init'
+  n: 'init'
 
 }]
 
 
 var items_utilities = [{
-   n: 'clean'
+   n: 'clean',
+   g: [['message']],
+   p: {
+     message: {
+       t: 'Object',
+       d: 'Message object to clean.'
+     }
+   },
+   d: 'Clean messages by removing metadata and directives. All property names containing a <code>$</code> character are removed.'
 
 }, {
-   n: 'deepextend'
-
+   n: 'deepextend',
+   g: [['object...']],
+   p: {
+     'object...': {
+       t: 'Object',
+       d: 'Any number of parameters that are Objects.'
+     }
+   },
+   d: 'Combine the listed objects into one new object, overwriting properties from right to left.'
 }, {
    n: 'pattern'
 
 }]
+
+
+
+Q(items_instance, function (i) {
+  i.x = i.x || QQ(example.instance)[i.n]
+})
+
+Q(items_messages, function (i) {
+  i.x = i.x || QQ(example.messages)[i.n]
+})
+
+Q(items_methods, function (i) {
+  i.x = i.x || QQ(example.methods)[i.n]
+})
+
+Q(items_modifiers, function (i) {
+  i.x = i.x || QQ(example.modifiers)[i.n]
+})
+
+Q(items_options, function (i) {
+  i.x = i.x || QQ(example.options)[i.n]
+})
+
+Q(items_plugins, function (i) {
+  i.x = i.x || QQ(example.plugins)[i.n]
+})
+
+Q(items_utilities, function (i) {
+  i.x = i.x || QQ(example.utilities)[i.n]
+})
 
 
 // Omit separator after last item.
@@ -299,6 +354,11 @@ function Q(x,iter) {
   return isobj ? x : xa
 }
 
+function QQ(x) {
+  return null == x ? {} : x
+}
+
+
 // Conditional print.
 function P(bool, x) {
   return !!bool ? x : ''
@@ -310,6 +370,10 @@ function sort_items (i) {
    })
    return i
 } 
+
+function X(name) {
+  return fs.readFileSync('./code/api-examples/'+name).toString()
+}
 %>
 
 
@@ -453,6 +517,7 @@ function sort_items (i) {
 
 
 
+
 <!-- Short utilities descriptions -->
 
 <div class="cf">
@@ -460,15 +525,30 @@ function sort_items (i) {
 <a class="api-back" href="#seneca-api">up</a>
 </div>
 <div class="row">
-<% sort_items(items_utilities).forEach(function (i) { %>
-<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="utility-<%=i.n%>">
-<h5><b><%=i.n%></b></h5>
+<% sort_items(items_utilities).forEach(function (i) { var g = Q(i.g) %>
+<div class="col-xs-12 col-sm-4"><div class="api-box" data-api-box-ref="utility-<%=i.r||i.n%>">
+<h5>
+<b><%=i.n%></b>
+<% Q(g[0], function (p0) { %>
+<i><%=p0%><%=P(Q(i.p[p0]).o,'?')%></i>
+<% }) %>
+</h5>
 <p><%-i.d%></p>
+<ul>
+<% Q(g[0], function (pn) { var p = i.p[pn] %>
+<li><i><%=pn%></i> :
+
+<% Q(p.t, function (t,I,A) { %>
+<u><%=t%></u> <%=S(I,A,'|')%>
+<% }) %>
+
+</li>
+<% }) %>
+<ul>
 </div></div>
 <% }) %>
+
 </div>
-
-
 
 
 
@@ -599,13 +679,16 @@ function sort_items (i) {
 <% }) %>
 </table>
 
-
+<% if (i.m) { %>
 <h4>Details</h4>
 <p class="desc"><%-i.m%></p>
+<% } %>
 
+<% if (i.x) { %>
 <h4>Example</h4>
-<pre><code class="lang-js hljs javascript"><%-i.x%></code></pre>
+<pre><code class="lang-js hljs javascript"><%-i.x.trim()%></code></pre>
 <%-i.y%>
+<% } %>
 
 </div></div>
 <% }) %>
@@ -705,26 +788,52 @@ function sort_items (i) {
 
 
 
-<!-- Full utilties descriptions -->
 <div class="api-vs"></div>
+<!-- Full utilties descriptions -->
 
-<% sort_items(items_utilities).forEach(function (i) { %>
+<% items_utilities.forEach(function (i) { %>
 <div class="cf">
-<h2 class="api-subhead">Utility: <b><%=i.n%></b></h2>
-<a class="api-back" href="#utilities">up</a>
+  <h2 class="api-subhead">Utility: <b><%=i.n%></b></h2>
+  <a class="api-back" href="#utilities">up</a>
 </div>
 
 <div class="row"><div class="col-xs-12 api-desc">
 
-<h4>Description</h4>
-<p class="desc"><%-i.d%></p>
+<p><%-i.d%></p>
 
-<% if(i.m) { %>
+<h4>Signatures</h4>
+<ul>
+<% Q(i.g, function (g) { %>
+<li><b><%=i.n%></b> &nbsp;&nbsp;
+<% Q(g, function (pn,I,A) { %>
+<i><%=pn%></i><%=S(I,A,',')%> 
+<% }) %>
+</li>
+<% }) %>
+</ul>
+
+<h4>Parameters</h4>
+<table>
+<% Q(i.p, function (pn) { var p = i.p[pn] %>
+<tr>
+  <td><i><%=pn%></i></td>
+  <td>
+<% Q(p.t, function(t,I,A) { %>
+    <u><%=t%></u><%=S(I,A,'|')%>
+<% }) %>
+  <small><%=P(Q(i.p[pn]).o,'(optional)')%></small>
+  </td>
+  <td><%-p.d%></td>
+</tr>
+<% }) %>
+</table>
+
+<% if (i.m) { %>
 <h4>Details</h4>
-<%-i.m%>
+<p class="desc"><%-i.m%></p>
 <% } %>
 
-<% if(i.x) { %>
+<% if (i.x) { %>
 <h4>Example</h4>
 <pre><code class="lang-js hljs javascript"><%-i.x.trim()%></code></pre>
 <%-i.y%>
@@ -771,31 +880,41 @@ The public member variable <code>Seneca.tag</code> can be used to retrieve the t
 
 function example_options () {
   return {
-   tag: `
-var seneca = require('seneca')({tag: 'foo'})
-
-// prints .../foo
-console.log(seneca.id)
-   `,
-   test: `
-var Seneca = require('seneca')
-
-function unit_test(done) {
-  var seneca = Seneca().test(done)
-
-  // prints true
-  console.log(true === seneca.options().test)
-
-  seneca
-    .add('a:1', function () { 
-      throw new Error('failed!') 
-    })
-    .act('a:1')
+    tag: X('option-tag.js'),
+    test: X('option-test.js')
+  }
 }
 
-// prints lots of error information
-unit_test(console.log)
-   `,
-   }
+
+function example_utilities () {
+  return {
+   deepextend: X('utility-deepextend.js')
+  }
 }
+
+
+function more_instance() {}
+function more_messages() {}
+function more_methods() {}
+function more_modifiers() {}
+// function more_options() {}
+function more_plugins() {}
+function more_utilities() {}
+
+function example_instance() {}
+function example_messages() {}
+function example_methods() {}
+function example_modifiers() {}
+// function example_options() {}
+function example_plugins() {}
+// function example_utilities() {}
+
+function sub_instance() {}
+function sub_messages() {}
+function sub_methods() {}
+function sub_modifiers() {}
+// function sub_options() {}
+function sub_plugins() {}
+function sub_utilities() {}
+
 %>
