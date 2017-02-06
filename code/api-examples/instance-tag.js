@@ -1,8 +1,5 @@
 var seneca = require('seneca')({tag: 'foo'})
 
-// prints foo
+// Prints the tag string of the instance.
 console.log(seneca.tag)
-
-// prints .../foo
-console.log(seneca.id)
 

@@ -13,40 +13,11 @@ layout: api.html
 var require = this.process.mainModule.require
 var fs = require('fs')
 
-var more = {
-  instance: more_instance(),
-  messages: more_messages(),
-  methods: more_methods(),
-  modifiers: more_modifiers(),
-  options: more_options(),
-  plugins: more_plugins(),
-  utilities: more_utilities(),
-}
-
-var example = {
-  instance: example_instance(),
-  messages: example_messages(),
-  methods: example_methods(),
-  modifiers: example_modifiers(),
-  options: example_options(),
-  plugins: example_plugins(),
-  utilities: example_utilities(),
-}
-
-var sub = {
-  instance: sub_instance(),
-  messages: sub_messages(),
-  methods: sub_methods(),
-  modifiers: sub_modifiers(),
-  options: sub_options(),
-  plugins: sub_plugins(),
-  utilities: sub_utilities(),
-}
-
 
 /*
 Field names:
   n: name,
+  c: code,
   d: description,
   t: type or type list
   f: default value
@@ -60,25 +31,32 @@ Field names:
 
 var items_top = [{
   n: 'Instance',
-  d: 'Creating and using the Seneca instance object.'
+  d: 'Creating and using the Seneca instance object.',
+  c: 'instance',
 }, {
   n: 'Options',
-  d: 'The configuration options for Seneca.'
+  d: 'The configuration options for Seneca.',
+  c: 'options',
 }, {
   n: 'Methods',
-  d: 'The public methods of the Seneca instance.'
+  d: 'The public methods of the Seneca instance.',
+  c: 'methods',
 }, {
   n: 'Plugins',
-  d: 'The plugin interface.'
+  d: 'The plugin interface.',
+  c: 'plugins',
 }, {
   n: 'Messages',
-  d: 'The message metadata properties.'
+  d: 'The message metadata properties.',
+  c: 'messages',
 }, {
   n: 'Modifiers',
-  d: 'Message modifiers that control message processing.'
+  d: 'Message modifiers that control message processing.',
+  c: 'modifiers',
 }, {
   n: 'Utilities',
-  d: 'Utility functions and formats.'
+  d: 'Utility functions and formats.',
+  c: 'utilities',
 }]
 
 
@@ -108,22 +86,16 @@ var items_instance = [{
 var items_options = [{
    n: 'tag',
    t: [{t:'String', f:'"-"'}],
-   m: more.options.tag,
-   x: example.options.tag,
    d: 'Tag the Seneca instance with a short code that will be added to the instance identifier. Useful for tracing and debugging.',
 
 }, {
    n: 'timeout',
    t: [{t:'Integer', f:'22222'}],
-   m: more.options.tag,
-   x: example.options.tag,
    d: 'The global timeout for actions. Once this timeout is exceeded, the sender of the message receives an error response via the callback of the <a href="#method-act">act</a> method.'
 
 }, {
    n: 'plugin',
    t: [{t:'Object', f:'{...}'}],
-   m: more.options.plugin,
-   x: example.options.plugin,
    d: 'Namespace for plugin options. Once loaded, plugin options are stored here for ease of shared access.'
 
 }, {
@@ -134,115 +106,145 @@ var items_options = [{
 }, {
    n: 'debug',
    t: [{t:'Object', f:'{...}'}],
-   s: sub.options.debug,
-   m: more.options.debug,
-   x: example.options.debug,
    d: 'Namespace object for options related to debugging. They should all be <code>false</code> for production deployments.'
 
 }, {
    n: 'strict',
    t: [{t:'Object', f:'{...}'}],
-   s: sub.options.strict,
-   m: more.options.strict,
-   x: example.options.strict,
    d: 'Namespace object for options related to strict behaviors. Mostly this is for backwards compatibility with older versions of Seneca that were not as strict.'
 }]
 
 
 
 var items_methods = [{
-   n: 'Seneca (constructor)',
-   r: 'seneca-constructor',
-   d: 'Create an instance of the Seneca object.'
+  n: 'Seneca',
+  c: 'seneca-constructor',
+  r: 'seneca-constructor',
+  g: [['options']],
+  p: {options: {t:['Object', 'String'], o:true}},
+  d: 'Create an instance of the Seneca object.'
 
 }, {
-   n: 'add',
-   g: [['pattern', 'action'], ['pattern', 'sub_pattern', 'action']],
-   p: { 
-     pattern: {
-       t:['jsonic', 'Object'], 
-       d:'The pattern that inbound messages must match to trigger this action.'
-     },
-     sub_pattern: {
-       t:['Object'], 
-       o:true, 
-       d:'A convenience parameter that is merged into the <i>pattern</i> parameter with lower precedence.'
-     },
-     action: {
-       t:['Function'], 
-       d:'The function that executes the action for this pattern.'
-     } 
-   },
-   d: '<p>Add an <i>action</i> function to be called when inbound messages match the <i>pattern</i>.</p>'
+  n: 'add',
+  g: [['pattern', 'action'], ['pattern', 'sub_pattern', 'action']],
+  p: { 
+    pattern: {
+      t:['jsonic', 'Object'], 
+      d:'The pattern that inbound messages must match to trigger this action.'
+    },
+    sub_pattern: {
+      t:['Object'], 
+      o:true, 
+      d:'A convenience parameter that is merged into the <i>pattern</i> parameter with lower precedence.'
+    },
+    action: {
+      t:['Function'], 
+      d:'The function that executes the action for this pattern.'
+    } 
+  },
+  d: '<p>Add an <i>action</i> function to be called when inbound messages match the <i>pattern</i>.</p>'
 }, {
-   n: 'act',
-   g: [['message', 'callback'], ['message', 'sub_message', 'callback']],
-   p: { 
-     message: {
-       t:['jsonic', 'Object'], 
-       d:'The pattern that inbound messages must match to trigger this action.'
-     },
-     sub_message: {
-       t:['Object'], 
-       o:true, 
-       d:'A convenience parameter that is merged into the <i>message</i> parameter with lower precedence.'
-     },
-     callback: {
-       t:['Function'], 
-       o:true, 
-       d:'The function that executes the action for this pattern.'
-     } 
-   },
-   d: 'Send a <i>message</i> and receive a response via the <i>callback</i>. If there is no <i>callback</i> the message is asynchronous.'
+  n: 'act',
+  g: [['message', 'callback'], ['message', 'sub_message', 'callback']],
+  p: { 
+    message: {
+      t:['jsonic', 'Object'], 
+      d:'The pattern that inbound messages must match to trigger this action.'
+    },
+    sub_message: {
+      t:['Object'], 
+      o:true, 
+      d:'A convenience parameter that is merged into the <i>message</i> parameter with lower precedence.'
+    },
+    callback: {
+      t:['Function'], 
+      o:true, 
+      d:'The function that executes the action for this pattern.'
+    } 
+  },
+  d: 'Send a <i>message</i> and receive a response via the <i>callback</i>. If there is no <i>callback</i> the message is asynchronous.'
 
 }, {
-   n: 'use',
-   g: [['plugin', 'options']],
-   p: {
-     plugin: {
-       t:['String', 'Function', 'Object'],
-       d:'The plugin definition is either: the name of a module; a file path; an initialization function; or a metadata object.'
-     },
-     options: {
-       t:['Object'],
-       o:true,
-       d:"The options that control the plugin's behavior. These are placed under the property path <code>plugin.&lt;plugin-name&gt;</code> in the Seneca <a href='#option-plugin'>options</a> object."
-     }
-   },
-   d:'Load a plugin and use the action patterns that it defines. <a href="/docs/tutorials/how-to-write-a-plugin.html">Plugin initialization</a> must complete before further actions are executed.'
+  n: 'use',
+  g: [['plugin', 'options']],
+  p: {
+    plugin: {
+      t:['String', 'Function', 'Object'],
+      d:'The plugin definition is either: the name of a module; a file path; an initialization function; or a metadata object.'
+    },
+    options: {
+      t:['Object'],
+      o:true,
+      d:"The options that control the plugin's behavior. These are placed under the property path <code>plugin.&lt;plugin-name&gt;</code> in the Seneca <a href='#option-plugin'>options</a> object."
+    }
+  },
+  d:'Load a plugin and use the action patterns that it defines. <a href="/docs/tutorials/how-to-write-a-plugin.html">Plugin initialization</a> must complete before further actions are executed.'
 
 }, {
-   n: 'listen',
+  n: 'listen',
+  g: [['port', 'host'], ['object']],
+  p: {
+    port: {t:['Integer', 'String'], o:true},
+    host: {t:['String'], o:true},
+  },
 
 }, {
-   n: 'client',
+  n: 'client',
+  g: [['port', 'host'], ['object']],
+  p: {
+    port: {t:['Integer', 'String'], o:true},
+    host: {t:['String'], o:true},
+  },
 
 }, {
-   n: 'ready',
+  n: 'ready',
+  g: [['callback']],
+  p: {
+    callback: {t:['Function']},
+  },
 
 }, {
-   n: 'options',
+  n: 'options',
+  g: [['object', 'chain']],
+  p: {
+    object: {t:['Object'], o:true},
+    chain: {t:['Boolean'], o:true},
+  },
 
 }, {
-   n: 'log',
+  n: 'log',
+  g: [['object']],
+  p: {
+    object: {t:['Object']},
+  },
 
 }, {
-   n: 'test',
+  n: 'test',
+  g: [['callback', 'logspec']],
+  p: {
+    callback: {t:['Function']},
+    logspec: {t:['Object', 'String']},
+  },
 
 }, {
-   n: 'find',
+  n: 'find',
+  g: [['pattern']],
 
 }, {
-   n: 'has',
+  n: 'has',
+  g: [['pattern']],
 
 }, {
-   n: 'list',
+  n: 'list',
+  g: [['pattern']],
 
 }, {
-   n: 'gate',
+  n: 'gate',
+  g: [['pattern']],
 
 }, {
-   n: 'ungate',
+  n: 'ungate',
+  g: [['pattern']],
 
 }]
 
@@ -284,60 +286,63 @@ var items_plugins = [{
 
 
 var items_utilities = [{
-   n: 'clean',
-   g: [['message']],
-   p: {
-     message: {
-       t: 'Object',
-       d: 'Message object to clean.'
-     }
-   },
-   d: 'Clean messages by removing metadata and directives. All property names containing a <code>$</code> character are removed.'
-
+  n: 'clean',
+  g: [['message']],
+  p: {
+    message: {
+      t: 'Object',
+      d: 'Message object to clean.'
+    }
+  },
+  d: 'Clean messages by removing metadata and directives. All (and only) top level property names containing a <code>$</code> character are removed.'
+  
 }, {
-   n: 'deepextend',
-   g: [['object...']],
-   p: {
-     'object...': {
-       t: 'Object',
-       d: 'Any number of parameters that are Objects.'
-     }
-   },
-   d: 'Combine the listed objects into one new object, overwriting properties from right to left.'
+  n: 'deepextend',
+  g: [['object...']],
+  p: {
+    'object...': {
+      t: 'Object',
+      d: 'Any number of parameters that are Objects.'
+    }
+  },
+  d: 'Combine the listed objects into one new object, overwriting properties from right to left.'
 }, {
-   n: 'pattern'
+  n: 'pattern',
+  g: [['object']],
+  p: {
+    'object': {
+      t: 'Object',
+      d: 'An object defining a pattern.'
+    }
+  },
+  d: 'Convert a pattern object into a normalized jsonic String.',
 
 }]
 
 
 
-Q(items_instance, function (i) {
-  i.x = i.x || QQ(example.instance)[i.n]
+var more = {}
+var example = {}
+var sub = {}
+
+Q(items_top, function(i) {
+  var subitems = eval('Q(items_'+i.c+')')
+  subitems.forEach(function (si,I) {
+    si.c = (si.c || si.n).replace(/\$/g, '')
+  })
+
+  more[i.c] = eval('more_'+i.c+'()')
+  example[i.c] = eval('example_'+i.c+'()')
+  sub[i.c] = eval('sub_'+i.c+'()')
+
+  subitems.forEach(function (si,I) {
+    si.m = si.m || QQ(more[i.c])[si.c]
+    si.x = si.x || QQ(example[i.c])[si.c]
+    si.s = si.s || QQ(sub[i.c])[si.c]
+  })
 })
 
-Q(items_messages, function (i) {
-  i.x = i.x || QQ(example.messages)[i.n]
-})
 
-Q(items_methods, function (i) {
-  i.x = i.x || QQ(example.methods)[i.n]
-})
-
-Q(items_modifiers, function (i) {
-  i.x = i.x || QQ(example.modifiers)[i.n]
-})
-
-Q(items_options, function (i) {
-  i.x = i.x || QQ(example.options)[i.n]
-})
-
-Q(items_plugins, function (i) {
-  i.x = i.x || QQ(example.plugins)[i.n]
-})
-
-Q(items_utilities, function (i) {
-  i.x = i.x || QQ(example.utilities)[i.n]
-})
 
 
 // Omit separator after last item.
@@ -372,8 +377,15 @@ function sort_items (i) {
 } 
 
 function X(name) {
-  return fs.readFileSync('./code/api-examples/'+name).toString()
+  try {
+    return fs.readFileSync('./code/api-examples/'+name).toString()
+  }
+  catch (e) {
+    console.log(e.message)
+    return ''
+  }
 }
+
 %>
 
 
@@ -440,12 +452,12 @@ function X(name) {
 <h5>
 <b><%=i.n%></b>
 <% Q(g[0], function (p0) { %>
-<i><%=p0%><%=P(Q(i.p[p0]).o,'?')%></i>
+<i><%=p0%><%=P(Q(Q(i.p)[p0]).o,'?')%></i>
 <% }) %>
 </h5>
 <p><%-i.d%></p>
 <ul>
-<% Q(g[0], function (pn) { var p = i.p[pn] %>
+<% Q(g[0], function (pn) { var p = Q(Q(i.p)[pn]) %>
 <li><i><%=pn%></i> :
 
 <% Q(p.t, function (t,I,A) { %>
@@ -878,18 +890,55 @@ The public member variable <code>Seneca.tag</code> can be used to retrieve the t
    }   
 }
 
-function example_options () {
-  return {
-    tag: X('option-tag.js'),
-    test: X('option-test.js')
-  }
+
+
+
+function example_instance () {
+  var out = {}
+  Q(items_instance, function (i) {
+    out[i.c] = X('instance-'+i.c+'.js')
+  })
+  return out
 }
 
+function example_options () {
+  var out = {}
+  Q(items_options, function (i) {
+    out[i.c] = X('option-'+i.c+'.js')
+  })
+  return out
+}
 
 function example_utilities () {
-  return {
-   deepextend: X('utility-deepextend.js')
-  }
+  var out = {}
+  Q(items_utilities, function (i) {
+    out[i.c] = X('utility-'+i.c+'.js')
+  })
+  return out
+}
+
+function example_messages () {
+  var out = {}
+  Q(items_messages, function (i) {
+    out[i.c] = X('message-'+i.c+'.js')
+  })
+  return out
+}
+
+function example_modifiers () {
+  var out = {}
+  Q(items_modifiers, function (i) {
+    out[i.c] = X('modifier-'+i.c+'.js')
+  })
+  return out
+}
+
+function example_plugins () {
+  var out = {}
+  Q(items_plugins, function (i) {
+    out[i.c] = X('plugin-'+i.c+'.js')
+  })
+  return out
 }
 
 
@@ -897,23 +946,15 @@ function more_instance() {}
 function more_messages() {}
 function more_methods() {}
 function more_modifiers() {}
-// function more_options() {}
 function more_plugins() {}
 function more_utilities() {}
 
-function example_instance() {}
-function example_messages() {}
 function example_methods() {}
-function example_modifiers() {}
-// function example_options() {}
-function example_plugins() {}
-// function example_utilities() {}
 
 function sub_instance() {}
 function sub_messages() {}
 function sub_methods() {}
 function sub_modifiers() {}
-// function sub_options() {}
 function sub_plugins() {}
 function sub_utilities() {}
 
