@@ -119,7 +119,7 @@ var items_options = [{
 var items_methods = [{
   n: 'Seneca',
   c: 'seneca-constructor',
-  r: 'seneca-constructor',
+  r: 'seneca',
   g: [['options']],
   p: {options: {t:['Object', 'String'], o:true}},
   d: 'Create an instance of the Seneca object.'
@@ -187,7 +187,7 @@ var items_methods = [{
     port: {t:['Integer', 'String'], o:true},
     host: {t:['String'], o:true},
   },
-
+  d: 'Listen for inbound messages.',
 }, {
   n: 'client',
   g: [['port', 'host'], ['object']],
@@ -195,6 +195,7 @@ var items_methods = [{
     port: {t:['Integer', 'String'], o:true},
     host: {t:['String'], o:true},
   },
+  d: 'Send outbound messages.',
 
 }, {
   n: 'ready',
@@ -202,6 +203,7 @@ var items_methods = [{
   p: {
     callback: {t:['Function']},
   },
+  d: 'Wait for plugins to initialize fully.'
 
 }, {
   n: 'options',
@@ -210,6 +212,7 @@ var items_methods = [{
     object: {t:['Object'], o:true},
     chain: {t:['Boolean'], o:true},
   },
+  d: 'Get and set options.'
 
 }, {
   n: 'log',
@@ -217,6 +220,7 @@ var items_methods = [{
   p: {
     object: {t:['Object']},
   },
+  d: 'Create log entries.'
 
 }, {
   n: 'test',
@@ -225,27 +229,40 @@ var items_methods = [{
     callback: {t:['Function']},
     logspec: {t:['Object', 'String']},
   },
+  d: 'Enter <a href="/docs/tutorials/unit-testing.html">unit testing</a> mode.'
 
 }, {
   n: 'find',
   g: [['pattern']],
+  p: {
+    pattern: {t:['Object', 'String']},
+  },
+  d: 'Find the unique action metadata for the given pattern. Returns null if the pattern has not been <a href="#method-add">added<a/>.'
 
 }, {
   n: 'has',
   g: [['pattern']],
+  p: {
+    pattern: {t:['Object', 'String']},
+  },
+  d: 'Returns <code>true</code> if the given pattern has been <a href="#method-add">added<a/>.'
 
 }, {
   n: 'list',
   g: [['pattern']],
-
+  p: {
+    pattern: {t:['Object', 'String']},
+  },
+  d: 'List all added patterns that partially match the given pattern.'
 }, {
   n: 'gate',
-  g: [['pattern']],
+  g: [[]],
+  d: 'Enter gated mode, where all actions must complete before new actions can start. This is used to give plugin initialization a deterministic order.'
 
 }, {
   n: 'ungate',
-  g: [['pattern']],
-
+  g: [[]],
+  d: 'Exit gated mode. Actions now execute immediately and do not wait for each other. This is the default mode.'
 }]
 
 
@@ -280,8 +297,8 @@ var items_modifiers = [{
 
 
 var items_plugins = [{
-  n: 'init'
-
+  n: 'init',
+  d: 'The plugin initialization action. Executed in order deterministically with other plugin initialization actions.'
 }]
 
 
@@ -388,6 +405,13 @@ function X(name) {
 
 %>
 
+
+<div class="col-xs-12"><div class="box" style="margin-bottom:2rem">
+
+The API documentation is organized alphabetically into topics, subtopics and entries. Each entry contains a code example to show API usage
+(The <a href="old.html">old API documentation</a> is still available).
+
+</div></div>
 
 
 <!-- Top level descriptions -->
@@ -941,6 +965,15 @@ function example_plugins () {
   return out
 }
 
+function example_methods() {
+  var out = {}
+  Q(items_methods, function (i) {
+    out[i.c] = X('method-'+i.c+'.js')
+  })
+  return out
+}
+
+
 
 function more_instance() {}
 function more_messages() {}
@@ -948,8 +981,6 @@ function more_methods() {}
 function more_modifiers() {}
 function more_plugins() {}
 function more_utilities() {}
-
-function example_methods() {}
 
 function sub_instance() {}
 function sub_messages() {}
