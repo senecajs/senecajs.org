@@ -19,7 +19,7 @@ ways and with different complimentary technologies.
 
 ## Sample projects
 For convenience, we have a number of sample apps in a single repository. This repository
-covers single concepts as well as popular plugins. See the repo at [Seneca examples][Sample02].
+covers single concepts as well as popular plugins. See the repo at [Seneca examples][Sample01].
 
 ### NodeZoo
 NodeZoo is a search engine for Node.js modules. The complete system is an example of a real-
