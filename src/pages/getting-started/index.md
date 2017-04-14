@@ -28,7 +28,7 @@ about, and Seneca (with a little configuration help) makes sure that you get any
 other services that match those patterns. The patterns are very simple: just a list of key-value
 pairs that must match the top-level properties of the JSON message.
 
-This guide will walk you through seneca principles and teach you how to build microservices with it.
+This guide will walk you through Seneca principles and teach you how to build microservices with it.
 
 Let's build some microservices!
 
@@ -606,7 +606,7 @@ module.exports = function math(options) {
 }
 ```
 
-This plugin is defined in the [math.js][] file. You export the plugin definition function and then call seneca.use with the name of the file. You can either [require][] it in or if you like to be terse, let Seneca make the `require` call:
+This plugin is defined in the [math.js][] file. You export the plugin definition function and then call `seneca.use` with the name of the file. You can either [require][] it in or if you like to be terse, let Seneca make the `require` call:
 
 ``` js
 // these are equivalent
@@ -794,11 +794,11 @@ nu
 null { answer: 3 }
 ```
 
-On the listening server, the setting `--seneca.log=plugin:math` narrows down the log to those entries where the `plugin` attribute is _math_. You can see the registration of the _math_ plugin and the addition of its action patterns. If you remember, you used `seneca.wrap` to override the basic actions with a string-to-integer conversion. That means that the `role:math` actions have two _ADD_ lines in the logs. You'll also notice that each action gets an indentifer of the form (abcde). You can use this to find out the exact action function that is executed when a message comes in.
+On the listening server, the setting `--seneca.log=plugin:math` narrows down the log to those entries where the `plugin` attribute is _math_. You can see the registration of the _math_ plugin and the addition of its action patterns. If you remember, you used `seneca.wrap` to override the basic actions with a string-to-integer conversion. That means that the `role:math` actions have two _ADD_ lines in the logs. You'll also notice that each action gets an identifier of the form `(abcde)`. You can use this to find out the exact action function that is executed when a message comes in.
 
-When a message comes in, an `IN` log entry is created. When the action function provides a result, an 'OUT' log entry is created. In the listening server logs above, you can see this happening when the {role:math,cmd:sum,left:1,right:2} comes in over the network from the client.
+When a message comes in, an `IN` log entry is created. When the action function provides a result, an `OUT` log entry is created. In the listening server logs above, you can see this happening when the `{role:math,cmd:sum,left:1,right:2}` comes in over the network from the client.
 
-Look carefully at the generated unique action identifers `2682lsrziy1i/rst61586f7wl` and `1k46jra7rhpd/rst61586f7wl`. These can be used to trace the flow of messages. The `IN` and `OUT` lines have the same action identifier. Furthermore, the second page, after the /, is a transaction identifer. All sub-actions triggered by an initial action have the same transaction identifier, in this case `rst61586f7wl`.
+Look carefully at the generated unique action identifiers `2682lsrziy1i/rst61586f7wl` and `1k46jra7rhpd/rst61586f7wl`. These can be used to trace the flow of messages. The `IN` and `OUT` lines have the same action identifier. Furthermore, the second page, after the `/`, is a transaction identifier. All sub-actions triggered by an initial action have the same transaction identifier, in this case `rst61586f7wl`.
 
 The action identifier persists over the network so that you can trace message flows when you have many microservices. Let's look at the client side. The setting `--seneca.log=pin:role:math` is another filter. This time it filters all log entries where the action pattern contains the specific pin, in this case `role:math`.
 
@@ -806,7 +806,7 @@ You can see that the action identifier `2682lsrziy1i/rst61586f7wl` originated on
 
 Also seen in the output of the client is the console.log printing of the results — these are not part of the logs, just ordinary printed output.
 
-There are many ways to configure your microservice communciation architecture. Take a look at the reference links at the end of this guide for more information.
+There are many ways to configure your microservice communication architecture. Take a look at the reference links at the end of this guide for more information.
 
 ## Web Server Integration
 
@@ -839,7 +839,7 @@ var seneca = require('seneca')()
       .client( { type:'tcp', pin:'role:math' } )
 ```
 
-You create a seneca instance, load the _api_ plugin, and then use `seneca.client` to send any `role:math` actions out to an external service. Your Express app is the microservice client.
+You create a Seneca instance, load the _api_ plugin, and then use `seneca.client` to send any `role:math` actions out to an external service. Your Express app is the microservice client.
 
 The integration between Seneca and Express happens in this line:
 
@@ -907,9 +907,9 @@ The remaining message properties are obtained from the URL query string, and fro
 
 SenecaWeb will provide information about the request to `msg.args`, this can include the following:
 
-* body - post parameters for the request
-* query - querystring parameters for the request
-* params - any route param replacements (e.g., `:operation`)
+* `body`: post parameters for the request
+* `query`: querystring parameters for the request
+* `params`: any route param replacements (e.g., `:operation`)
 
 You can re-use the microservice from the previous example. To run the app, start:
 
@@ -963,7 +963,7 @@ Microservice development is made much easier when data persistence is provided b
 
 Using the data persistence patterns directly can become tedious, so [seneca-entity][] also provides a more familiar [ActiveRecord][]-style interface. To create a record object, you call the `seneca.make` method. The record object has methods `load$`, `save$`, `list$` and `remove$` (the trailing $ avoids clashes with data fields). The data fields are just the object properties.
 
-To use [seneca-entity][] include the module in your package.json and add a seneca.use statement to require it into your seneca instance.
+To use [seneca-entity][] include the module in your package.json and add a `seneca.use` statement to require it into your Seneca instance.
 
 Let's create and save a simple data entity that stores "product" details:
 
@@ -1091,7 +1091,7 @@ $ node shop-test.js
 20.. h3.. INFO plugin shop ACT gj.. info:purchase,role:shop purchase {when:1436528824554,product:90vzcc,name:Apple,price:1.99,id:3i402d}
 ```
 
-This output includes the log entry that you created with seneca.log.info in the implementation of the `role:shop,info:purchase` action.
+This output includes the log entry that you created with `seneca.log.info` in the implementation of the `role:shop,info:purchase` action.
 
 Let's run a separate service to capture the purchase message events. For the sake of example we'll just count the number of purchases per product. Here's the [shop-stats.js][] microservice:
 
