@@ -1,0 +1,60 @@
+---
+layout: content.html
+---
+
+<%
+var require = this.process.mainModule.require
+var fs = require('fs')
+
+function X(code) {
+  try {
+    return fs.readFileSync('./faq/'+code+'.md').toString()
+  }
+  catch (e) {
+    console.log(e.message)
+    return ''
+  }
+}
+
+var questions = []
+var question
+%>
+
+
+<%
+questions = [{
+  code: "gotq",
+  title: "Got a question?",
+}, {
+  code: 'patuse',
+  title: "Why is pattern-matching so useful?",
+}, {
+  code: 'recstruct',
+  title: "What is the recommended structure for Seneca apps?",
+}, {
+  code: 'fatal',
+  title: "Why is the Seneca process dying with a FATAL error?",
+}]
+
+for( var qI = 0; qI < questions.length; qI++) {
+  questions[qI].answer = X(questions[qI].code)
+}
+%>
+
+# Frequently Asked Questions
+
+<% for( var qI = 0; qI < questions.length; qI++) { question = questions[qI] %>
+* <a href="#q-<%=question.code%>"><%=question.title%></a><% } %>
+
+<p></p>
+
+<% for( var qI = 0; qI < questions.length; qI++) { question = questions[qI] %>
+
+<a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 8px -80px">[&#8679;]</a>
+<a name="q-<%=question.code%>"/>
+### <%=question.title%>
+
+<%-question.answer%>
+<% } %>
+
+

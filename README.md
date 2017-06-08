@@ -22,7 +22,7 @@ npm run docs
 ```
 
 ## Contributing
-Seneca is __open__ project and encourage participation. If you feel you can help in
+Seneca is an __open__ project and encourage participation. If you feel you can help in
 any way, be it with examples, extra testing, tutorials, or new features please be our
 guest.
 
@@ -33,7 +33,7 @@ your PR being accepted your changes will be deployed.
 
 ## License
 
-Copyright (c) 2010 - 2016 Richard Rodger and other contributors. Licensed under [MIT][].
+Copyright (c) 2010 - 2017 Richard Rodger and other contributors. Licensed under [MIT][].
 
 [/src/pages]: ./src/pages
 [Seneca.js]: https://www.npmjs.com/package/seneca
