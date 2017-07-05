@@ -1,0 +1,276 @@
+---
+layout: content.html
+title: Learn
+---
+
+
+<%
+function bt (color) {
+  return '<span style="color: '+color+'; font-size:1.5em; line-height:1px; vertical-align: -3px">&#9648;</span>'
+}
+var WD = bt('lightgray')
+var OD = bt('orange')
+var GD = bt('green')
+var PD = bt('orchid')
+var BD = bt('blue')
+var RD = bt('red')
+var KD = bt('black')
+
+%>
+
+<style>
+ul {
+  margin-top: 0px;
+  list-style: none;
+  padding: 0px;
+}
+</style>
+
+
+# Learn Seneca
+
+Want to learn how to use Seneca to build microservice systems? Enter
+the Seneca _dojo_ and follow the seven steps to enlightenment.
+
+
+* [<span style="color:lightgray; font-size:2em; line-height:1px; vertical-align:-6px">&#9648;</span> White Belt](#white-belt): learn the basics.
+* [<span style="color:orange; font-size:2em; line-height:1px; vertical-align:-6px">&#9648;</span> Orange Belt](#orange-belt): get microservices talking to each other.
+* [<span style="color:green; font-size:2em; line-height:1px; vertical-align:-6px">&#9648;</span> Green Belt](#green-belt): write some business logic.
+* [<span style="color:orchid; font-size:2em; line-height:1px; vertical-align:-6px">&#9648;</span> Purple Belt](#purple-belt): transporting messages and talking to strangers.
+* [<span style="color:blue; font-size:2em; line-height:1px; vertical-align:-6px">&#9648;</span> Blue Belt](#blue-belt): run a minimum viable product with containers.
+* [<span style="color:red; font-size:2em; line-height:1px; vertical-align:-6px">&#9648;</span> Red Belt](#red-belt): design and run a full system.
+* [<span style="color:black; font-size:2em; line-height:1px; vertical-align:-6px">&#9648;</span> Black Belt](#black-belt): contribute by writing plugins and helping the community.
+
+
+<br><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 43px -80px">[&#8679;]</a><a name="white-belt"></a>
+## <span style="color:lightgray; font-size:2em; line-height:1px; vertical-align:-13px">&#9648;</span> White Belt
+
+#### Learn how to:
+  * <%-WD%> Install, run and use Seneca
+  * <%-WD%> Use pattern matching to model your business requirements
+  * <%-WD%> Use logging to figure out what's going on
+  * <%-WD%> Learn about and use the core plugins
+
+#### Follow these tutorials:
+  * <%-WD%> [Getting started](/getting-started)
+  * <%-WD%> **TODO** [Using pattern matching](/docs/tutorials/patterns)
+  * <%-WD%> **TODO** [Core plugins](/docs/tutorials/core-plugins.html)
+  
+#### Try this example code:
+  * <%-WD%> **TODO** [helloworld](https://github.com/senecajs/seneca/blob/master/docs/examples/helloworld/README.md)
+  * <%-WD%> **TODO** [colors](https://github.com/senecajs/seneca/blob/master/docs/examples/colors/README.md)
+  * <%-WD%> **TODO** [salestax](https://github.com/senecajs/seneca/blob/master/docs/examples/salestax/README.md)
+
+#### Use this reference material: 
+  * <%-WD%> **TODO** [Core API](/api#core)
+  * <%-WD%> [Core plugins](/plugins/#core-plugins)
+
+#### Blood, sweat, and tears:
+(AKA: Don't worry, this part is supposed to be hard.)
+  * <%-WD%> Learning the pattern matching rules and running them "in your head".
+  * <%-WD%> Grokking the log output.
+
+
+<br><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 43px -80px">[&#8679;]</a><a name="orange-belt"></a>
+## <span style="color:orange; font-size:2em; line-height:1px; vertical-align:-13px">&#9648;</span> Orange Belt
+
+#### Learn how to:
+  * <%-OD%> Get microservices talking to each other over the network
+  * <%-OD%> Unit test your microservices
+  * <%-OD%> Work with databases
+  * <%-OD%> Understand Seneca prior actions
+  * <%-OD%> Control log output
+  * <%-OD%> Submit issues and ask questions
+  
+#### Follow these tutorials:
+  * <%-OD%> [Logging](/docs/tutorials/logging-with-seneca.html)
+  * <%-OD%> [Unit tests](/docs/tutorials/unit-testing.html)
+  * <%-OD%> [Entities](/docs/tutorials/understanding-data-entities.html)
+  * <%-OD%> [Understanding priors](/docs/tutorials/understanding-prior-actions.html)
+  * <%-OD%> **TODO** [The Seneca community](/docs/tutorials/seneca-community.html)
+
+#### Try this example code:
+  * <%-OD%> **TODO** [two-microservices](https://github.com/senecajs/seneca/blob/master/docs/examples/two-microservices/README.md)
+  * <%-OD%> **TODO** [color-service](https://github.com/senecajs/seneca/blob/master/docs/examples/color-service/README.md)
+  * <%-OD%> **TODO** [salestax-system](https://github.com/senecajs/seneca/blob/master/docs/examples/salestax-system/README.md)
+  * <%-OD%> **TODO** [basic-data](https://github.com/senecajs/seneca/blob/master/docs/examples/basic-data/README.md)
+  * <%-OD%> **TODO** [cmdline](https://github.com/senecajs/seneca/blob/master/docs/examples/cmdline/README.md)
+
+#### Use this reference material: 
+  * <%-OD%> [Seneca instance](/api/#instance)
+  * <%-OD%> [Seneca methods](/api/#methods)
+  * <%-OD%> [Seneca utilities](/api/#utilities)
+  * <%-OD%> **TODO** [Seneca entities](/api/#entities)
+  * <%-OD%> **TODO** [Seneca command line](/api/#cmdline)
+  * <%-OD%> [Storage plugins](/plugins/#storage-plugins)
+
+#### Blood, sweat, and tears:
+  * <%-OD%> Connecting things over the network never works the first time. Invest in understanding the log output to help debug.
+  * <%-OD%> Timeouts are annoying.
+  * <%-OD%> Prior actions make writing components easy, but you need to understand the rules.
+  * <%-OD%> Entities are opinionated, so they might not be what you need. You should still understand them as they are used by many plugins.
+  * <%-OD%> The Seneca community and maintainers probably won't respond in real-time. Sorry.
+
+
+<br><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 42px -80px">[&#8679;]</a><a name="green-belt"></a>
+## <span style="color:green; font-size:2em; line-height:1px; vertical-align:-13px">&#9648;</span>Green Belt
+
+#### Learn how to:
+  * <%-GD%> Connect your web framework (express, hapi, etc.) to Seneca
+  * <%-GD%> Write business logic plugins and expose them as microservices (this is why you're here!)
+  * <%-GD%> Use pins to pattern match the patterns (meta!)
+  * <%-GD%> Configure custom logging and integrate with analytics services so you can debug your microservices
+  * <%-GD%> Give a meetup talk about Seneca
+  * <%-GD%> Configure Seneca
+
+#### Follow these tutorials:
+  * <%-GD%> [Write a plugin](/docs/tutorials/how-to-write-a-plugin.html)
+  * <%-GD%> **TODO** [Route messages](/docs/tutorials/route-messages.html)
+  * <%-GD%> **TODO** [Advanced logging](/docs/tutorials/advanced-logging.html)
+  * <%-GD%> **TODO** [Debugging](/docs/tutorials/debugging.html)
+  * <%-GD%> **TODO** [Give meetup talks](/docs/tutorials/meeting-talks.html)
+  * <%-GD%> **TODO** [Configure Seneca](/docs/tutorials/configure-seneca.html)
+
+#### Try this example code:
+  * <%-GD%> **TODO** [seneca-express](https://github.com/senecajs/seneca/blob/master/docs/examples/seneca-express/README.md)
+  * <%-GD%> **TODO** [seneca-hapi](https://github.com/senecajs/seneca/blob/master/docs/examples/seneca-hapi/README.md)
+  * <%-GD%> **TODO** more
+
+#### Use this reference material: 
+  * <%-GD%> [Seneca messages](/api/#messages)
+  * <%-GD%> [Seneca modifiers](/api/#modifiers)
+  * <%-GD%> [Seneca options](/api/#options)
+
+
+#### Blood, sweat, and tears:
+  * <%-GD%> Getting used to thinking in terms of message flows takes practice.
+  * <%-GD%> Finding the right patterns to match your messages takes trial and error.
+  * <%-GD%> Reading and interpreting log files is hard.
+  * <%-GD%> Live-coding at a meetup is harder than it looks.
+
+
+<br><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 42px -80px">[&#8679;]</a><a name="purple-belt"></a>
+## <span style="color:orchid; font-size:2em; line-height:1px; vertical-align:-13px">&#9648;</span>Purple Belt
+
+#### Learn how to:
+  * <%-PD%> Use different message transports
+  * <%-PD%> Choose the right service discovery mechanism
+  * <%-PD%> Use a peer-to-peer service mesh
+  * <%-PD%> Draw and generate diagrams to describe your microservices
+  * <%-PD%> Write shield plugins to wrap other elements of your network
+  * <%-PD%> Understand the standard message flow patterns
+
+#### Follow these tutorials:
+  * <%-PD%> **TODO** [Message transport](/docs/tutorials/message-transport.html)
+  * <%-PD%> **TODO** [Monitor messages](/docs/tutorials/monitor-messages.html)
+  * <%-PD%> **TODO** [Service discovery](/docs/tutorials/service-discovery.html)
+  * <%-PD%> **TODO** [Service mesh](/docs/tutorials/service-mesh.html)
+  * <%-PD%> **TODO** [Shield plugins](/docs/tutorials/shield-plugins.html)
+
+#### Try this example code:
+  * <%-PD%> **TODO** [seneca-http](https://github.com/senecajs/seneca/blob/master/docs/examples/seneca-http/README.md)
+  * <%-PD%> **TODO** [seneca-tcp](https://github.com/senecajs/seneca/blob/master/docs/examples/seneca-tcp/README.md)
+  * <%-PD%> **TODO** [seneca-redis](https://github.com/senecajs/seneca/blob/master/docs/examples/seneca-redis/README.md)
+  * <%-PD%> **TODO** [seneca-zeromq](https://github.com/senecajs/seneca/blob/master/docs/examples/seneca-zeromq/README.md)
+  * <%-PD%> **TODO** [seneca-amqp](https://github.com/senecajs/seneca/blob/master/docs/examples/seneca-amqp/README.md)
+  * <%-PD%> **TODO** [seneca-kafka](https://github.com/senecajs/seneca/blob/master/docs/examples/seneca-kafka/README.md)
+
+#### Use this reference material: 
+  * <%-PD%> [Seneca protocol](/api/#protocol)
+  * <%-PD%> [Transport plugins](/plugins/#transport-plugins)
+
+#### Blood, sweat, and tears:
+  * <%-PD%> Connecting everything end-to-end is not going to work the first time
+  * <%-PD%> Mesh networks are powerful, but you need to understand the core concepts
+
+
+<br><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 42px -80px">[&#8679;]</a><a name="blue-belt"></a>
+## <span style="color:blue; font-size:2em; line-height:1px; vertical-align:-13px">&#9648;</span>Blue Belt
+
+#### Learn how to:
+  * <%-BD%> Design and build a Minimum Viable Product using microservices
+  * <%-BD%> Use containers to run your microservices
+  * <%-BD%> Write a blog post about Seneca
+  * <%-BD%> Give a conference talk about Seneca
+  * <%-BD%> Integrate with microservices written in other languages
+
+#### Follow these tutorials:
+  * <%-BD%> **TODO** [Containers](/docs/tutorials/containers.html)
+  * <%-BD%> **TODO** [Blog post](/docs/tutorials/blog-post.html)
+  * <%-BD%> **TODO** [Conference talk](/docs/tutorials/conference-talk.html)
+  * <%-BD%> **TODO** [Polyglot services](/docs/tutorials/polyglot-services.html)
+
+#### Try this example code:
+  * <%-PD%> **TODO** [todo list](https://github.com/senecajs/todo-list)
+  * <%-BD%> [ramanujan twitter clone](https://github.com/senecajs/ramanujan)
+
+#### Use this reference material: 
+  * <%-BD%> **TODO** [cheatsheet](/cheatsheet)
+
+#### Blood, sweat, and tears:
+  * <%-BD%> Your use of Node.js will be ridiculed
+  * <%-BD%> Your use of microservices will be ridiculed
+  * <%-BD%> Container networking is designed to make you cry
+  * <%-BD%> Integration is hard, always
+
+
+
+
+<br><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 42px -80px">[&#8679;]</a><a name="red-belt"></a>
+## <span style="color:red; font-size:2em; line-height:1px; vertical-align:-13px">&#9648;</span>Red Belt
+
+#### Learn how to:
+  * <%-RD%> Write utility plugins
+
+  * <%-RD%> Design a microservice system
+  * <%-RD%> Use orchestration (Kubernetes!)
+  * <%-RD%> Write a tutorial
+
+#### Follow these tutorials:
+  * <%-RD%> **TODO** [System design](/docs/tutorials/utility-plugins.html)
+  * <%-RD%> **TODO** [System design](/docs/tutorials/system-design.html)
+  * <%-RD%> **TODO** [Orchestration](/docs/tutorials/orchestration.html)
+
+#### Try this example code:
+  * <%-RD%> [Nodezoo](https://github.com/nodezoo)
+
+#### Use this reference material: 
+  * <%-RD%> [Microservice books](/docs/#books)
+
+#### Blood, sweat, and tears:
+  * <%-RD%> You'll have to leave the Seneca documentation behind, and read the source code directly
+
+
+
+<br><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 42px -80px">[&#8679;]</a><a name="black-belt"></a>
+## <span style="color:black; font-size:2em; line-height:1px; vertical-align:-13px">&#9648;</span>Black Belt
+
+#### Learn how to:
+  * <%-KD%> Maintain a Seneca plugin
+  * <%-KD%> Contribute to Seneca
+
+#### Follow these tutorials:
+  * <%-KD%> **TODO** [Maintain a plugin](/docs/tutorials/maintain-plugin.html)
+  * <%-KD%> **TODO** [Contribute to Seneca core](/docs/tutorials/core-contribute.html)
+
+#### Try this example code:
+  * <%-KD%> [CODE OF CONDUCT](https://github.com/senecajs/seneca/blob/master/CODE_OF_CONDUCT.md)
+
+#### Use this reference material: 
+  * <%-KD%> [roadmap](/roadmap)
+  * <%-KD%> [roadmap](/roadmap)
+
+#### Blood, sweat, and tears:
+  * <%-KD%> Joining and participating in a community takes time, patience, and respect.
+
+
+
+
+
+### Acknowledgment
+
+This learning approach is inspired by [Kathy Sierra's](http://seriouspony.com/badass-users-the-book/)
+book
+[Badass: Making Users Awesome](http://shop.oreilly.com/product/0636920036593.do). You
+should read it. It will make you awesome.
+
