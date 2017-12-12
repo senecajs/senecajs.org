@@ -94,7 +94,7 @@ logic.
 
 The unit tests will *not* use the service. This is deliberate, as unit
 tests should not have network dependencies. The service code is
-included here to give you a more complere picture of how things fit
+included here to give you a more complete picture of how things fit
 together.
 
 <a name="seneca-test-mode"></a>
@@ -107,7 +107,7 @@ callback to this method as the first argument to report errors
 properly. This ensures that even errors inside action callbacks are
 captured.
 
-The unit test mode also captures additional strack tracking
+The unit test mode also captures additional stack tracking
 information, showing not only the location of the exception, but also
 the location in calling code that the current action was called from.
 
