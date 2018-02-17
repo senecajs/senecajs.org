@@ -293,6 +293,12 @@ var items_modifiers = [{
   r: 'gate',
   d: 'This action is gated and must complete before any other actions can start.'
 
+}, {
+  n: 'fatal$',
+  r: 'fatal',
+  d: 'Any errors in this action, or sub actions, will be fatal. Used for plugin definition and initialization.',
+  m:'<p>When this modifier is <code>true</code>, Seneca will terminate the Node.js process if an error occurs inside an action, or any actions that that action calls. This prevents a Seneca microservice from continuing to run when a plugin has failed to start up correctly.</p><p>For example, if an entity plugin cannot connect to the database, the microservice is not functional, and should die.</p><p>On death, Seneca will print out a detailed error message including summary information about the current process.</p>'
+
 }]
 
 
