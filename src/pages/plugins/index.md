@@ -230,6 +230,7 @@ the right solution.
 ### [Level store](https://npmjs.org/package/seneca-level-store)
 [![version][level-store-npm-version]][level-store-npm-url]
 [![downloads][level-store-npm-downloads]][level-store-npm-url]
+
 [level-store-npm-version]: https://img.shields.io/npm/v/seneca-level-store.svg?style=flat-square
 [level-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-level-store.svg?style=flat-square
 [level-store-npm-url]: https://npmjs.org/package/seneca-level-store
@@ -261,6 +262,7 @@ the right solution.
 ### [HANA store](https://npmjs.org/package/seneca-hana-store)
 [![version][hana-store-npm-version]][hana-store-npm-url]
 [![downloads][hana-store-npm-downloads]][hana-store-npm-url]
+
 [hana-store-npm-version]: https://img.shields.io/npm/v/seneca-hana-store.svg?style=flat-square
 [hana-store-npm-downloads]: https://img.shields.io/npm/dm/seneca-hana-store.svg?style=flat-square
 [hana-store-npm-url]: https://npmjs.org/package/seneca-hana-store
