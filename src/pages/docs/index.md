@@ -4,6 +4,10 @@ layout: content.html
 
 # Documentation
 
+## Frequently Asked Questions
+
+This is a good place to start when you hit something odd: [FAQ List](/faq).
+
 ## Tutorials
 Seneca tutorials offer a deep dive into a particular concept or feature. We also have a number
 of sample projects, small and large that demonstrate how to use Seneca in a number of different
