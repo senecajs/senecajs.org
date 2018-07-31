@@ -438,7 +438,13 @@ Seneca supports many different transports. Use the one that fits best with your 
 [seneca-seraph-neo4j-npm-downloads]: https://img.shields.io/npm/dm/seneca-seraph.svg?style=flat-square
 [seneca-seraph-neo4j-npm-url]: https://npmjs.com/package/seneca-seraph
 
+### [MQTT](https://www.npmjs.com/package/seneca-mqtt-transport)
+[![version][seneca-mqtt-transport-transport-npm-version]][seneca-mqtt-transport-npm-url]
+[![downloads][seneca-mqtt-transport-npm-downloads]][seneca-mqtt-transport-npm-url]
 
+[seneca-mqtt-transport-transport-npm-version]: https://img.shields.io/npm/v/seneca-mqtt-transport.svg?style=flat-square
+[seneca-mqtt-transport-npm-downloads]: https://img.shields.io/npm/dm/seneca-mqtt-transport.svg?style=flat-square
+[seneca-mqtt-transport-npm-url]: https://npmjs.com/package/seneca-mqtt-transport
 
 ## Got a plugin to share?
 Our docs are open source. Simply fork the [senecajs.org] repository, add your plugin to the appropriate section,
