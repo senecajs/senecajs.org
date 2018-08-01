@@ -107,7 +107,7 @@ seneca.act( {foo:'bar'}, console.log )
 
 
 This code is available in
-the [doc/examples/write-a-plugin][]
+the [docs/examples/write-a-plugin][]
 example, in the _simple.js_ script. Running the script produces:
 
 ``` bash
@@ -190,7 +190,7 @@ is, if you can _require_ it, you can _use_ it! Let's update the
 simple example to show this. First, create a file called _foo.js_
 containing the plugin code (all the files in this article are available on
 the Seneca github
-at ([doc/examples/write-a-plugin][]).
+at ([docs/examples/write-a-plugin][]).
 
 
 ``` js
@@ -456,9 +456,7 @@ plugin, by using tag strings. NOTE: the action patterns will still be
 overridden, unless the plugin handles this for you (like the example
 below). The data store plugins, in particular, use this mechanism to
 support multiple databases in the same system. For more details, read
-the [data entities tutorial.][] data entities
-tutorial.</a>
-
+the [data entities tutorial.][] 
 
 
 Here's a simple example that uses tags. In this case,
@@ -818,7 +816,7 @@ zed undefined { red: 10, green: 110, blue: 200 }
 ```
 
 
-Alternatively, you can use the environment variable `SENECA_OPTIONS` to specify options that will be merged into the base defaults (using `seneca.util.deepextend`). The format is [jsonic][] jsonic</a>, a lenient, abbreviated, fully compatible version of JSON for lazy developers.
+Alternatively, you can use the environment variable `SENECA_OPTIONS` to specify options that will be merged into the base defaults (using `seneca.util.deepextend`). The format is [jsonic][], a lenient, abbreviated, fully compatible version of JSON for lazy developers.
 
 
 ```bash
@@ -837,18 +835,18 @@ Command line options always override options from other sources. Here is the ord
 - Internal defaults
 
 
-[_add_]: http://senecajs.org/api/#add-pattern-paramspec-action-
+[_add_]: http://senecajs.org/api/#method-add
 [NPM]: http://www.npmjs.org/search?q=seneca%20plugin
 [micro-services]: http://martinfowler.com/articles/microservices.html
-[use]: http://senecajs.org/api/#use-name-options-
-[act]: http://senecajs.org/api/#act-input-callback-
-[doc/examples/write-a-plugin]: https://github.com/senecajs/seneca/tree/master/doc/examples/write-a-plugin
+[use]: http://senecajs.org/api/#method-use
+[act]: http://senecajs.org/api/#method-act
+[docs/examples/write-a-plugin]: https://github.com/senecajs/seneca/tree/master/docs/examples/write-a-plugin
 [npmjs.org]: https://www.npmjs.org/search?q=seneca
 [seneca-echo plugin]: https://www.npmjs.org/package/seneca-echo
 [many plugins]: http://senecajs.org/plugins
-[logging tutorial]: http://senecajs.org/tutorials/logging-with-seneca.html
-[seneca-vcache plugin]: https://github.com/senecajs/seneca-vcache
-[data entities tutorial.]: http://senecajs.org/tutorials/understanding-data-entities.html
+[logging tutorial]: http://senecajs.org/docs/tutorials/logging-with-seneca.html
+[seneca-vcache plugin]: https://github.com/rjrodger/seneca-vcache
+[data entities tutorial.]: http://senecajs.org/docs/tutorials/understanding-data-entities.html
 [`_.extend`]: http://underscorejs.org/#extend
-[redis-transport]: https://github.com/senecajs/seneca-redis-transport/blob/master/redis-transport.js
+[redis-transport]: https://github.com/senecajs/seneca-redis-pubsub-transport/blob/master/lib/index.js
 [jsonic]: https://github.com/rjrodger/jsonic

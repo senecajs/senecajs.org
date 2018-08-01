@@ -330,9 +330,9 @@ If you have questions on **priors**, you can:
 
 That's all folks! Corrections and comments: please tweet [@senecajs][].
 
-[plugins]: http://senecajs.org/tutorials/how-to-write-a-plugin.html
-[data entity patterns]: http://senecajs.org/tutorials/understanding-data-entities.html
-[logging tutorial]: http://senecajs.org/tutorials/logging-with-seneca.html
+[plugins]: http://senecajs.org/docs/tutorials/how-to-write-a-plugin.html
+[data entity patterns]: http://senecajs.org/docs/tutorials/understanding-data-entities.html
+[logging tutorial]: http://senecajs.org/dos/tutorials/logging-with-seneca.html
 [@senecajs]: https://twitter.com/senecajs
 [github issue]: https://github.com/senecajs/seneca/issues
 [conversation]: https://gitter.im/senecajs/seneca
