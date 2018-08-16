@@ -9,6 +9,8 @@ Some plugins are maintained in-house, while others are provided by the community
 On this page, we provide an `npm` link and total downloads per month for any plugins
 we find or publish ourselves, so you only need to look in one place.
 
+To learn more about how to use and write plugins, read the [plugins tutorial](/docs/tutorials/how-to-write-a-plugin.html).
+
 ## Core plugins
 Seneca includes a number of **core plugins** by default. It does this in order to ensure that you can create a **working microservice out of the box**.
 

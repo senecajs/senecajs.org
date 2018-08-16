@@ -7,13 +7,31 @@ title: How to Write a Seneca Plugin
 
 
 When you use the Seneca framework, you write plugins all the
-time. They   are an easy way to organize your action patterns.
+time. They are an easy way to organize your action patterns.
 
 A Seneca plugin is just a function that gets passed an _options_
 object, and has a Seneca instance as its _this_ variable. You
-then [_add_][] some action patterns in the body of the function,
-and you're done. There is no callback.
+then [_add_][] some action patterns in the body of the
+function, and you're done. There is no callback.
 
+
+``` js
+// file: my_plugin.js
+module.exports = function my_plugin(options) {
+  var world = options.world
+
+  this.add('say:hello', function(msg, reply) {
+    reply({ hello: world })
+  })
+}
+
+// file: service.js
+const Seneca = require('seneca')
+
+Seneca()
+  .use('my_plugin')
+  .act('say:hello', console.log)
+```
 
 
 This article will show some plugin examples, with code, going from
@@ -22,17 +40,55 @@ to use when writing them. You'll need to log the behaviour of your
 plugins, and you'll need to know how to debug them, so that will be
 discussed too.
 
+Sometimes you to need initialize your plugin (to connect to a database,
+say), and this needs to happen before your plugin can be used. You can
+define an _init_ action inside your plugin that must complete without
+errors before Seneca is ready.
 
 
-There are many Seneca plugins published on [NPM][]. Most of them
-can be extended and modified by overriding their actions. You'll also
-need to know how to do this.
+``` js
+module.exports = function my_plugin( options ) {
+
+  ...
+  
+  this.init(function(done) {
+    // do something asynchronous, like connecting to a database
+    done()
+  })
+}
+```
 
 
 
-Finally, plugins provide you with a way to organize your own code, and
-to make use of the [micro-services][] approach to software
-architecture, so that will be discussed too.
+There are many Seneca plugins published on [NPM][]. Most of them can
+be extended and modified by overriding their actions. You'll also need
+to know how to do this, so we'll cover that too. There's also a list
+of core [plugins][] that are directly developed by the Seneca team.
+
+Plugins provide you with a way to organize your own code, and
+to make use of the [microservices][] approach to software
+architecture. Here's the recommended way to define a Seneca
+microservice based on plugins:
+
+
+``` js
+// file: service.js
+const Seneca = require('seneca')
+
+Seneca({tag: 'my_microservice'})
+  .use('my_plugin')
+  .use('my_other_plugin')
+  .ready(function() {
+    console.log('service ready: '+this.id)
+  })
+```
+
+Since a service cannot work with plugins that failed to initialize,
+Seneca will terminate the service process if any plugin fails. You
+should configure your services to restart on failure in any case, so
+this handles intermittent failures or restarts of other services that
+you depend on (but read on for more options).
+
 
 ## Contents
 
@@ -53,12 +109,11 @@ plugin _options_ argument to build a result.
 
 
 ``` js
-var plugin = function( options ) {
+var plugin = function(options) {
 
-  this.add( {foo:'bar'}, function( args, done ) {
-    done( null, {color: options.color} )
+  this.add({foo: 'bar'}, function(msg, reply) {
+    reply({color: options.color})
   })
-
 }
 ```
 
@@ -88,21 +143,24 @@ name for you.
 
 
 
-You can use the plugin by calling the [use][] method
-of the Seneca object. This loads the plugin into Seneca, after which
-the action patterns defined by the plugin are available. You can then
-call the [act][] method to trigger them, like so:
+You can use the plugin by calling the [use][] method of the Seneca
+object. This loads the plugin into Seneca, after which the action
+patterns defined by the plugin are available. You can then call
+the [act][] method to send messages matching your action
+pattern. The [use][] method takes two arguments: a plugin name or
+definition, and an optional options object (which is passed to the
+plugin).
 
 
 ``` js
 // simple.js
+const Seneca = require('seneca')
 
-var seneca = require('seneca')()
+const plugin = function(options) { ... } // as above
 
-var plugin = function( options ) { ... } // as above
-
-seneca.use( plugin, {color:'pink'} )
-seneca.act( {foo:'bar'}, console.log )
+Seneca()
+  .use(plugin, {color:'pink'})
+  .act({foo:'bar'}, console.log)
 ```
 
 
@@ -837,11 +895,12 @@ Command line options always override options from other sources. Here is the ord
 - Internal defaults
 
 
-[_add_]: http://senecajs.org/api/#add-pattern-paramspec-action-
+[_add_]: /api/#method-add
+[plugins]: /plugins
 [NPM]: http://www.npmjs.org/search?q=seneca%20plugin
-[micro-services]: http://martinfowler.com/articles/microservices.html
-[use]: http://senecajs.org/api/#use-name-options-
-[act]: http://senecajs.org/api/#act-input-callback-
+[microservices]: http://martinfowler.com/articles/microservices.html
+[use]: /api/#method-use
+[act]: /api/#method-act
 [doc/examples/write-a-plugin]: https://github.com/senecajs/seneca/tree/master/doc/examples/write-a-plugin
 [npmjs.org]: https://www.npmjs.org/search?q=seneca
 [seneca-echo plugin]: https://www.npmjs.org/package/seneca-echo

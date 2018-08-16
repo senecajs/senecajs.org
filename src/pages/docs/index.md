@@ -13,12 +13,12 @@ Seneca tutorials offer a deep dive into a particular concept or feature. We also
 of sample projects, small and large that demonstrate how to use Seneca in a number of different
 ways and with different complimentary technologies.
 
-- [Logging with Seneca][Tutorial01]
 - [How to write a plugin][Tutorial02]
 - [How to write unit tests][unit-testing]
 - [Understanding data entities][Tutorial03]
 - [Understanding query syntax][Tutorial04]
 - [Understanding prior actions][Tutorial05]
+- [Logging with Seneca][Tutorial01]
 - [Seneca with promises][Tutorial06]
 
 ## Sample projects

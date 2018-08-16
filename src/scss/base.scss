@@ -25,13 +25,13 @@ p {
 
 // Links
 a {
-  color: $green;
+  color: $anchor-color;
   text-decoration: none;
   cursor: pointer;
   // transition: color 0.2s ease-in;
 
   &:hover {
-    color: $green-light;
+    color: $anchor-hover-color;;
   }
 
   &:focus {
