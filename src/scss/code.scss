@@ -27,8 +27,12 @@ pre, code {
 
 p code,
 li code {
-  font-size: $font-small;
-  color: $gray;
+    background-color: $gray-lighter;
+    font-weight: $font-weight-code;
+    font-size: $font-small;
+    color: $inline-code;
+    padding-left:2px;
+    padding-right:2px;
 }
 
 .hljs,

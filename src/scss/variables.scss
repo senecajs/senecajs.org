@@ -16,6 +16,7 @@ $font-monospaced: Menlo, Monaco, Consolas, monospace;
 // Font weight
 $font-weight-base: 400;
 $font-weight-bold: 700;
+$font-weight-code: 500;
 
 // Font sizes
 
@@ -48,6 +49,8 @@ $gray-dark: #333;
 $gray: #666;
 $gray-light: #ddd;
 $gray-lighter: #f0f0f0;
+
+$inline-code: #000;
 
 // Border radius
 $ui-radius: 3px;

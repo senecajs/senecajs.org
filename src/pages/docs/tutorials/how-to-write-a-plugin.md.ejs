@@ -3,6 +3,38 @@ layout: content.html
 title: How to Write a Seneca Plugin
 ---
 
+<%
+// NOTE: clone https://github.com/senecajs/seneca-examples into `examples` in same 
+//       top level folder as this repo
+
+var require = this.process.mainModule.require
+var Fs = require('fs')
+
+function X(filename,start,end) {
+  try {
+    var str = Fs
+      .readFileSync('../examples/how-to-write-a-plugin/'+filename+'.js')
+      .toString().replace(/\n+$/,'')
+    if(start) {
+      var lines = str.split('\n')
+      lines = lines.slice(start)
+      if(end) {
+        lines = lines.slice(0, end-start)
+      }
+      str = lines.join('\n')
+    }
+    return '// file: '+filename+'.js\n' + str 
+        
+  }
+  catch (e) {
+    console.log(e.message)
+    return ''
+  }
+
+}
+
+%>
+
 # How to Write a Seneca Plugin
 
 
@@ -16,23 +48,13 @@ function, and you're done. There is no callback.
 
 
 ``` js
-// file: my_plugin.js
-module.exports = function my_plugin(options) {
-  var world = options.world
+<%-X('my_plugin')%>
 
-  this.add('say:hello', function(msg, reply) {
-    reply({ hello: world })
-  })
-}
+<%-X('my_service')%>
 
-// file: service.js
-const Seneca = require('seneca')
-
-Seneca()
-  .use('my_plugin')
-  .act('say:hello', console.log)
+// prints:
+// > { hello: 'Earth' }
 ```
-
 
 This article will show some plugin examples, with code, going from
 basic to advanced. It will cover the plugin API, and the conventions
@@ -47,23 +69,20 @@ errors before Seneca is ready.
 
 
 ``` js
-module.exports = function my_plugin( options ) {
+<%-X('my_init_plugin')%>
 
-  ...
-  
-  this.init(function(done) {
-    // do something asynchronous, like connecting to a database
-    done()
-  })
-}
+<%-X('my_init_service')%>
+
+// prints:
+// > { hello: 'Mars' }
 ```
 
 
 
 There are many Seneca plugins published on [NPM][]. Most of them can
-be extended and modified by overriding their actions. You'll also need
-to know how to do this, so we'll cover that too. There's also a list
-of core [plugins][] that are directly developed by the Seneca team.
+be extended and modified by overriding their action patterns (that's
+the Seneca way!). There's also a list of core [plugins][] that are
+directly developed by the Seneca team.
 
 Plugins provide you with a way to organize your own code, and
 to make use of the [microservices][] approach to software
@@ -72,15 +91,11 @@ microservice based on plugins:
 
 
 ``` js
-// file: service.js
-const Seneca = require('seneca')
+<%-X('recommended_service')%>
 
-Seneca({tag: 'my_microservice'})
-  .use('my_plugin')
-  .use('my_other_plugin')
-  .ready(function() {
-    console.log('service ready: '+this.id)
-  })
+// prints:
+// > service ready: <random-id>/<start-time>/<pid>/<version>/my_microservice
+// > plugins: [ 'my_plugin', 'my_init_plugin', ... <other-plugins> ... ]
 ```
 
 Since a service cannot work with plugins that failed to initialize,
@@ -93,9 +108,9 @@ you depend on (but read on for more options).
 ## Contents
 
 - [A Simple Plugin](#wp-simple)
+- [Give Your Plugin a Name](#wp-name)
 - [Initializing a Plugin](#wp-init)
 - [A Plugin is a Module](#wp-module)
-- [Give Your Plugin a Name](#wp-name)
 - [Dealing with Options](#wp-options)
 
 
@@ -109,18 +124,13 @@ plugin _options_ argument to build a result.
 
 
 ``` js
-var plugin = function(options) {
-
-  this.add({foo: 'bar'}, function(msg, reply) {
-    reply({color: options.color})
-  })
-}
+<%-X('simple',2,8)%>
 ```
 
 
 The example above defines a single action
 pattern, _foo:bar_. This action provides a result based on the
-options provided to the plugin. Plugin options are not required, but
+`options` provided to the plugin. Plugin options are not required, but
 if they are provided, they are passed in as the first argument to the
 plugin definition function. The _options_ argument is just a
 JavaScript object with some properties. Seneca makes sure it always
@@ -128,19 +138,16 @@ exists. Even in the case where you have no options, you'll still get
 an empty object.
 
 
-
-The context object of the plugin function (that is, the value
-of _this_), is a Seneca instance that you can use to define
-actions. That means you don't need to
-call `require('seneca')` when defining a plugin. This
-Seneca instance provides the standard API, but the logging methods are
-special - they append information about the plugin. So when you
-call `this.log.debug('stuff about my plugin')`, the log
-output will contain extra fields identifying the plugin, such as its
-name. In this example, you haven't given the plugin a name (you'll see
-how to do that in a moment), so Seneca will generate a short random
-name for you.
-
+The context object of the plugin function (that is, the value of
+_this_), is a Seneca instance that you can use to define actions. That
+means you don't need to call `require('seneca')` when defining a
+plugin. This Seneca instance provides the standard API, but the
+logging methods are special - they append information about the
+plugin. So when you call `this.log.debug('stuff about my plugin')`,
+the log output will contain extra fields identifying the plugin, such
+as its name. In this example, the name of the plugin will be
+"simple_plugin" (as that is the value of `name` property of the
+`Function` object defining the plugin.
 
 
 You can use the plugin by calling the [use][] method of the Seneca
@@ -149,35 +156,323 @@ patterns defined by the plugin are available. You can then call
 the [act][] method to send messages matching your action
 pattern. The [use][] method takes two arguments: a plugin name or
 definition, and an optional options object (which is passed to the
-plugin).
+plugin). Here is the full code to define and use a plugin:
 
 
 ``` js
-// simple.js
+<%-X('simple')%>
+```
+
+Run this script as follows:
+
+```
+$ node simple.js
+{ color: 'pink' }
+```
+
+The output is a JavaScript object with a single property _color_, the
+value of which is set from the original options given to the
+plugin. The example uses the utility function `Seneca.util.print` to
+print the action result neatly so that you don't have to worry about
+error handling. The example is run in "quiet" mode so that the default
+logging (which is suitable for production deployment) doesn't clutter
+up the output.
+
+
+
+<a name="wp-load"></a>
+## Loading a Plugin
+
+Seneca will look for your plugin using the first argument that you
+give to the [use][] method. If the first argument is a string value it
+will be interpreted as file path or a module name and will be passed
+to the [`require`][] built-in function. If the first argument is a
+function it will be interpreted as the plugin definition function.
+
+Let's take the "simple" plugin example and break it apart into two files:
+
+* `simple_plugin.js`: a script defining the plugin
+* `simple_service.js`: a script the starts Seneca and loads the plugin
+
+This configuration is the recommended way to structure your own
+microservices&mdash;run the microservice using a service script that
+loads all the plugins you need to define the service.
+
+Here is the plugin code, which exposes the plugin definition function
+as the exported module value:
+
+``` js
+<%-X('simple_plugin')%>
+```
+
+And here is the service script that loads and runs the plugin:
+
+``` js
+<%-X('simple_service')%>
+```
+
+Run this service as follows:
+
+```
+$ node simple_service.js
+{ color: 'pink' }
+```
+
+You'll also notice that Seneca uses method chaining as an API design
+principle. This functionality is provided as a convenience, so that
+your service definition code can be a concise chain of [use[]] calls.
+
+The `.use` method in the above example refered to a plugin directly by
+name "simple_plugin". Seneca was able to find this plugin because a
+file in the same folder as the service script existed called
+`simple_plugin.js`. The Seneca `.use` method passes the plugin name to
+the builtin system `require` function. Thus, the following are
+essentially equivalent:
+
+
+```
+seneca.use('simple_plugin')
+seneca.use(require('./simple_plugin'))
+```
+
+Thus, if Seneca can't find your plugin for some reason, you can just
+`require` it in directly.
+
+
+Framework plugins that provide general functionality (such
+as
+[database connections](https://github.com/senecajs/seneca-mongo-store),
+or
+[user account business logic](https://github.com/senecajs/seneca-user))
+are prefixed with `seneca-` to place them in a separate namespace from
+your own plugins. Nonetheless, since you'll often want to use multiple
+framework plugins per service, it can be tedious and verbose to have
+to enter their full names. Seneca allows you to optionally omit the
+`seneca-` prefix. Thus: `seneca.use('user')` is equivalent to
+`seneca.use('seneca-user')` (assuming you've run `npm install
+seneca-user`).
+
+
+
+TODO: update seneca-echo
+
+
+
+<a name="wp-name"></a>
+## Give Your Plugin a Name
+
+
+Your plugin needs a name so that you can track and debug its behavior.
+The easiest way to do this is to give the function that defines your plugin a name.
+
+``` js
+function mercury(options) {
+  this.add('say:hello', function (msg, reply) {
+    reply({ hello: 'world' })
+  })
+}
+```
+
+Then you can observe the registration and configuration of the plugin in the Seneca logs:
+
+``` sh
+$ node -e "require('seneca').use('./mercury-plugin.js')" - --seneca.test | grep mercury
+46/1x/- add/ADD  name:mercury,plugin:define,role:seneca,seq:2,tag:undefined ...
+60/1x/- act/IN/a  vu/xv  name:mercury,plugin:define,role:seneca,seq:2,tag:undefined ...
+60/1x/- plugin/init  mercury
+61/1x/- plugin/install  mercury
+62/1x/- act/DEFAULT/s  xz/xv  {role:'seneca',plugin:'init',seq:2,init:'mercury',tag:undefined} 
+62/1x/- plugin/ready  mercury
+63/1x/- act/OUT/a  vu/xv  name:mercury,plugin:define,role:seneca,seq:2,tag:undefined ...
+```
+
+In the above command (which uses the `-e` option of node.js to quickly
+load the plugin), the argument `--seneca.test` makes Seneca run in
+test mode, which output developer friendly debug logs. To remove
+clutter, `grep` filters the logs down to those containing the string
+"mercury", the name of the plugin.
+
+We'll cover what these log entries mean later. For now, just observe
+that you can use the plugin name to identify the logs relevant to your
+plugin.
+
+If you don't give your plugin definition function a name, then the
+file path of the script file containing the plugin is used.
+
+```
+// file: venus.js
+function (options) {
+  this.add('say:hello', function (msg, reply) {
+    reply({ hello: 'world' })
+  })
+}
+
+// venus-service.js
 const Seneca = require('seneca')
 
-const plugin = function(options) { ... } // as above
-
 Seneca()
-  .use(plugin, {color:'pink'})
-  .act({foo:'bar'}, console.log)
+
+  // The name of the plugin will be "./venus.js"
+  .use('./venus.js')
 ```
 
 
-This code is available in
-the [doc/examples/write-a-plugin][]
-example, in the _simple.js_ script. Running the script produces:
 
-``` bash
-$ node simple.js
-null { color: 'pink' }
+
+===================
+
+
+
+
+
+There's an obvious risk that you might have a naming conflict. Seneca
+allows this because it's more useful to have the ability to
+override plugins. If you're defining your own set of plugin names,
+it's best to choose a short prefix for your project. This is a good
+idea in general for many frameworks!
+
+
+
+For example, if you're working on the Manhattan project, choose the
+prefix _mh_. Then call your "Trinity" plugin _mh-trinity_.
+
+
+
+There are no hard and fast rules for naming your action
+patterns. However, there are some conventions that help to organize
+the patterns. Your plugin is providing functionality to the
+system. This functionality fulfills a role in the system. So it makes
+sense to use the form _role:plugin-name_ as part of your action
+pattern. This creates a pattern namespace to avoid clashes with other
+plugin patterns. The use of the word "role" also indicates that other
+plugins may override some aspects of this role (that is, aspects of
+this functionality) by providing extensions to some of the action
+patterns.
+
+
+
+For example,
+the [seneca-vcache plugin][] overrides the standard entity patterns, of the
+form _role:entity, cmd:*_. It does this to transparently add
+caching to the database store operations.
+
+
+
+Another common convention is to use the property "cmd" for the main
+public commands exposed by the plugin. So, you might have, for
+example:
+
+
+``` js
+var plugin = function trinity( options ) {
+
+  this.add( {role:'trinity', cmd:'detonate'}, function( args, done ) {
+    // ... compress plutonium, etc
+  })
+}
 ```
 
 
-In the output, the _null_ is the first argument
-to _console.log_, and indicates that there was no error.  The
-output is a JavaScript object with single property _color_, the
-value of which is set from the original options given to the plugin.
+Many of the public Seneca plugins on NPM follow this pattern. You may
+find other patterns more useful in your own projects, so don't feel
+obligated to follow this one.
+
+
+
+If you load a plugin multiple times, only the last one loaded will be
+used. You can however load multiple separate instances of the same
+plugin, by using tag strings. NOTE: the action patterns will still be
+overridden, unless the plugin handles this for you (like the example
+below). The data store plugins, in particular, use this mechanism to
+support multiple databases in the same system. For more details, read
+the [data entities tutorial.][] data entities
+tutorial.</a>
+
+
+
+Here's a simple example that uses tags. In this case,
+the _bar.js_ plugin defines an action pattern using one of its
+option properties. This means that different action patterns are
+defined depending on the options provided.
+
+
+``` js
+// bar.js
+module.exports = function( options ) {
+  var tag = this.context.tag
+
+  this.add( {foo:'bar', zed:options.zed}, function( args, done ) {
+    done( null, {color: options.color, tag:tag} )
+  })
+
+}
+```
+
+
+You can access the tag value from the context property of the plugin
+Seneca instance: `this.context.tag`
+
+
+
+You still want to debug and track each instance of this plugin, so you
+provide a tag each time you register it with the _use_
+method. Tags can be supplied in two ways, either by description object
+for the plugin, or by suffixing a _$_ character, and then the
+tag, to the plugin module reference. Here's the example code:
+
+
+``` js
+// tags.js
+var seneca = require('seneca')()
+
+seneca.use( {name:'./bar.js',tag:'AAA'}, {zed:1,color:'red'} )
+seneca.use( './bar.js$BBB',              {zed:2,color:'green'} )
+
+seneca.act( {foo:'bar',zed:1}, console.log )
+seneca.act( {foo:'bar',zed:2}, console.log )
+```
+
+
+Running this code produces the output:
+
+
+```bash
+$ node tags.js
+null { color: 'red', tag: 'AAA' }
+null { color: 'green', tag: 'BBB' }
+```
+
+
+Using the debug log shows the different instances of the plugin in action:
+
+
+```bash
+$ node tags.js --seneca.log=plugin:./bar.js
+... DEBUG  plugin  ./bar.js  AAA  add  ./bar.js  AAA  {foo=bar,zed=1}  ...
+... DEBUG  plugin  ./bar.js  BBB  add  ./bar.js  BBB  {foo=bar,zed=2}  ...
+... DEBUG  act     ./bar.js  AAA  pamds7vlteyv  IN   {foo=bar,zed=1}  ...
+... DEBUG  act     ./bar.js  BBB  4uxz90gcczn5  IN   {foo=bar,zed=2}  ...
+... DEBUG  act     ./bar.js  AAA  pamds7vlteyv  OUT  {color=red,tag=AAA}  ...
+null { color: 'red', tag: 'AAA' }
+... DEBUG  act     ./bar.js  BBB  4uxz90gcczn5  OUT  {color=green,tag=BBB}  ...
+null { color: 'green', tag: 'BBB' }
+```
+
+
+To isolate a tag, use these log settings:
+
+
+```bash
+$ node tags.js --seneca.log=plugin:./bar.js,tag:AAA
+... DEBUG  plugin  ./bar.js  AAA  add  ./bar.js  AAA  {foo=bar,zed=1}  ...
+... DEBUG  act     ./bar.js  AAA  9rp8luozaf92  IN   {foo=bar,zed=1}  ...
+... DEBUG  act     ./bar.js  AAA  9rp8luozaf92  OUT  {color=red,tag=AAA}  ...
+null { color: 'red', tag: 'AAA' }
+null { color: 'green', tag: 'BBB' }
+```
+
+
+
 
 
 <a name="wp-init"></a>
@@ -339,266 +634,6 @@ seneca.use( 'echo' )
 ```
 
 
-<a name="wp-name"></a>
-## Give Your Plugin a Name
-
-
-Your plugin needs a name. You can return a string from the plugin
-definition function to give it one. When you look at the Seneca logs,
-you can see what your plugin is doing. Let's try it!
-
-
-``` js
-// name0.js
-
-var plugin = function( options ) {
-
-  this.add( {foo:'bar'}, function( args, done ) {
-    done( null, {color: options.color} )
-  })
-
-  return 'name0'
-}
-
-var seneca = require('seneca')()
-
-seneca.use( plugin, {color:'pink'} )
-seneca.act( {foo:'bar'}, console.log )
-```
-
-
-And then run it like so:
-
-
-```bash
-$ node name0.js --seneca.log=plugin:name0
-... DEBUG  act  name0  -  yvgt5y48wqjb  IN   {foo=bar}  ...
-... DEBUG  act  name0  -  yvgt5y48wqjb  OUT  {color=pink}  ...
-null { color: 'pink' }
-```
-
-
-This uses Seneca's log filtering feature to focus on the log lines
-that you care about. For more details on log filtering, read
-the [logging tutorial][].
-
-
-
-To avoid repetition, the public plugins drop their "seneca-" prefix
-when registering their names. Try this:
-
-
-```bash
-$ node echo.js --seneca.log=plugin:echo
-... DEBUG  plugin  echo  -  add  echo  -  {role=echo}  ...
-... DEBUG  act     echo  -  lkmlk29r6uwt  IN   {role=echo,foo=bar}  ...
-... DEBUG  act     echo  -  lkmlk29r6uwt  OUT  {foo=bar}  ...
-null { foo: 'bar' }
-```
-
-
-You may have noticed something interesting. There were three lines of
-logging output that time. Why didn't you see an "add" line for your
-"name0" plugin? During the execution of its definition function, it
-didn't have a name. You only gave it one when you returned a
-name. Sometimes this is useful, because you can set a name
-dynamically. Still, is it possible to set the name initially? Yes! Just
-give the defining function a name:
-
-
-
-``` js
-// name1.js
-
-var plugin = function name1( options ) {
-
-  this.add( {foo:'bar'}, function( args, done ) {
-    done( null, {color: options.color} )
-  })
-}
-
-var seneca = require('seneca')()
-
-seneca.use( plugin, {color:'pink'} )
-seneca.act( {foo:'bar'}, console.log )
-```
-
-
-Running this gives:
-
-
-```bash
-$ node name1.js --seneca.log=plugin:name1
-... DEBUG  plugin  name1  -  add  name1  -  {foo=bar}  ...
-... DEBUG  act     name1  -  b3uamicogfnm  IN   {foo=bar}  ...
-... DEBUG  act     name1  -  b3uamicogfnm  OUT  {color=pink}  ...
-null { color: 'pink' }
-```
-
-
-
-When you load a plugin as a module then the module reference, as
-supplied to the _use_ method, becomes the initial name of the
-module (Of course, you can override this by returning your own name)
-Here's the _foo.js_ plugin again:
-
-
-
-```bash
-$ node module.js --seneca.log=plugin:./foo.js
-... DEBUG  plugin  ./foo.js  -  add  ./foo.js  -  {foo=bar}  ...
-... DEBUG  act     ./foo.js  -  47ssblskuj59  IN   {foo=bar}  ...
-... DEBUG  act     ./foo.js  -  47ssblskuj59  OUT  {color=pink}  ...
-null { color: 'pink' }
-```
-
-
-
-There's an obvious risk that you might have a naming conflict. Seneca
-allows this because it's more useful to have the ability to
-override plugins. If you're defining your own set of plugin names,
-it's best to choose a short prefix for your project. This is a good
-idea in general for many frameworks!
-
-
-
-For example, if you're working on the Manhattan project, choose the
-prefix _mh_. Then call your "Trinity" plugin _mh-trinity_.
-
-
-
-There are no hard and fast rules for naming your action
-patterns. However, there are some conventions that help to organize
-the patterns. Your plugin is providing functionality to the
-system. This functionality fulfills a role in the system. So it makes
-sense to use the form _role:plugin-name_ as part of your action
-pattern. This creates a pattern namespace to avoid clashes with other
-plugin patterns. The use of the word "role" also indicates that other
-plugins may override some aspects of this role (that is, aspects of
-this functionality) by providing extensions to some of the action
-patterns.
-
-
-
-For example,
-the [seneca-vcache plugin][] overrides the standard entity patterns, of the
-form _role:entity, cmd:*_. It does this to transparently add
-caching to the database store operations.
-
-
-
-Another common convention is to use the property "cmd" for the main
-public commands exposed by the plugin. So, you might have, for
-example:
-
-
-``` js
-var plugin = function trinity( options ) {
-
-  this.add( {role:'trinity', cmd:'detonate'}, function( args, done ) {
-    // ... compress plutonium, etc
-  })
-}
-```
-
-
-Many of the public Seneca plugins on NPM follow this pattern. You may
-find other patterns more useful in your own projects, so don't feel
-obligated to follow this one.
-
-
-
-If you load a plugin multiple times, only the last one loaded will be
-used. You can however load multiple separate instances of the same
-plugin, by using tag strings. NOTE: the action patterns will still be
-overridden, unless the plugin handles this for you (like the example
-below). The data store plugins, in particular, use this mechanism to
-support multiple databases in the same system. For more details, read
-the [data entities tutorial.][] data entities
-tutorial.</a>
-
-
-
-Here's a simple example that uses tags. In this case,
-the _bar.js_ plugin defines an action pattern using one of its
-option properties. This means that different action patterns are
-defined depending on the options provided.
-
-
-``` js
-// bar.js
-module.exports = function( options ) {
-  var tag = this.context.tag
-
-  this.add( {foo:'bar', zed:options.zed}, function( args, done ) {
-    done( null, {color: options.color, tag:tag} )
-  })
-
-}
-```
-
-
-You can access the tag value from the context property of the plugin
-Seneca instance: `this.context.tag`
-
-
-
-You still want to debug and track each instance of this plugin, so you
-provide a tag each time you register it with the _use_
-method. Tags can be supplied in two ways, either by description object
-for the plugin, or by suffixing a _$_ character, and then the
-tag, to the plugin module reference. Here's the example code:
-
-
-``` js
-// tags.js
-var seneca = require('seneca')()
-
-seneca.use( {name:'./bar.js',tag:'AAA'}, {zed:1,color:'red'} )
-seneca.use( './bar.js$BBB',              {zed:2,color:'green'} )
-
-seneca.act( {foo:'bar',zed:1}, console.log )
-seneca.act( {foo:'bar',zed:2}, console.log )
-```
-
-
-Running this code produces the output:
-
-
-```bash
-$ node tags.js
-null { color: 'red', tag: 'AAA' }
-null { color: 'green', tag: 'BBB' }
-```
-
-
-Using the debug log shows the different instances of the plugin in action:
-
-
-```bash
-$ node tags.js --seneca.log=plugin:./bar.js
-... DEBUG  plugin  ./bar.js  AAA  add  ./bar.js  AAA  {foo=bar,zed=1}  ...
-... DEBUG  plugin  ./bar.js  BBB  add  ./bar.js  BBB  {foo=bar,zed=2}  ...
-... DEBUG  act     ./bar.js  AAA  pamds7vlteyv  IN   {foo=bar,zed=1}  ...
-... DEBUG  act     ./bar.js  BBB  4uxz90gcczn5  IN   {foo=bar,zed=2}  ...
-... DEBUG  act     ./bar.js  AAA  pamds7vlteyv  OUT  {color=red,tag=AAA}  ...
-null { color: 'red', tag: 'AAA' }
-... DEBUG  act     ./bar.js  BBB  4uxz90gcczn5  OUT  {color=green,tag=BBB}  ...
-null { color: 'green', tag: 'BBB' }
-```
-
-
-To isolate a tag, use these log settings:
-
-
-```bash
-$ node tags.js --seneca.log=plugin:./bar.js,tag:AAA
-... DEBUG  plugin  ./bar.js  AAA  add  ./bar.js  AAA  {foo=bar,zed=1}  ...
-... DEBUG  act     ./bar.js  AAA  9rp8luozaf92  IN   {foo=bar,zed=1}  ...
-... DEBUG  act     ./bar.js  AAA  9rp8luozaf92  OUT  {color=red,tag=AAA}  ...
-null { color: 'red', tag: 'AAA' }
-null { color: 'green', tag: 'BBB' }
-```
 
 
 <a name="wp-options"></a>
