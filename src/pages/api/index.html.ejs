@@ -263,6 +263,25 @@ var items_methods = [{
   n: 'ungate',
   g: [[]],
   d: 'Exit gated mode. Actions now execute immediately and do not wait for each other. This is the default mode.'
+}, {
+  n: 'translate',
+  g: [['from', 'to', 'pick']],
+  p: { 
+    from: {
+      t:['jsonic', 'Object'], 
+      d:'The source pattern to be rewritten.'
+    },
+    to: {
+      t:['jsonic', 'Object'], 
+      d:'The desired target pattern.'
+    },
+    pick: {
+      t:['String','Array','Object'], 
+      o:true, 
+      d:'A list of properties to explicitly include in the translated message.'
+    } 
+  },
+  d: 'Translate a <i>message</i> from one pattern into another, optionally picking out properties to include and exclude.'
 }]
 
 
