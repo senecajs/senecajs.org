@@ -38,7 +38,7 @@ abbreviations. You can provide a data response using:
 
 You can provide an error response using:
 
-* `reply(new Error('my error message')`
+* `reply(new Error('my error message'))`
 
 And you can provide an empty response using:
 
