@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{&gt; head}}
+  </head>
+  <body>
+    {{&gt; menu}}
+
+    <div class="container-fluid">
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10 txt-left">
+          {{{contents}}}
+        </div>
+      </div>
+
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10">
+          <p class="txt-lead mb mt2x">Issues? From spelling errors to broken tutorials and everything in between, report
+          them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a></p>
+        </div>
+      </div>
+    </div>
+
+    {{&gt; footer}}
+    {{&gt; algolia}}
+    {{&gt; analytics}}
+
+
+    <script>
+      $('[data-api-box-ref]')
+        .each(function (index, apibox) {
+          $(apibox).find('a').on('click', function(ev) {
+            ev.stopPropagation()
+          })
+        })
+        .on('click', function (ev) {
+          window.location.hash = $(this).attr('data-api-box-ref')
+          return false
+        })
+    </script>
+
+  </body>
+</html>

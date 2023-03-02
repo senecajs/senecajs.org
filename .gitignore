@@ -2,7 +2,6 @@ test
 node_modules
 *.log
 _site
-dist
 *~
 .DS_Store
 *.off

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,400italic,700">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    
+    <title>Seneca, a microservices toolkit for Node.js</title>  </head>
+  <body>
+    <nav class="nav-main" role="navigation">
+      <div class="container-fluid cf">
+        <a class="logo logo-seneca" href="/" title="Seneca">Seneca</a>
+    
+        <div class="nav-search">
+          <input type="search" id="seneca-search-input" placeholder="Search the docs...">
+        </div>
+        <!-- nav search -->
+    
+        <div class="nav-bar">
+    
+          <input type="checkbox" name="nav-menu-handle" id="nav-menu-handle" class="nav-menu-handle">
+          <label for="nav-menu-handle"></label>
+    
+          <ul class="list-unstyled list-inline nav-items">
+            <li><a href='/api/'>API</a></li>
+            <li><a href='/docs/'>Docs</a></li>
+            <li><a href='/faq/'>FAQ</a></li>
+            <li><a href='/plugins/'>Plugins</a></li>
+            <li><a href='/roadmap/'>Roadmap</a></li>
+            <li><a href='/support/'>Support</a></li>
+          </ul>
+          <!-- nav items -->
+        </div>
+    
+      </div>
+      <!-- container -->
+    </nav>
+    <header role="banner">
+      <div class="container-fluid center-xs">
+        <img src="/images/illustration-top.svg"
+             alt="Design, develop and organize code"
+             title="Design, develop and organize code"
+             height="auto"
+             width="320"
+             class="mt"
+          />
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10 txt-left">
+          <h1 id="frequently-asked-questions"><a href="#frequently-asked-questions" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Frequently Asked Questions</h1>
+<ul>
+<li><a href="#q-gotq">Got a question?</a></li>
+<li><a href="#q-patuse">Why is pattern-matching so useful?</a></li>
+<li><a href="#q-recstruct">What is the recommended structure for Seneca apps?</a></li>
+<li><a href="#q-fatal">Why is the Seneca process dying with a FATAL error?</a></li>
+<li><a href="#q-reply">How do I respond to a message?</a></li>
+</ul>
+<p></p>
+
+
+
+<p><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 8px -80px">[&#x21E7;]</a>
+<a name="q-gotq"></a></p>
+<h3 id="got-a-question"><a href="#got-a-question" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Got a question?</h3>
+<p>Please post an issue to github, marking as &#x201C;FAQ:&#x201D; in the title: <a href="https://github.com/senecajs/senecajs.org/issues/new?title=FAQ:%20">I
+want to ask a
+question!</a></p>
+<p><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 8px -80px">[&#x21E7;]</a>
+<a name="q-patuse"></a></p>
+<h3 id="why-is-pattern-matching-so-useful"><a href="#why-is-pattern-matching-so-useful" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Why is pattern-matching so useful?</h3>
+<p>Because it gives you a clean component model. This lets you build big
+things out of small things without ending up with spaghetti code.</p>
+<p>The trick is to make composition easy. That way you can combine and
+extend microservices. Instead of modifying an existing microservice,
+simply add a new one with more functionality. This is a much more
+scalable way to handle changing requirements without building up
+technical debt.</p>
+<p>There&#x2019;s a <a href="https://vimeo.com/151465912">great talk by Gerald Sussman</a>
+(co-inventor of Scheme) on the basic principles of this idea. There&#x2019;s
+also a
+<a href="http://www.richardrodger.com/seneca-microservices-nodejs#.Vqi9LBiLT-k">maintainer blog post</a>
+explaining this from a Seneca perspective.</p>
+<pre style="margin-bottom:0px">
+A diamond is very pretty.
+But it is hard to add to a diamond.
+&#xA0;
+A ball of mud is not so pretty.
+But you can always add more mud to a ball of mud.
+</pre>
+<div style="text-align:right"><small>[Joel Moses](https://en.wikipedia.org/wiki/Joel_Moses) / [Paul Penfield](http://www-mtl.mit.edu/~penfield/)</small></div>
+
+<p>&#xA0;</p>
+
+
+
+<p><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 8px -80px">[&#x21E7;]</a>
+<a name="q-recstruct"></a></p>
+<h3 id="what-is-the-recommended-structure-for-seneca-apps"><a href="#what-is-the-recommended-structure-for-seneca-apps" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>What is the recommended structure for Seneca apps?</h3>
+<p>Some things that work well:</p>
+<ul>
+<li><p>Separate the business logic from the execution. Put your business
+logic into separate plugins - either separate node modules,
+different repositories, or simply different files in the same
+repository.</p>
+</li>
+<li><p>Use execution scripts to compose your app. Don&#x2019;t be afraid to use
+different scripts for different contexts. They should be pretty
+short any way. You want your scripts to look something like:</p>
+</li>
+</ul>
+<pre><code>var SOME_CONFIG = process.env.SOME_CONFIG || &apos;some-default-value&apos; 
+
+require(&apos;seneca&apos;)({ some_options: 123 })
+
+  // existing Seneca plugins
+  .use(&apos;community-plugin-0&apos;)
+  .use(&apos;community-plugin-1&apos;, {some_config: SOME_CONFIG})
+  .use(&apos;community-plugin-2&apos;)
+
+  // your own plugins with your own business logic
+  .use(&apos;project-plugin-module&apos;)
+  .use(&apos;../plugin-repository&apos;)
+  .use(&apos;./lib/local-plugin&apos;)
+
+  .listen( ... )
+  .client( ... )
+
+  .ready( function() {
+    // your own custom code - executed once Seneca is spun up
+  })</code></pre><ul>
+<li>Plugin loading order <em>is significant</em>. This is a good thing. It
+lets you control the <a href="http://www.richardrodger.com/seneca-microservices-nodejs#.VqdKAhiLT-k">composition of your message language</a>.</li>
+</ul>
+<p>Things that don&#x2019;t work well:</p>
+<ul>
+<li><p>Mixing Seneca initialization with other framework
+initialization. Define your express or hapi app in one file, and
+Seneca in another. Keep it separate and simple.</p>
+</li>
+<li><p>Passing the Seneca instance around. Don&#x2019;t create a Seneca
+instance and then pass it as a parameter to stuff you&#x2019;ve
+<code>required</code> in, and only then start adding plugins and
+actions. Instead, use small execution scripts with clear and
+linear construction of your service from a list of plugins.</p>
+</li>
+</ul>
+<p>Looking for an example structure to copy? The
+<a href="https://github.com/nodezoo/nodezoo-workshop">nodezoo workshop</a> is a good
+place to find one.</p>
+<p><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 8px -80px">[&#x21E7;]</a>
+<a name="q-fatal"></a></p>
+<h3 id="why-is-the-seneca-process-dying-with-a-fatal-error"><a href="#why-is-the-seneca-process-dying-with-a-fatal-error" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Why is the Seneca process dying with a FATAL error?</h3>
+<p>Your Seneca microservice will rely on a set of plugins, both <a href="https://github.com/senecajs?utf8=%E2%9C%93&amp;q=seneca-*&amp;type=source&amp;language=">community
+plugins</a>, and your own, to provide the actions that respond to
+messages. All of the plugins need to load and initialize
+successfully. If they don&#x2019;t, your microservice will be in an
+undefined state. The best thing to do in this case is bail out and
+die.</p>
+<p>For example, if you are using the
+<a href="http://github.com/senecajs/seneca-mongo-store"><code>seneca-mongo-store</code></a>
+plugin, and the plugin cannot connect to the database, then your
+microservice can&#x2019;t do any work. Maybe the failure is transient. In
+that case, you want the microservice to die and restart. Your
+container system (Docker, Kubernetes, etc) will start a new instance
+of your microservice, but needs the old one to die first.</p>
+<p>When
+<a href="/docs/tutorials/how-to-write-a-plugin.html">Seneca loads a plugin</a>,
+it is first <em>defined</em>, then <em>initialized</em>. Plugin definition happens
+inside the plugin definition function, where you add your patterns:</p>
+<pre><code class="language-js">// file: foo.js
+// The string `foo` will be the name of the plugin.
+module.exports = function foo(options) {
+
+  // `this` === context Seneca instance with fatal$ === true
+  // the pattern is `a:1`
+  this.add(&apos;a:1&apos;, function (msg, reply) {
+    reply({x: msg.x})
+  }) 
+}</code></pre>
+<p>A failure of any sort here is fatal, as it means the plugin is not
+fully defined. Some patterns could be missing. Plugin definition is
+<em>synchronous</em>.</p>
+<p>Plugin initialization happens inside the <code>init:&lt;plugin-name&gt;</code>
+action. Add this inside your plugin definition:</p>
+<pre><code class="language-js">// file: foo.js
+// The function `foo` will be the name of the plugin.
+module.exports = function foo(options) {
+
+  this.add(&apos;a:1&apos;, function (msg, reply) {
+    reply({x: msg.x})
+  }) 
+
+  this.add(&apos;init:foo&apos;, function (msg, reply) {
+
+    // do something asynchronous
+    database_setup(options, function(err) {
+
+      // call reply to indicate that the plugin is initialized,
+      // no need for response data
+      reply(err)
+    })
+  })
+}</code></pre>
+<p>Plugin initialization is optional, and only necessary if you need to
+perform an asynchronous operation such as interacting with the outside
+world. Failures in initialization are also fatal.</p>
+<p>The <a href="/api/#method-ready"><code>seneca.ready</code></a> callback is not called until
+all plugins are defined and initialized.</p>
+<p>To make an action fatal when it fails, use the <code>fatal$:true</code> directive
+as part of your message. This is what Seneca itself does for plugin
+definition (which is run inside an internally created one-off action)
+and initialization. The <code>fatal$</code> directive is set as a fixed argument
+of any messages sent by the plugin Seneca context.</p>
+<p>There are times when you want to avoid this behavior. One way, when
+debugging, is to set the option <code>debug.undead = true</code>:</p>
+<pre><code>var Seneca = require(&apos;seneca&apos;)
+var seneca = Seneca({debug: {undead: true}})</code></pre><p>Another is to create a new Seneca instance that does not have a fixed
+<code>fatal$ = true</code> argument:</p>
+<pre><code>var fresh_seneca = this.root.delegate()</code></pre><p>This is necessary for plugins that will send messages once Seneca is
+ready, such as the transport plugins.</p>
+<p><a href="#" class="linkable" style="color: rgba(41, 125, 134, 0.20); display:inline-block; float:left; margin: 8px -80px">[&#x21E7;]</a>
+<a name="q-reply"></a></p>
+<h3 id="how-do-i-respond-to-a-message"><a href="#how-do-i-respond-to-a-message" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>How do I respond to a message?</h3>
+<p>When a message pattern is matched, it triggers execution of the
+associated action function that you have defined. Your action function
+is passed three parameters:</p>
+<ul>
+<li><code>msg</code>: the message that triggered this action.</li>
+<li><code>reply</code>: a callback function that you can use to reply to the message.</li>
+<li><code>meta</code>: a meta data object for tracing and debugging (normally ignored).</li>
+</ul>
+<p>Thus a typical action definition looks like so:</p>
+<pre><code>const Seneca = require(&apos;seneca&apos;)
+
+const seneca = Seneca()
+
+seneca
+  .add({a: 1}, function(msg, reply) {
+    reply(null, {x: msg.y})
+  })</code></pre><p>And to use it, you call:</p>
+<pre><code>seneca.act({a: 1, y: 2}, function(err, out) {
+  console.log(err) // prints null, as there was no error
+  console.log(out) // prints {x: 2}, as that was the response given to `reply`
+})</code></pre><p>The <code>reply</code> callback follows the normal signature for callbacks:
+<code>callback(err, result)</code>. But it also provides some convenience
+abbreviations. You can provide a data response using:</p>
+<ul>
+<li><code>reply(null, {z: 3})</code></li>
+<li><code>reply({z: 3})</code></li>
+</ul>
+<p>You can provide an error response using:</p>
+<ul>
+<li><code>reply(new Error(&apos;my error message&apos;)</code></li>
+</ul>
+<p>And you can provide an empty response using:</p>
+<ul>
+<li><code>reply()</code></li>
+</ul>
+<p>Thus, our example above can be more conveniently written as:</p>
+<pre><code>seneca
+  .add({a: 1}, function(msg, reply) {
+    reply({x: msg.y})
+  })</code></pre><p>It is also common practice to pass the <code>reply</code> callback into another
+function expecting a standard signature callback. For example:</p>
+<pre><code>const Fs = require(&apos;fs&apos;)
+
+seneca
+  .add({file: &apos;read&apos;}, function(msg, reply) {
+    Fs.stat(msg.path, reply)
+  })</code></pre>
+        </div>
+      </div>
+
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10">
+          <p class="txt-lead mb mt2x">Issues? From spelling errors to broken tutorials and everything in between, report
+          them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a></p>
+        </div>
+      </div>
+    </div>
+
+    <footer role="contentinfo">
+    
+      <div class="footer-top">
+        <div class="container-fluid">
+          <div class="row center-xs">
+            <div class="col-xs-12">
+              <img src="/images/logo-seneca-inversed.svg" class="logo-seneca-lg" alt="Seneca" />
+            </div>
+    
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="https://github.com/senecajs/seneca" class="link-has-icon icon icon-github">Github</a></p>
+            </div>
+    
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="/docs/" class="link-has-icon icon icon-docs">Documentation</a></p>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="https://twitter.com/senecajs" class="link-has-icon icon icon-twitter">Twitter</a></p>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+      </div>
+      <!-- footer top -->
+    
+      <div class="footer-bottom">
+        <div class="container-fluid txt-center">
+          <p class="mb0">© <a href="https://github.com/rjrodger">Richard Rodger</a> and <a href="https://github.com/senecajs/senecajs.org/contributors">other</a> <a href="https://github.com/senecajs/seneca/contributors">contributors</a> 2010 - 2023. Powered by <a href="http://metalsmith.io">MetalSmith</a>, hosted by <a href="http://surge.sh">Surge</a>. A <a href="https://www.voxgig.com">Voxgig</a> project.</p>
+        </div>
+      </div>
+      <!-- footer bottom -->
+    </footer>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js" integrity="sha256-vrn14y7WH7zgEElyQqm2uCGSQrX/xjYDjniRUQx3NyU=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+        apiKey: 'a5afa8843727758cbaa7fbacb932b215',
+        indexName: 'senecajs',
+        inputSelector: '#seneca-search-input'
+    });
+    </script>    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-57673-6', 'senecajs.org');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
