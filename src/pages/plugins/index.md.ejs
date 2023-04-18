@@ -41,27 +41,27 @@ let plugins = {
   // etc
 }
 
-let plgtest = {
-  cache: [
+let plgtest = [
+  {cache: [
     {name: 'cache'},
-    {name: 'cache-test'}],
-  entity: [
+    {name: 'cache-test'}]},
+  {entity: [
     {name: 'entity'},
     {name: 'entity-cache'},
     {name: 'entity-depend'},
     {name: 'entity-history'},
     {name: 'entity-rtag'},
-    {name: 'entity-util'},],
-  gateway: [
+    {name: 'entity-util'},]},
+  {gateway: [
     {name: 'gateway'},
     {name: 'gateway-auth'},
     {name: 'gateway-express-auth'},
     {name: 'gateway-express'},
-    {name: 'gateway-lambda'},],
-  msg: [
+    {name: 'gateway-lambda'},]},
+  {msg: [
     {name: 'msg-run'},
-    {name: 'msg-test'},],
-}
+    {name: 'msg-test'},]},
+]
 %>
 
 <%
@@ -80,6 +80,50 @@ let C = [{name:'alpha'},{name:'beta'},{name:'charlie'}]
 let h3C = '<h3>Test of '+C[1].name+' heading</h3>'
 %>
 <%-h3C%>
+
+<%
+let boxes = `
+<table>
+  <tr>
+    <td>
+      <ul>
+        <li>${plgtest[0].cache[0].name}</li>
+        <li>${plgtest[0].cache[1].name}</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>${plgtest[1].entity[0].name}</li>
+        <li>${plgtest[1].entity[1].name}</li>
+        <li>${plgtest[1].entity[2].name}</li>
+        <li>${plgtest[1].entity[3].name}</li>
+        <li>${plgtest[1].entity[4].name}</li>
+        <li>${plgtest[1].entity[5].name}</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>${plgtest[2].gateway[0].name}</li>
+        <li>${plgtest[2].gateway[1].name}</li>
+        <li>${plgtest[2].gateway[2].name}</li>
+        <li>${plgtest[2].gateway[3].name}</li>
+        <li>${plgtest[2].gateway[4].name}</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <ul>
+        <li>${plgtest[3].msg[0].name}</li>
+        <li>${plgtest[3].msg[1].name}</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+`
+%>
+<%-boxes%>
+
 
 ## <%=cols[0].label%>
 
