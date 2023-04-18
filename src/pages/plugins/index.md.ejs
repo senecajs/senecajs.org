@@ -20,8 +20,6 @@ Some plugins are maintained in-house, while others are provided by the community
 On this page, we provide an `npm` link and total downloads per month for any plugins
 we find or publish ourselves, so you only need to look in one place.
 
-## <%=cols[0].label%>
-
 <%
 let plugins = {
   plugingroup: [
@@ -66,7 +64,24 @@ let plgtest = {
 }
 %>
 
+<%
+let h3 = '<h3>Test of h3 heading</h3>'
+%>
+<%-h3%>
 
+<%
+let B = 'nested var'
+let h3B = '<h3>Test of '+B+' heading</h3>'
+%>
+<%-h3B%>
+
+<%
+let C = [{name:'alpha'},{name:'beta'},{name:'charlie'}]
+let h3C = '<h3>Test of '+C[1].name+' heading</h3>'
+%>
+<%-h3C%>
+
+## <%=cols[0].label%>
 
 - cache
   - S! cache-test
