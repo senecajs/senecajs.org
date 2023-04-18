@@ -22,6 +22,52 @@ we find or publish ourselves, so you only need to look in one place.
 
 ## <%=cols[0].label%>
 
+<%
+let plugins = {
+  plugingroup: [
+    {
+      name: 'plugin',
+      github: 'https//:github.com/orgname/reponame',
+      host: 'senecajs/voxgig',
+      badges: {
+        badge1: 'infomation',
+        badge2: 'information',
+      },
+      additional: 'info',
+      duplicate: false
+    },
+    // etc
+  ],
+  plugingroup2: [{}],
+  plugingroup3: [{}],
+  // etc
+}
+
+let plgtest = {
+  cache: [
+    {name: 'cache'},
+    {name: 'cache-test'}],
+  entity: [
+    {name: 'entity'},
+    {name: 'entity-cache'},
+    {name: 'entity-depend'},
+    {name: 'entity-history'},
+    {name: 'entity-rtag'},
+    {name: 'entity-util'},],
+  gateway: [
+    {name: 'gateway'},
+    {name: 'gateway-auth'},
+    {name: 'gateway-express-auth'},
+    {name: 'gateway-express'},
+    {name: 'gateway-lambda'},],
+  msg: [
+    {name: 'msg-run'},
+    {name: 'msg-test'},],
+}
+%>
+
+
+
 - cache
   - S! cache-test
   - S! cache
