@@ -3,13 +3,8 @@ layout: content.html
 ---
 
 <%
-let cols = [
-{ label: 'col2'},
-{ label: 'col3'},
-{ label: 'col2&4'},
-{ label: 'crosscolumn'},
-{ label: 'copy voxgig/senecajs'},
-]
+const require = this.process.mainModule.require
+const fs = require('fs')
 %>
 
 # Plugins
@@ -21,109 +16,21 @@ On this page, we provide an `npm` link and total downloads per month for any plu
 we find or publish ourselves, so you only need to look in one place.
 
 <%
-let plugins = {
-  plugingroup: [
-    {
-      name: 'plugin',
-      github: 'https//:github.com/orgname/reponame',
-      host: 'senecajs/voxgig',
-      badges: {
-        badge1: 'infomation',
-        badge2: 'information',
-      },
-      additional: 'info',
-      duplicate: false
-    },
-    // etc
-  ],
-  plugingroup2: [{}],
-  plugingroup3: [{}],
-  // etc
-}
-
-let plgtest = [
-  {cache: [
-    {name: 'cache'},
-    {name: 'cache-test'}]},
-  {entity: [
-    {name: 'entity'},
-    {name: 'entity-cache'},
-    {name: 'entity-depend'},
-    {name: 'entity-history'},
-    {name: 'entity-rtag'},
-    {name: 'entity-util'},]},
-  {gateway: [
-    {name: 'gateway'},
-    {name: 'gateway-auth'},
-    {name: 'gateway-express-auth'},
-    {name: 'gateway-express'},
-    {name: 'gateway-lambda'},]},
-  {msg: [
-    {name: 'msg-run'},
-    {name: 'msg-test'},]},
-]
+let testFile = JSON.parse(fs.readFileSync('./assets/files/plugins.json', 'utf8'))
 %>
-
 <%
-let h3 = '<h3>Test of h3 heading</h3>'
+testFile.forEach(function (group) {
+  let ht = '<h3>'+Object.keys(group)+'</h3>'
 %>
-<!-- <%-h3%> -->
-
+<%-ht%>
 <%
-let B = 'nested var'
-let h3B = '<h3>Test of '+B+' heading</h3>'
+  let plugins = Object.values(group)[0]
+  plugins.forEach(function (plugin) {
+    let htm = '<h4>'+plugin.title+'</h4>'
 %>
-<!-- <%-h3B%> -->
-
-<%
-let C = [{name:'alpha'},{name:'beta'},{name:'charlie'}]
-let h3C = '<h3>Test of '+C[1].name+' heading</h3>'
-%>
-<!-- <%-h3C%> -->
-
-<%
-let boxes = `
-<table>
-  <tr>
-    <td>
-      <ul>
-        <li>${plgtest[0].cache[0].name}</li>
-        <li>${plgtest[0].cache[1].name}</li>
-      </ul>
-    </td>
-    <td>
-      <ul>
-        <li>${plgtest[1].entity[0].name}</li>
-        <li>${plgtest[1].entity[1].name}</li>
-        <li>${plgtest[1].entity[2].name}</li>
-        <li>${plgtest[1].entity[3].name}</li>
-        <li>${plgtest[1].entity[4].name}</li>
-        <li>${plgtest[1].entity[5].name}</li>
-      </ul>
-    </td>
-    <td>
-      <ul>
-        <li>${plgtest[2].gateway[0].name}</li>
-        <li>${plgtest[2].gateway[1].name}</li>
-        <li>${plgtest[2].gateway[2].name}</li>
-        <li>${plgtest[2].gateway[3].name}</li>
-        <li>${plgtest[2].gateway[4].name}</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <ul>
-        <li>${plgtest[3].msg[0].name}</li>
-        <li>${plgtest[3].msg[1].name}</li>
-      </ul>
-    </td>
-  </tr>
-</table>
-`
-%>
-<!-- <%-boxes%> -->
-
+<%-htm%>
+<% })%>
+<%})%>
 
 ## Core plugins
 
