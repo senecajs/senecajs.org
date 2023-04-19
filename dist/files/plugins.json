@@ -1,0 +1,40 @@
+{
+  "plugins": [
+    {
+      "cache": [
+        {
+          "title": "cache",
+          "github_link": "https",
+          "npm_version": "v2.3.0",
+          "downloads": "1.2k",
+          "desc": "This is a plugin"
+        },
+        {
+          "title": "cache-test",
+          "github_link": "https",
+          "npm_version": "v2.3.0",
+          "downloads": "1.2k",
+          "desc": "This is a plugin"
+        }
+      ]
+    },
+    {
+      "entity": [
+        {
+          "title": "entity",
+          "github_link": "https",
+          "npm_version": "v2.3.0",
+          "downloads": "1.2k",
+          "desc": "This is a plugin"
+        },
+        {
+          "title": "entity-depend",
+          "github_link": "https",
+          "npm_version": "v2.3.0",
+          "downloads": "1.2k",
+          "desc": "This is a plugin"
+        }
+      ]
+    }
+  ]
+}
