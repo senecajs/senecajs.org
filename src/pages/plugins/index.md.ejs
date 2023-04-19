@@ -67,19 +67,19 @@ let plgtest = [
 <%
 let h3 = '<h3>Test of h3 heading</h3>'
 %>
-<%-h3%>
+<!-- <%-h3%> -->
 
 <%
 let B = 'nested var'
 let h3B = '<h3>Test of '+B+' heading</h3>'
 %>
-<%-h3B%>
+<!-- <%-h3B%> -->
 
 <%
 let C = [{name:'alpha'},{name:'beta'},{name:'charlie'}]
 let h3C = '<h3>Test of '+C[1].name+' heading</h3>'
 %>
-<%-h3C%>
+<!-- <%-h3C%> -->
 
 <%
 let boxes = `
@@ -122,204 +122,7 @@ let boxes = `
 </table>
 `
 %>
-<%-boxes%>
-
-
-## <%=cols[0].label%>
-
-- cache
-  - S! cache-test
-  - S! cache
-
-
-- entity
-  - S entity
-  - S entity-cache
-  - S entity-depend
-  - S entity-history
-  - V entity-rtag
-  - V! entity-util
-
-
-- gateway
-  - S gateway
-  - S gateway-auth
-  - S! gateway-express-auth
-  - S! gateway-express
-  - S gateway-lambda
-
-
-- msg
-  - V msg-run
-  - V! msg-test
-
-
-- redis
-  - S redis-cache
-  - S! redis-pubsub-transport
-  - S! redis-queue-transport
-  - S! redis-store
-  - V redis-kv
-
-
-- search
-  - S search-aws-cloudsearch
-  - S search-elastic
-  - S search-mini
-  - S! search-test
-
-
-- telemetry
-  - S! telemetry
-  - S! telemetry-datadog
-  - S! telemetry-newrelic
-
-
-- transport
-  - S! transport
-  - S! transport-test
-
-
-- user
-  - S user
-  - V! user-telemetry
-
-
-- web
-  - S web
-  - S! web-adapter-connect
-  - S! web-adapter-express
-  - S! web-adapter-hapi
-  - S! web-adapter-koa1
-  - S! web-adapter-koa2
-
-## <%=cols[1].label%>
-
-- web-adapter
-  - S! web-adapter-connect
-  - S! web-adapter-express
-  - S! web-adapter-hapi
-  - S! web-adapter-koa1
-  - S! web-adapter-koa2
-
-
-- cache
-  - S! entity-cache
-  - S! memcached-cache
-  - S! redis-cache
-
-
-- gateway-express
-  - S! gateway-express
-  - S! gateway-express-auth
-
-
-- logger
-  - S logentries-logger
-  - S logstash-logger
-  - S pino-logger
-
-
-- provider
-  - S apimatic-provider
-  - S branchio-provider
-  - S checklyhq-provider
-  - S eventbrite-provider
-  - S evervault-provider
-  - S gcal-provider
-  - S github-provider
-  - S gitlab-provider
-  - S hubspot-provider
-  - S meetup-provider
-  - S mixpanel-provider
-  - S nordigen-provider
-  - S notion-provider
-  - S orbit-provider
-  - S salesforce-provider
-  - S stych-provider
-  - S tangocard-provider
-  - S trello-provider
-  - S vercel-provider
-  - S webflow-provider
-
-
-- store
-  - S dynamo-store
-  - S jsonfile-store
-  - S knex-store
-  - S level-store
-  - S mem-store
-  - S mongo-store
-  - S mysql-store
-  - S postgres-store
-  - S! redis-store
-  - S s3-store
-  - S sqlite-store
-
-
-- test
-  - S! cache-test
-  - S! error-test
-  - S! search-test
-  - S! store-test
-  - S! transport-test
-  - V! msg-test
-
-
-- transport
-  - S! amqp-transport
-  - S! beanstalk-transport
-  - S! sns-transport
-
-
-- util
-  - S sql-util
-  - V! entity-util
-
-## <%=cols[2].label%>
-
-- redis-x-transport
-  - S! redis-pubsub-transport
-  - S! redis-queue-transport
-
-## <%=cols[3].label%>
-
-- cache
-  - S! cache
-  - S! cache-test
-  - S! entity-cache
-  - S! memcached-cache
-  - S! redis-cache
-
-
-- transport
-  - S! transport
-  - S! transport-test
-  - S! amqp-transport
-  - S! beanstalk-transport
-  - S! sns-transport
-
-
-- test
-  - S test-plugin
-  - S! cache-test
-  - S! error-test
-  - S! search-test
-  - S! store-test
-  - S! transport-test
-  - V! msg-test
-
-
-- telemetry
-  - S! telemetry
-  - S! telemetry-datadog
-  - S! telemetry-newrelic
-  - V! user-telemrtry
-
-## <%=cols[4].label%>
-
-- seneca-allow (last commit 2018/last commit 2022)
-- seneca-kv (last commit 2018/empty init 2021)
+<!-- <%-boxes%> -->
 
 
 ## Core plugins
