@@ -15,22 +15,26 @@ Some plugins are maintained in-house, while others are provided by the community
 On this page, we provide an `npm` link and total downloads per month for any plugins
 we find or publish ourselves, so you only need to look in one place.
 
-<%
+<!-- <%
 let testFile = JSON.parse(fs.readFileSync('./assets/files/plugins.json', 'utf8'))
 %>
 <%
 testFile.forEach(function (group) {
-  let ht = '<h3>'+Object.keys(group)+'</h3>'
-%>
-<%-ht%>
-<%
   let plugins = Object.values(group)[0]
   plugins.forEach(function (plugin) {
-    let htm = '<h4>'+plugin.title+'</h4>'
 %>
-<%-htm%>
+### [<%=plugin.title%>](<%=plugin.title%>)
+
+[![version][p-npm-version]][p-npm-url]
+[![downloads][p-npm-downloads]][p-npm-url]
+
+[p-npm-version]: <%=plugin.npm_version%>
+[p-npm-downloads]: <%=plugin.downloads%>
+[p-npm-url]: <%=plugin.npm_link%>
+
+<%=plugin.desc%>
 <% })%>
-<%})%>
+<%})%> -->
 
 ## Core plugins
 
