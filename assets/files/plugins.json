@@ -3,17 +3,19 @@
     "gateway": [
       {
         "title": "gateway-lambda",
-        "github_link": "https",
-        "npm_version": "v2.3.0",
-        "downloads": "1.2k",
-        "desc": "This is a plugin"
+        "github_link": "https://github.com/senecajs/seneca-gateway-lambda/",
+        "npm_link": "https://www.npmjs.com/package/@seneca/gateway-lambda",
+        "npm_version": "https://img.shields.io/npm/v/seneca-gateway-lambda.svg?style=flat-square",
+        "downloads": "https://img.shields.io/npm/dm/seneca-gateway-lambda.svg?style=flat-square",
+        "desc": "Handle incoming messages within other frameworks."
       },
       {
         "title": "gateway-auth",
-        "github_link": "https",
-        "npm_version": "v2.3.0",
-        "downloads": "1.2k",
-        "desc": "This is a plugin"
+        "github_link": "https://github.com/senecajs/seneca-gateway-auth/",
+        "npm_link": "https://www.npmjs.com/package/@seneca/gateway-auth",
+        "npm_version": "https://img.shields.io/npm/v/seneca-gateway-auth.svg?style=flat-square",
+        "downloads": "https://img.shields.io/npm/dm/seneca-gateway-auth.svg?style=flat-square",
+        "desc": "Handle incoming messages within other frameworks."
       }
     ]
   },
@@ -21,17 +23,19 @@
     "entity": [
       {
         "title": "entity-cache",
-        "github_link": "https",
-        "npm_version": "v2.3.0",
-        "downloads": "1.2k",
-        "desc": "This is a plugin"
+        "github_link": "https://github.com/senecajs/seneca-entity-cache/",
+        "npm_link": "https://www.npmjs.com/package/@seneca/entity-cache",
+        "npm_version": "https://img.shields.io/npm/v/seneca-entity-cache.svg?style=flat-square",
+        "downloads": "https://img.shields.io/npm/dm/seneca-entity-cache.svg?style=flat-square",
+        "desc": "Seneca plugin providing simple id-based distributed entity caching."
       },
       {
         "title": "entity-depend",
-        "github_link": "https",
-        "npm_version": "v2.3.0",
-        "downloads": "1.2k",
-        "desc": "This is a plugin"
+        "github_link": "https://github.com/senecajs/seneca-entity-depend/",
+        "npm_link": "https://www.npmjs.com/package/@seneca/entity-depend",
+        "npm_version": "https://img.shields.io/npm/v/seneca-entity-depend.svg?style=flat-square",
+        "downloads": "https://img.shields.io/npm/dm/seneca-entity-depend.svg?style=flat-square",
+        "desc": "Handle dependency relationships on entity verison"
       }
     ]
   }
