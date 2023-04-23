@@ -2,6 +2,125 @@
 layout: content.html
 ---
 
+<%
+// TODO: put badges into badge object to iterate over
+// Badges are all seneca-gateway temporarily
+let plugins = [
+  {
+    gateway: [
+      {
+        title: 'gateway-lambda',
+        desc: 'Handle incoming messages within other frameworks.',
+        github_link: 'https://github.com/senecajs/seneca-gateway-lambda/',
+        npm_link: 'https://www.npmjs.com/package/@seneca/gateway-lambda',
+        npm_badge: 'https://img.shields.io/npm/v/@seneca/gateway.svg',
+        build_link:
+          'https://github.com/senecajs/seneca-gateway/actions/workflows/build.yml',
+        build_badge:
+          'https://github.com/senecajs/seneca-gateway/actions/workflows/build.yml/badge.svg',
+        coverage_link:
+          'https://coveralls.io/github/senecajs/seneca-gateway?branch=main',
+        coverage_badge:
+          'https://coveralls.io/repos/github/senecajs/seneca-gateway/badge.svg?branch=main',
+        vul_link: 'https://snyk.io/test/github/senecajs/seneca-gateway',
+        vul_badge:
+          'https://snyk.io/test/github/senecajs/seneca-gateway/badge.svg',
+        deepscan_link:
+          'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
+        deepscan_badge:
+          'https://deepscan.io/api/teams/5016/projects/19453/branches/505563/badge/grade.svg',
+        maintain_link:
+          'https://codeclimate.com/github/senecajs/seneca-gateway/maintainability',
+        maintain_badge:
+          'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
+      },
+      {
+        title: 'gateway-auth',
+        desc: 'Handle incoming messages within other frameworks.',
+        github_link: 'https://github.com/senecajs/seneca-gateway-auth/',
+        npm_link: 'https://www.npmjs.com/package/@seneca/gateway-auth',
+        npm_badge: 'https://img.shields.io/npm/v/@seneca/gateway.svg',
+        build_link:
+          'https://github.com/senecajs/seneca-gateway/actions/workflows/build.yml',
+        build_badge:
+          'https://github.com/senecajs/seneca-gateway/actions/workflows/build.yml/badge.svg',
+        coverage_link:
+          'https://coveralls.io/github/senecajs/seneca-gateway?branch=main',
+        coverage_badge:
+          'https://coveralls.io/repos/github/senecajs/seneca-gateway/badge.svg?branch=main',
+        vul_link: 'https://snyk.io/test/github/senecajs/seneca-gateway',
+        vul_badge:
+          'https://snyk.io/test/github/senecajs/seneca-gateway/badge.svg',
+        deepscan_link:
+          'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
+        deepscan_badge:
+          'https://deepscan.io/api/teams/5016/projects/19453/branches/505563/badge/grade.svg',
+        maintain_link:
+          'https://codeclimate.com/github/senecajs/seneca-gateway/maintainability',
+        maintain_badge:
+          'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
+      },
+    ],
+  },
+  {
+    entity: [
+      {
+        title: 'entity-cache',
+        desc: 'Seneca plugin providing simple id-based distributed entity caching.',
+        github_link: 'https://github.com/senecajs/seneca-entity-cache/',
+        npm_link: 'https://www.npmjs.com/package/@seneca/entity-cache',
+        npm_badge: 'https://img.shields.io/npm/v/@seneca/gateway.svg',
+        build_link:
+          'https://github.com/senecajs/seneca-gateway/actions/workflows/build.yml',
+        build_badge:
+          'https://github.com/senecajs/seneca-gateway/actions/workflows/build.yml/badge.svg',
+        coverage_link:
+          'https://coveralls.io/github/senecajs/seneca-gateway?branch=main',
+        coverage_badge:
+          'https://coveralls.io/repos/github/senecajs/seneca-gateway/badge.svg?branch=main',
+        vul_link: 'https://snyk.io/test/github/senecajs/seneca-gateway',
+        vul_badge:
+          'https://snyk.io/test/github/senecajs/seneca-gateway/badge.svg',
+        deepscan_link:
+          'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
+        deepscan_badge:
+          'https://deepscan.io/api/teams/5016/projects/19453/branches/505563/badge/grade.svg',
+        maintain_link:
+          'https://codeclimate.com/github/senecajs/seneca-gateway/maintainability',
+        maintain_badge:
+          'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
+      },
+      {
+        title: 'entity-depend',
+        desc: 'Handle dependency relationships on entity verison',
+        github_link: 'https://github.com/senecajs/seneca-entity-depend/',
+        npm_link: 'https://www.npmjs.com/package/@seneca/entity-depend',
+        npm_badge: 'https://img.shields.io/npm/v/@seneca/gateway.svg',
+        build_link:
+          'https://github.com/senecajs/seneca-gateway/actions/workflows/build.yml',
+        build_badge:
+          'https://github.com/senecajs/seneca-gateway/actions/workflows/build.yml/badge.svg',
+        coverage_link:
+          'https://coveralls.io/github/senecajs/seneca-gateway?branch=main',
+        coverage_badge:
+          'https://coveralls.io/repos/github/senecajs/seneca-gateway/badge.svg?branch=main',
+        vul_link: 'https://snyk.io/test/github/senecajs/seneca-gateway',
+        vul_badge:
+          'https://snyk.io/test/github/senecajs/seneca-gateway/badge.svg',
+        deepscan_link:
+          'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
+        deepscan_badge:
+          'https://deepscan.io/api/teams/5016/projects/19453/branches/505563/badge/grade.svg',
+        maintain_link:
+          'https://codeclimate.com/github/senecajs/seneca-gateway/maintainability',
+        maintain_badge:
+          'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
+      },
+    ],
+  },
+]
+%>
+
 # Plugins
 
 _Seneca_ plugins enable you to build awesome microservices, incredibly fast.
@@ -9,6 +128,25 @@ Some plugins are maintained in-house, while others are provided by the community
 
 On this page, we provide an `npm` link and total downloads per month for any plugins
 we find or publish ourselves, so you only need to look in one place.
+
+<%
+plugins.forEach(function (group) {
+  let plugins = Object.values(group)[0]
+  plugins.forEach(function (plugin) {
+%>
+### [<%=plugin.title%>](<%=plugin.title%>)
+<!--for/forEach on the badge object-->
+
+[![npm](<%=plugin.npm_badge%>)](<%=plugin.npm_link%>)
+[![build](<%=plugin.build_badge%>)](<%=plugin.build_link%>)
+[![Coverage Status](<%=plugin.coverage_badge%>)](<%=plugin.coverage_link%>)
+[![Known Vulnerabilities](<%=plugin.vul_badge%>)](<%=plugin.vul_link%>)
+[![DeepScan Grade](<%=plugin.deepscan_badge%>)](<%=plugin.deepscan_link%>)
+[![Maintainability](<%=plugin.maintain_badge%>)](<%=plugin.maintain_link%>)
+
+<%=plugin.desc%>
+<% })%>
+<%})%>
 
 ## Core plugins
 
