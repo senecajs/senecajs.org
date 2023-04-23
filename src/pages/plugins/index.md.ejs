@@ -6,7 +6,7 @@ layout: content.html
 // Plugin data
 // TODO: put badges into badge object to iterate over
 // Badges are all seneca-gateway temporarily
-let plugins = [
+let pluginsByGroup = [
   {
     gateway: [
       {
@@ -135,6 +135,29 @@ On this page, we provide an `npm` link and total downloads per month for any plu
 we find or publish ourselves, so you only need to look in one place.
 
 <!-- Plugin navigation -->
+<table>
+<%for (let g = 0; g < pluginsByGroup.length; g++) {
+  if (0 == g%4) {%>
+    <tr>
+  <%}%>
+  <td>
+  <%let groupName = pluginsByGroup[g]
+  let plugins = Object.values(groupName)[0]%>
+  <ul>
+  <%plugins.forEach(function (plugin) {
+  %>
+    <li>${plugin.title}</li>
+  <% })%>
+  </ul>
+  </td>
+  <%if (0 == g%4) {%>
+    <tr>
+  <%}%>
+<%}%>
+</table>
+
+
+
 <!-- <%
 let C = [{name:'alpha'},{name:'beta'},{name:'charlie'}]
 let h3C = `
@@ -146,7 +169,7 @@ let h3C = `
 
 <!-- Plugin information blocks -->
 <%
-plugins.forEach(function (group) {
+pluginsByGroup.forEach(function (group) {
   let plugins = Object.values(group)[0]
   plugins.forEach(function (plugin) {
 %>
