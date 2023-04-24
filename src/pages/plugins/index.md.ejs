@@ -157,7 +157,7 @@ for (let g = 0; g < pluginsByGroup.length; g++) {
 }
 pluginNav += '</table>'
 %>
-<%-pluginNav%>
+<!-- <%-pluginNav%> -->
 
 
 <!-- Plugin information blocks -->
@@ -166,17 +166,17 @@ pluginsByGroup.forEach(function (group) {
   let plugins = Object.values(group)[0]
   plugins.forEach(function (plugin) {
 %>
-### [<%=plugin.title%>](<%=plugin.npm_link%>)
+<!-- ### [<%=plugin.title%>](<%=plugin.npm_link%>) -->
 <!-- for/forEach on the badge object -->
 
-[![npm](<%=plugin.npm_badge%>)](<%=plugin.npm_link%>)
-[![build](<%=plugin.build_badge%>)](<%=plugin.build_link%>)
-[![Coverage Status](<%=plugin.coverage_badge%>)](<%=plugin.coverage_link%>)
-[![Known Vulnerabilities](<%=plugin.vul_badge%>)](<%=plugin.vul_link%>)
-[![DeepScan Grade](<%=plugin.deepscan_badge%>)](<%=plugin.deepscan_link%>)
-[![Maintainability](<%=plugin.maintain_badge%>)](<%=plugin.maintain_link%>)
+<!-- [![npm](<%=plugin.npm_badge%>)](<%=plugin.npm_link%>) -->
+<!-- [![build](<%=plugin.build_badge%>)](<%=plugin.build_link%>) -->
+<!-- [![Coverage Status](<%=plugin.coverage_badge%>)](<%=plugin.coverage_link%>) -->
+<!-- [![Known Vulnerabilities](<%=plugin.vul_badge%>)](<%=plugin.vul_link%>) -->
+<!-- [![DeepScan Grade](<%=plugin.deepscan_badge%>)](<%=plugin.deepscan_link%>) -->
+<!-- [![Maintainability](<%=plugin.maintain_badge%>)](<%=plugin.maintain_link%>) -->
 
-<%=plugin.desc%>
+<!-- <%=plugin.desc%> -->
 <% })%>
 <%})%>
 
