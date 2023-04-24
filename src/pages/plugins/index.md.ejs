@@ -136,17 +136,18 @@ we find or publish ourselves, so you only need to look in one place.
 
 <!-- Plugin navigation -->
 <%
-let pluginNav = '<table>'
+let pluginNav = '<table style="table-layout:fixed;width:100%">'
 for (let g = 0; g < pluginsByGroup.length; g++) {
   if (0 == g%4) {
     pluginNav += '<tr>'
   }
-  pluginNav += '<td>'
+  pluginNav += '<td style="background-color:#f0f0f0">'
   let groupName = pluginsByGroup[g]
   let plugins = Object.values(groupName)[0]
-  pluginNav += '<ul>'
+  // Should use plugin.title or plugin.name for fragment links?
+  pluginNav += '<h4><a href="./#'+plugins[0].title+'">'+Object.keys(groupName)[0]+'</a></h4><ul>'
   plugins.forEach(function (plugin) {
-    pluginNav += '<li>'+plugin.title+'</li>'
+    pluginNav += '<li><a href="./#'+plugin.title+'">'+plugin.title+'</a></li>'
   })
   pluginNav += '</ul>'
   pluginNav += '</td>'
