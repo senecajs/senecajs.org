@@ -68,7 +68,24 @@ pluginNav += '</table>'
 %>
 <%-pluginNav%>
 
+<!-- Plugin information blocks -->
+<%
+Object.keys(pluginGroupMap).forEach(function (group) {
+  Object.keys(pluginGroupMap[group]).forEach(function (pluginName) {
+    let plugin = pluginGroupMap[group][pluginName]
+%>
+### [<%=plugin.title%>](<%=plugin.npm_link%>)
 
+[![npm](https://img.shields.io/npm/v/<%=plugin.name%>.svg)](https://www.npmjs.com/package/<%=plugin.name%>)
+[![Build](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml/badge.svg)](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml)
+[![Coverage Status](https://coveralls.io/repos/github/<%=plugin.org_repo%>/badge.svg?branch=master)](https://coveralls.io/github/<%=plugin.org_repo%>?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/<%=plugin.org_repo%>/badge.svg)](https://snyk.io/test/github/<%=plugin.org_repo%>)
+[![DeepScan Grade](<%=plugin.deepscan_badge%>)](<%=plugin.deepscan_url%>)
+[![Maintainability](<%=plugin.maintainability_badge%>)](https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability)
+
+<%=plugin.desc%>
+<% })%>
+<%})%>
 
 
 
