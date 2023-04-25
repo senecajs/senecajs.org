@@ -43,6 +43,36 @@ let pluginGroupMap = {
 }
 %>
 
+<!-- Plugin navigation -->
+<%
+let pluginNav = '<table style="table-layout:fixed;width:100%;margin-top:2%">'
+let g = 0
+Object.keys(pluginGroupMap).forEach(function (group) {
+  if (0 == g%4) {
+    pluginNav += '<tr>'
+  }
+  pluginNav += '<td style="background-color:#f0f0f0">'
+  pluginNav += '<h4><a href="./#'+group+'">'+group+'</a></h4><ul>'
+  Object.keys(pluginGroupMap[group]).forEach(function (pluginName) {
+    let plugin = pluginGroupMap[group][pluginName]
+    pluginNav += '<li><a href="./#'+Object.keys(plugin).title+'">'+plugin.title+'</a></li>'
+  })
+  pluginNav += '</ul>'
+  pluginNav += '</td>'
+  if (2 == g%2 || Object.keys(pluginGroupMap).length-1 == g) {
+    pluginNav += '</tr>'
+  }
+  g++
+})
+pluginNav += '</table>'
+%>
+<%-pluginNav%>
+
+
+
+
+
+
 # Plugins
 
 _Seneca_ plugins enable you to build awesome microservices, incredibly fast.
