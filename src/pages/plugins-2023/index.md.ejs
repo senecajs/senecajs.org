@@ -1,0 +1,288 @@
+---
+layout: content.html
+---
+
+<%
+const pluginGroupMap = {
+  gateway: {
+    '@seneca/gateway-lambda': {
+      title: 'gateway-lambda',
+      org_repo: 'senecajs/seneca-gateway-lambda',
+	    desc: 'Handle incoming messages within other frameworks.',
+      deepscan_url: 'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
+      deepscan_badge: 'https://deepscan.io/api/teams/5016/projects/19453/branches/505563/badge/grade.svg',
+      maintainability_badge: 'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
+    },
+    '@seneca/gateway-auth': {
+      title: 'gateway-auth',
+      org_repo: 'senecajs/seneca-gateway-auth',
+	    desc: 'Handle incoming messages within other frameworks.',
+      deepscan_url: 'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
+      deepscan_badge: 'https://deepscan.io/api/teams/5016/projects/19453/branches/505563/badge/grade.svg',
+      maintainability_badge: 'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
+    },
+  },
+  entity: {
+    '@seneca/entity-cache': {
+      title: 'entity-cache',
+      org_repo: 'senecajs/seneca-entity-cache',
+	    desc: 'Handle incoming messages within other frameworks.',
+      deepscan_url: 'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
+      deepscan_badge: 'https://deepscan.io/api/teams/5016/projects/19453/branches/505563/badge/grade.svg',
+      maintainability_badge: 'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
+    },
+    '@seneca/entity-depend': {
+      title: 'entity-depend',
+      org_repo: 'senecajs/seneca-entity-depend',
+	    desc: 'Handle incoming messages within other frameworks.',
+      deepscan_url: 'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
+      deepscan_badge: 'https://deepscan.io/api/teams/5016/projects/19453/branches/505563/badge/grade.svg',
+      maintainability_badge: 'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
+    },
+  },
+} 
+
+const allPlugins = {
+  cache: {
+    'cache': {},
+    'cache-test': {},
+    'entity-cache': {},
+    'memcached-cache': {},
+    'redis-cache': {},
+  },
+  entity: {
+    'entity': {},
+    'entity-cache': {},
+    'entity-depend': {},
+    'entity-history': {},
+    'entity-rtag': {},
+    'entity-util': {},
+  },
+  gateway: {
+    'gateway': {},
+    'gateway-auth': {},
+    'gateway-express-auth': {},
+    'gateway-express': {},
+    'gateway-lambda': {},
+  },
+  msg: {
+    'msg-run': {},
+    'msg-test': {},
+  },
+  redis: {
+    'redis-cache': {},
+    'redis-pubsub-transport': {},
+    'redis-queue-transport': {},
+    'redis-store': {},
+    'redis-kv': {},
+  },
+  search: {
+    'search-aws-cloudsearch': {},
+    'search-elastic': {},
+    'search-mini': {},
+    'search-test': {},
+  },
+  telemetry: {
+    'telemetry': {},
+    'telemetry-datadog': {},
+    'telemetry-newrelic': {},
+    'user-telemetry': {},
+  },
+  transport: {
+    'transport': {},
+    'transport-test': {},
+    'amqp-transport': {},
+    'beanstalk-transport': {},
+    'sns-transport': {},
+  },
+  user: {
+    'user': {},
+    'user-telemetry': {},
+  },
+  web: {
+    'web': {},
+    'web-adapter-connect': {},
+    'web-adapter-express': {},
+    'web-adapter-hapi': {},
+    'web-adapter-koa1': {},
+    'web-adapter-koa2': {},
+  },
+  'web-adaptor': {
+    'web': {},
+    'web-adapter-connect': {},
+    'web-adapter-express': {},
+    'web-adapter-hapi': {},
+    'web-adapter-koa1': {},
+    'web-adapter-koa2': {},
+  },
+  'gateway-express': {
+    'gateway-express': {},
+    'gatewaty-express-auth': {},
+  },
+  logger: {
+    'logentries-logger': {},
+    'logstash-logger': {},
+    'pino-logger': {},
+  },
+  provider: {
+    'apimatic-provider': {},
+    'branchio-provider': {},
+    'checklyhq-provider': {},
+    'eventbrite-provider': {},
+    'evervault-provider': {},
+    'gcal-provider': {},
+    'github-provider': {},
+    'gitlab-provider': {},
+    'hubspot-provider': {},
+    'meetup-provider': {},
+    'mixpanel-provider': {},
+    'nordigen-provider': {},
+    'notion-provider': {},
+    'orbit-provider': {},
+    'salesforce-provider': {},
+    'stych-provider': {},
+    'tangocard-provider': {},
+    'trello-provider': {},
+    'vercel-provider': {},
+    'webflow-provider': {},
+  },
+  store: {
+    'dynamo-store': {},
+    'jsonfile-store': {},
+    'knex-store': {},
+    'level-store': {},
+    'mem-store': {},
+    'mongo-store': {},
+    'mysql-store': {},
+    'postgres-store': {},
+    'redis-store': {},
+    's3-store': {},
+    'sqlite-store': {},
+  },
+  test: {
+    'cache-test': {},
+    'error-test': {},
+    'search-test': {},
+    'store-test': {},
+    'transport-test': {},
+    'msg-test': {},
+    'test-plugin': {},
+  },
+  util: {
+    'sql-util': {},
+    'entity-util': {},
+  },
+  'redis-transport': {
+    'redis-pubsub-transport': {},
+    'redis-queue-transport': {},
+  },
+  XXX: {
+    flame: {},
+    debug: {},
+    basic: {},
+    ledger: {},
+    maintain: {},
+    request: {},
+    mail: {},
+    'balance-client': {},
+    graph: {},
+    gateway: {},
+    repl: {},
+    refer: {},
+    browser: {},
+    flow: {},
+    vote: {},
+    env: {},
+    allow: {},
+    apikey: {},
+    joi: {},
+    mesh: {},
+    kv: {},
+    'log-filter': {},
+    'consul-registry': {},
+    registry: {},
+    auth: {},
+    parambulator: {},
+    config: {},
+    doc: {},
+    group: {},
+    hapi: {},
+    external: {},
+    populate: {},
+    monitor: {},
+    owner: {},
+    promisify: {},
+    member: {},
+    kv: {},
+    allow: {},
+    'sendgrid-mail': {},
+    'entity-rtag': {},
+    'srv-admin': {},
+    component: {},
+  },
+}
+%>
+
+
+# Plugins
+
+_Seneca_ plugins enable you to build awesome microservices, incredibly fast.
+Some plugins are maintained in-house, while others are provided by the community.
+
+On this page, we provide an `npm` link and total downloads per month for any plugins
+we find or publish ourselves, so you only need to look in one place.
+
+
+<!-- Plugin navigation -->
+<%
+let pluginNav = '<table style="table-layout:fixed;width:100%;margin-top:2%">'
+let g = 0
+Object.keys(pluginGroupMap).forEach(function (group) {
+  if (0 == g%4) {
+    pluginNav += '<tr>'
+  }
+  pluginNav += '<td style="background-color:#f0f0f0">'
+  pluginNav += '<h4><a href="./#'+group+'_plugins">'+group+'</a></h4><ul>'
+  Object.keys(pluginGroupMap[group]).forEach(function (pluginName) {
+    let plugin = pluginGroupMap[group][pluginName]
+    pluginNav += '<li><a href="./#'+plugin.title+'">'+plugin.title+'</a></li>'
+  })
+  pluginNav += '</ul>'
+  pluginNav += '</td>'
+  if (2 == g%2 || Object.keys(pluginGroupMap).length-1 == g) {
+    pluginNav += '</tr>'
+  }
+  g++
+})
+pluginNav += '</table>'
+%>
+<%-pluginNav%>
+
+<!-- Plugin information blocks -->
+<%Object.keys(pluginGroupMap).forEach(function (group) {%>
+## <%=group%>_plugins
+
+Description about **<%=group%> plugins**.
+<%
+  Object.keys(pluginGroupMap[group]).forEach(function (pluginName) {
+    let plugin = pluginGroupMap[group][pluginName]
+%>
+### [<%=plugin.title%>](<%=plugin.npm_link%>)
+
+[![npm](https://img.shields.io/npm/v/<%=plugin.name%>.svg)](https://www.npmjs.com/package/<%=plugin.name%>)
+[![Build](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml/badge.svg)](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml)
+[![Coverage Status](https://coveralls.io/repos/github/<%=plugin.org_repo%>/badge.svg?branch=master)](https://coveralls.io/github/<%=plugin.org_repo%>?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/<%=plugin.org_repo%>/badge.svg)](https://snyk.io/test/github/<%=plugin.org_repo%>)
+[![DeepScan Grade](<%=plugin.deepscan_badge%>)](<%=plugin.deepscan_url%>)
+[![Maintainability](<%=plugin.maintainability_badge%>)](https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability)
+
+<%=plugin.desc%>
+<% })%>
+<%})%>
+
+## Got a plugin to share?
+
+Our docs are open source. Simply fork the [senecajs.org] repository, add your plugin to the appropriate section,
+and send us on a pull request - that way, other people can find your awesome plugin easily.
+
+[senecajs.org]: https://github.com/senecajs/senecajs.org
