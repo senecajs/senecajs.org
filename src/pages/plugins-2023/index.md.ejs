@@ -1491,19 +1491,20 @@ we find or publish ourselves, so you only need to look in one place.
 <%
 let pluginNav = '<table style="table-layout:fixed;width:100%;margin-top:2%">'
 let g = 0
-Object.keys(pluginGroupMap).forEach(function (group) {
+Object.keys(allPlugins).forEach(function (group) {
   if (0 == g%4) {
     pluginNav += '<tr>'
   }
   pluginNav += '<td style="background-color:#f0f0f0">'
   pluginNav += '<h4><a href="./#'+group+'_plugins">'+group+'</a></h4><ul>'
-  Object.keys(pluginGroupMap[group]).forEach(function (pluginName) {
-    let plugin = pluginGroupMap[group][pluginName]
+  Object.keys(allPlugins[group]).forEach(function (pluginName) {
+    if('XdescX' == pluginName) {return}
+    let plugin = allPlugins[group][pluginName]
     pluginNav += '<li><a href="./#'+plugin.title+'">'+plugin.title+'</a></li>'
   })
   pluginNav += '</ul>'
   pluginNav += '</td>'
-  if (2 == g%2 || Object.keys(pluginGroupMap).length-1 == g) {
+  if (2 == g%2 || Object.keys(allPlugins).length-1 == g) {
     pluginNav += '</tr>'
   }
   g++
@@ -1513,13 +1514,14 @@ pluginNav += '</table>'
 <%-pluginNav%>
 
 <!-- Plugin information blocks -->
-<%Object.keys(pluginGroupMap).forEach(function (group) {%>
+<%Object.keys(allPlugins).forEach(function (group) {%>
 ## <%=group%>_plugins
 
 Description about **<%=group%> plugins**.
 <%
-  Object.keys(pluginGroupMap[group]).forEach(function (pluginName) {
-    let plugin = pluginGroupMap[group][pluginName]
+  Object.keys(allPlugins[group]).forEach(function (pluginName) {
+    if('XdescX' == pluginName) {return}
+    let plugin = allPlugins[group][pluginName]
 %>
 ### [<%=plugin.title%>](<%=plugin.npm_link%>)
 
