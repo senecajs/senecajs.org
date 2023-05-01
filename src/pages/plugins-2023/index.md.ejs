@@ -1517,7 +1517,7 @@ pluginNav += '</table>'
 <%Object.keys(allPlugins).forEach(function (group) {%>
 ## <%=group%>_plugins
 
-Description about **<%=group%> plugins**.
+Description about **<%=group%> plugins**. Current description is <%=allPlugins[group].XdescX%>.
 <%
   Object.keys(allPlugins[group]).forEach(function (pluginName) {
     if('XdescX' == pluginName) {return}
