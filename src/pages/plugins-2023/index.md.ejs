@@ -1309,6 +1309,36 @@ Some plugins are maintained in-house, while others are provided by the community
 On this page, we provide an `npm` link and total downloads per month for any plugins
 we find or publish ourselves, so you only need to look in one place.
 
+<!-- Plugin groups -->
+<%Object.keys(allPlugins).forEach(function (group) {%>
+### Group name: <%=group%>
+Group description: <%=allPlugins[group].XdescX%>. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminplogy should be decided between group/family/clan/etc
+
+<%Object.keys(allPlugins[group]).forEach(function (pluginName) {
+  if('XdescX' == pluginName) {return}
+  let plugin = allPlugins[group][pluginName]%>
+- <%=plugin.title%>
+  - <%=plugin.desc%>. This will be a short description taken from the package.json file.
+
+<%  })%>
+<%})%>
+
+<!-- Plugin groups v2 -->
+<%
+let groupNav = '<div>'
+Object.keys(allPlugins).forEach(function (group) {
+  groupNav += '<table><tr style="background-color:#f0f0f0"><td style="background-color:#505050">'
+  groupNav += '<h4>'+group+'</h4><p>'+allPlugins[group].XdescX+' This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminplogy should be decided between group/family/clan/etc.</p></td><td style="background-color:#909090"><dl>'
+  Object.keys(allPlugins[group]).forEach(function (pluginName) {
+    if('XdescX' == pluginName) {return}
+    let plugin = allPlugins[group][pluginName]
+    groupNav += '<dt>'+plugin.title+'</dt><dd>'+plugin.desc+' This will be a short description taken from the package.json file.</dd>'
+  })
+  groupNav += '</dl></td></tr></table>'
+})
+groupNav += '</div>'
+%>
+<%-groupNav%>
 
 <!-- Plugin navigation -->
 <%
