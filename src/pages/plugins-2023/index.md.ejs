@@ -5,7 +5,7 @@ layout: content.html
 <%
 const require = this.process.mainModule.require
 const Fs = require('fs')
-const allPlugins = {}
+let allPlugins = {}
 %>
 
 <% include('../../../assets/data/plugins', {AP:allPlugins}) %>
