@@ -6,7 +6,8 @@
     "metalsmith-ignore": [
       "drafts/*",
       "*~",
-      ".#"
+      ".#",
+      "src/pages/plugins-2023/modules"
     ],
     "metalsmith-assets": {
       "source": "./assets",
@@ -36,10 +37,7 @@
       "default": "content.html"
     },
     "metalsmith-move-up": {
-     "pattern": [
-      "pages/**",
-      "images/favicon.ico"
-    ]
+      "pattern": ["pages/**", "images/favicon.ico"]
     }
   },
   "metalsmith-broken-link-checker": {
