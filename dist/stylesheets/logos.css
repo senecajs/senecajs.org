@@ -1,0 +1,80 @@
+/* 5px */
+/* 10px */
+/* 15px */
+/* 60px */
+/* 16px */
+/* 14px */
+/* 20px */
+/* 36px */
+/* 32px */
+/* 26px */
+/* 20px */
+/* 1200px */
+/* 1024px */
+/*  786px */
+/*  480px */
+/* 1px */
+.logo,
+.logo-company {
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity .5s ease-in;
+}
+
+.logo:hover,
+.logo-company:hover {
+  opacity: .6;
+}
+
+.logo {
+  background-repeat: no-repeat;
+  background-size: contain;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.logo-seneca-inversed {
+  height: 39px;
+  width: 200px;
+}
+
+.logo-seneca {
+  position: relative;
+  top: 5px;
+  height: 100px;
+  background-image: url("/images/logo-seneca.svg");
+}
+
+.logo-seneca-lg {
+  width: 350px;
+  max-width: 100%;
+}
+
+.logo-company {
+  margin: 15px 30px;
+}
+
+@media screen and (max-width: 48em) {
+  .logo.logo-seneca {
+    width: 50px;
+    height: 40px;
+    top: 5px;
+    background-size: cover;
+  }
+}
+
+@media screen and (min-width: 48.0625em) and (max-width: 75em) {
+  .logo.logo-seneca {
+    width: 50px;
+    height: 40px;
+    top: 5px;
+    background-size: cover;
+  }
+}
+
+@media screen and (min-width: 75.0625em) {
+  .logo.logo-seneca {
+    width: 200px;
+  }
+}
