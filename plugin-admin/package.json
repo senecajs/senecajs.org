@@ -60,7 +60,6 @@
     "@seneca/user-telemetry": "^0.4.0",
     "@seneca/vercel-provider": "^0.1.0",
     "@seneca/vote": "^2.1.0",
-    "search-test": "^2.0.0",
     "seneca-amqp-transport": "^2.2.0",
     "seneca-auth": "^1.1.0",
     "seneca-balance-client": "^1.2.0",
