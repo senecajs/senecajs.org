@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,400italic,700">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    
+    <title>Seneca, a microservices toolkit for Node.js</title>  </head>
+  <body>
+    <nav class="nav-main" role="navigation">
+      <div class="container-fluid cf">
+        <a class="logo logo-seneca" href="/" title="Seneca">Seneca</a>
+    
+        <div class="nav-search">
+          <input type="search" id="seneca-search-input" placeholder="Search the docs...">
+        </div>
+        <!-- nav search -->
+    
+        <div class="nav-bar">
+    
+          <input type="checkbox" name="nav-menu-handle" id="nav-menu-handle" class="nav-menu-handle">
+          <label for="nav-menu-handle"></label>
+    
+          <ul class="list-unstyled list-inline nav-items">
+            <li><a href='/api/'>API</a></li>
+            <li><a href='/docs/'>Docs</a></li>
+            <li><a href='/faq/'>FAQ</a></li>
+            <li><a href='/plugins/'>Plugins</a></li>
+            <li><a href='/roadmap/'>Roadmap</a></li>
+            <li><a href='/support/'>Support</a></li>
+          </ul>
+          <!-- nav items -->
+        </div>
+    
+      </div>
+      <!-- container -->
+    </nav>
+    <header role="banner">
+      <div class="container-fluid center-xs">
+        <img src="/images/illustration-top.svg"
+             alt="Design, develop and organize code"
+             title="Design, develop and organize code"
+             height="auto"
+             width="320"
+             class="mt"
+          />
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10 txt-left">
+          <h1 id="getting-started"><a href="#getting-started" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Getting started</h1>
+<p>Welcome to the Seneca <em>Getting started</em> guide! This guide assumes that you are already familiar
+with <a href="https://nodejs.org/en/">Node.js</a> and how to build simple applications with it.</p>
+<h2 id="what-is-seneca"><a href="#what-is-seneca" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>What is Seneca?</h2>
+<p>Seneca lets you build message based microservice systems with ease. You don&#x2019;t need to know where
+the other services are located, how many of them there are, or what they do. Everything external to
+your business logic - such as databases, caches and third-party integrations - is likewise hidden
+behind microservices.</p>
+<p>This decoupling makes your system easy to continuously build and change. It works because Seneca
+has the following three core features:</p>
+<ul>
+<li><strong>Pattern matching</strong>: Instead of fragile service discovery, you just let the world know what sort of messages you care about.</li>
+<li><strong>Transport independence</strong>: You can send messages between services in many ways, all hidden from your business logic.</li>
+<li><strong>Componentisation</strong>: Functionality is expressed as a set of plugins which can be composed together as microservices.</li>
+</ul>
+<p>Messages are JSON objects. They can have any internal structure you like. Messages can be sent via
+HTTP/S, TCP, message queues, publish/subscribe services or any mechanism that moves bits around.
+From your perspective as the writer of a service, you just send messages out into the world. You
+don&#x2019;t need to know which services receive them.</p>
+<p>Then there are the messages you&#x2019;d like to receive. You specify the property patterns that you care
+about, and Seneca (with a little configuration help) makes sure that you get any messages sent by
+other services that match those patterns. The patterns are very simple: just a list of key-value
+pairs that must match the top-level properties of the JSON message.</p>
+<p>This guide will walk you through seneca principles and teach you how to build microservices with it.</p>
+<p>Let&#x2019;s build some microservices!</p>
+<h2 id="patterns"><a href="#patterns" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Patterns</h2>
+<p>Let&#x2019;s start with some code. We will create two microservices, one that will do math operations and
+another that makes use</p>
+<pre><code class="language-js">var seneca = require(&apos;seneca&apos;)()
+
+seneca.add(&apos;role:math,cmd:sum&apos;, (msg, reply) =&gt; {
+  reply(null, {answer: (msg.left + msg.right)})
+})
+
+seneca.act({role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1, right: 2}, function (err, result) {
+  if (err) return console.error(err)
+  console.log(result)
+})</code></pre>
+<p>For the moment, this is all happening in the same process, without network traffic. In-process
+function calls are a type of message transport too!</p>
+<p>The <code>seneca.add</code> method adds a new action pattern to the Seneca instance. It has two parameters:</p>
+<ul>
+<li><code>pattern</code>: the property pattern to match in any JSON messages that the Seneca instance receives.</li>
+<li><code>action</code>: the function to execute when a pattern matches a message.</li>
+</ul>
+<p>The action function has two parameters:</p>
+<ul>
+<li><code>msg</code>: the matching inbound message (provided as a plain object).</li>
+<li><code>respond</code>: a callback function that you use to provide a response to the message.</li>
+</ul>
+<p>The respond function is a callback with the standard <code>error, result</code> signature.</p>
+<p>Let&#x2019;s put this all together again:</p>
+<pre><code class="language-js">seneca.add({role: &apos;math&apos;, cmd: &apos;sum&apos;}, function (msg, respond) {
+  var sum = msg.left + msg.right
+  respond(null, {answer: sum})
+})</code></pre>
+<p>In the sample code, the action computes the sum of two numbers, provided via the <code>left</code> and
+<code>right</code> properties of the message object. Not all messages generate a result, but as this is the
+most common case, Seneca allows you to provide the result via a callback function.</p>
+<p>In summary, the action pattern <code>role:math,cmd:sum</code> acts on this message:</p>
+<pre><code class="language-js">{role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1, right: 2}</code></pre>
+<p>to produce this result:</p>
+<pre><code class="language-js">{answer: 3}</code></pre>
+<p>There is nothing special about the properties <code>role</code> and <code>cmd</code>. They just happen to be the ones you
+are using for pattern matching.</p>
+<p>The <code>seneca.act</code> method submits a message to act on. It has two parameters:</p>
+<ul>
+<li><code>msg</code>: the message object.</li>
+<li><code>response_callback</code>: a function that receives the message response, if any.</li>
+</ul>
+<p>The response callback is a function you provide with the standard <code>error, result</code> signature. If
+there is a problem (say, the message matches no patterns), then the first argument is an
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> object. If everything goes according to plan, the second argument is the result object. In the
+sample code, these arguments are simply printed to the console:</p>
+<pre><code class="language-js">seneca.act({role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1, right: 2}, function (err, result) {
+  if (err) return console.error(err)
+  console.log(result)
+})</code></pre>
+<p>The sample code in the <a href="https://github.com/senecajs/getting-started/blob/master/sum.js">sum.js</a> file shows you how to define and call an action pattern inside
+the same Node.js process. You&#x2019;ll soon see how to split this code over multiple processes.</p>
+<h2 id="how-patterns-work"><a href="#how-patterns-work" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>How patterns work</h2>
+<p>Patterns - as opposed to network addresses or topics - make it much easier to extend and enhance your system. They do this by letting you incrementally add new microservices.</p>
+<p>Let&#x2019;s add to our system the ability to multiply two numbers.</p>
+<p>We want messages that look like this:</p>
+<pre><code class="language-js">{role: &apos;math&apos;, cmd: &apos;product&apos;, left: 3, right: 4}</code></pre>
+<p>to produce results like this:</p>
+<pre><code class="language-js">{answer: 12}</code></pre>
+<p>You can use the <code>role: math, cmd: sum</code> action pattern as a template to define a new
+<code>role: math, cmd: product</code> action:</p>
+<pre><code class="language-js">seneca.add({role: &apos;math&apos;, cmd: &apos;product&apos;}, function (msg, respond) {
+  var product = msg.left * msg.right
+  respond(null, { answer: product })
+})</code></pre>
+<p>And you can call it in exactly the same way:</p>
+<pre><code class="language-js">seneca.act({role: &apos;math&apos;, cmd: &apos;product&apos;, left: 3, right: 4}, console.log)</code></pre>
+<p>Here, you use <code>console.log</code> as a shortcut to print out both the error (if any) and the result.
+Running this code produces:</p>
+<pre><code class="language-js">{answer: 12}</code></pre>
+<p>Putting this all together, you get:</p>
+<pre><code class="language-js">var seneca = require(&apos;seneca&apos;)()
+
+seneca.add({role: &apos;math&apos;, cmd: &apos;sum&apos;}, function (msg, respond) {
+  var sum = msg.left + msg.right
+  respond(null, {answer: sum})
+})
+
+seneca.add({role: &apos;math&apos;, cmd: &apos;product&apos;}, function (msg, respond) {
+  var product = msg.left * msg.right
+  respond(null, { answer: product })
+})
+
+
+seneca.act({role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1, right: 2}, console.log)
+      .act({role: &apos;math&apos;, cmd: &apos;product&apos;, left: 3, right: 4}, console.log)</code></pre>
+<p>In the above code sample, the <code>seneca.act</code> calls are chained together. Seneca provides a chaining API as a
+convenience. Chained calls are executed in order, but not in series, so their results could come
+back in any order.</p>
+<h2 id="extending-functionality-by-adding-patterns"><a href="#extending-functionality-by-adding-patterns" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Extending functionality by adding patterns</h2>
+<p>Patterns make it easy for you to extend your functionality. Instead of adding if statements and complex
+logic, you simply add more patterns.</p>
+<p>Let&#x2019;s extend the addition action by adding the ability to force integer-only arithmetic. To do this, you add a new property, <em>integer:true</em>, to the message object. Then, you provide a new action for messages that have this property:</p>
+<pre><code class="language-js">seneca.add({role: &apos;math&apos;, cmd: &apos;sum&apos;, integer: true}, function (msg, respond) {
+  var sum = Math.floor(msg.left) + Math.floor(msg.right)
+  respond(null, {answer: sum})
+})</code></pre>
+<p>Now, this message</p>
+<pre><code class="language-js">{role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1.5, right: 2.5, integer: true}</code></pre>
+<p>produces this result:</p>
+<pre><code class="language-js">{answer: 3}  // == 1 + 2, as decimals removed</code></pre>
+<p>What happens if you add both patterns to the same system? How does Seneca choose which one to use?
+The more specific pattern always wins. In other words, the pattern with the highest number of matching attributes has precedence.</p>
+<p>Here&#x2019;s some code to illustrate this:</p>
+<pre><code class="language-js">var seneca = require(&apos;seneca&apos;)()
+
+seneca.add({role: &apos;math&apos;, cmd: &apos;sum&apos;}, function (msg, respond) {
+  var sum = msg.left + msg.right
+  respond(null, {answer: sum})
+})
+
+// both these messages match role: math, cmd: sum
+
+
+seneca.act({role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1.5, right: 2.5}, console.log)
+seneca.act({role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1.5, right: 2.5, integer: true}, console.log)
+
+seneca.add({role: &apos;math&apos;, cmd: &apos;sum&apos;, integer: true}, function (msg, respond) {
+  var sum = Math.floor(msg.left) + Math.floor(msg.right)
+  respond(null, { answer: sum })
+})
+
+// this still matches role: math, cmd: sum
+seneca.act({role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1.5, right: 2.5}, console.log)
+
+// BUT this matches role:math,cmd:sum,integer:true
+// because it&apos;s more specific - more properties match
+seneca.act({role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1.5, right: 2.5, integer: true}, console.log)</code></pre>
+<p>And the output it generates is:</p>
+<pre><code class="language-js">2016  ...  INFO  hello  ...
+null { answer: 4 }
+null { answer: 4 }
+null { answer: 4 }
+null { answer: 3 }</code></pre>
+<p>The first two <code>.act</code> calls both match the <code>role: math, cmd: sum</code> action pattern. Next, the code defines the integer-only action pattern <code>role: math, cmd: sum, integer: true</code>. After that, the third call to
+<code>.act</code> goes with the <code>role: math, cmd: sum</code> action, but the fourth goes with <code>role: math, cmd: sum,
+integer: true</code>. This code also demonstrates that you can chain <code>.add</code> and <code>.act</code> calls together.
+This code is available in the <a href="https://github.com/senecajs/getting-started/blob/master/sum-integer.js">sum-integer.js</a> file.</p>
+<p>The ability to easily extend the behavior of your actions by matching more specific kinds of
+messages is an easy way to handle new and changing requirements. This applies both while your project is in
+development and when it is live and needs to adapt. It also has the advantage that you do not need
+to modify existing code. It&#x2019;s much safer to add new code to handle special cases. In a production system, you won&#x2019;t even need to do a re-deploy. Your existing services can stay running as they are. All you need to do is start up your new service.</p>
+<h2 id="using-patterns-for-code-re-use"><a href="#using-patterns-for-code-re-use" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Using patterns for code re-use</h2>
+<p>Action patterns can call other action patterns to do their work. Let&#x2019;s modify our sample
+code to use this approach:</p>
+<pre><code class="language-js">var seneca = require(&apos;seneca&apos;)()
+
+seneca.add(&apos;role: math, cmd: sum&apos;, function (msg, respond) {
+  var sum = msg.left + msg.right
+  respond(null, {answer: sum})
+})
+
+seneca.add(&apos;role: math, cmd: sum, integer: true&apos;, function (msg, respond) {
+  // reuse role:math, cmd:sum
+  this.act({
+    role: &apos;math&apos;,
+    cmd: &apos;sum&apos;,
+    left: Math.floor(msg.left),
+    right: Math.floor(msg.right)
+  }, respond)
+})
+
+// this matches role:math,cmd:sum
+seneca.act(&apos;role: math, cmd: sum, left: 1.5, right: 2.5&apos;,console.log)
+
+// BUT this matches role:math,cmd:sum,integer:true
+seneca.act(&apos;role: math, cmd: sum, left: 1.5, right: 2.5, integer: true&apos;, console.log)</code></pre>
+<p>In this version of the code, the definition of the <code>role: math, cmd: sum, integer: true</code> action pattern uses
+the previously defined <code>role: math, cmd: sum</code> action pattern. However, it first modifies the message to
+convert the <code>left</code> and <code>right</code> properties to integers.</p>
+<p>Inside the action function, the context variable <code>this</code> is a reference to the current Seneca
+instance. This is the proper way to reference Seneca inside actions, as you get the full
+context of the current action call. This makes your logs more informative, among other things.</p>
+<p>This code uses an abbreviated form of JSON to specify the patterns and messages. For example, the
+object literal form</p>
+<pre><code class="language-js">{role: &apos;math&apos;, cmd: &apos;sum&apos;, left: 1.5, right: 2.5}</code></pre>
+<p>becomes:</p>
+<pre><code class="language-js">&apos;role: math, cmd: sum, left: 1.5, right: 2.5&apos;</code></pre>
+<p>This format, <a href="https://github.com/rjrodger/jsonic">jsonic</a>, which you provide as a string literal, is a convenient format for making
+patterns and messages more concise in your code.</p>
+<p>The code for the sample above is available in the <a href="https://github.com/senecajs/getting-started/blob/master/sum-reuse.js">sum-reuse.js</a> file.</p>
+<h2 id="patterns-are-unique"><a href="#patterns-are-unique" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Patterns are unique</h2>
+<p>The action patterns that you define are <strong>unique</strong>. They can trigger only one function. The patterns
+resolve using the following rules:</p>
+<ul>
+<li>More properties win.</li>
+<li>If the patterns have the same number of properties, they are matched in alphabetical order.</li>
+</ul>
+<p>These rules are designed to be simple so that you can run them in your head. It&#x2019;s very
+easy to understand which pattern will trigger which action function.</p>
+<p>Here are some examples:</p>
+<ul>
+<li><code>a:1, b:2</code> wins over <code>a:1</code> as it has more properties.</li>
+<li><code>a:1, b:2</code> wins over <code>a:1, c:3</code> as <code>b</code> comes before <code>c</code> alphabetically.</li>
+<li><code>a:1, b:2, d:4</code> wins over <code>a:1, c:3, d:4</code> as <code>b</code> comes before <code>c</code> alphabetically.</li>
+<li><code>a:1, b:2, c:3</code> wins over <code>a:1, b:2</code> as it has more properties.</li>
+<li><code>a:1, b:2, c:3</code> wins over <code>a:1, c:3</code> as it has more properties.</li>
+</ul>
+<p>To see this in action, run the file <a href="https://github.com/senecajs/getting-started/blob/master/pattern-wins.js">pattern-wins.js</a>. <em>For more details, see the <a href="https://www.npmjs.com/package/patrun">patrun module</a></em>.</p>
+<p>It is sometimes useful to have a way of <em>enhancing the behavior of an action without rewriting it
+fully</em>. For example, you might want to perform custom validation of the message properties,
+capture message statistics, add additional information to action results, or throttle message
+flow rates.</p>
+<p>In the sample code, the addition action expects the <code>left</code> and <code>right</code> properties to be finite
+numbers. Also, it&#x2019;s useful to include the original input arguments in the output for debugging
+purposes. You can add a validation check and debugging information using the following code:</p>
+<pre><code class="language-js">var seneca = require(&apos;seneca&apos;)()
+
+seneca
+  .add(
+    &apos;role:math,cmd:sum&apos;,
+    function (msg, respond) {
+      var sum = msg.left + msg.right
+      respond(null, { answer: sum })
+    })
+
+  // override role:math,cmd:sum with additional functionality
+  .add(
+    &apos;role:math,cmd:sum&apos;,
+    function (msg, respond) {
+
+      // bail out early if there&apos;s a problem
+      if (!Number.isFinite(msg.left) ||
+          !Number.isFinite(msg.right))
+      {
+        return respond(new Error(&quot;Expected left and right to be numbers.&quot;))
+      }
+
+      // call previous action function for role:math,cmd:sum
+      this.prior({
+        role:  &apos;math&apos;,
+        cmd:   &apos;sum&apos;,
+        left:  msg.left,
+        right: msg.right,
+
+      }, function (err, result) {
+        if (err) return respond(err)
+
+        result.info = msg.left+&apos;+&apos;+msg.right
+        respond(null, result)
+      })
+    })
+
+  // enhanced role:math,cmd:sum
+  .act(&apos;role:math,cmd:sum,left:1.5,right:2.5&apos;,
+        console.log // prints { answer: 4, info: &apos;1.5+2.5&apos; }
+     )</code></pre>
+<p>The Seneca instance provided to an action function via the <code>this</code> context variable has a special <code>prior</code> method that calls the previous action definition for the current action pattern.</p>
+<p>The prior function has parameters:</p>
+<ul>
+<li><code>msg</code>: the msg object, which you may have modified.</li>
+<li><code>response_callback</code>: a callback function where you can modify the result.</li>
+</ul>
+<p>The example code shows you how to modify both the inbound message and the outbound result. Modification of either is optional. You may leave the data unchanged and use this mechanism for enhanced logging or auditing.</p>
+<p>The example code also shows good practice for error handling. It uses early returns to exit from the action function as soon as possible. This avoids spurious indentation from <code>if-else</code> statements. The error is provided using an <code>Error</code> object. This ensures stack trace capture and proper handling.</p>
+<p>Errors should only be used for invalid input or internal failures. For example, if you are executing a database query that returns no data, that is <em>not</em> an error; it is just a fact about the database. If the database connection fails, that is an error.</p>
+<p>The code for this example is in the <a href="https://github.com/senecajs/getting-started/blob/master/sum-valid.js">sum-valid.js</a> file.</p>
+<h2 id="organising-patterns-into-plugins"><a href="#organising-patterns-into-plugins" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Organising patterns into plugins</h2>
+<p>A Seneca instance is just a set of action patterns. You can organize action patterns using namespacing conventions, such as <code>role:math</code>. To help with logging and debugging, Seneca supports a minimalist notion of a plugin.</p>
+<p>Likewise, a Seneca plugin is just a set of action patterns. A plugin can have a name, which is used to annotate logging entries. Plugins can be given a set of options to control their behavior. Plugins also provide a mechanism for executing initialization functions in the correct order. For example, you want your database connection to be established before you try to read data from the database.</p>
+<p>A Seneca plugin is a function that has a single parameter <code>options</code>. You pass this plugin definition function to the <code>seneca.use</code> method. Here is the minimal Seneca plugin (it does nothing!):</p>
+<pre><code class="language-js">function minimal_plugin(options) {
+  console.log(options)
+}
+
+require(&apos;seneca&apos;)()
+  .use(minimal_plugin, {foo: &apos;bar&apos;})</code></pre>
+<p>The <code>seneca.use</code> method takes two parameters:</p>
+<ul>
+<li><code>plugin</code>: plugin definition function or plugin name.</li>
+<li><code>options</code>: options object for the plugin.</li>
+</ul>
+<p>The sample code (in file <a href="https://github.com/senecajs/getting-started/blob/master/minimal-plugin.js">minimal-plugin.js</a>) produces the following output:</p>
+<pre><code class="language-js">$ node minimal-plugin.js
+2016 ...    INFO    hello  ...
+{ foo: &apos;bar&apos; }</code></pre>
+<p>Seneca provides detailed logging information when it starts and also when running. Normally, the log level is set to <code>INFO</code> which means you don&#x2019;t see very much. To see all the logs, try this:</p>
+<pre><code class="language-js">$ node minimal-plugin.js --seneca.log.all
+... lots of log lines ...</code></pre>
+<p>You can narrow this down by <a href="http://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/">grepping</a> the log output for log lines relevant to plugin definition:</p>
+<pre><code class="language-js">$ node minimal-plugin.js --seneca.log.all | grep plugin | grep DEFINE
+2016...    3qf7...    DEBUG    plugin    basic           DEFINE    {}
+2016...    3qf7...    DEBUG    plugin    transport       DEFINE    {}
+2016...    3qf7...    DEBUG    plugin    web             DEFINE    {}
+2016...    3qf7...    DEBUG    plugin    mem-store       DEFINE    {}
+2016...    3qf7...    DEBUG    plugin    minimal_plugin  DEFINE    {foo=bar}</code></pre>
+<p>You can see that Seneca loads four <em>built-in</em> plugins by default: <a href="https://www.npmjs.com/package/seneca-basic">basic</a>, <a href="https://www.npmjs.com/package/seneca-transport">transport</a>,<a href="https://www.npmjs.com/package/seneca-web">web</a> and <a href="https://www.npmjs.com/package/seneca-mem-store">mem-store</a>. These provide core functionalities for basic microservices. You can also see that your <code>minimal_plugin</code> is in the list as well, and also shown are the options you provided: <code>{foo=bar}</code>. The name <code>minimal_plugin</code> is obtained from the plugin definition function name, so you should always give your plugin definition function a name.</p>
+<p>Let&#x2019;s give the plugin some action patterns. The <code>this</code> context variable of the plugin definition function is an instance of Seneca that you can use to do this. Here&#x2019;s a <code>math</code> plugin:</p>
+<pre><code class="language-js">function math(options) {
+
+  this.add(&apos;role:math,cmd:sum&apos;, function (msg, respond) {
+    respond(null, { answer: msg.left + msg.right })
+  })
+
+  this.add(&apos;role:math,cmd:product&apos;, function (msg, respond) {
+    respond(null, { answer: msg.left * msg.right })
+  })
+
+}
+
+require(&apos;seneca&apos;)()
+  .use(math)
+  .act(&apos;role:math,cmd:sum,left:1,right:2&apos;, console.log)</code></pre>
+<p>Running this file <a href="https://github.com/senecajs/getting-started/blob/master/math-plugin.js">math-plugin.js</a> generates the following output:</p>
+<pre><code class="language-js">$ node math-plugin.js
+2016...    INFO    hello   ...
+null { answer: 3 }</code></pre>
+<p>Let&#x2019;s look at the logging output relevant to this plugin by grepping for the string &#x201C;math&#x201D;:</p>
+<pre><code class="language-js">$ node math-plugin.js --seneca.log.all | grep math
+2016...    alqs...    DEBUG    delegate  {plugin$={name=math,tag=undefined},ungate$=true,fatal$=true}    29ny56
+2016...    alqs...    DEBUG    register  init     math
+2016...    alqs...    DEBUG    plugin    math     DEFINE    {}
+2016...    alqs...    DEBUG    plugin    math     ADD    qlh13h47d0nu    cmd:sum,role:math    sum
+2016...    alqs...    DEBUG    plugin    math     ADD    10lk4seu3aee    cmd:product,role:math    product
+2016...    alqs...    DEBUG    plugin    math     options    set    {math={}}
+2016...    alqs...    DEBUG    act                -    -    DEFAULT    {init=math,tag=}
+2016...    alqs...    DEBUG    register  ready    math    {}
+2016...    alqs...    DEBUG    register  install  math    {exports=[]:}
+2016...    alqs...    DEBUG    act       math     -    IN    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {role=math,cmd=sum,left=1,right=2}    ENTRY    A;qlh13h47d0nu    -
+2016...    alqs...    DEBUG    act       math     -    OUT    pg7er4ouia1p/u5hfgtpmkeoy    cmd:sum,role:math    {answer=3}    EXIT    A;qlh13h47d0nu    5</code></pre>
+<p>There is detailed logging information on the plugin definition and initialization, but you can mostly ignore this for now. The most interesting lines are the ones showing the addition of action patterns within the <em>math</em> plugin, and then the execution of the <code>role:math,cmd:sum,left:1,right:2</code> action, showing the inbound and outbound messages:</p>
+<pre><code class="language-js">...
+20.. al.. DEBUG plugin math   ADD ql.. cmd:sum,role:math     sum
+20.. al.. DEBUG plugin math   ADD 10.. cmd:product,role:math product
+...
+20.. al.. DEBUG act    math - IN  pg.. cmd:sum,role:math {role=math,cmd=sum,left=1,right=2} ENTRY A;ql.. -
+20.. al.. DEBUG act    math - OUT pg.. cmd:sum,role:math {answer=3} EXIT A;ql.. 5
+...</code></pre>
+<p>With Seneca, you build up your system by defining a set of patterns that correspond to messages. You organize these patterns into plugins to make logging and debugging easier. You then combine one or more plugins into microservices. You&#x2019;ll create a <code>math</code> microservice in the next section.</p>
+<p>Plugins often need to do some initialization work, such as connecting to a database. You don&#x2019;t do this work in the body of the plugin definition function. The definition function is synchronous by design, because all it does is <em>define</em> the plugin. In fact, you should not call <code>seneca.act</code> at all in the plugin definition - call <code>seneca.add</code> only.</p>
+<p>To initialize a plugin, you add a special action pattern: <code>init:&lt;plugin-name&gt;</code>. This action pattern is called in sequence for each plugin. The init function <em>must</em> call its <code>respond</code> callback without errors. If plugin initialization fails, then Seneca exits the Node.js process. You want your microservices to fail fast (and scream loudly) when there&#x2019;s a problem. All plugins must complete initialization before any actions are executed.</p>
+<p>To demonstrate initialization, let&#x2019;s add simplistic custom logging to the <em>math</em> plugin. When the plugin starts, it opens a log file and writes a log of all operations to the file. The file needs to open successfully and be writable. If this fails, the microservice should fail:</p>
+<pre><code class="language-js">var fs = require(&apos;fs&apos;)
+
+function math(options) {
+
+  // the logging function, built by init
+  var log
+
+  // place all the patterns together
+  // this make it easier to see them at a glance
+  this.add(&apos;role:math,cmd:sum&apos;,     sum)
+  this.add(&apos;role:math,cmd:product&apos;, product)
+
+  // this is the special initialization pattern
+  this.add(&apos;init:math&apos;, init)
+
+
+  function init(msg, respond) {
+    // log to a custom file
+    fs.open(options.logfile, &apos;a&apos;, function (err, fd) {
+
+      // cannot open for writing, so fail
+      // this error is fatal to Seneca
+      if (err) return respond(err)
+
+      log = make_log(fd)
+      respond()
+    })
+  }
+
+  function sum(msg, respond) {
+    var out = { answer: msg.left + msg.right }
+    log(&apos;sum &apos;+msg.left+&apos;+&apos;+msg.right+&apos;=&apos;+out.answer+&apos;\n&apos;)
+    respond(null, out)
+  }
+
+  function product(msg, respond) {
+    var out = { answer: msg.left * msg.right }
+    log(&apos;product &apos;+msg.left+&apos;*&apos;+msg.right+&apos;=&apos;+out.answer+&apos;\n&apos;)
+    respond(null, out)
+  }
+
+
+  function make_log(fd) {
+    return function (entry) {
+      fs.write(fd, new Date().toISOString()+&apos; &apos;+entry, null, &apos;utf8&apos;, function (err) {
+        if (err) return console.log(err)
+
+        // ensure log entry is flushed
+        fs.fsync(fd, function (err) {
+          if (err) return console.log(err)
+        })
+      })
+    }
+  }
+}
+
+require(&apos;seneca&apos;)()
+  .use(math, {logfile:&apos;./math.log&apos;})
+  .act(&apos;role:math,cmd:sum,left:1,right:2&apos;, console.log)</code></pre>
+<p>In this plugin code, the patterns are organized at the top of the plugin so that they are easy to see. The action functions are defined below these patterns. You can also see how the options are used to provide the location for the custom log file (it should go without saying that this is not a way to do production logging!).</p>
+<p>The initialization function <code>init</code> does some asynchronous file system work and so must complete before any actions can be performed. If it fails, the whole service fails to initialize. To see this in action, try changing the log file location to something invalid, such as <code>&apos;/math.log&apos;</code>.</p>
+<p>This code is available in the <a href="https://github.com/senecajs/getting-started/blob/master/math-plugin-init.js">math-plugin-init.js</a> file.</p>
+<h2 id="writing-microservices"><a href="#writing-microservices" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Writing microservices</h2>
+<p>Let&#x2019;s turn the <em>math</em> plugin into a real microservice. First, you need to get organized. The business logic of the <em>math</em> plugin - that is, the functionality that it provides - is separate from whatever way it communicates with the outside world. Sometimes you might expose a web service; other times you might listen on a message bus.</p>
+<p>It makes sense to put the business logic - that is, the plugin definition - in its own file. <em>Node.js</em> modules are perfect for this:</p>
+<pre><code class="language-js">module.exports = function math(options) {
+
+  this.add(&apos;role:math,cmd:sum&apos;, function sum(msg, respond) {
+    respond(null, { answer: msg.left + msg.right })
+  })
+
+  this.add(&apos;role:math,cmd:product&apos;, function product(msg, respond) {
+    respond(null, { answer: msg.left * msg.right })
+  })
+
+  this.wrap(&apos;role:math&apos;, function (msg, respond) {
+    msg.left  = Number(msg.left).valueOf()
+    msg.right = Number(msg.right).valueOf()
+    this.prior(msg, respond)
+  })
+
+}</code></pre>
+<p>This plugin is defined in the <a href="https://github.com/senecajs/getting-started/blob/master/math.js">math.js</a> file. You export the plugin definition function and then call seneca.use with the name of the file. You can either <a href="https://nodejs.org/api/modules.html">require</a> it in or if you like to be terse, let Seneca make the <code>require</code> call:</p>
+<pre><code class="language-js">// these are equivalent
+require(&apos;seneca&apos;)()
+  .use(require(&apos;./math.js&apos;))
+  .act(&apos;role:math,cmd:sum,left:1,right:2&apos;, console.log)
+
+require(&apos;seneca&apos;)()
+  .use(&apos;math&apos;) // finds ./math.js in local folder
+  .act(&apos;role:math,cmd:sum,left:1,right:2&apos;, console.log)</code></pre>
+<p>The <code>seneca.wrap</code> method matches a set of patterns and overrides all of them with the same action extension function. This is the same as calling <code>seneca.add</code> manually for each one. It takes the following two parameters:</p>
+<ul>
+<li><code>pin</code>: a pin is a pattern-matching pattern.</li>
+<li><code>action</code>: action extension function.</li>
+</ul>
+<p>A <code>pin</code> is a pattern that matches other patterns (it &#x201C;pins&#x201D; them). The pin <code>role:math</code> matches the patterns <code>role:math,cmd:sum</code> and <code>role:math,cmd:product</code> that are registered with Seneca.</p>
+<p>In this case, you use <code>seneca.wrap</code> to make sure that the <code>left</code> and <code>right</code> properties are parsed as numeric values, even if they are provided as strings.</p>
+<p>Sometimes it can be useful to see a visual tree of the patterns and any overrides in a Seneca instance. You can do this using the <code>--seneca.print.tree</code> command line option. The file <a href="https://github.com/senecajs/getting-started/blob/master/math-tree.js">math-tree.js</a> loads the <em>math</em> plugin, but then does nothing:</p>
+<pre><code>require(&apos;seneca&apos;)()
+  .use(&apos;math&apos;)</code></pre><p>We&#x2019;re just using it to show the action tree:</p>
+<pre><code class="language-js">$ node math-tree.js --seneca.print.tree
+2016 ... INFO    hello    ...
+Seneca action patterns for instance: 9vjqzroin2k4/1436455291148/78025/-
+&#x251C;&#x2500;&#x252C; cmd:sum
+&#x2502; &#x2514;&#x2500;&#x252C; role:math
+&#x2502;   &#x2514;&#x2500;&#x2500; # math, (s1a28),
+&#x2502;       # math, (sw9ew), sum
+&#x2514;&#x2500;&#x252C; cmd:product
+  &#x2514;&#x2500;&#x252C; role:math
+    &#x2514;&#x2500;&#x2500; # math, (sxti2),
+        # math, (b8gcw), product</code></pre>
+<p>Here, you can see the name/value pairs of the action patterns arranged in a tree structure as well as any overrides. Action functions are indicated by the format: # <code>plugin</code>, <code>(action-id)</code>, <code>function-name</code>.</p>
+<p>Everything is still in the same process. Let&#x2019;s change that. First you need a microservice:</p>
+<pre><code class="language-js">require(&apos;seneca&apos;)()
+  .use(&apos;math&apos;)
+  .listen()</code></pre>
+<p>Running this code (<a href="https://github.com/senecajs/getting-started/blob/master/math-service.js">math-service.js</a>) starts a microservice process that listens on port 10101 for HTTP requests. This is <em>not</em> a web server. In this case, HTTP is being used as the transport mechanism for messages.</p>
+<p>You can try it out by sending a request to the microservice. Open the URL: <code>http://localhost:10101/act?role=math&amp;cmd=sum&amp;left=1&amp;right=2</code> in a web browser or use curl on the command line:</p>
+<pre><code class="language-bash">$ curl -d &apos;{&quot;role&quot;:&quot;math&quot;,&quot;cmd&quot;:&quot;sum&quot;,&quot;left&quot;:1,&quot;right&quot;:2}&apos; http://localhost:10101/act</code></pre>
+<p>What you get back is:</p>
+<pre><code class="language-js">{&quot;answer&quot;:3}</code></pre>
+<p>Next, you need a microservice client:</p>
+<pre><code class="language-js">require(&apos;seneca&apos;)()
+  .client()
+  .act(&apos;role:math,cmd:sum,left:1,right:2&apos;,console.log)</code></pre>
+<p>Running this code (<a href="https://github.com/senecajs/getting-started/blob/master/math-client.js">math-client.js</a>) starts a microservice client that sends this JSON message:</p>
+<pre><code class="language-js">{ &quot;role&quot;:&quot;math&quot;, &quot;cmd&quot;:&quot;sum&quot;, &quot;left&quot;:1, &quot;right&quot;:2 }</code></pre>
+<p>to the math-service microservice above, which then responds with:</p>
+<pre><code class="language-js">{ &quot;answer&quot;:3 }</code></pre>
+<p>With Seneca, you create microservices by calling <code>seneca.listen</code> and you talk to the services using <code>seneca.client</code>. In the example, you are using the default settings for the client and server (communicate via HTTP over port 10101). Both <code>seneca.client</code> and <code>seneca.listen</code> accept the following parameters:</p>
+<ul>
+<li><code>port</code>: optional integer; port number.</li>
+<li><code>host</code>: optional string; host IP address.</li>
+<li><code>spec</code>: optional object; full specification object.</li>
+</ul>
+<p><strong>Note:</strong> On windows machines, if no host is specified, the client will try to connect to <code>host</code> at <code>0.0.0.0</code>, which won&#x2019;t work. To get around this, set the <code>host</code> to be <code>localhost</code>.</p>
+<p>As long as the client and listen parameters are the same, the two services can communicate. Here are some examples:</p>
+<ul>
+<li><code>seneca.client(8080)</code> &#x2192; <code>seneca.listen(8080)</code></li>
+<li><code>seneca.client(8080, &apos;192.168.0.2&apos;)</code> &#x2192; <code>seneca.listen(8080, &apos;192.168.0.2&apos;)</code></li>
+<li><code>seneca.client({ port: 8080, host: &apos;192.168.0.2&apos; })</code> &#x2192; <code>seneca.listen({ port: 8080, host: &apos;192.168.0.2&apos; })</code></li>
+</ul>
+<p>Seneca provides you with <strong>transport independence</strong> because your business logic does not need to know how messages are transported or which service will get them. This is specified in the service setup code or configuration. In this case, the code in the <em>math.js</em> plugin <em>never</em> changes.</p>
+<p>The HTTP transport provides an easy way to integrate with Seneca microservices, but it does have all the overhead of HTTP. Another transport that you can use is direct TCP connections. Seneca provides both HTTP and TCP options via the built-in <a href="https://www.npmjs.com/package/seneca-transport">transport</a>. Let&#x2019;s move to TCP:</p>
+<ul>
+<li><code>seneca.client({ type: &apos;tcp&apos; })</code> &#x2192; <code>seneca.listen({ type: &apos;tcp&apos; })</code></li>
+</ul>
+<p>The default <em>client/listen</em> configuration sends all messages that the client does not recognize over the listening server. Locally defined patterns are executed locally. It&#x2019;s usually preferable to specify exactly which patterns should be sent to which service. You can do this using a <em>pin</em>.</p>
+<p>Let&#x2019;s put all this together into an example that sends <code>role:math</code> messages out over TCP on port 30303 (just an arbitrary port) and executes all other messages locally.</p>
+<p>First, the listening service (<a href="https://github.com/senecajs/getting-started/blob/master/math-pin-service.js">math-pin-service.js</a>):</p>
+<pre><code class="language-js">require(&apos;seneca&apos;)()
+
+  .use(&apos;math&apos;)
+
+  // listen for role:math messages
+  // IMPORTANT: must match client
+  .listen({ type: &apos;tcp&apos;, pin: &apos;role:math&apos; })</code></pre>
+<p>Then, the client (<a href="https://github.com/senecajs/getting-started/blob/master/math-pin-client.js">math-pin-client.js</a>):</p>
+<pre><code class="language-js">require(&apos;seneca&apos;)()
+
+  // a local pattern
+  .add(&apos;say:hello&apos;, function (msg, respond){ respond(null, {text: &quot;Hi!&quot;}) })
+
+  // send any role:math patterns out over the network
+  // IMPORTANT: must match listening service
+  .client({ type: &apos;tcp&apos;, pin: &apos;role:math&apos; })
+
+  // executed remotely
+  .act(&apos;role:math,cmd:sum,left:1,right:2&apos;,console.log)
+
+  // executed locally
+  .act(&apos;say:hello&apos;,console.log)</code></pre>
+<p>You can use filtered logging to trace the flow of messages. You can use the command line option <code>--seneca...</code> to control how Seneca runs, including the log output generated. Seneca logs have the following attributes (in order of importance):</p>
+<ul>
+<li><code>date-time</code>: when the log entry occurred.</li>
+<li><code>seneca-id</code>: identifier for the Seneca process.</li>
+<li><code>level</code>: one of <em>DEBUG</em>, <em>INFO</em>, <em>WARN</em>, <em>ERROR</em>, <em>FATAL</em>.</li>
+<li><code>type</code>: entry code, such as act, plugin, etc.</li>
+<li><code>plugin</code>: plugin name (actions without a plugin have root$).</li>
+<li><code>case</code>: entry case, such as <em>IN</em>, <em>OUT</em>, <em>ADD</em>, etc.</li>
+<li><code>action-id/transaction-id</code>: tracing identifier, <strong>stays the same over the network</strong>.</li>
+<li><code>pin</code>: the action pattern for this message.</li>
+<li><code>message</code>: the inbound or outbound message (truncated if too long).</li>
+</ul>
+<p>If you run the above processes with <code>--seneca.log.all</code> then you get all the logs. If you look at the entries, you can see Seneca booting up all the internal plugins:</p>
+<pre><code class="language-js">$ node math-pin-service.js --seneca.log.all
+... lots of logs ...
+
+$ node math-pin-client.js --seneca.log.all
+... lots of logs ...</code></pre>
+<p>It&#x2019;s hard to see the log entries that you care about; that is, the ones relevant to the <em>math</em> plugin. To narrow down the output, try this:</p>
+<pre><code class="language-js">$ node math-pin-service.js --seneca.log=plugin:math
+20.. 85.. DEBUG    plugin    math  DEFINE    {}
+20.. 85.. DEBUG    plugin    math  ADD    (f3ysr)    cmd:sum,role:math    sum
+20.. 85.. DEBUG    plugin    math  ADD    (9mocb)    cmd:product,role:math    product
+20.. 85.. DEBUG    plugin    math  ADD    (ydx70)    cmd:sum,role:math
+20.. 85.. DEBUG    plugin    math  ADD    (ka7rj)    cmd:product,role:math
+20.. 85.. DEBUG    plugin    math  options    set    {math:{}}
+20.. 85.. DEBUG    act    math  IN    2682lsrziy1i/rst61586f7wl    cmd:sum,role:math    {role:math,cmd:sum,left:1,right:2}    ENTRY    (ydx70)    LISTEN    o2..    -
+20.. 85.. DEBUG    act    math  IN    1k46jra7rhpd/rst61586f7wl    cmd:sum,role:math    {role:math,cmd:sum,left:1,right:2}    PRIOR;(ydx70)    (f3ysr)    -    -    -
+20.. 85.. DEBUG    act    math  OUT    1k46jra7rhpd/rst61586f7wl    cmd:sum,role:math    {answer:3}    PRIOR;(ydx70)    (f3ysr)    -    -    0    -
+20.. 85.. DEBUG    act    math  OUT    2682lsrziy1i/rst61586f7wl    cmd:sum,role:math    {answer:3}    EXI(ydx70)    LISTEN    o2..    1    -
+
+$ node math-pin-client.js --seneca.log=pin:role:math
+20.. o2.. DEBUG    act    remote$ IN    2682lsrziy1i/rst61586f7wl    role:math    {role:math,cmd:sum,left:1,right:2}    ENTRY    CLIENT    -    -    -
+nu
+20.. o2.. DEBUG    act    remote$ OUT    2682lsrziy1i/rst61586f7wl    role:math    {answer:3}    EXIT    CLIENT    -    85..    15    -
+null { answer: 3 }</code></pre>
+<p>On the listening server, the setting <code>--seneca.log=plugin:math</code> narrows down the log to those entries where the <code>plugin</code> attribute is <em>math</em>. You can see the registration of the <em>math</em> plugin and the addition of its action patterns. If you remember, you used <code>seneca.wrap</code> to override the basic actions with a string-to-integer conversion. That means that the <code>role:math</code> actions have two <em>ADD</em> lines in the logs. You&#x2019;ll also notice that each action gets an indentifer of the form (abcde). You can use this to find out the exact action function that is executed when a message comes in.</p>
+<p>When a message comes in, an <code>IN</code> log entry is created. When the action function provides a result, an &#x2018;OUT&#x2019; log entry is created. In the listening server logs above, you can see this happening when the {role:math,cmd:sum,left:1,right:2} comes in over the network from the client.</p>
+<p>Look carefully at the generated unique action identifers <code>2682lsrziy1i/rst61586f7wl</code> and <code>1k46jra7rhpd/rst61586f7wl</code>. These can be used to trace the flow of messages. The <code>IN</code> and <code>OUT</code> lines have the same action identifier. Furthermore, the second page, after the /, is a transaction identifer. All sub-actions triggered by an initial action have the same transaction identifier, in this case <code>rst61586f7wl</code>.</p>
+<p>The action identifier persists over the network so that you can trace message flows when you have many microservices. Let&#x2019;s look at the client side. The setting <code>--seneca.log=pin:role:math</code> is another filter. This time it filters all log entries where the action pattern contains the specific pin, in this case <code>role:math</code>.</p>
+<p>You can see that the action identifier <code>2682lsrziy1i/rst61586f7wl</code> originated on the client, and is passed over the listening server. You can also see that the client and listening server identifiers, <code>85..</code> and <code>o2..</code> (shortened for clarity) are given in the log entries so that you can tell which service sent which message.</p>
+<p>Also seen in the output of the client is the console.log printing of the results &#x2014; these are not part of the logs, just ordinary printed output.</p>
+<p>There are many ways to configure your microservice communciation architecture. Take a look at the reference links at the end of this guide for more information.</p>
+<h2 id="web-server-integration"><a href="#web-server-integration" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Web Server Integration</h2>
+<p>Seneca is not a web framework. But you still need to connect it up to your web service API. Here&#x2019;s the easiest way to do that.</p>
+<p>The most important thing to remember is that you don&#x2019;t want to expose your internal action patterns to the outside world. That&#x2019;s not good security practice. Instead, define a set of API patterns, say with property <code>role:api</code>. Then you can hook them up to your internal microservices.</p>
+<p>Let&#x2019;s look at a simple example using <a href="http://expressjs.com">Express</a>. Here&#x2019;s the Express app (<a href="https://github.com/senecajs/getting-started/blob/master/app.js">app.js</a>):</p>
+<pre><code class="language-js">var SenecaWeb = require(&apos;seneca-web&apos;)
+var Express = require(&apos;express&apos;)
+var Router = Express.Router
+var context = new Router()
+
+var senecaWebConfig = {
+      context: context,
+      adapter: require(&apos;seneca-web-adapter-express&apos;),
+      options: { parseBody: false } // so we can use body-parser
+}
+
+var app = Express()
+      .use( require(&apos;body-parser&apos;).json() )
+      .use( context )
+      .listen(3000)
+
+var seneca = require(&apos;seneca&apos;)()
+      .use(SenecaWeb, senecaWebConfig )
+      .use(&apos;api&apos;)
+      .client( { type:&apos;tcp&apos;, pin:&apos;role:math&apos; } )</code></pre>
+<p>You create a seneca instance, load the <em>api</em> plugin, and then use <code>seneca.client</code> to send any <code>role:math</code> actions out to an external service. Your Express app is the microservice client.</p>
+<p>The integration between Seneca and Express happens in this line:</p>
+<pre><code class="language-js">      .use(SenecaWeb, senecaWebConfig )</code></pre>
+<p>SenecaWeb will attach any of the routes defined through <code>seneca.act(&apos;role:web&apos;, {routes: routes})</code> to context.</p>
+<p>Here&#x2019;s the <em>api</em> plugin (<a href="https://github.com/senecajs/getting-started/blob/master/api.js">api.js</a>):</p>
+<pre><code class="language-js">module.exports = function api(options) {
+
+  var valid_ops = { sum:&apos;sum&apos;, product:&apos;product&apos; }
+
+  this.add(&apos;role:api,path:calculate&apos;, function (msg, respond) {
+    var operation = msg.args.params.operation
+    var left = msg.args.query.left
+    var right = msg.args.query.right
+    this.act(&apos;role:math&apos;, {
+      cmd:   valid_ops[operation],
+      left:  left,
+      right: right,
+    }, respond)
+  })
+
+
+  this.add(&apos;init:api&apos;, function (msg, respond) {
+    this.act(&apos;role:web&apos;,{routes:{
+      prefix: &apos;/api&apos;,
+      pin:    &apos;role:api,path:*&apos;,
+      map: {
+        calculate: { GET:true, suffix:&apos;/:operation&apos; }
+      }
+    }}, respond)
+  })
+
+}</code></pre>
+<p>This is a normal Seneca plugin. The <code>role:api,path:calculate</code> pattern will be exposed via URL endpoint. The inbound message should have the property <code>operation</code> that specifies the calculation to perform: <code>sum</code> or <code>product</code>. You can see that the code creates an explicit message for <code>role:math</code>, and makes a small attempt to sanitize the input. The <code>seneca.act</code> method allows you to build up the message both from a string (in this case <code>&apos;role:math&apos;</code>), and an object, merging the two together as a convenience.</p>
+<p><strong>Never use external input to create an action string. Always explicitly create the internal message. This avoids injection attacks.</strong></p>
+<p>The initialisation action makes a call to the pattern <code>role:web</code>, and defines the property <code>routes</code>. This is a definition object that defines a route mapping from URLs to action patterns. It has the properties:</p>
+<ul>
+<li><code>prefix</code>: the URL prefix</li>
+<li><code>pin</code>: the set of patterns to map</li>
+<li><code>map</code>: the list of pin wildcard property values to use as URL endpoints.</li>
+</ul>
+<p>Your URL endpoint starts with <code>/api/....</code></p>
+<p>The pin is <code>role:api,path:*</code>. This means map any patterns that have <em>role = &#x2018;api&#x2019;</em>, and where a <em>path</em> property is defined. In this case, there is only one match: <code>role:api,path:calculate</code>.</p>
+<p>The map has the property <code>calculate</code> corresponding to the value of the path property.</p>
+<p>Your URL endpoint starts with <code>/api/calculate/....</code></p>
+<p>The calculate property has a subobject that indicates that the HTTP method is GET, and that the URL should have a parameterised suffix (these work just like Express parameters).</p>
+<p>Your full URL endpoint is <code>/api/calculate/:operation</code>.</p>
+<p>The remaining message properties are obtained from the URL query string, and from any JSON body submitted with the HTTP request. In this case, we are using GET, so there is no body.</p>
+<p>SenecaWeb will provide information about the request to <code>msg.args</code>, this can include the following:</p>
+<ul>
+<li>body - post parameters for the request</li>
+<li>query - querystring parameters for the request</li>
+<li>params - any route param replacements (e.g., <code>:operation</code>)</li>
+</ul>
+<p>You can re-use the microservice from the previous example. To run the app, start:</p>
+<pre><code class="language-js">$ node math-pin-service.js --seneca.log=plugin:math
+... logs as above ...
+
+$ node app.js --seneca.log=plugin:web,plugin:api
+... log entries for the web and api plugins ...</code></pre>
+<p>To exercise the app, load these URLs in a browser:</p>
+<pre><code class="language-js">http://localhost:3000/api/calculate/sum?left=2&amp;right=3 &#x2192; {&quot;answer&quot;:5}
+
+http://localhost:3000/api/calculate/product?left=2&amp;right=3 &#x2192; {&quot;answer&quot;:6}</code></pre>
+<p>If you look at the log output, you can see the corresponding action calls. You&#x2019;ll also see the line:</p>
+<pre><code class="language-js">20.. ks.. DEBUG    plugin    web  ACT  f7../b8..  role:web  http  get  /api/calculate/:operation</code></pre>
+<p>Look for lines like this to see what URL endpoints you are building.</p>
+<h2 id="data-storage"><a href="#data-storage" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Data Storage</h2>
+<p>You&#x2019;ll need to persist your data. Especially if you plan to build real-world systems! You can do anything you like inside Seneca actions, and use any kind of database layer. However, why not use the power of pattern matching and microservices to make your life easier?</p>
+<p>The pattern matching approach also means you can postpone the debate about microservice data &#x2014; do services &#x201C;own&#x201D; data, do they access a shared database, etc. The pattern matching approach means you can reconfigure your system any which way later on.</p>
+<p><a href="https://github.com/senecajs/seneca-entity">seneca-entity</a> provides a simple data abstraction layer (&#x201C;ORM&#x201D;), based on the following operations:</p>
+<ul>
+<li><strong>load</strong>: load an entity by identifier</li>
+<li><strong>save</strong>: create or update (if you provide an identifier) an entity</li>
+<li><strong>list</strong>: list entities matching a simple query</li>
+<li><strong>remove</strong>: delete an entity by identifier</li>
+</ul>
+<p>The patterns are:</p>
+<ul>
+<li><strong>load</strong>: <code>role:entity,cmd:load,name:&lt;entity-name&gt;</code></li>
+<li><strong>save</strong>: <code>role:entity,cmd:save,name:&lt;entity-name&gt;</code></li>
+<li><strong>list</strong>: <code>role:entity,cmd:list,name:&lt;entity-name&gt;</code></li>
+<li><strong>remove</strong>: <code>role:entity,cmd:remove,name:&lt;entity-name&gt;</code></li>
+</ul>
+<p>A plugin can provide access to a database (say <a href="https://www.npmjs.com/package/seneca-mysql-store">MySQL</a>) by providing implementations of these patterns.</p>
+<p>Microservice development is made much easier when data persistence is provided by the same mechanism as everything else: pattern-matched messages.</p>
+<p>Using the data persistence patterns directly can become tedious, so <a href="https://github.com/senecajs/seneca-entity">seneca-entity</a> also provides a more familiar <a href="https://en.wikipedia.org/wiki/Active_record_pattern">ActiveRecord</a>-style interface. To create a record object, you call the <code>seneca.make</code> method. The record object has methods <code>load$</code>, <code>save$</code>, <code>list$</code> and <code>remove$</code> (the trailing $ avoids clashes with data fields). The data fields are just the object properties.</p>
+<p>To use <a href="https://github.com/senecajs/seneca-entity">seneca-entity</a> include the module in your package.json and add a seneca.use statement to require it into your seneca instance.</p>
+<p>Let&#x2019;s create and save a simple data entity that stores &#x201C;product&#x201D; details:</p>
+<pre><code class="language-js">var seneca = require(&apos;seneca&apos;)()
+seneca.use(&apos;entity&apos;)
+
+var product = seneca.make(&apos;product&apos;)
+product.name = &apos;Apple&apos;
+product.price = 1.99
+
+// sends role:entity,cmd:save,name:product messsage
+product.save$( console.log )</code></pre>
+<p>Run the file <a href>product.js</a> to test this. You&#x2019;ll see the output:</p>
+<pre><code class="language-js">2016 ... INFO    hello    ...
+null $-/-/product:{id=3i402d;name=Apple;price=1.99}</code></pre>
+<p>The response to the <code>role:entity,cmd:save message</code> is the record object, which prints itself as <code>$-/-/product:{id=3i402d;name=Apple;price=1.99}</code>. You can see that it auto-generated an identifier for you.</p>
+<p>Seneca comes with a built-in data persistence plugin: <a href="https://www.npmjs.com/package/seneca-mem-store">mem-store</a>. This plugin just stores the data in-memory, and does not actually persist it anywhere. It&#x2019;s very useful for writing fast unit tests!</p>
+<p>Because all data operations go via the same set of messages, you can very easily swap databases, at any time. No need to make database choice at the start of your project! Maybe use <a href="https://www.npmjs.com/package/seneca-mongo-store">MongoDB</a> to begin with when your schemas are in development, and switch to <a href="https://www.npmjs.com/package/seneca-postgres-store">Postgres</a> for the final few months before go-live and production.</p>
+<p>Let&#x2019;s build a little shop, and integrate it into our existing microservice system. First, here&#x2019;s a simple shop plugin, with some messages for adding products, getting product details, and making a purchase (<a href="https://github.com/senecajs/getting-started/blob/master/shop.js">shop.js</a>):</p>
+<pre><code class="language-js">module.exports = function( options ) {
+
+  this.add( &apos;role:shop,get:product&apos;, function( msg, respond ) {
+    this.make( &apos;product&apos; ).load$( msg.id, respond )
+  })
+
+  this.add( &apos;role:shop,add:product&apos;, function( msg, respond ) {
+    this.make( &apos;product&apos; ).data$(msg.data).save$(respond)
+  })
+
+  this.add( &apos;role:shop,cmd:purchase&apos;, function( msg, respond ) {
+    this.make( &apos;product&apos; ).load$(msg.id, function( err, product ) {
+      if( err ) return respond( err )
+
+      this
+        .make( &apos;purchase&apos; )
+        .data$({
+          when:    Date.now(),
+          product: product.id,
+          name:    product.name,
+          price:   product.price,
+        })
+        .save$( function( err, purchase ) {
+          if( err ) return respond( err )
+
+          this.act(&apos;role:shop,info:purchase&apos;,{purchase:purchase})
+          respond(null,purchase)
+        })
+    })
+  })
+
+  this.add( &apos;role:shop,info:purchase&apos;, function( msg, respond ) {
+    this.log.info(&apos;purchase&apos;,msg.purchase)
+    respond()
+  })
+}</code></pre>
+<p>The <code>role:shop,get:product</code> pattern retrieves a product from the &#x201C;database&#x201D;. You provide the identifier via the <code>id</code> property. Notice the <code>respond</code> callback is simply passed along to the <code>load$</code> method to use as its callback.</p>
+<p>The <code>role:shop,add:product</code> pattern adds a new product to the &#x201C;database&#x201D;. You provide the data fields via the <code>data</code> object property. The <code>data$</code> method is a shortcut for setting all the data fields from the provided object (in this case, <code>msg.data</code>). Again, respond is passed along.</p>
+<p>The <code>role:shop,cmd:purchase</code> pattern creates a new row in the <code>purchase</code> table (a small part of what would happen in the real world when you hit the <em>Checkout</em> button). The <code>product</code> identifier and details for that transaction are recorded (prices change!). The action function also emits a <code>role:shop,info:purchase</code> message, <strong>but does not expect a response</strong>. This is a <a href="http://oredev.org/oredev2013/2013/wed-fri-conference/implementing-micro-service-architectures.html">common microservice pattern</a> &#x2014; letting the world know that something has happened, but not caring who gets the message.</p>
+<p>Finally, you provide a default implementation for the <code>role:shop,info:purchase</code>message. This is useful for debugging and unit testing. In the example code, you can see that it uses the <code>seneca.log.info</code> method to log the purchase event. The <code>seneca.log</code> object provides a method for each of the log levels: <code>debug, info, warn, error, fatal</code>. These methods also annotate your log entries with the name of your plugin.</p>
+<p>Let&#x2019;s create simple unit test for this plugin. Writing unit tests for Seneca plugins is very easy &#x2014; verify that inbound messages generate the right responses. Here&#x2019;s the unit test code (<a href="https://github.com/senecajs/getting-started/blob/master/shop-test.js">shop-test.js</a>):</p>
+<pre><code class="language-js">var assert = require(&apos;assert&apos;)
+
+var seneca = require(&apos;seneca&apos;)()
+      .use(&apos;entity&apos;)
+      .use(&apos;shop&apos;)
+
+      // uncomment to send messages to the shop-stats service
+      // .client({port:9003,pin:&apos;role:shop,info:purchase&apos;})
+
+      .error( assert.fail )
+
+add_product()
+
+function add_product() {
+  seneca.act(
+    &apos;role:shop,add:product,data:{name:Apple,price:1.99}&apos;,
+    function( err, save_apple ) {
+
+      this.act(
+        &apos;role:shop,get:product&apos;, {id:save_apple.id},
+        function( err, load_apple ) {
+
+          assert.equal( load_apple.name, save_apple.name )
+
+          do_purchase( load_apple )
+        })
+    })
+}
+
+function do_purchase( apple ) {
+  seneca.act(
+    &apos;role:shop,cmd:purchase&apos;,{id:apple.id},
+    function( err, purchase) {
+      assert.equal( purchase.product, apple.id )
+    }
+  )
+}</code></pre>
+<p>This code uses the built-in Node.js <a href="https://nodejs.org/api/assert.html">assert</a> module. It loads the shop plugin, and then exercises the <code>role:shop</code> messages. If you run the test file, you&#x2019;ll see the output:</p>
+<pre><code>$ node shop-test.js
+20.. h3.. INFO hello  ...
+20.. h3.. INFO plugin shop ACT gj.. info:purchase,role:shop purchase {when:1436528824554,product:90vzcc,name:Apple,price:1.99,id:3i402d}</code></pre><p>This output includes the log entry that you created with seneca.log.info in the implementation of the <code>role:shop,info:purchase</code> action.</p>
+<p>Let&#x2019;s run a separate service to capture the purchase message events. For the sake of example we&#x2019;ll just count the number of purchases per product. Here&#x2019;s the <a href="https://github.com/senecajs/getting-started/blob/master/shop-stats.js">shop-stats.js</a> microservice:</p>
+<pre><code class="language-js">var stats = {}
+require(&apos;seneca&apos;)()
+  .add(&apos;role:shop,info:purchase&apos;,function( msg, respond ) {
+    var product_name = msg.purchase.name
+    stats[product_name] = stats[product_name] || 0
+    stats[product_name]++
+    console.log(stats)
+    respond()
+  })
+  .listen({port:9003,pin:&apos;role:shop,info:purchase&apos;})</code></pre>
+<p>This service listens on port 9003, and prints out a product purchase statistics report every time a new purchase is made. Notice that you are providing an implementation of <code>role:shop,info:purchase</code>.</p>
+<p>To see this in action, uncomment the line in <a href="https://github.com/senecajs/getting-started/blob/master/shop-test.js">shop-test.js</a>:</p>
+<pre><code class="language-js">      // uncomment to send messages to the shop-stats service
+      // .client({port:9003,pin:&apos;role:shop,info:purchase&apos;})</code></pre>
+<p>And then run both:</p>
+<pre><code class="language-js">$ node shop-test.js
+20.. j0.. INFO hello  ...
+20.. j0.. INFO client {port:9003,pin:role:shop,info:purchase}
+
+$ node shop-stats.js
+20.. wb.. INFO hello  ...
+20.. wb.. INFO listen {port:9003,pin:role:shop,info:purchase}
+{ Apple: 1 }</code></pre>
+<h2 id="bringing-it-altogether"><a href="#bringing-it-altogether" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Bringing it Altogether</h2>
+<p>You&#x2019;re going to run four services. In the real world, you&#x2019;d use something like <a href="https://www.docker.com">Docker</a> to keep yourself sane. For the purposes of this example, you&#x2019;ll run everything in the terminal as bare processes.</p>
+<p>The services are:</p>
+<ul>
+<li><a href="https://github.com/senecajs/getting-started/blob/master/shop-stats.js">shop-stats.js</a>: collect shop statistics</li>
+<li><a href="https://github.com/senecajs/getting-started/blob/master/shop-service.js">shop-service.js</a>: provide shop functionality</li>
+<li><a href="https://github.com/senecajs/getting-started/blob/master/math-pin-service.js">math-pin-service.js</a>: provide math functionality (as above)</li>
+<li><a href="https://github.com/senecajs/getting-started/blob/master/app-all.js">app-all.js</a>: web server</li>
+</ul>
+<p>The services <code>shop-stats</code> and <code>math-pin-service</code> are the same as before, so you can spin them up right away:</p>
+<pre><code class="language-js">$ node math-pin-service.js --seneca.log.all
+
+$ node shop-stats.js --seneca.log.all</code></pre>
+<p>In this example, we&#x2019;re using <code>--seneca.log.all</code> to log at the highest level of detail. There&#x2019;s a lot of output. Look out for the <code>act</code> lines, and the <code>IN</code> and <code>OUT</code> cases, and you can trace the message flows.</p>
+<p>We need a <a href="https://github.com/senecajs/getting-started/blob/master/shop-service.js">shop-service.js</a>:</p>
+<pre><code class="language-js">require( &apos;seneca&apos; )()
+  .use(&apos;entity&apos;)
+  .use( &apos;shop&apos; )
+  .listen( { port:9002, pin:&apos;role:shop&apos; } )
+  .client( { port:9003, pin:&apos;role:shop,info:purchase&apos; } )</code></pre>
+<p>This service listens for inbound <code>role:shop</code> messages, <strong>but</strong> sends any <code>role:shop,info:purchase</code> messages out onto the network. Seneca lets you mix and match <code>client</code> and <code>listen</code> configurations. <strong>Remember, the client and listen pins must match</strong>.</p>
+<p>In this configuration, we&#x2019;ve put the <code>shop-service</code> on local port 9002, and the <code>shop-stats</code> service on local port 9003. In production, you might use a <a href="https://www.npmjs.com/package/seneca-amqp-transport">message bus</a>, or have <a href="https://www.npmjs.com/package/seneca-redis-transport">multiple clients</a>, or an <a href="https://github.com/coreos/flannel">overlay network</a>, or even <a href="https://www.consul.io">service discovery</a> to configure the port and host.</p>
+<p>Start the <code>shop</code> service:</p>
+<pre><code class="language-js">$ node shop-service.js --seneca.log.all</code></pre>
+<p>The shop functionality is exposed via the URL endpoints <code>/api/shop/get</code> and <code>/api/shop/purchase</code>. We need to add these to the <em>api</em> plugin (<a href="https://github.com/senecajs/getting-started/blob/master/api-all.js">api-all.js</a>):</p>
+<pre><code class="language-js">  ...
+
+  this.add( &apos;role:api,path:shop&apos;, function( msg, respond ) {
+    var id = null
+    if (msg.args.query.pid) { id = msg.args.query.pid }
+    if (msg.args.body.pid) { id = msg.args.body.pid }
+
+    var operation = msg.args.params.operation
+    var shopmsg = { role:&apos;shop&apos;, id:id }
+    if( &apos;get&apos;      == operation ) shopmsg.get = &apos;product&apos;
+    if( &apos;purchase&apos; == operation ) shopmsg.cmd = &apos;purchase&apos;
+
+    this.act( shopmsg, respond )
+  })
+
+  this.add( &apos;init:api&apos;, function( msg, respond ) {
+
+    ...
+
+  this.act(&apos;role:web&apos;,{routes:{
+    prefix: &apos;/api&apos;,
+    pin:    &apos;role:api,path:*&apos;,
+    map: {
+      shop: { GET:true, POST:true, suffix:&apos;/:operation&apos; },
+    }
+  }})
+
+  respond()
+})</code></pre>
+<p>Finally, we need to update the web server to send <code>role:shop</code> messages to the <code>shop-service</code> (<a href="https://github.com/senecajs/getting-started/blob/master/app-all.js">app-all.js</a>):</p>
+<pre><code class="language-js">var SenecaWeb = require(&apos;seneca-web&apos;)
+var Express = require(&apos;express&apos;)
+var Router = Express.Router
+var context = new Router()
+
+var senecaWebConfig = {
+      context: context,
+      adapter: require(&apos;seneca-web-adapter-express&apos;),
+      options: { parseBody: false } // so we can use json body-parser
+}
+
+var app = Express()
+      .use( require(&apos;body-parser&apos;).json() )
+      .use( context )
+      .listen(3000)
+
+var seneca = require( &apos;seneca&apos; )()
+      .use(&apos;entity&apos;)
+      .use(SenecaWeb, senecaWebConfig )
+      .use( &apos;api-all&apos; )
+      .client( { type:&apos;tcp&apos;, pin:&apos;role:math&apos; } )
+      .client( { port:9002,  pin:&apos;role:shop&apos; } )
+
+// create a dummy product
+seneca.act(
+  &apos;role:shop,add:product&apos;,{data:{name:&apos;Apple&apos;,price:1.99}},
+  console.log
+)</code></pre>
+<p>We&#x2019;ve also added a dummy product for testing. When you run the web service with:</p>
+<pre><code class="language-js">$ node app-all.js --seneca.log.all</code></pre>
+<p>the last line of the output will be something like:</p>
+<pre><code class="language-js">null $-/-/product:{id=mbm07t;name=Apple;price=1.99}</code></pre>
+<p>Copy the product identifier, in this case <code>mbm07t</code>. You can use this to exercise the system.</p>
+<p>First, get the product details:</p>
+<pre><code class="language-js">http://localhost:3000/api/shop/get?pid=mbm07t &#x2192; {&quot;name&quot;:&quot;Apple&quot;,&quot;price&quot;:1.99,&quot;id&quot;:&quot;mbm07t&quot;}</code></pre>
+<p>Then, make a purchase:</p>
+<pre><code class="language-js">$ curl -d &apos;{&quot;pid&quot;:&quot;mbm07t&quot;}&apos; -H &quot;content-type:application/json&quot; http://localhost:3000/api/shop/purchase
+{&quot;when&quot;:1436536799159,&quot;product&quot;:&quot;mbm07t&quot;,&quot;name&quot;:&quot;Apple&quot;,&quot;price&quot;:1.99,&quot;id&quot;:&quot;ny09dx&quot;}</code></pre>
+<p>Using <code>curl</code> on the command line, you can create a HTTP POST request to make a purchase. Note the need for the correct content type header: <code>application/json</code>.</p>
+<p>Look at the logging output of all services. You&#x2019;ll be able to trace the action identifiers and transaction identifiers across all the services.</p>
+<p>Don&#x2019;t forget that the <em>math</em> service still works:</p>
+<pre><code class="language-js">http://localhost:3000/api/calculate/sum?left=2&amp;right=3 &#x2192; {&quot;answer&quot;:5}</code></pre>
+<p><strong>The math and shop services can be changed, updated, deployed, or even removed independently.</strong></p>
+<p>Changes to one service do not affect the others. This is how microservices give you <a href="https://www.thoughtworks.com/talks/software-development-21st-century-xconf-europe-2014">continuous delivery</a>.</p>
+
+        </div>
+      </div>
+
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10">
+          <p class="txt-lead mb mt2x">Issues? From spelling errors to broken tutorials and everything in between, report
+          them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a></p>
+        </div>
+      </div>
+    </div>
+
+    <footer role="contentinfo">
+    
+      <div class="footer-top">
+        <div class="container-fluid">
+          <div class="row center-xs">
+            <div class="col-xs-12">
+              <img src="/images/logo-seneca-inversed.svg" class="logo-seneca-lg" alt="Seneca" />
+            </div>
+    
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="https://github.com/senecajs/seneca" class="link-has-icon icon icon-github">Github</a></p>
+            </div>
+    
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="/docs/" class="link-has-icon icon icon-docs">Documentation</a></p>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="https://twitter.com/senecajs" class="link-has-icon icon icon-twitter">Twitter</a></p>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+      </div>
+      <!-- footer top -->
+    
+      <div class="footer-bottom">
+        <div class="container-fluid txt-center">
+          <p class="mb0">© <a href="https://github.com/rjrodger">Richard Rodger</a> and <a href="https://github.com/senecajs/senecajs.org/contributors">other</a> <a href="https://github.com/senecajs/seneca/contributors">contributors</a> 2010 - 2023. Powered by <a href="http://metalsmith.io">MetalSmith</a>, hosted by <a href="http://surge.sh">Surge</a>. A <a href="https://www.voxgig.com">Voxgig</a> project.</p>
+        </div>
+      </div>
+      <!-- footer bottom -->
+    </footer>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js" integrity="sha256-vrn14y7WH7zgEElyQqm2uCGSQrX/xjYDjniRUQx3NyU=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+        apiKey: 'a5afa8843727758cbaa7fbacb932b215',
+        indexName: 'senecajs',
+        inputSelector: '#seneca-search-input'
+    });
+    </script>    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-57673-6', 'senecajs.org');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

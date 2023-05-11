@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,400italic,700">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    
+    <title>Seneca, a microservices toolkit for Node.js</title>  </head>
+  <body>
+    <nav class="nav-main" role="navigation">
+      <div class="container-fluid cf">
+        <a class="logo logo-seneca" href="/" title="Seneca">Seneca</a>
+    
+        <div class="nav-search">
+          <input type="search" id="seneca-search-input" placeholder="Search the docs...">
+        </div>
+        <!-- nav search -->
+    
+        <div class="nav-bar">
+    
+          <input type="checkbox" name="nav-menu-handle" id="nav-menu-handle" class="nav-menu-handle">
+          <label for="nav-menu-handle"></label>
+    
+          <ul class="list-unstyled list-inline nav-items">
+            <li><a href='/api/'>API</a></li>
+            <li><a href='/docs/'>Docs</a></li>
+            <li><a href='/faq/'>FAQ</a></li>
+            <li><a href='/plugins/'>Plugins</a></li>
+            <li><a href='/roadmap/'>Roadmap</a></li>
+            <li><a href='/support/'>Support</a></li>
+          </ul>
+          <!-- nav items -->
+        </div>
+    
+      </div>
+      <!-- container -->
+    </nav>
+    <header role="banner">
+      <div class="container-fluid center-xs">
+        <img src="/images/illustration-top.svg"
+             alt="Design, develop and organize code"
+             title="Design, develop and organize code"
+             height="auto"
+             width="320"
+             class="mt"
+          />
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10 txt-left">
+          <h1 id="logging-with-seneca"><a href="#logging-with-seneca" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Logging with Seneca</h1>
+<p>This tutorial shows you  how to control Seneca&#x2019;s logging output. Clone the <a href="http://github.com/senecajs/seneca">main Seneca repository</a> from github, and
+open the _doc/examples_folder.</p>
+<p>You&#x2019;ll use the Sales Tax example code. This code shows you how to handle sales tax rules using Seneca. Take a look at
+the <a href="https://github.com/senecajs/seneca">main README</a> for details. For this tutorial, you&#x2019;ll focus on the logging output.</p>
+<p>Here&#x2019;s some code to calculate sales tax. It won&#x2019;t work, because you haven&#x2019;t actually told Seneca how to do that yet.</p>
+<pre><code>var seneca = require(&apos;seneca&apos;)()
+
+seneca.act({cmd: &apos;salestax&apos;, net: 100}, function (err, result) {
+  if (err) return console.error(err)
+  console.log(result.total)
+})</code></pre><p>This invokes a Seneca action that, hopefully, calculates sales tax. Arbitrarily you&#x2019;re using the property <code>cmd</code> to
+indicate what you want done (calculate sales tax), and <code>net</code> is net price before tax. The <code>callback</code> function returns
+the total price, and uses the <em>standard Node.js signature</em> (error object as first parameter).</p>
+<p>Let&#x2019;s try to run this code, even though it will fail. In the examples folder, this code is saved in the file <code>sales-tax-error.js</code>. Run this file using <em>Node.js</em>, and you&#x2019;ll see the following output:</p>
+<pre><code>$ node sales-tax-error.js
+[-isodate-]    INFO    init    start
+[-isodate-]    INFO    init    end
+[-isodate-]    ERROR    fail    seneca/act_not_found
+Seneca: act(args,cb):
+action not found for args = {&quot;cmd&quot;:&quot;salestax&quot;,&quot;net&quot;:100}
+{ [Error: ...] }</code></pre><p>Seneca outputs some logging information so you can track what&#x2019;s going
+on. The <code>INIT</code> entries log the start and end of the initialization phase, when Seneca loads plugins.
+The <code>ERROR</code> entry tells you what went wrong: no action pattern matched the input args in the JSON document:
+<code>{&quot;cmd&quot;:&quot;salestax&quot;,&quot;net&quot;:100}</code>. The code also prints the JavaScript Error object to the console. That&#x2019;s the line:
+<code>if( err ) return console.error(err);</code></p>
+<p>You can fix this by defining an action:</p>
+<pre><code>seneca.add( {cmd:&apos;salestax&apos;}, function(args,callback){
+  var rate= 0.23
+  var total = args.net * (1+rate)
+  callback(null,{total:total})
+})</code></pre><p>The file <code>sales-tax.js</code> in the examples folder contains the new code. Run it:</p>
+<pre><code>$ node sales-tax.js
+[-isodate-]    INFO    init    start
+[-isodate-]    INFO    init    end
+123</code></pre><p>Well that worked! 23% sales tax on a price of $100 gives a total of $123. Fabulous!</p>
+<p>You might find that logging output annoying. Turn it off with:</p>
+<pre><code>$ node sales-tax.js --seneca.log.quiet
+123</code></pre><p>Or you might be a logging freak, in which case, here&#x2019;s the all-you-can-eat version:.</p>
+<pre><code>node sales-tax.js --seneca.log.print
+[-isodate-]    INFO    init    start
+... lots of init stuff ...
+[-isodate-]    INFO    init    end
+[-isodate-]    INFO    add    {cmd=salestax}
+[-isodate-]    DEBUG    act    in    90xkee    {cmd=salestax,net=100}
+[-isodate-]    DEBUG    act    out    90xkee    {total=123}
+123</code></pre><p>So you might be wondering how to get finer-grained logging output. Logging can be filtered on:</p>
+<ul>
+<li><code>level</code>: <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>FATAL</code></li>
+<li><code>type</code>: short string code, examples: <code>init</code>, <code>plugin</code>, <code>error</code>, &#x2026;</li>
+<li><code>plugin</code>: the names of the plugin</li>
+<li><code>tag</code>: an identifier tag, used when you have multiple instances of the same plugin</li>
+</ul>
+<p>Let do that now:</p>
+<pre><code>node sales-tax.js --seneca.log=type:act
+[-isodate-]    DEBUG    act    in    actid0    {cmd=salestax,net=100}
+[-isodate-]    DEBUG    act    out    actid0    {total=123}
+123</code></pre><p>The command line argument <code>--seneca.log</code> accepts a
+comma-separated list of filters. The filter <code>type:act</code> means only
+output the log entries of type <code>act</code>. The <code>type</code> is the third
+field. The <code>act</code> entries are very low level debugging logs
+showing the operation of individual actions. The logs show the input
+arguments, <code>in</code>, and the eventual output of the
+action <code>out</code>. Because these can be separated in time, a random
+action identifier (above: <code>actid0</code>) is generated for each action, so that you
+can match up the input and output.</p>
+<h2 id="logging-from-plugins"><a href="#logging-from-plugins" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Logging from Plugins</h2>
+<p>Let&#x2019;s turn the sales tax calculator into a plugin. This plugin accepts
+two configuration options. You can specify the tax rate, and the
+country which applies that rate (using two letter country codes).</p>
+<p>Here&#x2019;s the client code, in the file <code>sales-tax-log.js</code>:</p>
+<pre><code>var seneca = require(&apos;seneca&apos;)()
+
+seneca.use(&apos;sales-tax-plugin&apos;, {country: &apos;IE&apos;, rate: 0.23})
+seneca.use(&apos;sales-tax-plugin&apos;, {country: &apos;UK&apos;, rate: 0.20})
+
+seneca.ready(function (err) {
+  if (err) return process.exit(!console.error(err))
+
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, country: &apos;IE&apos;, net: 100})
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, country: &apos;UK&apos;, net: 200})
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, country: &apos;UK&apos;, net: 300})
+})</code></pre><p>Since you&#x2019;re using log files to trace the commands, you can drop the
+callback function from the <code>act</code> method call.</p>
+<p>Now you need a plugin - that&#x2019;s in the <code>sales-tax-plugin.js</code> file:</p>
+<pre><code>module.exports = function (options) {
+  var seneca = this
+  var plugin = &apos;shop&apos;
+  var country = options.country || &apos;IE&apos;
+  var rate = options.rate || 0.23
+
+  var calc = function (net) {
+    return net * (1 + rate)
+  }
+
+  seneca.add({ role: plugin, cmd: &apos;salestax&apos;, country: country }, function (args, callback) {
+    var total = calc(parseFloat(args.net, 10))
+    seneca.log.debug(&apos;apply-tax&apos;, args.net, total, rate, country)
+    callback(null, { total: total })
+  })
+
+  seneca.add({ role: plugin, cmd: &apos;salestax&apos; }, function (args, callback) {
+    var total = calc(parseFloat(args.net, 10))
+    seneca.log.debug(&apos;apply-tax&apos;, args.net, total, rate, country)
+    callback(null, { total: total })
+  })
+
+  seneca.act({ role: &apos;web&apos;, use: {
+    prefix: &apos;shop/&apos;,
+    pin: { role: &apos;shop&apos;, cmd: &apos;*&apos; },
+    map: {
+      salestax: { GET: true }
+    }
+  }})
+
+  return {
+    name: plugin
+  }
+}</code></pre><p>The plugin creates a separate instance of the <code>salestax</code> object
+for each country and one instance that matches a call with no country. This object stores the country rate, country code,
+and the number of times that sales tax for that country is calculated
+(hit count).</p>
+<p>This plugin follows the standard format for Seneca plugins. You provide a function that takes
+a set of options and it&#x2019;s called in the Seneca context (eg the <code>this</code> object). Using the Seneca instance, you add some actions, and
+return a plugin object:</p>
+<pre><code>module.exports = function (options) {
+  var seneca = this
+
+  seneca.add( { ... }, function (args, callback) {
+  ...
+  })
+
+  return {
+    name: &apos;plugin-name&apos;
+  }
+}</code></pre><p>Run this code, and filter the log to show only debug output from the sales-tax plugin:</p>
+<pre><code>$ node sales-tax-log.js --seneca.log=plugin:shop
+
+[-isodate-]    DEBUG    plugin    sales-tax    IE    annv4h
+net:    100    total:    123    tax:    {hits=1,rate=0.23,country=IE}
+
+[-isodate-]    DEBUG    plugin    sales-tax    UK    3rkaa2
+net:    200    total:    240    tax:    {hits=1,rate=0.2,country=UK}
+
+[-isodate-]    DEBUG    plugin    sales-tax    UK    cwxcts
+net:    300    total:    360    tax:    {hits=2,rate=0.2,country=UK}</code></pre><p>These logs appear because the plugin calls <code>seneca.log.debug</code> and provides the information about the sales tax calculation:</p>
+<pre><code>seneca.add({ role: plugin, cmd: &apos;salestax&apos;, country: country }, function (args, callback) {
+  var total = calc(parseFloat(args.net, 10))
+  seneca.log.debug(&apos;apply-tax&apos;, args.net, total, rate, country)
+  callback(null, { total: total })
+})</code></pre><p>The object <code>seneca.log</code> has convenience functions for the built-in log levels:</p>
+<ul>
+<li>seneca.log.debug</li>
+<li>seneca.log.info</li>
+<li>seneca.log.warn</li>
+<li>seneca.log.error</li>
+<li>seneca.log.fatal</li>
+</ul>
+<p>These functions concatenate all their arguments into an array, which is the content of the log message. This array is then
+formatted for display or storage by a handler function (which you can provide).
+To minimize impact on performance, log data is only evaluated if a
+matching log filter is active. The last argument to the logging
+function can be a function (which should return an array of values), which again is only executed if a logging
+filter matches.</p>
+<p>Here&#x2019;s another example. This time, you filter on the <code>act</code> log
+entry type. This allows you to see the data passing into and out of
+actions:</p>
+<pre><code>$ node sales-tax-log.js --seneca.log=type:act
+[-isodate-]    DEBUG    act    in    uk74hd    {cmd=salestax,country=IE,net=100}
+[-isodate-]    DEBUG    act    out    uk74hd    {total=123}
+[-isodate-]    DEBUG    act    in    qv5sts    {cmd=salestax,country=UK,net=200}
+[-isodate-]    DEBUG    act    out    qv5sts    {total=240}
+[-isodate-]    DEBUG    act    in    7j9q4a    {cmd=salestax,country=UK,net=300}
+[-isodate-]    DEBUG    act    out    7j9q4a    {total=360}</code></pre><p>You can see two entries for each action, <code>in</code>
+and <code>out</code>. Each entry shows the JSON document data being passed
+into Seneca, and out of, Seneca. You can also see that each pair has the same action identifier, such as <code>uk74hd</code>.</p>
+<p>Let&#x2019;s put this all together. You want to see the input and output
+data of the actions, and anything the sale tax plugin decides to log:</p>
+<pre><code>$ node sales-tax-log.js --seneca.log=plugin:sales-tax --seneca.log=type:act
+
+[-isodate-]    DEBUG    act    in    cpvycd    {cmd=salestax,country=IE,net=100}
+[-isodate-]    DEBUG    plugin    sales-tax    IE    cpvycd
+net:    100    total:    123    tax:    {hits=1,rate=0.23,country=IE}
+[-isodate-]    DEBUG    act    out    cpvycd    {total=123}
+
+[-isodate-]    DEBUG    act    in    tx5zj3    {cmd=salestax,country=UK,net=200}
+[-isodate-]    DEBUG    plugin    sales-tax    UK    tx5zj3
+net:    200    total:    240    tax:    {hits=1,rate=0.2,country=UK}
+[-isodate-]    DEBUG    act    out    tx5zj3    {total=240}
+
+[-isodate-]    DEBUG    act    in    8ikumj    {cmd=salestax,country=UK,net=300}
+[-isodate-]    DEBUG    plugin    sales-tax    UK    8ikumj
+net:    300    total:    360    tax:    {hits=2,rate=0.2,country=UK}
+[-isodate-]    DEBUG    act    out    8ikumj    {total=360}</code></pre><p>This shows the detailed processing of the sales tax calculation. The
+action identifiers, which you can get using <code>args.actid$</code> inside
+an action function.You need to specify two <code>--seneca.log</code>
+filters, as the type is <code>plugin</code> for one, and <code>act</code> for the
+other.</p>
+<p>The <code>tag</code> filter can be used to focus on a specific, tagged, plugin instance. Here&#x2019;s how you look at UK sales tax
+operations only:</p>
+<pre><code>$ node sales-tax-log.js --seneca.log=plugin:sales-tax,tag:UK
+[-isodate-]    DEBUG    plugin    sales-tax    UK    i2r7wn
+net:    200    total:    240    tax:    {hits=1,rate=0.2,country=UK}
+[-isodate-]    DEBUG    plugin    sales-tax    UK    8ir490
+net:    300    total:    360    tax:    {hits=2,rate=0.2,country=UK}</code></pre><h2 id="live-logs-in-your-browser"><a href="#live-logs-in-your-browser" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Live Logs in Your Browser</h2>
+<p>Console logs are fun, but live logs in your web browser are awesome! Seneca can do this too:</p>
+<p>You&#x2019;ll need to create an app that provides a sales-tax calculation HTTP JSON API. Using the
+<code>web</code> plugin this is easy. This plugin accepts JSON documents from remote clients
+over HTTP and submits them to the local Seneca instance.</p>
+<p>Here the code, in <code>sales-tax-app.js</code>, that sets up the app:</p>
+<pre><code>var connect = require(&apos;connect&apos;)
+var connect_query = require(&apos;connect-query&apos;)
+var body_parser = require(&apos;body-parser&apos;)
+
+var seneca = require(&apos;seneca&apos;)()
+
+seneca.use(&apos;sales-tax-plugin&apos;, {country: &apos;IE&apos;, rate: 0.23})
+seneca.use(&apos;sales-tax-plugin&apos;, {country: &apos;UK&apos;, rate: 0.20})
+seneca.use(&apos;sales-tax-plugin&apos;, {country: &apos;*&apos;, rate: 0.25})
+
+var app = connect()
+
+app.use(connect_query())
+app.use(body_parser.json())
+app.use(seneca.export(&apos;web&apos;))
+
+app.listen(3000)
+
+seneca.use(&apos;data-editor&apos;)
+seneca.use(&apos;admin&apos;, {server: app, local: true})</code></pre><p>The script sets up a simple HTTP server, using the Node.js <code>connect</code> module. The <code>web</code> plugin is preloaded by Seneca and
+works locally without any configuration, so all you have to do is hook it as a <a href="http://www.senchalabs.org/connect/">connect</a> or <a href="http://expressjs.com">express</a> middleware, or directly with the standard HTTP API:</p>
+<pre><code>var app = connect()
+app.use(seneca.export(&apos;web&apos;))
+app.listen(3000)</code></pre><p>The <code>admin</code> and <code>data-editor</code> plugins together provide a web administration interface for
+Seneca. It uses web sockets, so you need to provide a reference to the
+http server object in the plugin options. To expose the
+administration web interface locally without requiring a password,
+use the <code>local:true</code> option:</p>
+<pre><code>seneca.use(&apos;data-editor&apos;)
+seneca.use(&apos;admin&apos;, {server: app, local: true})</code></pre><p>Run this app, and open <a href="localhost:3000/admin">localhost:3000/admin</a>. You can
+still use command line logging - you can have multiple separate logging channels.</p>
+<pre><code>$ node sales-tax-app.js --seneca.log=plugin:shop</code></pre><p>The administration interface let&#x2019;s you set filtering options. They work the same way as the command line options.
+There&#x2019;s nothing to log yet, so let&#x2019;s generate some sales tax calculations!</p>
+<p>The file <code>sales-tax-app-client.js</code> contains the client
+code. We&#x2019;re using the standard Node HTTP client here:</p>
+<pre><code>var http = require(&apos;http&apos;)
+
+http.get({
+  hostname: &apos;localhost&apos;,
+  port: 3000,
+  path: &apos;/shop/salestax?net=100&amp;country=UK&apos;
+}, function (res) {
+  res.on(&apos;data&apos;, function (chunk) {
+    console.log(JSON.parse(chunk.toString()))
+  })
+})</code></pre><p>But you can also test it with cUrl:</p>
+<pre><code>$ curl -S &apos;http://localhost:3000/shop/salestax?net=100&amp;country=UK&apos;
+$ {&quot;total&quot;:120}</code></pre><p>The sales tax operations code is as before. This is the key idea
+behind Seneca - your business logic code stays the same, but you can
+move around and reconfigure where it happens without worrying about
+refactoring your code.</p>
+<p>With the app up and running, run the client: you&#x2019;ll see log entries in the web interface.</p>
+<h2 id="log-handlers"><a href="#log-handlers" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Log Handlers</h2>
+<p>You can define your own log handlers programmatically when you setup Seneca. The file
+<code>sales-tax-log-handler.js</code> shows you how to do this:</p>
+<pre><code>var seneca = require(&apos;seneca&apos;)
+
+// need this to get a reference to seneca.loghandler
+seneca = seneca({
+  log: {
+    map: [
+      {plugin: &apos;shop&apos;, handler: &apos;print&apos;},
+      {level: &apos;all&apos;, handler: seneca.loghandler.file(&apos;shop.log&apos;)}
+    ]
+  }
+})
+
+seneca.use(&apos;sales-tax-plugin&apos;, {rate: 0.23})
+
+seneca.ready(function (err) {
+  if (err) return process.exit(!console.error(err))
+
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, net: 100})
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, net: 200})
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, net: 300})
+})</code></pre><p>Running this script will output log entries both to the console (only where plugin is &#x201C;shop&#x201D; ), and
+to a log file <code>shop.log</code>, which gets everything. In production you mostly just want to output to the console and use
+the operating system tools for file redirection. The file handler is mostly for creating special log files.</p>
+<p>The logging map allows you to send log entries to multiple locations based on the filters you specify. You can still use the
+command line argument <code>--seneca.log=...</code> to add further filters.</p>
+<p>The built-in handlers are:</p>
+<ul>
+<li><code>seneca.loghandler.print</code>: logs to the console</li>
+<li><code>seneca.loghandler.file(filepath)</code>: logs to a file</li>
+<li><code>seneca.loghandler.stream(WriteStream)</code>: logs to a stream</li>
+<li><code>seneca.loghandler.emitter(EventEmitter)</code>: logs using events</li>
+</ul>
+<p>You can write your own handler. It&#x2019;s just a function that takes the
+log entry as first argument. The log entry is an array of values.</p>
+<p>Here&#x2019;s an example using the <a href="http://logentries.com">LogEntries.com</a> service. This is cloud logging service that
+stores your logs and makes them searchable. I wrote their Node.js API module :) - <code>$ npm install node-logentries</code>.
+This example is in the file <code>sales-tax-logentries.js</code>:</p>
+<pre><code>var logentries = require(&apos;node-logentries&apos;)
+
+var log = logentries.logger({
+  token: &apos;YOUR_TOKEN&apos;,
+
+  // redefine log levels to match the ones seneca uses
+  levels: {debug: 0, info: 1, warn: 2, error: 3, fatal: 4}
+})
+
+var seneca = require(&apos;seneca&apos;)({
+  log: {
+    map: [
+      {level: &apos;all&apos;, handler: function () {
+        log.log(arguments[1], Array.prototype.join.call(arguments, &apos;\t&apos;))
+      }}
+    ]
+  }
+})
+
+seneca.use(&apos;sales-tax-plugin&apos;, {rate: 0.23})
+
+seneca.ready(function (err) {
+  if (err) return process.exit(!console.error(err))
+
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, net: 100})
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, net: 200})
+  seneca.act({role: &apos;shop&apos;, cmd: &apos;salestax&apos;, net: 300})
+})</code></pre><p>You&#x2019;ll need to register a <a href="https://logentries.com/">LogEntries.com</a> account and get a token for this to work.</p>
+<p>You can use custom handler functions to send logs anywhere you want, and process them anyway you need.</p>
+<h2 id="one-more-thing-"><a href="#one-more-thing-" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>One More Thing &#x2026;</h2>
+<p><em>Log filters are dynamic</em>. You can add new ones at runtime using the <code>seneca.logroute</code> method:</p>
+<pre><code>seneca.logroute( {level:&apos;all&apos;, handler:seneca.handler.print} )</code></pre><p>If you omit the handler, any previous filter is removed. If you add
+multiple handlers for the same filter, the logs will be sent to all
+the handlers.This feature enables the administration web site to
+dynamically modify the filters at runtime.</p>
+<hr>
+<p>That&#x2019;s all folks!</p>
+
+        </div>
+      </div>
+
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10">
+          <p class="txt-lead mb mt2x">Issues? From spelling errors to broken tutorials and everything in between, report
+          them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a></p>
+        </div>
+      </div>
+    </div>
+
+    <footer role="contentinfo">
+    
+      <div class="footer-top">
+        <div class="container-fluid">
+          <div class="row center-xs">
+            <div class="col-xs-12">
+              <img src="/images/logo-seneca-inversed.svg" class="logo-seneca-lg" alt="Seneca" />
+            </div>
+    
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="https://github.com/senecajs/seneca" class="link-has-icon icon icon-github">Github</a></p>
+            </div>
+    
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="/docs/" class="link-has-icon icon icon-docs">Documentation</a></p>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="https://twitter.com/senecajs" class="link-has-icon icon icon-twitter">Twitter</a></p>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+      </div>
+      <!-- footer top -->
+    
+      <div class="footer-bottom">
+        <div class="container-fluid txt-center">
+          <p class="mb0">© <a href="https://github.com/rjrodger">Richard Rodger</a> and <a href="https://github.com/senecajs/senecajs.org/contributors">other</a> <a href="https://github.com/senecajs/seneca/contributors">contributors</a> 2010 - 2023. Powered by <a href="http://metalsmith.io">MetalSmith</a>, hosted by <a href="http://surge.sh">Surge</a>. A <a href="https://www.voxgig.com">Voxgig</a> project.</p>
+        </div>
+      </div>
+      <!-- footer bottom -->
+    </footer>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js" integrity="sha256-vrn14y7WH7zgEElyQqm2uCGSQrX/xjYDjniRUQx3NyU=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+        apiKey: 'a5afa8843727758cbaa7fbacb932b215',
+        indexName: 'senecajs',
+        inputSelector: '#seneca-search-input'
+    });
+    </script>    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-57673-6', 'senecajs.org');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

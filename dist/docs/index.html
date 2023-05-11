@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,400italic,700">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    
+    <title>Seneca, a microservices toolkit for Node.js</title>  </head>
+  <body>
+    <nav class="nav-main" role="navigation">
+      <div class="container-fluid cf">
+        <a class="logo logo-seneca" href="/" title="Seneca">Seneca</a>
+    
+        <div class="nav-search">
+          <input type="search" id="seneca-search-input" placeholder="Search the docs...">
+        </div>
+        <!-- nav search -->
+    
+        <div class="nav-bar">
+    
+          <input type="checkbox" name="nav-menu-handle" id="nav-menu-handle" class="nav-menu-handle">
+          <label for="nav-menu-handle"></label>
+    
+          <ul class="list-unstyled list-inline nav-items">
+            <li><a href='/api/'>API</a></li>
+            <li><a href='/docs/'>Docs</a></li>
+            <li><a href='/faq/'>FAQ</a></li>
+            <li><a href='/plugins/'>Plugins</a></li>
+            <li><a href='/roadmap/'>Roadmap</a></li>
+            <li><a href='/support/'>Support</a></li>
+          </ul>
+          <!-- nav items -->
+        </div>
+    
+      </div>
+      <!-- container -->
+    </nav>
+    <header role="banner">
+      <div class="container-fluid center-xs">
+        <img src="/images/illustration-top.svg"
+             alt="Design, develop and organize code"
+             title="Design, develop and organize code"
+             height="auto"
+             width="320"
+             class="mt"
+          />
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10 txt-left">
+          <h1 id="documentation"><a href="#documentation" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Documentation</h1>
+<h2 id="frequently-asked-questions"><a href="#frequently-asked-questions" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Frequently Asked Questions</h2>
+<p>This is a good place to start when you hit something odd: <a href="/faq">FAQ List</a>.</p>
+<h2 id="tutorials"><a href="#tutorials" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Tutorials</h2>
+<p>Seneca tutorials offer a deep dive into a particular concept or feature. We also have a number
+of sample projects, small and large that demonstrate how to use Seneca in a number of different
+ways and with different complimentary technologies.</p>
+<ul>
+<li><a href="/docs/tutorials/logging-with-seneca.html">Logging with Seneca</a></li>
+<li><a href="/docs/tutorials/how-to-write-a-plugin.html">How to write a plugin</a></li>
+<li><a href="/docs/tutorials/unit-testing.html">How to write unit tests</a></li>
+<li><a href="/docs/tutorials/understanding-data-entities.html">Understanding data entities</a></li>
+<li><a href="/docs/tutorials/understanding-query-syntax.html">Understanding query syntax</a></li>
+<li><a href="/docs/tutorials/understanding-prior-actions.html">Understanding prior actions</a></li>
+<li><a href="/docs/tutorials/seneca-with-promises.html">Seneca with promises</a></li>
+</ul>
+<h2 id="sample-projects"><a href="#sample-projects" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Sample projects</h2>
+<p>For convenience, we have a number of sample apps in a single repository. This repository
+covers single concepts as well as popular plugins. See the repo at <a href="https://github.com/rjrodger/seneca-examples">Seneca examples</a>.</p>
+<h3 id="nodezoo"><a href="#nodezoo" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>NodeZoo</h3>
+<p>NodeZoo is a search engine for Node.js modules. The complete system is an example of a real-
+world service built using Node.js microservices. Each microservice is published in its
+own GitHub repository. The code base is intended to be used as a larger-scale example and as a
+starting point for your own projects. See the system at <a href="https://github.com/nodezoo/nodezoo-system">NodeZoo</a>.</p>
+<h2 id="articles"><a href="#articles" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Articles</h2>
+<ul>
+<li><a href="http://www.richardrodger.com/seneca-microservices-nodejs#.VqjAZRiLT-k">Seneca 1.0.0: A microservices framework for Node.js</a></li>
+<li><a href="http://www.richardrodger.com/monolithic-nodejs#.VqjAixiLT-k">Monolithic Node.js</a></li>
+</ul>
+<h2 id="talks"><a href="#talks" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Talks</h2>
+<p>Here are some talks about Seneca and Microservices:</p>
+<ul>
+<li><a href="https://skillsmatter.com/skillscasts/6819-we-are-not-object-oriented-anymore-or-why-the-node-callback-style-is-awesome">We are not Object-Oriented anymore</a> - <em>Matteo Collina (FullStack London 2015)</em></li>
+<li><a href="http://www.infoq.com/presentations/measuring-microservices">Measuring Microservices</a> - <em>Richard Rodger (microxchg.io Berlin 2015)</em></li>
+<li><a href="https://www.youtube.com/watch?v=fVfWuked2qE">Microservices</a> - <em>Richard Rodger (NodeConf EU 2014)</em></li>
+</ul>
+<h2 id="books"><a href="#books" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Books</h2>
+<p>These books help you understand how to design, build and deploy microservice systems. Some
+of them cover Seneca directly, and others provide more general guidance. The ideas in the
+books listed here can be applied using Seneca without restriction. They all contain useful
+insights, and more importantly, real-world lessons.</p>
+<h3 id="the-tao-of-microservices"><a href="#the-tao-of-microservices" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>The Tao of Microservices</h3>
+<p>The Tao of Microservices teaches you the path to understanding how to apply microservices
+architecture with your own real-world projects. This high-level book offers you a conceptual
+view of microservice architectures, along with core concepts and their application. You&#x2019;ll
+also find a detailed case study for the nodezoo.com system, including all source code and
+documentation. By the end of the book, you&#x2019;ll have explored in depth the key ideas of the
+microservice architecture and will be able to design, analyze and implement systems based
+on this architecture.</p>
+<p><a href="https://manning.com/books/the-tao-of-microservices?a_aid=tms&amp;a_bid=3b7806c8">The Tao of Microservices</a></p>
+<h3 id="building-microservices"><a href="#building-microservices" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Building Microservices</h3>
+<p>Distributed systems have become more fine-grained in the past 10 years, shifting from code-
+heavy monolithic applications to smaller, self-contained microservices. But developing these
+systems brings its own set of headaches. With lots of examples and practical advice, this book
+takes a holistic view of the topics that system architects and administrators must consider
+when building, managing, and evolving microservice architectures.</p>
+<p><a href="http://shop.oreilly.com/product/0636920033158.do">Building Microservices</a></p>
+<h3 id="antifragile-software"><a href="#antifragile-software" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Antifragile Software</h3>
+<p>We&#x2019;ve spent over a decade now becoming more and more agile and adaptable in our ways of
+working. Unfortunately our software is now struggling to keep up with the pace of innovation
+that is increasingly being demanded by modern businesses. It&#x2019;s time to sort that out. It&#x2019;s
+time for Antifragile Software with Microservices.</p>
+<p><a href="https://leanpub.com/antifragilesoftware">Antifragile Software</a></p>
+<h3 id="microservices-flexible-software-architectures"><a href="#microservices-flexible-software-architectures" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Microservices: Flexible Software Architectures</h3>
+<p>A Microservice-based architecture divides software systems into many small services which can
+be deployed independently. Every team works on its own Microservices and is thus decoupled
+from other teams. This allows to easily scale agile processes. The modularization into
+Microservices protects the system against architecture decay. Consequently, systems based on
+Microservices stay maintainable in the long term. In addition, legacy systems can be migrated
+to Microservices without having to change the legacy code. Moreover, Continuous Delivery is
+easier to implement in Microservice-based systems.</p>
+<p><a href="http://microservices-book.com/">Microservices: Flexible Software Architectures</a></p>
+<h3 id="microservices-in-net"><a href="#microservices-in-net" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Microservices in .NET</h3>
+<p>Microservices in .NET shows you how to build and deploy secure and operations-friendly
+microservices using Nancy. The book takes you through an introduction to the microservices
+architectural style. Next, you&#x2019;ll learn important practical aspects of developing microservices
+from simple core concepts to more sophisticated. Throughout the book, you&#x2019;ll see many code
+examples implementing it with lightweight .NET technologies - most prominently Nancy. By the
+end, you&#x2019;ll be able to quickly and easily build reliable and operations-friendly microservices
+using Nancy, OWIN and other open technologies.</p>
+<p><a href="https://www.manning.com/books/microservices-in-net">Microservices in .NET</a></p>
+<h3 id="microservices-in-go"><a href="#microservices-in-go" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>Microservices in GO</h3>
+<p>GO is a great language for building microservices. However there are a lot of challenges to
+navigate. How do you do caching, manage databases. Monitor and analyze performance. Integrate
+with Docker. Do continuous deployments. Run on private or public clouds.</p>
+<p><a href="http://microservicesingo.com">Microservices in GO</a></p>
+<h3 id="soa-patterns"><a href="#soa-patterns" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>SOA Patterns</h3>
+<p>SOA Patterns provides architectural guidance through patterns and anti-patterns. It shows you
+how to build real SOA services that feature flexibility, availability, and scalability.
+Through an extensive set of patterns, this book identifies the major SOA pressure points and
+provides reusable techniques to address them. Each pattern pairs the classic problem/solution
+format with a unique technology map, showing where specific solutions fit into the general
+pattern.</p>
+<p><a href="https://www.manning.com/books/soa-patterns">SOA Patterns</a></p>
+
+        </div>
+      </div>
+
+      <div class="row center-xs">
+        <div class="col-xs-12 col-md-10 col-lg-10">
+          <p class="txt-lead mb mt2x">Issues? From spelling errors to broken tutorials and everything in between, report
+          them <a href="https://github.com/senecajs/senecajs.org/issues">here.</a></p>
+        </div>
+      </div>
+    </div>
+
+    <footer role="contentinfo">
+    
+      <div class="footer-top">
+        <div class="container-fluid">
+          <div class="row center-xs">
+            <div class="col-xs-12">
+              <img src="/images/logo-seneca-inversed.svg" class="logo-seneca-lg" alt="Seneca" />
+            </div>
+    
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="https://github.com/senecajs/seneca" class="link-has-icon icon icon-github">Github</a></p>
+            </div>
+    
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="/docs/" class="link-has-icon icon icon-docs">Documentation</a></p>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3">
+              <p class="mt"><a href="https://twitter.com/senecajs" class="link-has-icon icon icon-twitter">Twitter</a></p>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+      </div>
+      <!-- footer top -->
+    
+      <div class="footer-bottom">
+        <div class="container-fluid txt-center">
+          <p class="mb0">© <a href="https://github.com/rjrodger">Richard Rodger</a> and <a href="https://github.com/senecajs/senecajs.org/contributors">other</a> <a href="https://github.com/senecajs/seneca/contributors">contributors</a> 2010 - 2023. Powered by <a href="http://metalsmith.io">MetalSmith</a>, hosted by <a href="http://surge.sh">Surge</a>. A <a href="https://www.voxgig.com">Voxgig</a> project.</p>
+        </div>
+      </div>
+      <!-- footer bottom -->
+    </footer>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js" integrity="sha256-vrn14y7WH7zgEElyQqm2uCGSQrX/xjYDjniRUQx3NyU=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+        apiKey: 'a5afa8843727758cbaa7fbacb932b215',
+        indexName: 'senecajs',
+        inputSelector: '#seneca-search-input'
+    });
+    </script>    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-57673-6', 'senecajs.org');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

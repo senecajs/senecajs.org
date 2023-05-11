@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/*********************************************************************
+*
+* NAVIGATION
+*
+*********************************************************************/
+/* 5px */
+/* 10px */
+/* 15px */
+/* 60px */
+/* 16px */
+/* 14px */
+/* 20px */
+/* 36px */
+/* 32px */
+/* 26px */
+/* 20px */
+/* 1200px */
+/* 1024px */
+/*  786px */
+/*  480px */
+/* 1px */
+.nav-main {
+  padding: 15px 0;
+  box-shadow: 0 2px 20px rgba(51, 51, 51, 0.5);
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: white;
+  height: 75px;
+  width: 100%;
+}
+
+.nav-main .nav-bar {
+  padding-left: 0;
+  float: right;
+  position: relative;
+}
+
+.nav-main .nav-search {
+  margin-left: 15px;
+}
+
+.nav-main .logo-seneca,
+.nav-main .nav-search {
+  float: left;
+}
+
+.nav-main .nav-bar {
+  float: right;
+}
+
+.nav-menu-handle {
+  visibility: hidden;
+  position: absolute;
+  left: -100%;
+}
+
+@media screen and (max-width: 64em) {
+  .nav-search {
+    width: 65%;
+  }
+  .nav-items {
+    display: none;
+  }
+   
+.nav-main .nav-search {
+    margin: 0;
+  }
+  .nav-main label {
+    float: right;
+    margin-left: 15px;
+    margin-top: 15px;
+    display: block;
+    height: 20px;
+    width: 23px;
+    background: url("/images/icon-menu.svg") no-repeat 0 0;
+    background-size: contain;
+    cursor: pointer;
+  }
+  .nav-main label:hover {
+    opacity: .5;
+  }
+  .nav-menu-handle:checked ~ .nav-items {
+    display: block;
+    position: fixed;
+    top: 74px;
+    left: 0;
+    width: 100vw;
+    background-color: white;
+  }
+  .nav-menu-handle:checked ~ .nav-items li {
+    display: block;
+    padding: 15px;
+    width: 100%;
+    border-top: 1px solid #ddd;
+  }
+  .nav-menu-handle:checked ~ .nav-items li:last-child {
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+@media screen and (min-width: 64.0625em) {
+  .nav-items li {
+    padding: 10px 0;
+  }
+}

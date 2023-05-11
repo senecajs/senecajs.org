@@ -3,12 +3,7 @@
   "destination": "dist",
   "plugins": {
     "metalsmith-drafts": true,
-    "metalsmith-ignore": [
-      "drafts/*",
-      "*~",
-      ".#",
-      "src/pages/plugins-2023/modules"
-    ],
+    "metalsmith-ignore": ["drafts/*", "*~", ".#"],
     "metalsmith-assets": {
       "source": "./assets",
       "destination": "."
