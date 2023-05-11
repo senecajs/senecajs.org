@@ -31,7 +31,7 @@ Group description: <%=allPlugins[group].XdescX%>. This will be a longer descript
 let groupNav = '<div>'
 Object.keys(allPlugins).forEach(function (group) {
   groupNav += '<table><tr style="background-color:#f0f0f0"><td style="background-color:#505050">'
-  groupNav += '<h4>'+group+'</h4><p>'+allPlugins[group].XdescX+' This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminplogy should be decided between group/family/clan/etc.</p></td><td style="background-color:#909090"><dl>'
+  groupNav += '<h4>'+group+'</h4><p>'+allPlugins[group].XdescX+' This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc.</p></td><td style="background-color:#909090"><dl>'
   Object.keys(allPlugins[group]).forEach(function (pluginName) {
     if('XdescX' == pluginName) {return}
     let plugin = allPlugins[group][pluginName]
