@@ -15,6 +15,19 @@ let pkgjson = require('./package.json')
 Object.keys(pkgjson.dependencies).forEach((dep) => {
   // npm fields: name, title, org_repo, desc
   let pkg = require('./node_modules/' + dep + '/package.json')
+  // pkg.name
+  let title = pkg.name
+  switch (pkg.name[0]) {
+    case '@':
+      title = title.slice(8)
+      break
+    case 's':
+      title = title.slice(7)
+      break
+    default:
+      break
+  }
+  // org_repo
   let giturl = ''
   if (typeof pkg.repository != 'undefined') {
     let gitslash = pkg.repository.url.split('/')
@@ -31,7 +44,7 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
     }
   }
   pluginData[pkg.name] = {
-    title: pkg.name,
+    title: title,
     org_repo: giturl,
     description: pkg.description,
   }
