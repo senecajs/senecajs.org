@@ -28,16 +28,16 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
       break
   }
   // org_repo
-  let giturl = ''
+  let org_repo = ''
   if (typeof pkg.repository != 'undefined') {
-    let gitslash = pkg.repository.url.split('/')
-    switch (gitslash.length) {
+    let giturl = pkg.repository.url.split('/')
+    switch (giturl.length) {
       case 5:
-        giturl = gitslash[3] + '/' + gitslash[4].split('.')[0]
+        org_repo = giturl[3] + '/' + giturl[4].split('.')[0]
         break
       case 2:
-        let gitdot = pkg.repository.url.split('.')
-        giturl = gitdot[1].split(':')[1]
+        giturl = pkg.repository.url.split('.')
+        org_repo = giturl[1].split(':')[1]
         break
       default:
         break
@@ -45,7 +45,7 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
   }
   pluginData[pkg.name] = {
     title: title,
-    org_repo: giturl,
+    org_repo: org_repo,
     description: pkg.description,
   }
   // ejs fields: badges, badges urls
