@@ -10,6 +10,7 @@
 // Write string data to file in /plugins-2023 to be included in another file in that dir
 
 const fs = require('fs')
+const jsonic = require('jsonic')
 
 let pluginData = {}
 let eplugins = {}
@@ -54,11 +55,10 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
   // ejs fields: badges, badges urls
   pluginData[pkg.name].main = pkg.main
   let ejs = fs.readFileSync('./src/pages/plugins-2023/plugins.ejs').toString()
-  ejsStr = ejs.slice(15, -2)
-  let eplugins = JSON.parse(ejsStr)
+  ejsStr = ejs.slice(16, -2)
+  let eplugins = jsonic(ejsStr)
+  console.log(eplugins)
 })
-
-console.log(eplugins)
 
 // Group name: ejs
 // Group desc: ejs
