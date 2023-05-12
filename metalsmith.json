@@ -3,11 +3,7 @@
   "destination": "dist",
   "plugins": {
     "metalsmith-drafts": true,
-    "metalsmith-ignore": [
-      "drafts/*",
-      "*~",
-      ".#"
-    ],
+    "metalsmith-ignore": ["drafts/*", "*~", ".#"],
     "metalsmith-assets": {
       "source": "./assets",
       "destination": "."
@@ -36,10 +32,7 @@
       "default": "content.html"
     },
     "metalsmith-move-up": {
-     "pattern": [
-      "pages/**",
-      "images/favicon.ico"
-    ]
+      "pattern": ["pages/**", "images/favicon.ico"]
     }
   },
   "metalsmith-broken-link-checker": {
