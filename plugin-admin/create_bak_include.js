@@ -18,10 +18,16 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
   let giturl = ''
   if (typeof pkg.repository != 'undefined') {
     let gitslash = pkg.repository.url.split('/')
-    if (typeof gitslash[4] != 'undefined') {
-      giturl = gitslash[3] + '/' + gitslash[4].split('.')[0]
-    } else {
-      console.log(gitslash)
+    switch (gitslash.length) {
+      case 5:
+        giturl = gitslash[3] + '/' + gitslash[4].split('.')[0]
+        break
+      case 2:
+        let gitdot = pkg.repository.url.split('.')
+        giturl = gitdot[1].split(':')[1]
+        break
+      default:
+        break
     }
   }
   pluginData[pkg.name] = {
