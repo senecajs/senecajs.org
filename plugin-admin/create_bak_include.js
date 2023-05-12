@@ -9,7 +9,10 @@
 // Convert data to string to send
 // Write string data to file in /plugins-2023 to be included in another file in that dir
 
+const fs = require('fs')
+
 let pluginData = {}
+let eplugins = {}
 
 let pkgjson = require('./package.json')
 Object.keys(pkgjson.dependencies).forEach((dep) => {
@@ -50,8 +53,12 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
   }
   // ejs fields: badges, badges urls
   pluginData[pkg.name].main = pkg.main
+  let ejs = fs.readFileSync('./src/pages/plugins-2023/plugins.ejs').toString()
+  ejsStr = ejs.slice(15, -2)
+  let eplugins = JSON.parse(ejsStr)
 })
-console.log(pluginData)
+
+console.log(eplugins)
 
 // Group name: ejs
 // Group desc: ejs
