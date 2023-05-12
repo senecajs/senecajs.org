@@ -13,7 +13,7 @@ const fs = require('fs')
 const jsonic = require('jsonic')
 
 let pluginData = {}
-let eplugins = {}
+let pluginNoGroup = {}
 
 let pkgjson = require('./package.json')
 Object.keys(pkgjson.dependencies).forEach((dep) => {
@@ -58,14 +58,18 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
   ejsStr = ejs.slice(16, -2)
   let eplugins = jsonic(ejsStr)
   // get group from package title
-  if (title.split('')) {
-  }
-  pluginData.badges = {
-    deepscan_url: eplugins,
-    eepscan_badge: '',
-    maintainability_badge: '',
-  }
+  pluginNoGroup = Object.values(eplugins)
+
+  // if (title.split('')) {
+  // }
+  // pluginData.badges = {
+  //   deepscan_url: eplugins,
+  //   eepscan_badge: '',
+  //   maintainability_badge: '',
+  // }
 })
+
+console.log(pluginNoGroup[0])
 
 // Group name: ejs
 // Group desc: ejs
