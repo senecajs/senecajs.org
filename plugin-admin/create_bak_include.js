@@ -13,22 +13,24 @@ let pluginData = {}
 
 let pkgjson = require('./package.json')
 Object.keys(pkgjson.dependencies).forEach((dep) => {
+  // npm fields: name, title, org_repo, desc
   let pkg = require('./node_modules/' + dep + '/package.json')
   console.log(Object.keys(pkg))
   pluginData[pkg.name] = {
     description: pkg.description,
     version: pkg.version,
   }
+  // ejs fields: badges, badges urls
 })
 console.log(pluginData)
 
 // Group name: ejs
 // Group desc: ejs
-// name: npm
-// title: ejs/npm string manipulation (go with npm)
-// org_repo: npm
-// desc: npm
-// badges: ejs
-// deepscan_url: ejs
-// deepscan_badge: ejs
-// maintainability_badge: ejs
+//   name: npm
+//   title: ejs/npm string manipulation (go with npm)
+//   org_repo: npm
+//   desc: npm
+//   badges: ejs
+//   deepscan_url: ejs
+//   deepscan_badge: ejs
+//   maintainability_badge: ejs
