@@ -57,7 +57,14 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
   let ejs = fs.readFileSync('./src/pages/plugins-2023/plugins.ejs').toString()
   ejsStr = ejs.slice(16, -2)
   let eplugins = jsonic(ejsStr)
-  console.log(eplugins)
+  // get group from package title
+  if (title.split('')) {
+  }
+  pluginData.badges = {
+    deepscan_url: eplugins,
+    eepscan_badge: '',
+    maintainability_badge: '',
+  }
 })
 
 // Group name: ejs
