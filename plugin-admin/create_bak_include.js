@@ -48,7 +48,7 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
   pluginData[pkg.name] = {
     title: title,
     org_repo: org_repo,
-    description: pkg.description,
+    desc: pkg.description,
   }
 })
 
