@@ -51,6 +51,7 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
     description: pkg.description,
   }
 })
+
 // ejs fields: badges, badges urls
 let ejs = fs.readFileSync('../src/pages/plugins-2023/plugins.ejs').toString()
 ejsStr = ejs.slice(16, -2)
@@ -84,3 +85,15 @@ pluginGroups.forEach((groupName) => {
     delete pluginData[groupName]
   }
 })
+
+let bak_include = `<%pluginsBak = ${JSON.stringify(pluginData)}%>`
+fs.writeFile(
+  '../src/pages/plugins-2023/plugins_bak.ejs',
+  bak_include,
+  (err) => {
+    if (err) throw err
+    console.log(
+      'Backup plugins EJS file successfully written to src/pages/plugins-2023 directory.'
+    )
+  }
+)
