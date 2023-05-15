@@ -13,6 +13,27 @@ On this page, we provide an `npm` link and total downloads per month for any plu
 we find or publish ourselves, so you only need to look in one place.
 
 <!-- Plugin groups -->
+<!-- Plugin groups v3 -->
+<%
+let v3groups = '<table><tr>'
+let v3 = 1
+Object.keys(allPlugins).forEach(function (group) {%>
+  ### <%=group%>
+  <%Object.keys(allPlugins[group]).forEach(function (pluginName) {
+    if('XdescX' == pluginName) {return}
+    let plugin = allPlugins[group][pluginName]
+    v3groups += `<td><h5>${plugin.title}</h5><h6>${plugin.desc}</h6></td>`
+    if (0 == v3%2) {
+      v3groups += '</tr><tr>'
+    }
+    v3++
+  })
+  v3groups += '</tr></table>'%>
+  <%-v3groups%>
+<%})%>
+
+
+<!-- Plugin groups v1 -->
 <%Object.keys(allPlugins).forEach(function (group) {%>
 ### Group name: <%=group%>
 Group description: <%=allPlugins[group].XdescX%>. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc
@@ -21,7 +42,7 @@ Group description: <%=allPlugins[group].XdescX%>. This will be a longer descript
   if('XdescX' == pluginName) {return}
   let plugin = allPlugins[group][pluginName]%>
 - <%=plugin.title%>
-  - <%=plugin.desc%>. This will be a short description taken from the package.json file.
+  - <%=plugin.desc%>
 
 <%  })%>
 <%})%>
@@ -35,7 +56,7 @@ Object.keys(allPlugins).forEach(function (group) {
   Object.keys(allPlugins[group]).forEach(function (pluginName) {
     if('XdescX' == pluginName) {return}
     let plugin = allPlugins[group][pluginName]
-    groupNav += '<dt>'+plugin.title+'</dt><dd>'+plugin.desc+' This will be a short description taken from the package.json file.</dd>'
+    groupNav += '<dt>'+plugin.title+'</dt><dd>'+plugin.desc+'</dd>'
   })
   groupNav += '</dl></td></tr></table>'
 })
