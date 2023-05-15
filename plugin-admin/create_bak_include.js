@@ -8,12 +8,12 @@
 // End for
 // Convert data to string to send
 // Write string data to file in /plugins-2023 to be included in another file in that dir
-
 const fs = require('fs')
+const path = require('path')
 const jsonic = require('jsonic')
 
 let pluginData = {}
-let pluginNoGroup = {}
+let ejsObj = {}
 
 let pkgjson = require('./package.json')
 Object.keys(pkgjson.dependencies).forEach((dep) => {
@@ -54,22 +54,29 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
   }
   // ejs fields: badges, badges urls
   pluginData[pkg.name].main = pkg.main
-  let ejs = fs.readFileSync('./src/pages/plugins-2023/plugins.ejs').toString()
+  let ejs = fs.readFileSync('../src/pages/plugins-2023/plugins.ejs').toString()
   ejsStr = ejs.slice(16, -2)
   let eplugins = jsonic(ejsStr)
   // get group from package title
-  pluginNoGroup = Object.values(eplugins)
+  pluginsInGroup = Object.values(eplugins)
+  pluginsInGroup.forEach((group) => {
+    pluginNames = Object.keys(group)
+    pluginNames.forEach((plugin) => {
+      if ('XdescX' == plugin) {
+        return
+      }
+      ejsObj[plugin] = group[plugin]
+    })
+  })
 
-  // if (title.split('')) {
-  // }
-  // pluginData.badges = {
-  //   deepscan_url: eplugins,
-  //   eepscan_badge: '',
-  //   maintainability_badge: '',
-  // }
+  pluginData[pkg.name].badges = ejsObj[pkg.name].badges
+  pluginData[pkg.name].deepscan_url = ejsObj[pkg.name].deepscan_url
+  pluginData[pkg.name].deepscan_badge = ejsObj[pkg.name].deepscan_badge
+  pluginData[pkg.name].maintainability_badge =
+    ejsObj[pkg.name].maintainability_badge
 })
 
-console.log(pluginNoGroup[0])
+console.log(pluginData)
 
 // Group name: ejs
 // Group desc: ejs
