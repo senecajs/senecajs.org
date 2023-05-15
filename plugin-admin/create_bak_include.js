@@ -86,7 +86,7 @@ pluginGroups.forEach((groupName) => {
   }
 })
 
-let bak_include = `<%pluginsBak = ${JSON.stringify(pluginData)}%>`
+let bak_include = `<%allPlugins = ${JSON.stringify(pluginData)}%>`
 fs.writeFile(
   '../src/pages/plugins-2023/plugins_bak.ejs',
   bak_include,
