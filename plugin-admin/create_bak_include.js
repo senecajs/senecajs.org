@@ -9,11 +9,9 @@
 // Convert data to string to send
 // Write string data to file in /plugins-2023 to be included in another file in that dir
 const fs = require('fs')
-const path = require('path')
 const jsonic = require('jsonic')
 
 let pluginData = {}
-let ejsObj = {}
 
 let pkgjson = require('./package.json')
 Object.keys(pkgjson.dependencies).forEach((dep) => {
@@ -52,29 +50,47 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
     org_repo: org_repo,
     description: pkg.description,
   }
-  // ejs fields: badges, badges urls
-  pluginData[pkg.name].main = pkg.main
-  let ejs = fs.readFileSync('../src/pages/plugins-2023/plugins.ejs').toString()
-  ejsStr = ejs.slice(16, -2)
-  let eplugins = jsonic(ejsStr)
-  // get group from package title
-  pluginsInGroup = Object.values(eplugins)
-  pluginsInGroup.forEach((group) => {
-    pluginNames = Object.keys(group)
-    pluginNames.forEach((plugin) => {
-      if ('XdescX' == plugin) {
-        return
-      }
-      ejsObj[plugin] = group[plugin]
-    })
-  })
-
-  pluginData[pkg.name].badges = ejsObj[pkg.name].badges
-  pluginData[pkg.name].deepscan_url = ejsObj[pkg.name].deepscan_url
-  pluginData[pkg.name].deepscan_badge = ejsObj[pkg.name].deepscan_badge
-  pluginData[pkg.name].maintainability_badge =
-    ejsObj[pkg.name].maintainability_badge
 })
+// ejs fields: badges, badges urls
+let ejs = fs.readFileSync('../src/pages/plugins-2023/plugins.ejs').toString()
+ejsStr = ejs.slice(16, -2)
+let eplugins = jsonic(ejsStr)
+// get group from package title
+pluginGroups = Object.keys(eplugins)
+pluginGroups.forEach((groupName) => {
+  let group = eplugins[groupName]
+  pluginNames = Object.keys(group)
+  // create group object in pluginData
+  pluginData[groupName] = { XdescX: '' }
+  pluginNames.forEach((plugin) => {
+    if ('XdescX' == plugin) {
+      // add description to plugin group
+      pluginData[groupName].XdescX = group.XdescX
+      return
+    } else if (!Object.keys(pluginData).includes(plugin)) {
+      return
+    }
+    // add ejs data to plugin
+    pluginData[plugin].badges = group[plugin].badges
+    pluginData[plugin].deepscan_url = group[plugin].deepscan_url
+    pluginData[plugin].deepscan_badge = group[plugin].deepscan_badge
+    pluginData[plugin].maintainability_badge =
+      group[plugin].maintainability_badge
+    // move plugin into group
+    // ejsObj[plugin] = group[plugin]
+    pluginData[groupName][plugin] = pluginData[plugin]
+    delete pluginData[plugin]
+  })
+  if (1 == Object.keys(pluginData[groupName]).length) {
+    delete pluginData[groupName]
+  }
+})
+
+// pluginData[pkg.name].badges = ejsObj[pkg.name].badges
+// pluginData[pkg.name].deepscan_url = ejsObj[pkg.name].deepscan_url
+// pluginData[pkg.name].deepscan_badge = ejsObj[pkg.name].deepscan_badge
+// pluginData[pkg.name].maintainability_badge =
+//   ejsObj[pkg.name].maintainability_badge
 
 console.log(pluginData)
 
