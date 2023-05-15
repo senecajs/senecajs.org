@@ -77,7 +77,6 @@ pluginGroups.forEach((groupName) => {
     pluginData[plugin].maintainability_badge =
       group[plugin].maintainability_badge
     // move plugin into group
-    // ejsObj[plugin] = group[plugin]
     pluginData[groupName][plugin] = pluginData[plugin]
     delete pluginData[plugin]
   })
@@ -85,22 +84,3 @@ pluginGroups.forEach((groupName) => {
     delete pluginData[groupName]
   }
 })
-
-// pluginData[pkg.name].badges = ejsObj[pkg.name].badges
-// pluginData[pkg.name].deepscan_url = ejsObj[pkg.name].deepscan_url
-// pluginData[pkg.name].deepscan_badge = ejsObj[pkg.name].deepscan_badge
-// pluginData[pkg.name].maintainability_badge =
-//   ejsObj[pkg.name].maintainability_badge
-
-console.log(pluginData)
-
-// Group name: ejs
-// Group desc: ejs
-//   name: npm
-//   title: ejs/npm string manipulation (go with npm)
-//   org_repo: npm
-//   desc: npm
-//   badges: ejs
-//   deepscan_url: ejs
-//   deepscan_badge: ejs
-//   maintainability_badge: ejs
