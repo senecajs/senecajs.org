@@ -5,3 +5,5 @@ _site
 *~
 .DS_Store
 *.off
+
+dist/plugins-2023/plugins_*.html
