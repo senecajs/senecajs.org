@@ -12,8 +12,15 @@ Some plugins are maintained in-house, while others are provided by the community
 On this page, we provide an `npm` link and total downloads per month for any plugins
 we find or publish ourselves, so you only need to look in one place.
 
-<!-- Plugin groups -->
-<!-- Plugin groups v3 -->
+Table of contents:
+- This intro about the plugins
+- Each family name with full description, followed by block-list of each plugin in family (with short description)
+- Table of each family name with list of each plugin underneath (all links)
+- Subheadings of each family with short description
+- Each plugin with badges and description (links active)
+- 'Got a plugin to share?' section
+
+<!-- Plugin families -->
 <%
 Object.keys(allPlugins).forEach(function (group) {
 %>
@@ -30,9 +37,6 @@ Object.keys(allPlugins).forEach(function (group) {
       <div style='font-size:90%; color: teal'>${plugin.title}</div>
       <div style='font-size:80%'>${plugin.desc}</div>
     </div>`
-    // if (0 == v3%5) {
-    //   v3groups += '</div><div>'
-    // }
     v3++
   })
   v3groups += '</div>'
