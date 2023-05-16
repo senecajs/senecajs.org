@@ -20,18 +20,18 @@ Object.keys(allPlugins).forEach(function (group) {
   ### <%=group%>
   <%=allPlugins[group].XdescX%>. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc
 <%
-  let v3groups = '<table><tr>'
+  let v3groups = `<div style='display:flex; flex-flow:row wrap;'>`
   let v3 = 1
   Object.keys(allPlugins[group]).forEach(function (pluginName) {
     if('XdescX' == pluginName) {return}
     let plugin = allPlugins[group][pluginName]
-    v3groups += `<td style='padding-left:1%'><h5>${plugin.title}</h5><h6>${plugin.desc}</h6></td>`
-    if (0 == v3%5) {
-      v3groups += '</tr><tr>'
-    }
+    v3groups += `<div style='flex: 0 0 25%'><h5>${plugin.title}</h5><h6>${plugin.desc}</h6></div>`
+    // if (0 == v3%5) {
+    //   v3groups += '</div><div>'
+    // }
     v3++
   })
-  v3groups += '</tr></table>'
+  v3groups += '</div>'
 %>
   <%-v3groups%>
 <%})%>
