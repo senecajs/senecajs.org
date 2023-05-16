@@ -66,67 +66,435 @@ we find or publish ourselves, so you only need to look in one place.</p>
 
 <h3 id="cache"><a href="#cache" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>cache</h3>
 <p>  cache. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>cache</dt><dd>In-memory caching plugin for seneca</dd></dl><dl style="flex: 0 0 25%;"><dt>cache-test</dt><dd>Standard test cases for seneca caches</dd></dl><dl style="flex: 0 0 25%;"><dt>entity-cache</dt><dd>Versioned caching plugin for seneca</dd></dl><dl style="flex: 0 0 25%;"><dt>memcached-cache</dt><dd>memcached plugin for seneca</dd></dl><dl style="flex: 0 0 25%;"><dt>redis-cache</dt><dd>Redis caching plugin for seneca</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">cache</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">In-memory caching plugin for seneca</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">cache-test</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Standard test cases for seneca caches</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">entity-cache</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Versioned caching plugin for seneca</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">memcached-cache</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">memcached plugin for seneca</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">redis-cache</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Redis caching plugin for seneca</div>
+    </div></div>
 
 <h3 id="entity"><a href="#entity" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>entity</h3>
 <p>  entity. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>entity</dt><dd>Entity plugin for seneca</dd></dl><dl style="flex: 0 0 25%;"><dt>entity-depend</dt><dd></dd></dl><dl style="flex: 0 0 25%;"><dt>entity-history</dt><dd></dd></dl><dl style="flex: 0 0 25%;"><dt>entity-rtag</dt><dd>Adds a random tag to entities on each save, allowing for various caching strategies.</dd></dl><dl style="flex: 0 0 25%;"><dt>entity-util</dt><dd>Collection of optional utilities for Seneca entities.</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">entity</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Entity plugin for seneca</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">entity-depend</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB"></div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">entity-history</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB"></div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">entity-rtag</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Adds a random tag to entities on each save, allowing for various caching strategies.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">entity-util</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Collection of optional utilities for Seneca entities.</div>
+    </div></div>
 
 <h3 id="gateway"><a href="#gateway" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>gateway</h3>
 <p>  gateway. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>gateway</dt><dd>Handle incoming messages within other frameworks.</dd></dl><dl style="flex: 0 0 25%;"><dt>gateway-auth</dt><dd>Authentication support for @seneca/gateway plugins</dd></dl><dl style="flex: 0 0 25%;"><dt>gateway-express-auth</dt><dd>Provide authentication for the @seneca/gateway-express plugin.</dd></dl><dl style="flex: 0 0 25%;"><dt>gateway-express</dt><dd>Handle incoming messages within express, defining an endpoint that accepts Seneca messages.</dd></dl><dl style="flex: 0 0 25%;"><dt>gateway-lambda</dt><dd>Handle incoming messages within AWS Lambdas.</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">gateway</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within other frameworks.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">gateway-auth</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Authentication support for @seneca/gateway plugins</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">gateway-express-auth</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Provide authentication for the @seneca/gateway-express plugin.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">gateway-express</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within express, defining an endpoint that accepts Seneca messages.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">gateway-lambda</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within AWS Lambdas.</div>
+    </div></div>
 
 <h3 id="msg"><a href="#msg" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>msg</h3>
 <p>  msg. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>msg-run</dt><dd></dd></dl><dl style="flex: 0 0 25%;"><dt>msg-test</dt><dd>Structured testing of seneca plugin messages.</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">msg-run</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB"></div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">msg-test</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Structured testing of seneca plugin messages.</div>
+    </div></div>
 
 <h3 id="redis"><a href="#redis" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>redis</h3>
 <p>  redis. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>redis-queue-transport</dt><dd>Seneca Redis Queue Transport</dd></dl><dl style="flex: 0 0 25%;"><dt>redis-store</dt><dd>Redis storage layer for Seneca framework</dd></dl><dl style="flex: 0 0 25%;"><dt>redis-kv</dt><dd>Seneca plugin providing messages for a redis key-value store.</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">redis-queue-transport</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca Redis Queue Transport</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">redis-store</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Redis storage layer for Seneca framework</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">redis-kv</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin providing messages for a redis key-value store.</div>
+    </div></div>
 
 <h3 id="search"><a href="#search" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>search</h3>
 <p>  search. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>search-mini</dt><dd></dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">search-mini</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB"></div>
+    </div></div>
 
 <h3 id="telemetry"><a href="#telemetry" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>telemetry</h3>
 <p>  telemetry. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>telemetry-datadog</dt><dd>undefined</dd></dl><dl style="flex: 0 0 25%;"><dt>telemetry-newrelic</dt><dd>Handle incoming messages within other frameworks.</dd></dl><dl style="flex: 0 0 25%;"><dt>user-telemetry</dt><dd>A Seneca plugin that provides basic user telemetry operations.</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">telemetry-datadog</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">undefined</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">telemetry-newrelic</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within other frameworks.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">user-telemetry</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">A Seneca plugin that provides basic user telemetry operations.</div>
+    </div></div>
 
 <h3 id="transport"><a href="#transport" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>transport</h3>
 <p>  transport. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>transport</dt><dd>Seneca transport</dd></dl><dl style="flex: 0 0 25%;"><dt>transport-test</dt><dd>Standard test cases for Seneca transports.</dd></dl><dl style="flex: 0 0 25%;"><dt>amqp-transport</dt><dd>Official AMQP transport plugin for Seneca</dd></dl><dl style="flex: 0 0 25%;"><dt>beanstalk-transport</dt><dd>Seneca beanstalk transport</dd></dl><dl style="flex: 0 0 25%;"><dt>sns-transport</dt><dd>Seneca transport for AWS SNS</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">transport</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca transport</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">transport-test</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Standard test cases for Seneca transports.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">amqp-transport</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Official AMQP transport plugin for Seneca</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">beanstalk-transport</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca beanstalk transport</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">sns-transport</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca transport for AWS SNS</div>
+    </div></div>
 
 <h3 id="user"><a href="#user" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>user</h3>
 <p>  user. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>user</dt><dd>User management plugin for Seneca</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">user</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">User management plugin for Seneca</div>
+    </div></div>
 
 <h3 id="web"><a href="#web" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>web</h3>
 <p>  web. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>web</dt><dd>Http route mapping for Seneca microservices.</dd></dl><dl style="flex: 0 0 25%;"><dt>web-adapter-connect</dt><dd>seneca-web adapter for connect</dd></dl><dl style="flex: 0 0 25%;"><dt>web-adapter-express</dt><dd>seneca-web adapter for express</dd></dl><dl style="flex: 0 0 25%;"><dt>web-adapter-hapi</dt><dd>seneca-web adapter for hapi</dd></dl><dl style="flex: 0 0 25%;"><dt>web-adapter-koa1</dt><dd>seneca-web adapter for koa web framework (v1)</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">web</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Http route mapping for Seneca microservices.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">web-adapter-connect</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">seneca-web adapter for connect</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">web-adapter-express</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">seneca-web adapter for express</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">web-adapter-hapi</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">seneca-web adapter for hapi</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">web-adapter-koa1</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">seneca-web adapter for koa web framework (v1)</div>
+    </div></div>
 
 <h3 id="logger"><a href="#logger" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>logger</h3>
 <p>  logger. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>logentries-logger</dt><dd>Seneca Logentries Logger</dd></dl><dl style="flex: 0 0 25%;"><dt>logstash-logger</dt><dd></dd></dl><dl style="flex: 0 0 25%;"><dt>pino-logger</dt><dd>Pino logger plugin for Seneca</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">logentries-logger</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca Logentries Logger</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">logstash-logger</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB"></div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">pino-logger</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Pino logger plugin for Seneca</div>
+    </div></div>
 
 <h3 id="provider"><a href="#provider" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>provider</h3>
 <p>  provider. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>branchio-provider</dt><dd>Seneca entity provider for the Branchio API.</dd></dl><dl style="flex: 0 0 25%;"><dt>eventbrite-provider</dt><dd>Handle incoming messages within other frameworks.</dd></dl><dl style="flex: 0 0 25%;"><dt>evervault-provider</dt><dd>Seneca entity provider for the Evervault API.</dd></dl><dl style="flex: 0 0 25%;"><dt>github-provider</dt><dd>Handle incoming messages within other frameworks.</dd></dl><dl style="flex: 0 0 25%;"><dt>mixpanel-provider</dt><dd>Seneca entity provider for the Mixpanel API.</dd></dl><dl style="flex: 0 0 25%;"><dt>nordigen-provider</dt><dd>Handle incoming messages within other frameworks.</dd></dl><dl style="flex: 0 0 25%;"><dt>tangocard-provider</dt><dd>Seneca entity provider for the Tangocard API.</dd></dl><dl style="flex: 0 0 25%;"><dt>trello-provider</dt><dd>Seneca entity provider for the Trello API.</dd></dl><dl style="flex: 0 0 25%;"><dt>vercel-provider</dt><dd>Seneca entity provider for the Vercel API.</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">branchio-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca entity provider for the Branchio API.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">eventbrite-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within other frameworks.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">evervault-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca entity provider for the Evervault API.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">github-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within other frameworks.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">mixpanel-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca entity provider for the Mixpanel API.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">nordigen-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within other frameworks.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">tangocard-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca entity provider for the Tangocard API.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">trello-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca entity provider for the Trello API.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">vercel-provider</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca entity provider for the Vercel API.</div>
+    </div></div>
 
 <h3 id="store"><a href="#store" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>store</h3>
 <p>  store. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>jsonfile-store</dt><dd>Seneca data store plugin that uses plain JSON files</dd></dl><dl style="flex: 0 0 25%;"><dt>mem-store</dt><dd>Seneca in-memory data storage plugin.</dd></dl><dl style="flex: 0 0 25%;"><dt>mongo-store</dt><dd>Seneca data store plugin for MongoDB</dd></dl><dl style="flex: 0 0 25%;"><dt>mysql-store</dt><dd>MySQL database layer for Seneca framework</dd></dl><dl style="flex: 0 0 25%;"><dt>postgres-store</dt><dd>Seneca data store plugin for PostgreSQL</dd></dl><dl style="flex: 0 0 25%;"><dt>sqlite-store</dt><dd>SQLite database layer for Seneca framework</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">jsonfile-store</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca data store plugin that uses plain JSON files</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">mem-store</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca in-memory data storage plugin.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">mongo-store</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca data store plugin for MongoDB</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">mysql-store</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">MySQL database layer for Seneca framework</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">postgres-store</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca data store plugin for PostgreSQL</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">sqlite-store</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">SQLite database layer for Seneca framework</div>
+    </div></div>
 
 <h3 id="test"><a href="#test" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>test</h3>
 <p>  test. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>error-test</dt><dd>Seneca error test.</dd></dl><dl style="flex: 0 0 25%;"><dt>store-test</dt><dd>Standard test cases for seneca stores</dd></dl><dl style="flex: 0 0 25%;"><dt>test-plugin</dt><dd>Test Seneca plugin.</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">error-test</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca error test.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">store-test</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Standard test cases for seneca stores</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">test-plugin</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Test Seneca plugin.</div>
+    </div></div>
 
 <h3 id="registry"><a href="#registry" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>registry</h3>
 <p>  registry. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>registry</dt><dd>Seneca service registry (simplistic single instance).</dd></dl><dl style="flex: 0 0 25%;"><dt>consul-registry</dt><dd>Seneca key value registry for Consul.</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">registry</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca service registry (simplistic single instance).</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">consul-registry</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca key value registry for Consul.</div>
+    </div></div>
 
 <h3 id="xxx"><a href="#xxx" class="linkable" style="margin-left:-2rem; margin-right:1rem; display:inline-block;font-size:1.2rem;color:rgba(41, 125, 134, 0.20);text-decoration:none;vertical-align:middle">&#xA7;</a>XXX</h3>
 <p>  various. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them. Terminology should be decided between group/family/clan/etc</p>
-  <div style="display:flex; flex-flow:row wrap; "><dl style="flex: 0 0 25%;"><dt>flame</dt><dd>Handle incoming messages within other frameworks.</dd></dl><dl style="flex: 0 0 25%;"><dt>debug</dt><dd>Seneca plugin for debugging Seneca-based systems.</dd></dl><dl style="flex: 0 0 25%;"><dt>basic</dt><dd>Seneca utility plugin.</dd></dl><dl style="flex: 0 0 25%;"><dt>ledger</dt><dd>Ledger business logic plugin for the Seneca platform.</dd></dl><dl style="flex: 0 0 25%;"><dt>maintain</dt><dd>Run maintenance tests for Seneca plugins.</dd></dl><dl style="flex: 0 0 25%;"><dt>request</dt><dd>Outbound Web Request Plugin for Seneca</dd></dl><dl style="flex: 0 0 25%;"><dt>mail</dt><dd>Seneca email plugin</dd></dl><dl style="flex: 0 0 25%;"><dt>balance-client</dt><dd>Seneca client-side load balancing transport.</dd></dl><dl style="flex: 0 0 25%;"><dt>graph</dt><dd>A Seneca plugin that provides basic graph operations.</dd></dl><dl style="flex: 0 0 25%;"><dt>repl</dt><dd>Provides a client and server REPL for Seneca microservice systems.</dd></dl><dl style="flex: 0 0 25%;"><dt>refer</dt><dd>User Referral business logic plugin for the Seneca platform.</dd></dl><dl style="flex: 0 0 25%;"><dt>browser</dt><dd>Seneca for the browser.</dd></dl><dl style="flex: 0 0 25%;"><dt>flow</dt><dd>Workflow operations and data model.</dd></dl><dl style="flex: 0 0 25%;"><dt>vote</dt><dd></dd></dl><dl style="flex: 0 0 25%;"><dt>env</dt><dd>Handle incoming messages within other frameworks.</dd></dl><dl style="flex: 0 0 25%;"><dt>allow</dt><dd>Allow messages to proceed if they meet certain criteria</dd></dl><dl style="flex: 0 0 25%;"><dt>apikey</dt><dd>Apikey management plugin for Seneca</dd></dl><dl style="flex: 0 0 25%;"><dt>joi</dt><dd>Seneca plugin that provides joi message validation.</dd></dl><dl style="flex: 0 0 25%;"><dt>kv</dt><dd>Seneca plugin providing messages for a generic key-value store.</dd></dl><dl style="flex: 0 0 25%;"><dt>log-filter</dt><dd>Seneca log filtering module</dd></dl><dl style="flex: 0 0 25%;"><dt>auth</dt><dd>User authentication plugin for the seneca module.</dd></dl><dl style="flex: 0 0 25%;"><dt>parambulator</dt><dd>Seneca plugin that provides parambulator message validation.</dd></dl><dl style="flex: 0 0 25%;"><dt>config</dt><dd></dd></dl><dl style="flex: 0 0 25%;"><dt>doc</dt><dd>Documentation helper for Seneca plugins.</dd></dl><dl style="flex: 0 0 25%;"><dt>group</dt><dd>Seneca plugin for user and group permissions.</dd></dl><dl style="flex: 0 0 25%;"><dt>hapi</dt><dd>Seneca plugin for hapi-based systems.</dd></dl><dl style="flex: 0 0 25%;"><dt>external</dt><dd>Handle external Seneca messages safely.</dd></dl><dl style="flex: 0 0 25%;"><dt>populate</dt><dd>Seneca plugin for user and populate permissions.</dd></dl><dl style="flex: 0 0 25%;"><dt>monitor</dt><dd>seneca-monitor</dd></dl><dl style="flex: 0 0 25%;"><dt>owner</dt><dd>Seneca plugin to add user ownership annotations to entities.</dd></dl><dl style="flex: 0 0 25%;"><dt>promisify</dt><dd>Seneca plugin for user and promisify permissions.</dd></dl><dl style="flex: 0 0 25%;"><dt>member</dt><dd>Seneca plugin for generic membership.</dd></dl><dl style="flex: 0 0 25%;"><dt>sendgrid-mail</dt><dd>Seneca SendGrid email plugin</dd></dl><dl style="flex: 0 0 25%;"><dt>srv-admin</dt><dd>Service administration</dd></dl></div>
+  <div style="display:flex; flex-flow:row wrap; justify-content: space-between; border: 1px solid #444444">
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">flame</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within other frameworks.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">debug</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin for debugging Seneca-based systems.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">basic</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca utility plugin.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">ledger</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Ledger business logic plugin for the Seneca platform.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">maintain</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Run maintenance tests for Seneca plugins.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">request</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Outbound Web Request Plugin for Seneca</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">mail</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca email plugin</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">balance-client</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca client-side load balancing transport.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">graph</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">A Seneca plugin that provides basic graph operations.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">repl</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Provides a client and server REPL for Seneca microservice systems.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">refer</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">User Referral business logic plugin for the Seneca platform.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">browser</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca for the browser.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">flow</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Workflow operations and data model.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">vote</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB"></div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">env</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle incoming messages within other frameworks.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">allow</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Allow messages to proceed if they meet certain criteria</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">apikey</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Apikey management plugin for Seneca</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">joi</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin that provides joi message validation.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">kv</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin providing messages for a generic key-value store.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">log-filter</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca log filtering module</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">auth</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">User authentication plugin for the seneca module.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">parambulator</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin that provides parambulator message validation.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">config</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB"></div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">doc</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Documentation helper for Seneca plugins.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">group</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin for user and group permissions.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">hapi</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin for hapi-based systems.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">external</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Handle external Seneca messages safely.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">populate</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin for user and populate permissions.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">monitor</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">seneca-monitor</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">owner</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin to add user ownership annotations to entities.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">promisify</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin for user and promisify permissions.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">member</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca plugin for generic membership.</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">sendgrid-mail</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Seneca SendGrid email plugin</div>
+    </div>
+    <div style="flex: 0 0 24%; margin-bottom: 1vw; border: 1px solid #AAAAAA">
+      <div style="font-size:90%; border: 1px solid #888888">srv-admin</div>
+      <div style="font-size:80%; border: 1px solid #BBBBBB">Service administration</div>
+    </div></div>
 
 
 
