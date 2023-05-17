@@ -1,13 +1,4 @@
-// Create empty object structure
-// Read plugins.ejs object in here and save as local variable
-// For each dep in package.json (as we don't want the ones not on npm):
-//   NOTE: scoped packages under node_modules/@seneca/title, unscoped under node_modules/name
-//   Write relevant information from package.json (stored in node_modules folder) to object
-//   Write relevant information not found in package.json from plugins.ejs variable to object
-//   NOTE: how to get groups if not every plugin.ejs is going in?
-// End for
-// Convert data to string to send
-// Write string data to file in /plugins-2023 to be included in another file in that dir
+// Generate plugin data file from npm node_modules and previous manually created plugin data file
 const fs = require('fs')
 const jsonic = require('jsonic')
 
@@ -17,7 +8,6 @@ let pkgjson = require('./package.json')
 Object.keys(pkgjson.dependencies).forEach((dep) => {
   // npm fields: name, title, org_repo, desc
   let pkg = require('./node_modules/' + dep + '/package.json')
-  // pkg.name
   let title = pkg.name
   switch (pkg.name[0]) {
     case '@':
@@ -29,7 +19,6 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
     default:
       break
   }
-  // org_repo
   let org_repo = ''
   if (typeof pkg.repository != 'undefined') {
     let giturl = pkg.repository.url.split('/')
@@ -58,28 +47,23 @@ let ejs = fs
   .toString()
 ejsStr = ejs.slice(16, -2)
 let eplugins = jsonic(ejsStr)
-// get group from package title
 pluginGroups = Object.keys(eplugins)
 pluginGroups.forEach((groupName) => {
   let group = eplugins[groupName]
   pluginNames = Object.keys(group)
-  // create group object in pluginData
   pluginData[groupName] = { XdescX: '' }
   pluginNames.forEach((plugin) => {
     if ('XdescX' == plugin) {
-      // add description to plugin group
       pluginData[groupName].XdescX = group.XdescX
       return
     } else if (!Object.keys(pluginData).includes(plugin)) {
       return
     }
-    // add ejs data to plugin
     pluginData[plugin].badges = group[plugin].badges
     pluginData[plugin].deepscan_url = group[plugin].deepscan_url
     pluginData[plugin].deepscan_badge = group[plugin].deepscan_badge
     pluginData[plugin].maintainability_badge =
       group[plugin].maintainability_badge
-    // move plugin into group
     pluginData[groupName][plugin] = pluginData[plugin]
     delete pluginData[plugin]
   })
