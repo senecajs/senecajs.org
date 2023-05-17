@@ -26,7 +26,7 @@ Object.values(pkgmap).forEach((pkg) => {
       break
   }
   let org_repo = ''
-  if (typeof pkg.repository != 'undefined') {
+  if (null != pkg.repository) {
     let giturl = pkg.repository.url.split('/')
     switch (giturl.length) {
       case 5:
