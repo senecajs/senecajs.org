@@ -5,9 +5,15 @@ const jsonic = require('jsonic')
 let pluginData = {}
 
 let pkgjson = require('./package.json')
-Object.keys(pkgjson.dependencies).forEach((dep) => {
+const pkgmap = Object.keys(pkgjson.dependencies).reduce(
+  (pkgmap, dep) => (
+    (pkgmap[dep] = require('./node_modules/' + dep + '/package.json')), pkgmap
+  ),
+  {}
+)
+
+Object.values(pkgmap).forEach((pkg) => {
   // npm fields: name, title, org_repo, desc
-  let pkg = require('./node_modules/' + dep + '/package.json')
   let title = pkg.name
   switch (pkg.name[0]) {
     case '@':
@@ -43,7 +49,7 @@ Object.keys(pkgjson.dependencies).forEach((dep) => {
 
 // ejs fields: badges, badges urls
 let ejs = fs
-  .readFileSync('../src/pages/plugins-2023/plugins_man.ejs')
+  .readFileSync('../src/pages/plugins-2023/plugins_manual.ejs')
   .toString()
 ejsStr = ejs.slice(16, -2)
 let eplugins = jsonic(ejsStr)
