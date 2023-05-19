@@ -16,11 +16,12 @@ Object.values(pkgmap).forEach((pkg) => {
   // npm fields: name, title, org_repo, desc
   let title_match = pkg.name.match(/^@?seneca[-|/]([a-z|-]+)/)
   let title = title_match ? title_match[1] : pkg.name
+  let org_repo = pkg.name
   if (null != pkg.repository) {
     let orgrepo_match = pkg.repository.url.match(
       /[a-z]+:\/\/github.com\/([a-z]+\/[a-z|-]+).git/
     )
-    let org_repo = orgrepo_match ? orgrepo_match[1] : pkg.name
+    org_repo = orgrepo_match ? orgrepo_match[1] : pkg.name
   }
   pluginData[pkg.name] = {
     title: title,
