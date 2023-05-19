@@ -14,22 +14,23 @@ we find or publish ourselves, so you only need to look in one place.
 
 Table of contents:
 - This intro about the plugins
+- Block list of families with description, link to full description block
 - Each family name with full description, followed by block-list of each plugin in family (with short description)
-- Table of each family name with list of each plugin underneath (all links)
 - Subheadings of each family with short description
 - Each plugin with badges and description (links active)
 - 'Got a plugin to share?' section
 
 <!-- List of families -->
 ## Plugin Families
+*Click to see further description and plugin list*
 <%
 let familyList = `<div style='display:flex; flex-flow:row wrap;'>`
 Object.keys(allPlugins).forEach(function (group) {
   let family = allPlugins[group]
   familyList += `
-  <div style='flex: 0 0 24%; margin-bottom: 1%; margin-right: 1%; padding-left: 0.2%; padding-right:0.2%; border: 2px solid teal; border-radius: 5px'>
-    <div style='font-size:90%; color: teal'>${group}</div>
-    <div style='font-size:80%'>${family.XdescX}</div>
+  <div style='flex: 0 0 49%; margin-bottom: 1%; margin-right: 1%; padding-left: 0.2%; padding-right:0.2%; border: 2px solid teal; border-radius: 5px'>
+    <div style='font-size:90%; color: teal; text-transform: uppercase;'><a href='#family_${group}'>${group}</a></div>
+    <div style='font-size:80%'>${family.XdescX}. Longer description to be added to plugins_def file.</div>
   </div>
   `
 })
@@ -38,10 +39,12 @@ familyList += '</div>'
 <%-familyList%>
 
 <!-- Plugin families -->
+## Family Descriptions
 <%
 Object.keys(allPlugins).forEach(function (group) {
+  let groupName = `<span id='family_${group}'>${group}</span>`
 %>
-  ### <%=group%>
+  ### <%-groupName%>
   <%=allPlugins[group].XdescX%>. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them.
 <%
   let v3groups = `<div style='display:flex; flex-flow:row wrap;'>`
@@ -49,9 +52,9 @@ Object.keys(allPlugins).forEach(function (group) {
     if('XdescX' == pluginName) {return}
     let plugin = allPlugins[group][pluginName]
     v3groups += `
-    <div style='flex: 0 0 24%; margin-bottom: 1%; margin-right: 1%; padding-left: 0.2%; padding-right:0.2%; border: 2px solid teal; border-radius: 5px'>
+    <div style='flex: 0 0 24%; margin-bottom: 1%; margin-right: 1%; padding-left: 0.2%; padding-right:0.2%; border: 2px solid teal; border-radius: 5px;'>
       <div style='font-size:90%; color: teal'>${plugin.title}</div>
-      <div style='font-size:80%'>${plugin.desc}</div>
+      <div style='font-size:80%;'>${plugin.desc}</div>
     </div>`
   })
   v3groups += '</div>'
@@ -73,7 +76,7 @@ Description about **<%=group%> plugins**. Current description is <%=allPlugins[g
 ### [<%=plugin.title%>](<%=plugin.npm_link%>)
 
 <!-- Newlines removed for formatting reasons, add them back in at 'percent><percent' for editing -->
-<%if(plugin.badges.includes('npm')){%>[![npm](https://img.shields.io/npm/v/<%=pluginName%>.svg)](https://www.npmjs.com/package/<%=pluginName%>)<%}%><%if(plugin.badges.includes('build')){%>[![Build](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml/badge.svg)](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml)<%}%><%if(plugin.badges.includes('coverage')){%>[![Coverage Status](https://coveralls.io/repos/github/<%=plugin.org_repo%>/badge.svg?branch=master)](https://coveralls.io/github/<%=plugin.org_repo%>?branch=master)<%}%><%if(plugin.badges.includes('vulnerability')){%>[![Known Vulnerabilities](https://snyk.io/test/github/<%=plugin.org_repo%>/badge.svg)](https://snyk.io/test/github/<%=plugin.org_repo%>)<%}%><%if(plugin.badges.includes('deepscan')){%>[![DeepScan Grade](<%=plugin.deepscan_badge%>)](<%=plugin.deepscan_url%>)<%}%><%if(plugin.badges.includes('maintainability')){%>[![Maintainability](<%=plugin.maintainability_badge%>)](https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability)<%}%>
+<%if(plugin.badges.includes('npm')){%>[![npm](https://img.shields.io/npm/v/<%=pluginName%>.svg)](https://www.npmjs.com/package/<%=pluginName%>)<%}%> <%if(plugin.badges.includes('build')){%>[![Build](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml/badge.svg)](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml)<%}%> <%if(plugin.badges.includes('coverage')){%>[![Coverage Status](https://coveralls.io/repos/github/<%=plugin.org_repo%>/badge.svg?branch=master)](https://coveralls.io/github/<%=plugin.org_repo%>?branch=master)<%}%> <%if(plugin.badges.includes('vulnerability')){%>[![Known Vulnerabilities](https://snyk.io/test/github/<%=plugin.org_repo%>/badge.svg)](https://snyk.io/test/github/<%=plugin.org_repo%>)<%}%> <%if(plugin.badges.includes('deepscan')){%>[![DeepScan Grade](<%=plugin.deepscan_badge%>)](<%=plugin.deepscan_url%>)<%}%> <%if(plugin.badges.includes('maintainability')){%>[![Maintainability](<%=plugin.maintainability_badge%>)](https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability)<%}%>
 
 <%=plugin.desc%>
 <% })%>
