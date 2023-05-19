@@ -14,17 +14,8 @@ const pkgmap = Object.keys(pkgjson.dependencies).reduce(
 
 Object.values(pkgmap).forEach((pkg) => {
   // npm fields: name, title, org_repo, desc
-  let title = pkg.name
-  switch (pkg.name[0]) {
-    case '@':
-      title = title.slice(8)
-      break
-    case 's':
-      title = title.slice(7)
-      break
-    default:
-      break
-  }
+  let title_match = pkg.name.match(/^@?seneca[-|/]([a-z|-]+)/)
+  let title = title_match ? title_match[1] : pkg.name
   let org_repo = ''
   if (null != pkg.repository) {
     let giturl = pkg.repository.url.split('/')
