@@ -16,20 +16,11 @@ Object.values(pkgmap).forEach((pkg) => {
   // npm fields: name, title, org_repo, desc
   let title_match = pkg.name.match(/^@?seneca[-|/]([a-z|-]+)/)
   let title = title_match ? title_match[1] : pkg.name
-  let org_repo = ''
   if (null != pkg.repository) {
-    let giturl = pkg.repository.url.split('/')
-    switch (giturl.length) {
-      case 5:
-        org_repo = giturl[3] + '/' + giturl[4].split('.')[0]
-        break
-      case 2:
-        giturl = pkg.repository.url.split('.')
-        org_repo = giturl[1].split(':')[1]
-        break
-      default:
-        break
-    }
+    let orgrepo_match = pkg.repository.url.match(
+      /[a-z]+:\/\/github.com\/([a-z]+\/[a-z|-]+).git/
+    )
+    let org_repo = orgrepo_match ? orgrepo_match[1] : pkg.name
   }
   pluginData[pkg.name] = {
     title: title,
