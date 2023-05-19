@@ -31,7 +31,7 @@ Object.values(pkgmap).forEach((pkg) => {
 
 // ejs fields: badges, badges urls
 let ejs = fs
-  .readFileSync('../src/pages/plugins-2023/plugins_manual.ejs')
+  .readFileSync('../src/pages/plugins-2023/plugins_def.ejs')
   .toString()
 ejsStr = ejs.slice(16, -2)
 let eplugins = jsonic(ejsStr)
