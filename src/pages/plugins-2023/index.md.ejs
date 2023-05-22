@@ -78,8 +78,29 @@ Description about **<%=group%> plugins**. Current description is <%=allPlugins[g
 %>
 ### [<%=plugin.title%>](<%=plugin.npm_link%>)
 
-<!-- Newlines removed for formatting reasons, add them back in at 'percent><percent' for editing -->
-<%if(plugin.badges.includes('npm')){%>[![npm](https://img.shields.io/npm/v/<%=pluginName%>.svg)](https://www.npmjs.com/package/<%=pluginName%>)<%}%> <%if(plugin.badges.includes('build')){%>[![Build](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml/badge.svg)](https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml)<%}%> <%if(plugin.badges.includes('coverage')){%>[![Coverage Status](https://coveralls.io/repos/github/<%=plugin.org_repo%>/badge.svg?branch=master)](https://coveralls.io/github/<%=plugin.org_repo%>?branch=master)<%}%> <%if(plugin.badges.includes('vulnerability')){%>[![Known Vulnerabilities](https://snyk.io/test/github/<%=plugin.org_repo%>/badge.svg)](https://snyk.io/test/github/<%=plugin.org_repo%>)<%}%> <%if(plugin.badges.includes('deepscan')){%>[![DeepScan Grade](<%=plugin.deepscan_badge%>)](<%=plugin.deepscan_url%>)<%}%> <%if(plugin.badges.includes('maintainability')){%>[![Maintainability](<%=plugin.maintainability_badge%>)](https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability)<%}%>
+<%
+let badges = ''
+
+if(plugin.badges.includes('npm')){
+  badges += `<a href='https://www.npmjs.com/package/${pluginName}'><img src='https://img.shields.io/npm/v/${pluginName}.svg' alt='npm'></a>`
+}
+if(plugin.badges.includes('build')){
+  badges += `<a href='https://github.com/${plugin.org_repo}/actions/workflows/build.yml'><img src='https://github.com/${plugin.org_repo}/actions/workflows/build.yml/badge.svg' alt='Build'></a>`
+}
+if(plugin.badges.includes('coverage')){
+  badges += `<a href='https://coveralls.io/github/${plugin.org_repo}?branch=master'><img src='https://coveralls.io/repos/github/${plugin.org_repo}/badge.svg?branch=master' alt='Coverage Status'></a>`
+}
+if(plugin.badges.includes('vulnerability')){
+  badges += `<a href='https://snyk.io/test/github/${plugin.org_repo}'><img src='https://snyk.io/test/github/${plugin.org_repo}/badge.svg' alt='Known Vulnerabilities'></a>`
+}
+if(plugin.badges.includes('deepscan')){
+  badges += `<a href='${plugin.deepscan_url}'><img src='${plugin.deepscan_badge}' alt='DeepScan Grade'></a>`
+}
+if(plugin.badges.includes('maintainability')){
+  badges += `<a href='https://codeclimate.com/github/${plugin.org_repo}/maintainability'><img src='${plugin.maintainability_badge}' alt='Maintainability'></a>`
+}
+%>
+<%-badges%>
 
 <%=plugin.desc%>
 <% })%>
