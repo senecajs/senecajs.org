@@ -42,7 +42,7 @@ familyList += '</div>'
 ## Family Descriptions
 <%
 Object.keys(allPlugins).forEach(function (group) {
-  let groupName = `<span id='family_${group}'>${group}</span>`
+  let groupName = `<a href='#plugin_family_${group}' id='family_${group}'>${group}</a>`
 %>
   ### <%-groupName%>
   <%=allPlugins[group].XdescX%>. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them.
@@ -64,8 +64,11 @@ Object.keys(allPlugins).forEach(function (group) {
 
 
 <!-- Plugin information blocks -->
-<%Object.keys(allPlugins).forEach(function (group) {%>
-## <%=group%>_plugins
+<%
+Object.keys(allPlugins).forEach(function (group) {
+  let pluginGroupName = `<span id='plugin_family_${group}' style='text-transform: capitalize;'>${group}</span>`
+%>
+## <%-pluginGroupName%> Plugins
 
 Description about **<%=group%> plugins**. Current description is <%=allPlugins[group].XdescX%>.
 <%
