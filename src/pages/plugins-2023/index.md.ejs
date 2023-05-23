@@ -76,7 +76,9 @@ Description about **<%=group%> plugins**. Current description is <%=allPlugins[g
     if('XdescX' == pluginName) {return}
     let plugin = allPlugins[group][pluginName]
 %>
-### [<%=plugin.title%>](<%=plugin.npm_link%>)
+
+<%let pluginTitle = `<a href='https://www.npmjs.com/package/${pluginName}' id='plugin_${pluginName}'>${plugin.title}</a>`%>
+### <%-pluginTitle%>
 
 <%
 let badges = ''
