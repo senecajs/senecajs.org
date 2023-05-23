@@ -53,7 +53,7 @@ Object.keys(allPlugins).forEach(function (group) {
     let plugin = allPlugins[group][pluginName]
     v3groups += `
     <div style='flex: 0 0 24%; margin-bottom: 1%; margin-right: 1%; padding: 0.5% 0.5%; background-color: #dcf1f3; border: 1px solid #dcf1f3; border-radius: 3px; box-shadow: none;'>
-      <div style='font-size:90%; color: #379199'>${plugin.title}</div>
+      <div style='font-size:90%; color: #379199'><a href='#plugin_${pluginName}'>${plugin.title}</a></div>
       <div style='font-size:80%;'>${plugin.desc}</div>
     </div>`
   })
