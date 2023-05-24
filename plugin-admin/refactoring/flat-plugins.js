@@ -1,15 +1,11 @@
-const fs = require('fs')
-const jsonic = require('jsonic')
 const { plugins } = require('./old_plugins')
 
 let newPlugins = {}
 
 Object.keys(plugins).forEach((familyName) => {
-  // console.log('\n' + familyName)
   let family = plugins[familyName]
   Object.keys(family).forEach((pluginName) => {
     if ('XdescX' == pluginName) return
-    // console.log(pluginName)
     let plugin = plugins[familyName][pluginName]
     let newp = {}
     newp.family = familyName
