@@ -48,11 +48,14 @@ pluginGroups.forEach((groupName) => {
     } else if (!Object.keys(pluginData).includes(plugin)) {
       return
     }
-    pluginData[plugin].badges = group[plugin].badges
-    pluginData[plugin].deepscan_url = group[plugin].deepscan_url
-    pluginData[plugin].deepscan_badge = group[plugin].deepscan_badge
-    pluginData[plugin].maintainability_badge =
-      group[plugin].maintainability_badge
+
+    let pluginObj = {}
+    pluginObj.badges = group[plugin].badges
+    pluginObj.deepscan_url = group[plugin].deepscan_url
+    pluginObj.deepscan_badge = group[plugin].deepscan_badge
+    pluginObj.maintainability_badge = group[plugin].maintainability_badge
+
+    Object.assign(pluginData[plugin], pluginObj)
     pluginData[groupName][plugin] = pluginData[plugin]
     delete pluginData[plugin]
   })
