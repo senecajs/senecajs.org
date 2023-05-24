@@ -1,11 +1,14 @@
 const { plugins } = require('./old_plugins')
 
 let newPlugins = {}
+let familyMembers = {}
 
 Object.keys(plugins).forEach((familyName) => {
+  familyMembers[familyName] = []
   let family = plugins[familyName]
   Object.keys(family).forEach((pluginName) => {
     if ('XdescX' == pluginName) return
+    familyMembers[familyName].push(pluginName)
     let plugin = plugins[familyName][pluginName]
     let newp = {}
     newp.family = familyName
@@ -17,4 +20,5 @@ Object.keys(plugins).forEach((familyName) => {
   })
 })
 
-exports.flatPlugins = newPlugins
+exports.localData = newPlugins
+exports.familyMembers = familyMembers
