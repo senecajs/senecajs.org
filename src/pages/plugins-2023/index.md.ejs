@@ -51,14 +51,14 @@ Object.keys(allPlugins).forEach(function (group) {
   <div style='display:flex; flex-flow:row wrap;'>
 
   <%
-    Object.keys(allPlugins[group]).forEach(function (pluginName) {
-      if('XdescX' == pluginName) {return}
-      let plugin = allPlugins[group][pluginName]
+  Object.keys(allPlugins[group]).forEach(function (pluginName) {
+    if('XdescX' == pluginName) {return}
+    let plugin = allPlugins[group][pluginName]
   %>
-    <div style='flex: 0 0 24%; margin-bottom: 1%; margin-right: 1%; padding: 0.5% 0.5%; background-color: #dcf1f3; border: 1px solid #dcf1f3; border-radius: 3px; box-shadow: none;'>
-      <div style='font-size:90%; color: #379199'><a href='#plugin_<%=pluginName%>'><%=plugin.title%></a></div>
-      <div style='font-size:80%;'><%=plugin.desc%></div>
-    </div>
+  <div style='flex: 0 0 24%; margin-bottom: 1%; margin-right: 1%; padding: 0.5% 0.5%; background-color: #dcf1f3; border: 1px solid #dcf1f3; border-radius: 3px; box-shadow: none;'>
+    <div style='font-size:90%; color: #379199'><a href='#plugin_<%=pluginName%>'><%=plugin.title%></a></div>
+    <div style='font-size:80%;'><%=plugin.desc%></div>
+  </div>
   <%})%>
   </div>
 <%})%>
@@ -79,26 +79,28 @@ Description about **<%=group%> plugins**. Current description is <%=allPlugins[g
     let plugin = allPlugins[group][pluginName]
 %>
 
-### <a href='https://www.npmjs.com/package/${pluginName}' id='plugin_${pluginName}'>${plugin.title}</a>
+### <a href='https://www.npmjs.com/package/<%=pluginName%>' id='plugin_<%=pluginName%>'><%=plugin.title%></a>
 
+<div style='display:flex; flex-flow:row wrap;'>
 <%if(plugin.badges.includes('npm')){%>
-<a href='https://www.npmjs.com/package/${pluginName}'><img src='https://img.shields.io/npm/v/${pluginName}.svg' alt='npm'></a>
+<a style='margin-right:5px' href='https://www.npmjs.com/package/<%=pluginName%>'><img src='https://img.shields.io/npm/v/<%=pluginName%>.svg' alt='npm'></a>
 <%}
 if(plugin.badges.includes('build')){%>
-<a href='https://github.com/${plugin.org_repo}/actions/workflows/build.yml'><img src='https://github.com/${plugin.org_repo}/actions/workflows/build.yml/badge.svg' alt='Build'></a>
+<a style='margin-right:5px' href='https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml'><img src='https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml/badge.svg' alt='Build'></a>
 <%}
 if(plugin.badges.includes('coverage')){%>
-<a href='https://coveralls.io/github/${plugin.org_repo}?branch=master'><img src='https://coveralls.io/repos/github/${plugin.org_repo}/badge.svg?branch=master' alt='Coverage Status'></a>
+<a style='margin-right:5px' href='https://coveralls.io/github/<%=plugin.org_repo%>?branch=master'><img src='https://coveralls.io/repos/github/<%=plugin.org_repo%>/badge.svg?branch=master' alt='Coverage Status'></a>
 <%}
 if(plugin.badges.includes('vulnerability')){%>
-<a href='https://snyk.io/test/github/${plugin.org_repo}'><img src='https://snyk.io/test/github/${plugin.org_repo}/badge.svg' alt='Known Vulnerabilities'></a>
+<a style='margin-right:5px' href='https://snyk.io/test/github/<%=plugin.org_repo%>'><img src='https://snyk.io/test/github/<%=plugin.org_repo%>/badge.svg' alt='Known Vulnerabilities'></a>
 <%}
 if(plugin.badges.includes('deepscan')){%>
-<a href='${plugin.deepscan_url}'><img src='${plugin.deepscan_badge}' alt='DeepScan Grade'></a>
+<a style='margin-right:5px' href='<%=plugin.deepscan_url%>'><img src='<%=plugin.deepscan_badge%>' alt='DeepScan Grade'></a>
 <%}
 if(plugin.badges.includes('maintainability')){%>
-<a href='https://codeclimate.com/github/${plugin.org_repo}/maintainability'><img src='${plugin.maintainability_badge}' alt='Maintainability'></a>
+<a style='margin-right:5px' href='https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability'><img src='<%=plugin.maintainability_badge%>' alt='Maintainability'></a>
 <%}%>
+</div>
 
 <%=plugin.desc%>
 
