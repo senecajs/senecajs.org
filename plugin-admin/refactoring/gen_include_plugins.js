@@ -28,7 +28,7 @@ pluginList.forEach((pluginName) => {
     plugin.org_repo = orgrepo_match ? orgrepo_match[1] : pkg.name
   }
 
-  plugin.desc = pkg.desc
+  plugin.desc = pkg.description
 
   plugin.badges = localData[pluginName].badges
   plugin.deepscan_url = localData[pluginName].deepscan_url
