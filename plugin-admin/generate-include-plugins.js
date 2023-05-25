@@ -2,7 +2,7 @@ const fs = require('fs')
 const pkgjson = require('./package.json')
 
 const pluginList = Object.keys(pkgjson.dependencies)
-const { localData } = require('./localPluginData')
+const { localData } = require('./localData')
 const { familyData } = require('./familyData')
 const npmData = pluginList.reduce(
   (npmData, dep) => (
