@@ -1,4 +1,4 @@
-const { plugins } = require('./old_plugins')
+const { plugins } = require('./old_plugins_def')
 
 let newPlugins = {}
 let familyMembers = {}

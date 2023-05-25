@@ -1,5 +1,4 @@
 module.exports = {
-  // Only contains data from those published on npm
   familyData: {
     cache: {
       short_desc: '',

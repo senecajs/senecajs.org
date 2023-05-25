@@ -1,13 +1,12 @@
 const fs = require('fs')
-const pkgjson = require('../package.json')
+const pkgjson = require('./package.json')
 
 const pluginList = Object.keys(pkgjson.dependencies)
 const { localData } = require('./localPluginData')
 const { familyData } = require('./familyData')
 const npmData = pluginList.reduce(
   (npmData, dep) => (
-    (npmData[dep] = require('../node_modules/' + dep + '/package.json')),
-    npmData
+    (npmData[dep] = require('./node_modules/' + dep + '/package.json')), npmData
   ),
   {}
 )
@@ -46,7 +45,7 @@ Object.keys(pluginByFamily).forEach((familyName) => {
 })
 
 let incl = `<%allPlugins = ${JSON.stringify(pluginByFamily)}%>`
-fs.writeFile('../../src/pages/plugins-2023/plugins_gen.ejs', incl, (err) => {
+fs.writeFile('../src/pages/plugins-2023/plugins_gen.ejs', incl, (err) => {
   if (err) throw err
   console.log(
     'Regenerated plugin data to include file in src/pages/plugins-2023 dir.'
