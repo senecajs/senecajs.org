@@ -22,9 +22,9 @@ pluginList.forEach((pluginName) => {
 
   if (null != pkg.repository) {
     let orgrepo_match = pkg.repository.url.match(
-      /[a-z]+:\/\/github.com\/([a-z]+\/[a-z|-]+).git/
+      /(git@|(git|(git\+)*https):\/\/)github.com(\/|:)([a-z]+\/[a-z0-9-]+)(.git)*/
     )
-    plugin.org_repo = orgrepo_match ? orgrepo_match[1] : pkg.name
+    plugin.org_repo = orgrepo_match?.[5]
   }
 
   plugin.desc = pkg.description
