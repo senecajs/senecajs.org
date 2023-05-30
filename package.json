@@ -42,6 +42,7 @@
   "dependencies": {
     "code": "4",
     "handlebars": "4",
+    "jsonic": "^1.0.1",
     "jstransformer-ejs": "0.2.0",
     "lab": "14",
     "metalsmith": "^2.5.1",
