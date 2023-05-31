@@ -99,7 +99,11 @@ if(plugin.badges.includes('deepscan')){%>
 <%}
 if(plugin.badges.includes('maintainability')){%>
 <a style='margin-right:5px' href='https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability'><img src='<%=plugin.maintainability_badge%>' alt='Maintainability'></a>
-<%}%>
+<%}
+let endpoint = 'https://untitled-8qw7iyil8lfs.runkit.sh/'
+if(plugin.seneca_maintain){ endpoint = 'https://untitled-zbmraluz2vkg.runkit.sh/' }
+%>
+<a style='margin-right:5px' href='https://npmjs.org/package/@seneca/maintain'><img src='https://img.shields.io/endpoint?url=<%=endpoint%>' alt='seneca-maintain'></a>
 </div>
 
 <%=plugin.desc%>
