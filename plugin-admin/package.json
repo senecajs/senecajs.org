@@ -38,7 +38,7 @@
     "@seneca/hapi": "^1.0.0",
     "@seneca/ledger": "^0.1.2",
     "@seneca/mail": "^2.4.0",
-    "@seneca/maintain": "^0.0.27",
+    "@seneca/maintain": "^0.0.30",
     "@seneca/memcached-cache": "^2.1.3",
     "@seneca/mixpanel-provider": "^0.2.0",
     "@seneca/msg-run": "^0.10.1",

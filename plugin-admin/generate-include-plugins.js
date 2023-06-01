@@ -30,6 +30,7 @@ pluginList.forEach((pluginName) => {
   plugin.desc = pkg.description
 
   plugin.badges = localData[pluginName].badges
+  plugin.seneca_maintain = false
   plugin.deepscan_url = localData[pluginName].deepscan_url
   plugin.deepscan_badge = localData[pluginName].deepscan_badge
   plugin.maintainability_badge = localData[pluginName].maintainability_badge
