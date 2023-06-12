@@ -2,7 +2,7 @@ const fs = require('fs')
 const pkgjson = require('./package.json')
 
 const pluginList = Object.keys(pkgjson.dependencies)
-const { localData } = require('./localData')
+const { badgeData } = require('./badgeData')
 const { familyData } = require('./familyData')
 const npmData = pluginList.reduce(
   (npmData, dep) => (
@@ -29,11 +29,11 @@ pluginList.forEach((pluginName) => {
 
   plugin.desc = pkg.description
 
-  plugin.badges = localData[pluginName].badges
+  plugin.badges = badgeData[pluginName].badges
   plugin.seneca_maintain = false
-  plugin.deepscan_url = localData[pluginName].deepscan_url
-  plugin.deepscan_badge = localData[pluginName].deepscan_badge
-  plugin.maintainability_badge = localData[pluginName].maintainability_badge
+  plugin.deepscan_url = badgeData[pluginName].deepscan_url
+  plugin.deepscan_badge = badgeData[pluginName].deepscan_badge
+  plugin.maintainability_badge = badgeData[pluginName].maintainability_badge
 
   pluginData[pluginName] = plugin
 })
