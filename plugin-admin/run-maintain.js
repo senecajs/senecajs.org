@@ -10,6 +10,7 @@ async function runMaintain() {
     pluginMaintain[pluginName] = await Maintain({
       returnBool: true,
       runPath: '/node_modules/' + pluginName,
+      exclude: ['check_default', 'content_gitignore'],
     })
   }
   console.log(pluginMaintain)
