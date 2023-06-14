@@ -1,5 +1,5 @@
 module.exports = {
-  localData: {
+  badgeData: {
     '@seneca/cache': {
       badges: [
         'npm',
