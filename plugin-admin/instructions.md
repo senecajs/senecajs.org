@@ -11,5 +11,5 @@ Things to improve upon/change:
 
 Steps to generate plugins_gen.ejs data file for plugins-2023 page:
 1. [Optional_Update] Update badgeData.js and familyData.js with any new badge or family information
-2. [Optional_Update] Add additional package names to DEPS variable in install_deps.sh, run install_deps.sh to update dependencies and install npm information to plugin-admin/node_modules folder
+2. [Optional_Update] Add additional package names to DEPS variable in install_deps.sh, run install_deps.sh *from plugin-admin directory* to update dependencies+install npm information to plugin-admin/node_modules folder
 3. Run generate-include-plugins.js from this plugin-admin directory. This script takes data from the aforementioned three sources and writes the output to an EJS file, formatted as an existing JS variable wrapped with EJS tags, as per specifications required for an EJS include file. This file is written to the src/pages/plugins-2023 directory under the name plugins_gen.ejs. No further action needed.
