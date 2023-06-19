@@ -9,16 +9,8 @@ layout: content.html
 _Seneca_ plugins enable you to build awesome microservices, incredibly fast.
 Some plugins are maintained in-house, while others are provided by the community.
 
-On this page, we provide an `npm` link and total downloads per month for any plugins
+On this page, we provide an `npm` link and other important information for any plugins
 we find or publish ourselves, so you only need to look in one place.
-
-Table of contents:
-- This intro about the plugins
-- Block list of families with description, link to full description block
-- Each family name with full description, followed by block-list of each plugin in family (with short description)
-- Subheadings of each family with short description
-- Each plugin with badges and description (links active)
-- 'Got a plugin to share?' section
 
 <!-- List of families -->
 ## Plugin Families
@@ -33,7 +25,7 @@ Object.keys(allPlugins).forEach(function (familyName) {
 
   <div style='flex: 0 0 49%; margin-bottom: 1%; margin-right: 1%; padding: 0.5% 0.5%; background-color: #dcf1f3; border: 1px solid #dcf1f3; border-radius: 3px; box-shadow: none;'>
     <div style='font-size:90%; color: #379199; text-transform: uppercase;'><a href='#family_<%=familyName%>'><%=familyName%></a></div>
-    <div style='font-size:80%'><%=family.short_desc%>. Longer description to be added to plugins_def file.</div>
+    <div style='font-size:80%'><%=family.short_desc%></div>
   </div>
 
 <%})%>
@@ -47,7 +39,10 @@ Object.keys(allPlugins).forEach(function (familyName) {
 %>
 
   ### <a href='#plugin_family_<%=familyName%>' id='family_<%=familyName%>'><%=familyName%></a>
-  <%=family.long_desc%>. This will be a longer description eventually, giving background on what this family of plugins could be used for, and how to use them.
+
+  *<%=family.short_desc%>*
+
+  <%=family.long_desc%>
 
   <div style='display:flex; flex-flow:row wrap;'>
 
@@ -72,7 +67,9 @@ Object.keys(allPlugins).forEach(function (familyName) {
 
 ## <span id='plugin_family_<%=familyName%>' style='text-transform: capitalize;'><%=familyName%></span> Plugins
 
-Description about **<%=familyName%> plugins**. Short description is <%=family.short_desc%>.
+*<%=family.short_desc%>*
+
+<%=family.long_desc%>
 
 <%
   Object.keys(family.plugins).forEach(function (pluginName) {
@@ -99,11 +96,7 @@ if(plugin.badges.includes('deepscan')){%>
 <%}
 if(plugin.badges.includes('maintainability')){%>
 <a style='margin-right:5px' href='https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability'><img src='<%=plugin.maintainability_badge%>' alt='Maintainability'></a>
-<%}
-let endpoint = 'https://untitled-8qw7iyil8lfs.runkit.sh/'
-if(plugin.seneca_maintain){ endpoint = 'https://untitled-zbmraluz2vkg.runkit.sh/' }
-%>
-<a style='margin-right:5px' href='https://npmjs.org/package/@seneca/maintain'><img src='https://img.shields.io/endpoint?url=<%=endpoint%>' alt='seneca-maintain'></a>
+<%}%>
 </div>
 
 <%=plugin.desc%>

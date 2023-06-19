@@ -1,8 +1,8 @@
 module.exports = {
   familyData: {
     cache: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Caching solutions for optimised data storage and retrieval',
+      long_desc: `With these plugins, developers gain access to a variety of caching functionalities to optimize data storage and retrieval, reducing the need to repeatedly fetch data from underlying databases or external services. With these plugins, you can cater to specific scenarios - including general-purpose caching, testing and debugging, and entity-specific caching. As well as this, certain plugins offer integration with popular caching technologies, enabling developers to leverage the power of Memcached or Redis for high-performance caching needs.`,
       members: [
         '@seneca/cache',
         '@seneca/cache-test',
@@ -13,8 +13,8 @@ module.exports = {
       plugins: {},
     },
     entity: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Simple Object-Relation Mapping for entity management',
+      long_desc: 'The entity family is a collection of plugins designed to enhance entity management capabilities within Seneca applications. These plugins offer a range of functionalities such as caching, dependency management, history tracking, random tagging, and utility functions. By integrating these plugins into your application, developers gain access to powerful tools for creating, manipulating, and managing entities. These tools streamline the process of working with entities by making use of simple Object-Relation mapping.',
       members: [
         'seneca-entity',
         '@seneca/entity-cache',
@@ -26,8 +26,8 @@ module.exports = {
       plugins: {},
     },
     gateway: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Creation of gateways for efficient communication between microservices',
+      long_desc: 'These plugins offer a range of functionalities for implementing gateway architecture. Developers can establish efficient communication channels between microservices, allowing requests from clients to be seamlessly routed to the appropriate services. The developer can manage user authentication, ensuring secure and controlled access to services. Additionally, there are plugins for popular frameworks such as Express.js and AWS Lambda, enabling seamless integration with existing infrastructure. The gateway plugins equip developers with the tools necessary to build robust gateways that enhance the communication and coordination capabilities of microservices within their Seneca applications.',
       members: [
         '@seneca/gateway',
         '@seneca/gateway-auth',
@@ -38,14 +38,14 @@ module.exports = {
       plugins: {},
     },
     msg: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Executing and testing message-driven workflows',
+      long_desc: 'The message family provides tools for implementing and testing message-driven workflows within Seneca applications. Developers can build highly decoupled and scalable systems where components communicate asynchronously. This family provides the necessary infrastructure for handling message routing, flow control, and integration among Seneca services. It also enables developers to write test scenarios and assertions to verify the correct behavior of message passing, ensuring the integrity and reliability of their systems.',
       members: ['@seneca/msg-run', 'seneca-msg-test'],
       plugins: {},
     },
     redis: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Redis-backed caching, messaging, and data storage solutions',
+      long_desc: `The redis family offers a broad set of functionalities for leveraging Redis as a versatile caching, messaging, and data storage solution within Seneca applications. Developers can harness the power of Redis for high-performance caching, enabling efficient data retrieval and storage. Redis's in-memory data structure store serves as a reliable and fast caching layer, reducing latency and enhancing application responsiveness. Additionally, the Redis family extends Seneca's messaging capabilities by integrating with Redis as a messaging backend.`,
       members: [
         '@seneca/redis-cache',
         'seneca-redis-pubsub-transport',
@@ -56,8 +56,8 @@ module.exports = {
       plugins: {},
     },
     search: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Integrate search functionality',
+      long_desc: 'This family enables developers to incorporate search functionality into Seneca applications using different search engines. They enable efficient indexing, querying, and retrieval of data, allowing developers to implement robust search capabilities within their Seneca applications. Developers can enhance their applications with powerful search capabilities, enabling efficient data retrieval, filtering, and discovery.',
       members: [
         'seneca-search-aws-cloudsearch',
         'seneca-search-elastic',
@@ -67,8 +67,8 @@ module.exports = {
       plugins: {},
     },
     telemetry: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Performance reporting and data monitoring',
+      long_desc: 'This family enables developers to gather and report performance and monitoring data within Seneca applications. They allow developers to monitor and analyze the behavior, performance, and health of their services. They integrate with popular telemetry platforms and services, providing options for data visualization, alerting, and analysis. With these plugins, developers can gain valuable insights into the performance and behavior of their Seneca services.',
       members: [
         'seneca-telemetry',
         '@seneca/telemetry-datadog',
@@ -78,8 +78,8 @@ module.exports = {
       plugins: {},
     },
     transport: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Communication and messaging between distributed components',
+      long_desc: 'This family enables seamless communication and messaging between distributed components or microservices within Seneca applications. These plugins facilitate reliable and efficient message passing, enabling components to exchange data, invoke actions, and coordinate workflows. Developers can build scalable and decoupled architectures, where different components can communicate asynchronously. This asynchronous nature of the messages enhances the flexibility, modularity, and resilience of the overall system architecture.',
       members: [
         'seneca-transport',
         'seneca-transport-test',
@@ -90,14 +90,14 @@ module.exports = {
       plugins: {},
     },
     user: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Authentication, authorisation, and telemetry for the user',
+      long_desc: 'This family can handle various user-related functionalities within Seneca applications, such as authentication, authorization, and telemetry. Developers can streamline user management processes and enhance application security. This allows developers to focus on building user-centric features and ensuring a smooth user experience.',
       members: ['@seneca/user', '@seneca/user-telemetry'],
       plugins: {},
     },
     web: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Integration with popular web frameworks',
+      long_desc: `This family offers adapters for seamless integration of popular web frameworks, allowing developers to build web applications and APIs efficiently. Developers can leverage the capabilities of well-established web frameworks such as Connect, Express, Hapi, and Koa, while benefitting from Seneca's powerful microservice capabilities. These plugins seamlessly combine the power of Seneca with the extensive ecosystem and features offered by popular web frameworks, simplifying the design and development of modular, scalable, and maintainable web architectures. This enables the development of complex, distributed systems without the hassle.`,
       members: [
         'seneca-web',
         'seneca-web-adapter-connect',
@@ -109,8 +109,8 @@ module.exports = {
       plugins: {},
     },
     logger: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Capture and manage application logs',
+      long_desc: 'This family enables developers to capture, manage, and analyze application logs within Seneca applications. These plugins offer flexibility in choosing different logging strategies and integration options, allowing developers to tailor their logging solutions to meet specific application requirements. These plugins enable the capturing and managing of application logs, as well as facilitating debugging, performance monitoring, and auditing. They allow developers to analyze and gain insights from application logs efficiently.',
       members: [
         'seneca-logentries-logger',
         'seneca-logstash-logger',
@@ -119,8 +119,8 @@ module.exports = {
       plugins: {},
     },
     provider: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Seamless integration with third-party APIs and SDKs',
+      long_desc: 'This family offers plugins that cater to a wide range of third-party services, allowing developers to seamlessly integrate and interact with these parties within their Seneca applications. By incorporating a provider plugin, developers can extend the capabilities of their own applications by leveraging the power of a third-party ecosystem. These plugins simplify the integration process, eliminating the need for manual API integrations and providing consistent and standardized interfaces through which to interact with these third parties. Developers can make use of external applications to enhance productivity, automate processes, and leverage different features within their Seneca applications. The provider family opens up a world of possibilities for building powerful and feature-rich applications.',
       members: [
         'seneca-apimatic-provider',
         '@seneca/branchio-provider',
@@ -148,8 +148,8 @@ module.exports = {
       plugins: {},
     },
     store: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Data storage and retrieval',
+      long_desc: `Using this family, developers can choose which database and storage technology they want to use within their Seneca application. This means they can leverage the flexibility and scalability of different technologies while working within the Seneca framework. These plugins provide consistent and convenient interfaces for data storage and retrieval, allowing developers to focus on their application logic rather than dealing with low-level database interactions. Whether developers need a NoSQL document database, a relational database, an in-memory store, or a file-based storage solution, this family offers a wide range of options. This flexibility enables developers to choose the most suitable storage technology for their application's specific needs, ensuring optimal performance and scalability.`,
       members: [
         '@seneca-dynamo-store',
         'seneca-jsonfile-store',
@@ -166,8 +166,8 @@ module.exports = {
       plugins: {},
     },
     test: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Testing and quality assurance',
+      long_desc: 'This family provides a range of plugins specifically designed for testing and quality assurance purposes in Seneca applications. Each plugin serves a different testing purpose, including cache testing, error handling testing, store testing, transport testing, and message testing, among others. These plugins offer utilities, helpers, and testing frameworks to facilitate the testing process and ensure the reliability and correctness of your application. These plugins provide a standardized and streamlined approach to writing test cases, enabling developers to assess the performance, correctness, and reliability of their codebase.',
       members: [
         '@seneca/cache-test',
         'seneca-error-test',
@@ -180,14 +180,14 @@ module.exports = {
       plugins: {},
     },
     registry: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Service registration, discovery, and management in distributed systems',
+      long_desc: 'This family offers essential functionality for service registration, discovery, and management in distributed systems using the Seneca framework. This enables developers to register their services with a central registry or service discovery mechanism, facilitating communication and interaction between different components of a distributed system. They provide a standardized approach for locating and connecting to services, ensuring seamless integration and interoperability. By incorporating these plugins, developers can easily manage and scale their distributed applications.',
       members: ['seneca-registry', 'seneca-consul-registry'],
       plugins: {},
     },
     various: {
-      short_desc: '',
-      long_desc: '',
+      short_desc: 'Various usecases and functionalities',
+      long_desc: `These plugins don't fit into any predefined family. Click through to their README's for further information.`,
       members: [
         '@seneca/flame',
         '@seneca/debug',
