@@ -149,7 +149,7 @@ module.exports = {
       maintainability_badge: '',
     },
     'seneca-redis-queue-transport': {
-      badges: ['npm', 'coverage', 'vulnerability'],
+      badges: ['npm', 'vulnerability'],
       deepscan_url: '',
       deepscan_badge: '',
       maintainability_badge: '',
@@ -200,7 +200,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/9d54b38a991fe7b92a43/maintainability',
     },
     '@seneca/telemetry-datadog': {
-      badges: ['npm', 'build', 'vulnerability', 'deepscan', 'maintainability'],
+      badges: ['npm', 'deepscan', 'maintainability'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=19453&bid=505563',
       deepscan_badge:
@@ -296,19 +296,19 @@ module.exports = {
       maintainability_badge: '',
     },
     'seneca-logentries-logger': {
-      badges: ['npm', 'vulnerability'],
+      badges: ['npm'],
       deepscan_url: '',
       deepscan_badge: '',
       maintainability_badge: '',
     },
     'seneca-logstash-logger': {
-      badges: ['npm', 'vulnerability'],
+      badges: ['npm'],
       deepscan_url: '',
       deepscan_badge: '',
       maintainability_badge: '',
     },
     'seneca-pino-logger': {
-      badges: ['npm', 'vulnerability'],
+      badges: ['npm'],
       deepscan_url: '',
       deepscan_badge: '',
       maintainability_badge: '',
@@ -323,7 +323,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/f76e83896b731bb5d609/maintainability',
     },
     '@seneca/branchio-provider': {
-      badges: ['npm', 'build', 'vulnerability', 'deepscan', 'maintainability'],
+      badges: ['npm', 'deepscan', 'maintainability'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=19462&bid=505954',
       deepscan_badge:
@@ -350,7 +350,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/562abed571a4f6412c3a/maintainability',
     },
     '@seneca/evervault-provider': {
-      badges: ['npm', 'build', 'vulnerability', 'deepscan', 'maintainability'],
+      badges: ['npm', 'deepscan', 'maintainability'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=19462&bid=505954',
       deepscan_badge:
@@ -404,7 +404,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/f76e83896b731bb5d609/maintainability',
     },
     '@seneca/mixpanel-provider': {
-      badges: ['npm', 'build', 'vulnerability', 'deepscan', 'maintainability'],
+      badges: ['npm', 'deepscan', 'maintainability'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=19462&bid=505954',
       deepscan_badge:
@@ -413,7 +413,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/f76e83896b731bb5d609/maintainability',
     },
     '@seneca/nordigen-provider': {
-      badges: ['npm', 'build', 'vulnerability', 'deepscan', 'maintainability'],
+      badges: ['npm', 'deepscan', 'maintainability'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=21342&bid=611017',
       deepscan_badge:
@@ -458,7 +458,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/f76e83896b731bb5d609/maintainability',
     },
     '@seneca/tangocard-provider': {
-      badges: ['npm', 'build', 'vulnerability', 'deepscan', 'maintainability'],
+      badges: ['npm', 'deepscan', 'maintainability'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=19462&bid=505954',
       deepscan_badge:
@@ -467,7 +467,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/f76e83896b731bb5d609/maintainability',
     },
     '@seneca/trello-provider': {
-      badges: ['npm', 'build', 'vulnerability', 'deepscan', 'maintainability'],
+      badges: ['npm', 'deepscan', 'maintainability'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=19462&bid=505954',
       deepscan_badge:
@@ -476,7 +476,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/f76e83896b731bb5d609/maintainability',
     },
     '@seneca/vercel-provider': {
-      badges: ['npm', 'build', 'vulnerability', 'deepscan', 'maintainability'],
+      badges: ['npm', 'deepscan', 'maintainability'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=19462&bid=505954',
       deepscan_badge:
@@ -595,7 +595,7 @@ module.exports = {
       maintainability_badge: '',
     },
     'seneca-sqlite-store': {
-      badges: ['npm', 'vulnerability'],
+      badges: ['npm'],
       deepscan_url: '',
       deepscan_badge: '',
       maintainability_badge: '',
@@ -629,7 +629,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/27eadf997922c38f4618/maintainability',
     },
     '@seneca/test-plugin': {
-      badges: ['npm', 'coverage', 'vulnerability'],
+      badges: ['npm'],
       deepscan_url: '',
       deepscan_badge: '',
       maintainability_badge: '',
@@ -647,7 +647,7 @@ module.exports = {
       maintainability_badge: '',
     },
     'seneca-consul-registry': {
-      badges: ['npm', 'vulnerability'],
+      badges: ['npm'],
       deepscan_url: '',
       deepscan_badge: '',
       maintainability_badge: '',
@@ -698,7 +698,7 @@ module.exports = {
         'https://api.codeclimate.com/v1/badges/a959a0996a357735c1d1/maintainability',
     },
     '@seneca/mail': {
-      badges: ['npm', 'coverage', 'vulnerability', 'deepscan'],
+      badges: ['npm', 'deepscan'],
       deepscan_url:
         'https://deepscan.io/dashboard#view=project&tid=5016&pid=12281&bid=187929',
       deepscan_badge:
@@ -712,7 +712,7 @@ module.exports = {
       maintainability_badge: '',
     },
     '@seneca/graph': {
-      badges: ['npm', 'coverage', 'vulnerability'],
+      badges: ['npm'],
       deepscan_url: '',
       deepscan_badge: '',
       maintainability_badge: '',
