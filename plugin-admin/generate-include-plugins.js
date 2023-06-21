@@ -43,26 +43,23 @@ async function generateData() {
     pluginData[pluginName] = plugin
   })
 
-  const familyDataSorted = Object.keys(familyData).sort().reduce(
-    (obj, key) => {
+  const familyDataSorted = Object.keys(familyData)
+    .sort()
+    .reduce((obj, key) => {
       obj[key] = familyData[key]
       return obj
-    },
-    {}
-  )
+    }, {})
 
   let pluginByFamily = familyDataSorted
   Object.keys(pluginByFamily).forEach((familyName) => {
-
-    // function compareSeneca(a, b) {
-    //   let senecaRX = /@*seneca(\/|-){1}([a-z0-9-]+)/
-    //   a = a.match(senecaRX)[2]
-    //   b = b.match(senecaRX)[2]
-    //   return a>b
-    // }
-    // pluginByFamily[familyName].members.sort(compareSeneca)
-    pluginByFamily[familyName].members.sort()
-
+    function compareSeneca(a, b) {
+      let senecaRX = /@*seneca(\/|-){1}([a-z0-9-]+)/
+      a = a.match(senecaRX)[2]
+      b = b.match(senecaRX)[2]
+      let sort = a > b
+      return +(sort - 1)
+    }
+    pluginByFamily[familyName].members.sort(compareSeneca)
     pluginByFamily[familyName].members.forEach((member) => {
       pluginByFamily[familyName].plugins[member] = pluginData[member]
     })
