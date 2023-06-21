@@ -12,6 +12,8 @@ Some plugins are maintained in-house, while others are provided by the community
 On this page, we provide an `npm` link and other important information for any plugins
 we find or publish ourselves, so you only need to look in one place.
 
+*Disclaimer: seneca-maintain status badge does not include the checks 'check_default' and 'content_gitignore'.*
+
 <!-- List of families -->
 ## Plugin Families
 *Click to see further description and plugin list*
@@ -38,7 +40,7 @@ Object.keys(allPlugins).forEach(function (familyName) {
   let family = allPlugins[familyName]
 %>
 
-  ### <a href='#plugin_family_<%=familyName%>' id='family_<%=familyName%>'><%=familyName%></a>
+  ### <div style='text-transform: uppercase;'><a href='#plugin_family_<%=familyName%>' id='family_<%=familyName%>'><%=familyName%></a></div>
 
   *<%=family.short_desc%>*
 
@@ -51,7 +53,7 @@ Object.keys(allPlugins).forEach(function (familyName) {
     let plugin = family.plugins[pluginName]
   %>
   <div style='flex: 0 0 24%; margin-bottom: 1%; margin-right: 1%; padding: 0.5% 0.5%; background-color: #dcf1f3; border: 1px solid #dcf1f3; border-radius: 3px; box-shadow: none;'>
-    <div style='font-size:90%; color: #379199'><a href='#plugin_<%=pluginName%>'><%=plugin.title%></a></div>
+    <div style='font-size:90%; color: #379199'><a href='#plugin_<%=pluginName%>'><%=pluginName%></a></div>
     <div style='font-size:80%;'><%=plugin.desc%></div>
   </div>
   <%})%>
@@ -76,11 +78,13 @@ Object.keys(allPlugins).forEach(function (familyName) {
     let plugin = family.plugins[pluginName]
 %>
 
-### <a href='https://www.npmjs.com/package/<%=pluginName%>' id='plugin_<%=pluginName%>'><%=plugin.title%></a>
+### <a href='https://npmjs.com/package/<%=pluginName%>' id='plugin_<%=pluginName%>'><%=pluginName%></a>
+
+<%=plugin.desc%>
 
 <div style='display:flex; flex-flow:row wrap;'>
 <%if(plugin.badges.includes('npm')){%>
-<a style='margin-right:5px' href='https://www.npmjs.com/package/<%=pluginName%>'><img src='https://img.shields.io/npm/v/<%=pluginName%>.svg' alt='npm'></a>
+<a style='margin-right:5px' href='https://npmjs.com/package/<%=pluginName%>'><img src='https://img.shields.io/npm/v/<%=pluginName%>.svg' alt='npm'></a>
 <%}
 if(plugin.badges.includes('build')){%>
 <a style='margin-right:5px' href='https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml'><img src='https://github.com/<%=plugin.org_repo%>/actions/workflows/build.yml/badge.svg' alt='Build'></a>
@@ -96,10 +100,21 @@ if(plugin.badges.includes('deepscan')){%>
 <%}
 if(plugin.badges.includes('maintainability')){%>
 <a style='margin-right:5px' href='https://codeclimate.com/github/<%=plugin.org_repo%>/maintainability'><img src='<%=plugin.maintainability_badge%>' alt='Maintainability'></a>
-<%}%>
+<%}
+let endpoint = 'https://untitled-8qw7iyil8lfs.runkit.sh/'
+if(plugin.seneca_maintain){ endpoint = 'https://untitled-zbmraluz2vkg.runkit.sh/' }
+%>
+<a style='margin-right:5px' href='https://npmjs.org/package/@seneca/maintain'><img src='https://img.shields.io/endpoint?url=<%=endpoint%>' alt='seneca-maintain'></a>
 </div>
 
-<%=plugin.desc%>
+<div style='display:flex; flex-flow:row wrap;'>
+<div style='flex: 0 1 auto; margin-bottom: 1%; margin-right: 1%; padding: 0.5% 0.5%; background-color: #dcf1f3; border: 1px solid #dcf1f3; border-radius: 3px; box-shadow: none;'>
+  <div style='font-size:90%; color: #379199'><a href='https://npmjs.org/package/<%=pluginName%>'>npm</a></div>
+</div>
+<div style='flex: 0 1 auto; margin-bottom: 1%; margin-right: 1%; padding: 0.5% 0.5%; background-color: #dcf1f3; border: 1px solid #dcf1f3; border-radius: 3px; box-shadow: none;'>
+  <div style='font-size:90%; color: #379199'><a href='https://github.com/<%=plugin.org_repo%>'>GitHub</a></div>
+</div>
+</div>
 
 <% })%>
 <%})%>

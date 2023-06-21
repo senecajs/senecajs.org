@@ -43,18 +43,6 @@ module.exports = {
       members: ['@seneca/msg-run', 'seneca-msg-test'],
       plugins: {},
     },
-    redis: {
-      short_desc: 'Redis-backed caching, messaging, and data storage solutions',
-      long_desc: `The redis family offers a broad set of functionalities for leveraging Redis as a versatile caching, messaging, and data storage solution within Seneca applications. Developers can harness the power of Redis for high-performance caching, enabling efficient data retrieval and storage. Redis's in-memory data structure store serves as a reliable and fast caching layer, reducing latency and enhancing application responsiveness. Additionally, the Redis family extends Seneca's messaging capabilities by integrating with Redis as a messaging backend.`,
-      members: [
-        '@seneca/redis-cache',
-        'seneca-redis-pubsub-transport',
-        'seneca-redis-queue-transport',
-        'seneca-redis-store',
-        'seneca-redis-kv',
-      ],
-      plugins: {},
-    },
     search: {
       short_desc: 'Integrate search functionality',
       long_desc: 'This family enables developers to incorporate search functionality into Seneca applications using different search engines. They enable efficient indexing, querying, and retrieval of data, allowing developers to implement robust search capabilities within their Seneca applications. Developers can enhance their applications with powerful search capabilities, enabling efficient data retrieval, filtering, and discovery.',
@@ -86,6 +74,7 @@ module.exports = {
         'seneca-amqp-transport',
         'seneca-beanstalk-transport',
         '@seneca/sns-transport',
+        'seneca-redis-queue-transport',
       ],
       plugins: {},
     },
@@ -171,7 +160,7 @@ module.exports = {
       members: [
         '@seneca/cache-test',
         'seneca-error-test',
-        'search-test',
+        'seneca-search-test',
         'seneca-store-test',
         'seneca-transport-test',
         'seneca-msg-test',
@@ -226,6 +215,7 @@ module.exports = {
         'seneca-sendgrid-mail',
         '@seneca/srv-admin',
         'seneca-component',
+        'seneca-redis-kv',
       ],
       plugins: {},
     },
