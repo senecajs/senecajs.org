@@ -5,7 +5,6 @@ const pluginList = Object.keys(pkgjson.dependencies)
 const { badgeData } = require('./badgeData')
 const { familyData } = require('./familyData')
 const { runPluginMaintain } = require('./run-maintain')
-const { generateKey } = require('crypto')
 const npmData = pluginList.reduce(
   (npmData, dep) => (
     (npmData[dep] = require('./node_modules/' + dep + '/package.json')), npmData
@@ -66,10 +65,10 @@ async function generateData() {
   })
 
   let incl = `<%allPlugins = ${JSON.stringify(pluginByFamily)}%>`
-  fs.writeFile('../src/pages/plugins-2023/plugins_gen.ejs', incl, (err) => {
+  fs.writeFile('../src/pages/plugins/plugins_gen.ejs', incl, (err) => {
     if (err) throw err
     console.log(
-      'Regenerated plugin data to include file in src/pages/plugins-2023 dir.'
+      'Regenerated plugin data to include file in src/pages/plugins dir.'
     )
   })
 }

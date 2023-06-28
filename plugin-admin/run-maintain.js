@@ -1,7 +1,6 @@
 module.exports = {
-  runPluginMaintain: async function() {
-
-    const { Maintain } = require('../../seneca-maintain/maintain')
+  runPluginMaintain: async function () {
+    const { Maintain } = require('@seneca/maintain')
     const pkgjson = require('./package.json')
 
     let pluginMaintain = {}
@@ -15,5 +14,5 @@ module.exports = {
       })
     }
     return pluginMaintain
-  }
+  },
 }
